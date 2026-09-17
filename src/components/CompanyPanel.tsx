@@ -16,14 +16,14 @@ function formatSalary(min: number | null, max: number | null, currency: string |
 export default function CompanyPanel({ company, onClose }: CompanyPanelProps) {
   if (!company) return null;
 
+  const pinLocation = [company.city, company.state].filter(Boolean).join(", ") || "Location unknown";
+
   return (
     <aside className="company-panel">
       <div className="company-panel-header">
         <div>
           <h2>{company.name}</h2>
-          <p className="company-panel-location">
-            {[company.city, company.state].filter(Boolean).join(", ") || "Location unknown"}
-          </p>
+          <p className="company-panel-location">{pinLocation}</p>
         </div>
         <button className="company-panel-close" onClick={onClose} aria-label="Close">
           ×
@@ -50,6 +50,14 @@ export default function CompanyPanel({ company, onClose }: CompanyPanelProps) {
                   </span>
                 )}
               </div>
+              {role.differentOffice && (
+                <div
+                  className="role-different-office"
+                  title={`This pin is placed at ${pinLocation}, but this role's posting lists a different location.`}
+                >
+                  ⚠ Different office than the pin ({pinLocation})
+                </div>
+              )}
             </li>
           );
         })}

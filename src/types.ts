@@ -12,6 +12,7 @@ export interface RoleData {
   salaryCurrency: string | null;
   url: string | null;
   postedAt: string | null;
+  differentOffice: boolean;
 }
 
 export interface CompanyData {
