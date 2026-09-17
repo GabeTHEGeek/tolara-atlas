@@ -344,13 +344,6 @@ async function main() {
     )
     .all() as Array<{ id: number; location: string | null }>;
 
-  if (roles.length === 0) {
-    console.log("Nothing to geocode — every active role already has geocoded_at set.");
-    return;
-  }
-
-  console.log(`Geocoding ${roles.length} active roles (1 req/sec per new location, cached by query)...`);
-
   // roles.resolved_city/state/latitude/longitude stay populated from the
   // FIRST location found, same as before -- geocoded_at is what marks a
   // role as "processed" so re-runs skip it, and a handful of older/other
@@ -369,13 +362,25 @@ async function main() {
 
   // query string -> result (or null for "resolved to nothing"), so repeat
   // cities across many roles (and repeat cities WITHIN one multi-office
-  // role) cost one network call instead of one each.
+  // role) cost one network call instead of one each. Declared here, before
+  // the "nothing new to geocode" check below, because the remote/HQ
+  // fallback pass further down reuses this same cache -- that pass must
+  // run every time regardless of whether this main loop had any new roles
+  // to process (a role can still be MISSING its role_locations rows -- via
+  // a manual data fix, say -- even when every role's OWN geocoded_at is
+  // already set).
   const cache = new Map<string, { lat: number; lon: number } | null>();
 
   let geocoded = 0;
   let skipped = 0;
   let cacheHits = 0;
   let extraLocations = 0;
+
+  if (roles.length === 0) {
+    console.log("Nothing new to geocode from roles' own location text — every active role already has geocoded_at set.");
+  } else {
+    console.log(`Geocoding ${roles.length} active roles (1 req/sec per new location, cached by query)...`);
+  }
 
   for (const role of roles) {
     const parsedList = extractAllCityStates(role.location ?? "");
