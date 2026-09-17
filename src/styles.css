@@ -202,3 +202,66 @@ body {
 .pin-tooltip .maplibregl-popup-tip {
   border-top-color: #ffffff;
 }
+
+/* Header button that opens the unmapped "remote-first companies" list --
+   deliberately underlined inline text, not a pill/badge, so it reads as
+   part of the stats line rather than a separate call-to-action. */
+.remote-panel-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.remote-panel-toggle:hover {
+  opacity: 1;
+}
+
+/* Same slide-in panel shell as .company-panel, for the unmapped
+   remote-first companies list (RemotePanel) -- these are visually
+   interchangeable except in content, so App.tsx only ever shows one at a
+   time. */
+.remote-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 360px;
+  max-width: 90vw;
+  background: #fff;
+  border-left: 1px solid var(--tolara-border);
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 5;
+}
+
+.remote-panel-note {
+  margin: 12px 0 20px;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.remote-company-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.remote-company-name {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tolara-navy);
+}
+
+.remote-company-count {
+  font-weight: 500;
+  color: #6b7280;
+}

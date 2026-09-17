@@ -35,10 +35,24 @@ export interface LocationPinData {
   roles: RoleData[];
 }
 
+// A company with at least one active role that has no resolvable location
+// anywhere -- no office of its own, no company/board dominant office, no
+// curated HQ (see server/ingestion/geocode.ts). No lat/lng, since there's
+// no city to place a pin at; shown in an unmapped list instead so these
+// roles are still findable rather than silently dropped.
+export interface RemoteCompanyData {
+  companyId: number;
+  companyName: string;
+  companySlug: string;
+  roleCount: number;
+  roles: RoleData[];
+}
+
 export interface MapData {
   generatedAt: string;
   companyCount: number;
   pinCount: number;
   roleCount: number;
   pins: LocationPinData[];
+  remoteCompanies: RemoteCompanyData[];
 }

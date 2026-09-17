@@ -46,6 +46,19 @@
  * This jitter exists only in the exported JSON — stored lat/lng on the
  * roles table stay untouched.
  *
+ * A small number of active roles have NO resolvable location anywhere --
+ * not in their own posting text, not in their company's dominant office,
+ * not in their company's wider board, not in a curated HQ (see
+ * geocode.ts's three-tier fallback). These get no role_locations row at
+ * all, so they're invisible to the query above and never become a pin --
+ * there's genuinely no city to put one at, and geocode.ts deliberately
+ * doesn't fabricate one. Rather than drop them from the export entirely,
+ * they're gathered separately into `remoteCompanies`, grouped by company,
+ * for the frontend to show in an unmapped list (e.g. a "Remote-first
+ * companies" panel) instead of a map pin -- so a genuinely remote-only
+ * company's roles are still findable, just not misrepresented as sitting
+ * in any particular city.
+ *
  * Usage: npm run export
  */
 
@@ -87,6 +100,17 @@ interface PinExport {
   state: string | null;
   latitude: number;
   longitude: number;
+  roleCount: number;
+  roles: RoleExport[];
+}
+
+// A company with at least one active role that has no resolvable location
+// anywhere (see the header comment above) -- no lat/lng, since there's no
+// city to place one at.
+interface RemoteCompanyExport {
+  companyId: number;
+  companyName: string;
+  companySlug: string;
   roleCount: number;
   roles: RoleExport[];
 }
@@ -271,12 +295,79 @@ function main() {
     };
   });
 
-  const companyCount = new Set(pins.map((p) => p.companyId)).size;
+  // Active roles with no role_locations row at all -- geocode.ts's three
+  // fallback tiers all came up empty for these (no office of their own, no
+  // company dominant office, no board-wide office, no curated HQ). Not a
+  // subset of `rows` above; this is the complement of it.
+  const unplacedRows = db
+    .prepare(
+      `SELECT
+         roles.id, roles.company_id, companies.name AS company_name, companies.slug AS company_slug,
+         roles.title, roles.location, roles.salary_min, roles.salary_max, roles.salary_currency,
+         roles.url, roles.posted_at
+       FROM roles
+       JOIN companies ON companies.id = roles.company_id
+       LEFT JOIN role_locations ON role_locations.role_id = roles.id
+       WHERE roles.status = 'active' AND role_locations.id IS NULL
+       ORDER BY roles.posted_at DESC`,
+    )
+    .all() as Array<{
+    id: number;
+    company_id: number;
+    company_name: string;
+    company_slug: string;
+    title: string;
+    location: string | null;
+    salary_min: number | null;
+    salary_max: number | null;
+    salary_currency: string | null;
+    url: string | null;
+    posted_at: string | null;
+  }>;
+
+  const remoteCompaniesByCompany = new Map<
+    number,
+    { companyId: number; companyName: string; companySlug: string; roles: RoleExport[] }
+  >();
+  for (const row of unplacedRows) {
+    const existing = remoteCompaniesByCompany.get(row.company_id);
+    const roleExport: RoleExport = {
+      id: row.id,
+      title: row.title,
+      location: row.location,
+      salaryMin: row.salary_min,
+      salaryMax: row.salary_max,
+      salaryCurrency: row.salary_currency,
+      url: row.url,
+      postedAt: row.posted_at,
+      isRemote: true,
+    };
+    if (existing) {
+      existing.roles.push(roleExport);
+    } else {
+      remoteCompaniesByCompany.set(row.company_id, {
+        companyId: row.company_id,
+        companyName: row.company_name,
+        companySlug: row.company_slug,
+        roles: [roleExport],
+      });
+    }
+  }
+
+  const remoteCompanies: RemoteCompanyExport[] = [...remoteCompaniesByCompany.values()]
+    .map((c) => ({ ...c, roleCount: c.roles.length }))
+    .sort((a, b) => a.companyName.localeCompare(b.companyName));
+
+  // companyCount/roleCount cover every active role, whether it landed on
+  // the map or in the unmapped remoteCompanies list -- a company with only
+  // unplaceable roles still counts as a company with open roles, and those
+  // roles are still real openings, just not pinnable anywhere.
+  const companyCount = new Set([...pins.map((p) => p.companyId), ...remoteCompanies.map((c) => c.companyId)]).size;
   // Distinct roles, not (role, office) pairs -- a role open in 3 offices
   // adds 1 here even though it contributes to 3 pins' individual
   // roleCount. rows is one row per role_locations entry, so the same
   // role.id can repeat; dedupe by id for the headline total.
-  const roleCount = new Set(rows.map((r) => r.id)).size;
+  const roleCount = new Set(rows.map((r) => r.id)).size + unplacedRows.length;
 
   mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   writeFileSync(
@@ -288,6 +379,7 @@ function main() {
         pinCount: pins.length,
         roleCount,
         pins,
+        remoteCompanies,
       },
       null,
       2,
@@ -295,7 +387,8 @@ function main() {
   );
 
   console.log(
-    `Exported ${pins.length} pins across ${companyCount} companies / ${roleCount} roles to ${OUTPUT_PATH}`,
+    `Exported ${pins.length} pins across ${companyCount} companies / ${roleCount} roles to ${OUTPUT_PATH} ` +
+      `(${remoteCompanies.length} companies / ${unplacedRows.length} roles with no resolvable location, shown unmapped).`,
   );
 }
 
