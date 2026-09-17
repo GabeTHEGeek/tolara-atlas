@@ -34,13 +34,17 @@
  * What's left after all of that (bare "Remote", "United States", country
  * names like "Portugal"/"India") has no specific place to pin from the
  * posting's own text. Rather than drop those roles entirely, a second pass
- * at the end of main() pins each one at its own company's DOMINANT office
- * (wherever that company already has the most other real, resolved
- * locations) and marks that role_locations row is_remote = 1 -- so a fully-
+ * at the end of main() tries, in order: (1) the company's DOMINANT office
+ * (wherever it already has the most other real, resolved locations), then
+ * (2) a curated headquarters on companies.city/state, for a company with
+ * NO resolved office at all (every one of its roles is remote). Either way
+ * the resulting role_locations row is marked is_remote = 1 -- so a fully-
  * remote posting still shows up on the map, associated with the company it
- * actually belongs to, instead of silently vanishing. A company with no
- * resolved office at all (every one of its roles is remote) has nothing
- * reasonable to fall back to, so those stay off the map.
+ * actually belongs to, instead of silently vanishing. companies.city/state
+ * aren't populated automatically; they're filled in by hand for companies
+ * worth the one-time lookup. A company with neither a dominant office nor
+ * a curated HQ has nothing reasonable to fall back to, so those stay off
+ * the map.
  *
  * Geocoding itself uses OpenStreetMap's Nominatim (free, no API key) —
  * rate-limited to 1 request/second per Nominatim's usage policy
@@ -83,6 +87,10 @@ const US_STATE_ABBREVS = new Set(Object.values(US_STATE_NAMES));
 const KNOWN_CITIES: Record<string, { city: string; state: string }> = {
   "san francisco": { city: "San Francisco", state: "CA" },
   sf: { city: "San Francisco", state: "CA" },
+  "san francisco bay area": { city: "San Francisco", state: "CA" },
+  "sf bay area": { city: "San Francisco", state: "CA" },
+  "bay area": { city: "San Francisco", state: "CA" },
+  "culver city": { city: "Culver City", state: "CA" },
   "new york city": { city: "New York City", state: "NY" },
   "new york": { city: "New York", state: "NY" },
   nyc: { city: "New York City", state: "NY" },
@@ -148,9 +156,26 @@ function toParsed(city: string, state: string): ParsedLocation {
 function stripNoise(raw: string): string {
   let s = raw.trim();
   s = s.replace(/^(?:hybrid|remote|onsite|on-site|in-office|in office)\s*[-:]\s*/i, "");
-  s = s.replace(/\s*[-–]?\s*(?:headquarters|hq|office)\s*$/i, "");
+  s = s.replace(/\s*[-–:|]?\s*(?:headquarters|hq|office|hub|remote|hybrid|onsite|on-site)\s*$/i, "");
   s = s.replace(/\([^)]*\)/g, "").trim();
   return s.trim();
+}
+
+/**
+ * Strips country/HQ-label noise tokens that sit right next to the real
+ * place name with a separator between them -- "USA - Mountain View, CA",
+ * "HQ-San Francisco", "US: San Mateo (...)". Applied to the WHOLE raw
+ * string before the city/state search below, because the abbrev/full-name
+ * regexes are greedy about what counts as the "city" portion of a "City,
+ * ST" match: left in place, "USA - Mountain View, CA" would capture "USA -
+ * Mountain View" as the city (garbling the geocoding query) rather than
+ * just "Mountain View". Only strips a token immediately followed by a
+ * dash/colon/pipe separator, so it never touches a token that's actually
+ * part of a real match, like the bare "US" at the end of "New York, NY,
+ * US" (nothing follows it to trigger this).
+ */
+function stripLeadingNoiseTokens(text: string): string {
+  return text.replace(/\b(?:USA?|U\.S\.A?\.?|United States|HQ|Hub|Headquarters)\s*[-–:|]\s*/gi, "");
 }
 
 /** "US-CA-Menlo Park" -> { city: "Menlo Park", state: "CA" } */
@@ -217,10 +242,19 @@ function findAllCityStates(text: string): ParsedLocation[] {
   }
 
   // Bare known cities with no state at all ("San Francisco", "NYC"),
-  // checked per ;/•/|-separated segment so e.g. "Austin; NYC" catches both.
-  const segments = text.split(/[;•|]/).map((s) => s.trim()).filter(Boolean);
+  // checked per ;/•/|/,/"or"-separated segment -- covers both a single
+  // bare city ("Austin; NYC") and the common "list every office with no
+  // real delimiter" shape ("NYC, Chicago, Seattle, San Francisco",
+  // "San Francisco Or New York", "New York City, Toronto, Chicago, or
+  // Remote"). Splitting on bare commas here is safe even though commas
+  // also separate "City, ST" pairs above -- a segment that doesn't match
+  // a known bare city (e.g. a state abbreviation left over from an
+  // already-matched pair) is just silently ignored, not misread as one.
+  // Hyphens are normalized to spaces before lookup so "New-York" still
+  // matches "New York".
+  const segments = text.split(/[;•|,]|\bor\b/i).map((s) => s.trim()).filter(Boolean);
   for (const segment of segments.length ? segments : [text]) {
-    const known = KNOWN_CITIES[stripNoise(segment).toLowerCase()];
+    const known = KNOWN_CITIES[stripNoise(segment).replace(/-/g, " ").replace(/\s+/g, " ").toLowerCase()];
     if (known) add(toParsed(known.city, known.state));
   }
 
@@ -238,13 +272,18 @@ function findAllCityStates(text: string): ParsedLocation[] {
 function extractAllCityStates(raw: string): ParsedLocation[] {
   if (!raw) return [];
 
+  // "US-CA-Menlo Park" is checked against the ORIGINAL string -- it's
+  // anchored at the start, so a leading noise token would break the
+  // anchor anyway, and the format is unambiguous as-is.
   const dashFormat = parseUsDashFormat(raw);
   if (dashFormat) return [dashFormat];
 
-  const stateParenCity = parseUsStateParenCity(raw);
+  const cleaned = stripLeadingNoiseTokens(raw);
+
+  const stateParenCity = parseUsStateParenCity(cleaned);
   if (stateParenCity) return [stateParenCity];
 
-  return findAllCityStates(raw);
+  return findAllCityStates(cleaned);
 }
 
 async function geocodeQuery(query: string): Promise<{ lat: number; lon: number } | null> {
@@ -383,17 +422,33 @@ async function main() {
      ORDER BY n DESC
      LIMIT 1`,
   );
+  // Fallback below the dominant-OTHER-role lookup: a manually-curated
+  // headquarters on the companies row itself (companies.city/state), for a
+  // company with no resolved office at all -- every one of its roles is
+  // remote, so there's no "other role" to learn a dominant city from.
+  // companies.city/state/latitude/longitude aren't populated by the sync
+  // pipeline; they're filled in by hand (or a future enrichment step) for
+  // companies worth the one-time lookup. latitude/longitude are geocoded
+  // here on first use if city/state are set but coordinates aren't yet.
+  const companyHqRow = db.prepare(`SELECT city, state, latitude, longitude FROM companies WHERE id = ?`);
+  const saveCompanyHqCoords = db.prepare(
+    `UPDATE companies SET latitude = ?, longitude = ?, geocoded_at = datetime('now') WHERE id = ?`,
+  );
   const insertRemoteLocation = db.prepare(
     `INSERT INTO role_locations (role_id, raw_segment, resolved_city, resolved_state, latitude, longitude, is_remote, geocoded_at)
      VALUES (?, ?, ?, ?, ?, ?, 1, datetime('now'))`,
   );
 
   let remoteAssigned = 0;
+  let hqAssigned = 0;
   let remoteUnplaceable = 0;
   // company_id -> its dominant office, or null if it has none (every one
   // of its OTHER roles is also unplaced) -- cached so a company with many
   // remote postings only costs one lookup query, not one per role.
   const dominantCache = new Map<number, { city: string; state: string; lat: number; lon: number } | null>();
+  // company_id -> its curated HQ (from companies.city/state), or null if
+  // it has none set -- same caching reasoning as dominantCache.
+  const hqCache = new Map<number, { city: string; state: string; lat: number; lon: number } | null>();
 
   for (const role of unplaced) {
     let dominant = dominantCache.get(role.company_id);
@@ -407,17 +462,52 @@ async function main() {
       dominantCache.set(role.company_id, dominant);
     }
 
-    if (!dominant) {
-      // This company has no resolved office at all (every one of its
-      // roles is remote, or it has no other active roles) -- nowhere
-      // reasonable to pin this one either, so it's left off the map.
+    if (dominant) {
+      insertRemoteLocation.run(role.id, role.location, dominant.city, dominant.state, dominant.lat, dominant.lon);
+      updateRoleSummary.run(dominant.city, dominant.state, dominant.lat, dominant.lon, role.id);
+      remoteAssigned += 1;
+      continue;
+    }
+
+    let hq = hqCache.get(role.company_id);
+    if (hq === undefined) {
+      const row = companyHqRow.get(role.company_id) as
+        | { city: string | null; state: string | null; latitude: number | null; longitude: number | null }
+        | undefined;
+      if (row?.city && row?.state) {
+        let lat = row.latitude;
+        let lon = row.longitude;
+        if (lat == null || lon == null) {
+          const query = `${row.city}, ${row.state}, USA`;
+          let result = cache.has(query) ? cache.get(query)! : null;
+          if (!cache.has(query)) {
+            result = await geocodeQuery(query);
+            cache.set(query, result);
+            await sleep(1100);
+          }
+          if (result) {
+            lat = result.lat;
+            lon = result.lon;
+            saveCompanyHqCoords.run(lat, lon, role.company_id);
+          }
+        }
+        hq = lat != null && lon != null ? { city: row.city, state: row.state, lat, lon } : null;
+      } else {
+        hq = null;
+      }
+      hqCache.set(role.company_id, hq);
+    }
+
+    if (!hq) {
+      // No dominant office AND no curated headquarters -- nowhere
+      // reasonable to pin this one, so it's left off the map.
       remoteUnplaceable += 1;
       continue;
     }
 
-    insertRemoteLocation.run(role.id, role.location, dominant.city, dominant.state, dominant.lat, dominant.lon);
-    updateRoleSummary.run(dominant.city, dominant.state, dominant.lat, dominant.lon, role.id);
-    remoteAssigned += 1;
+    insertRemoteLocation.run(role.id, role.location, hq.city, hq.state, hq.lat, hq.lon);
+    updateRoleSummary.run(hq.city, hq.state, hq.lat, hq.lon, role.id);
+    hqAssigned += 1;
   }
 
   console.log(
@@ -425,7 +515,8 @@ async function main() {
       `(${cache.size} unique locations looked up), ${extraLocations} additional office locations found for multi-office postings.`,
   );
   console.log(
-    `Remote postings: ${remoteAssigned} pinned at their company's dominant office, ${remoteUnplaceable} left off the map (no resolved office for that company at all).`,
+    `Remote postings: ${remoteAssigned} pinned at their company's dominant office, ${hqAssigned} pinned at a ` +
+      `curated headquarters, ${remoteUnplaceable} left off the map (no resolved office or curated HQ for that company).`,
   );
 }
 
