@@ -12,12 +12,18 @@
  * in order:
  *   1. "US-XX-City" (e.g. "US-CA-Menlo Park")
  *   2. "US <Full State Name> (<City>)..." (e.g. "US California (Redwood City) - Office")
- *   3. Prefix/suffix noise: "Hybrid - ", "Remote - ", "... HQ", "... Office"
- *   4. "City, ST" / "City, Full State Name[, Country]", tried per ";"-separated
- *      segment (a posting can list several offices) — non-US segments
- *      (e.g. "Vancouver, British Columbia, Canada") are correctly skipped.
- *   5. A short list of major US tech-hub cities given bare, with no state
- *      at all (e.g. "San Francisco", "NYC", "Austin").
+ *   3. A left-to-right SEARCH (not a whole-string match) for the first
+ *      plausible "City, ST" or "City, Full State Name" pair anywhere in
+ *      the string — handles trailing/interleaved noise of all shapes
+ *      without needing a rule for each one: "Washington, DC - Remote",
+ *      "Burlington, MA | Hybrid", "San Francisco, CA • New York, NY •
+ *      United States", "New York, NY, US" (bare "US"), and multi-office
+ *      strings with no delimiter at all ("San Francisco, CA, New York,
+ *      NY, Portland, OR, or Remote ..."). Non-US pairs (e.g. "Toronto,
+ *      ON") are correctly rejected since ON isn't a US state abbreviation.
+ *   4. A short list of major US tech-hub cities given bare, with no state
+ *      at all (e.g. "San Francisco", "NYC", "Austin"), tried per
+ *      ";"/"•"/"|"-separated segment.
  * What's left after all of that (bare "Remote", "United States", country
  * names like "Portugal"/"India") genuinely has no specific place to pin —
  * those roles are left ungeocoded on purpose rather than guessed at.
@@ -153,34 +159,50 @@ function parseUsStateParenCity(raw: string): ParsedLocation | null {
   return null;
 }
 
-function parseSegment(segment: string): ParsedLocation | null {
-  const cleaned = stripNoise(segment);
-
-  const abbrevMatch = cleaned.match(
-    /^([A-Za-z][A-Za-z.\s'-]*?),\s*([A-Z]{2})(?:,\s*(?:United States|USA|U\.S\.A?\.?))?$/,
-  );
-  if (abbrevMatch) {
-    const city = abbrevMatch[1].trim();
-    const state = abbrevMatch[2].trim();
+/**
+ * Searches (not anchors) for the first plausible "City, ST" or
+ * "City, Full State Name" pair anywhere in the text, left to right. This
+ * is deliberately a search rather than a whole-string match: real
+ * location strings put a valid office ahead of all kinds of trailing or
+ * interleaved noise a fixed set of separator rules can't keep up with —
+ * "Washington, DC - Remote", "Burlington, MA | Hybrid",
+ * "San Francisco, CA • New York, NY • United States", "New York, NY, US"
+ * (bare "US", not "United States"), and even multiple offices joined by
+ * plain commas with no delimiter at all ("San Francisco, CA, New York,
+ * NY, Portland, OR, or Remote ..."). A search naturally finds the first
+ * valid pair and ignores everything around it; an implausible match
+ * (e.g. "Remote, CA") is skipped in favor of the next candidate rather
+ * than failing the whole string.
+ */
+function findCityState(text: string): ParsedLocation | null {
+  const abbrevPattern = /([A-Za-z][A-Za-z.'-]*(?:\s[A-Za-z.'-]+)*),\s*([A-Z]{2})\b/g;
+  let m: RegExpExecArray | null;
+  while ((m = abbrevPattern.exec(text))) {
+    const city = m[1].trim();
+    const state = m[2].trim();
     if (US_STATE_ABBREVS.has(state) && isPlausibleCity(city)) return toParsed(city, state);
   }
 
-  const fullNameMatch = cleaned.match(
-    /^([A-Za-z][A-Za-z.\s'-]*?),\s*([A-Za-z][A-Za-z\s]*?)(?:,\s*(?:United States|USA|U\.S\.A?\.?))?$/,
-  );
-  if (fullNameMatch) {
-    const city = fullNameMatch[1].trim();
-    const stateAbbrev = US_STATE_NAMES[fullNameMatch[2].trim().toLowerCase()];
+  const fullNamePattern = /([A-Za-z][A-Za-z.'-]*(?:\s[A-Za-z.'-]+)*),\s*([A-Za-z]+(?:\s[A-Za-z]+)*)/g;
+  while ((m = fullNamePattern.exec(text))) {
+    const city = m[1].trim();
+    const stateAbbrev = US_STATE_NAMES[m[2].trim().toLowerCase()];
     if (stateAbbrev && isPlausibleCity(city)) return toParsed(city, stateAbbrev);
   }
-
-  const known = KNOWN_CITIES[cleaned.toLowerCase()];
-  if (known) return toParsed(known.city, known.state);
 
   return null;
 }
 
-/** A posting can list several offices separated by ";" — this takes the first that parses. */
+/** Bare known city, no state anywhere in the string ("San Francisco", "NYC"). */
+function findKnownCity(raw: string): ParsedLocation | null {
+  const segments = raw.split(/[;•|]/).map((s) => s.trim()).filter(Boolean);
+  for (const segment of segments.length ? segments : [raw]) {
+    const known = KNOWN_CITIES[stripNoise(segment).toLowerCase()];
+    if (known) return toParsed(known.city, known.state);
+  }
+  return null;
+}
+
 function extractCityState(raw: string): ParsedLocation | null {
   if (!raw) return null;
 
@@ -190,12 +212,10 @@ function extractCityState(raw: string): ParsedLocation | null {
   const stateParenCity = parseUsStateParenCity(raw);
   if (stateParenCity) return stateParenCity;
 
-  const segments = raw.split(";").map((s) => s.trim()).filter(Boolean);
-  for (const segment of segments) {
-    const parsed = parseSegment(segment);
-    if (parsed) return parsed;
-  }
-  return null;
+  const general = findCityState(raw);
+  if (general) return general;
+
+  return findKnownCity(raw);
 }
 
 async function geocodeQuery(query: string): Promise<{ lat: number; lon: number } | null> {
