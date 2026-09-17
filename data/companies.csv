@@ -30,7 +30,6 @@ Rula,rula,ashby,verified,2026-08-25T08:25:06,Auto-discovered
 Metriport,metriport,ashby,verified,2026-08-14T23:30:40,Auto-discovered
 Rho,rho,ashby,verified,2026-08-14T23:30:40,Auto-discovered
 Delinea,delinea,ashby,verified,2026-08-14T23:30:40,Auto-discovered
-Real,real,ashby,verified,2026-08-14T23:30:40,Auto-discovered
 Clasp,clasp,ashby,verified,2026-08-14T23:30:40,Auto-discovered
 Abby Care,abby-care,ashby,verified,2026-08-14T23:30:40,Auto-discovered
 Notabene,notabene,ashby,verified,2026-08-07T00:15:38,Auto-discovered
@@ -69,7 +68,6 @@ Relevanceai,relevanceai,ashby,verified,2026-08-25T15:57:04,Auto-discovered
 Perplexity,perplexity,ashby,verified,2026-08-12T00:15:12,Auto-discovered
 Airops,airops,ashby,verified,2026-08-25T09:00:54,Auto-discovered
 Clickup,clickup,ashby,verified,2026-07-31T23:21:32,Auto-discovered
-Evenup,evenup,ashby,verified,2026-08-15T02:20:08,Auto-discovered
 Element451,element451,ashby,verified,2026-07-31T23:20:07,Auto-discovered
 Jellyfish,jellyfish,ashby,verified,2026-08-12T12:16:10,Auto-discovered
 Kayak,kayak,ashby,verified,2026-07-31T23:07:07,Auto-discovered
@@ -83,7 +81,6 @@ Foundationhealthcareers,foundationhealthcareers,ashby,verified,2026-08-01T00:07:
 Xero,xero,ashby,verified,2026-07-31T23:01:17,Auto-discovered
 Brellium,brellium,ashby,verified,2026-08-17T14:44:44,Auto-discovered
 Zip,zip,ashby,verified,2026-08-20T14:20:09,Auto-discovered
-Whatnot,whatnot,ashby,verified,2026-08-25T15:51:44,Auto-discovered
 Reevo,reevo,ashby,verified,2026-07-31T23:15:21,Auto-discovered
 Profound,profound,ashby,verified,2026-08-17T18:33:24,Auto-discovered
 Tango,tango,ashby,verified,2026-08-01T00:09:03,Auto-discovered
@@ -122,7 +119,7 @@ Suno,suno,ashby,verified,2026-08-19T00:48:14,Auto-discovered
 Openrouter,openrouter,ashby,verified,2026-08-24T17:50:20,Auto-discovered
 Spoton,spoton,ashby,verified,2026-07-31T23:02:26,Auto-discovered
 Ltv,ltv,ashby,verified,2026-08-24T22:06:33,Auto-discovered
-Wand,wand,ashby,verified,2026-08-24T22:44:19,Auto-discovered
+Wand,wand-ai,ashby,verified,2026-08-24T22:44:19,Auto-discovered
 Datalab,datalab,ashby,verified,2026-08-08T06:48:51,Auto-discovered
 Teamworks,teamworks,ashby,verified,2026-08-25T08:54:47,Auto-discovered
 Pagerduty,pagerduty,greenhouse,verified,2026-09-11T17:37:16,Auto-discovered
@@ -173,7 +170,6 @@ Yext,yext,greenhouse,verified,2026-07-31T21:56:24,Auto-discovered
 Typeform,typeform,greenhouse,verified,2026-08-11T07:47:41,Auto-discovered
 Cadencesolutions,solutions,greenhouse,verified,2026-07-31T21:56:24,Auto-discovered
 Processstreet,processstreet,greenhouse,verified,2026-08-25T21:16:34,Auto-discovered
-Arcadiacareers,arcadiacareers,greenhouse,verified,2026-08-21T04:15:03,Auto-discovered
 Yipitdata,yipitdata,greenhouse,verified,2026-08-25T15:37:15,Auto-discovered
 Gitlab,gitlab,greenhouse,verified,2026-08-13T13:47:17,Auto-discovered
 Cookunity,cookunity,greenhouse,verified,2026-08-11T16:09:23,Auto-discovered
@@ -203,7 +199,6 @@ Angi,angi,ashby,verified,2026-08-06T22:38:49,Auto-discovered
 Economicmodeling,economicmodeling,lever,verified,2026-08-17T17:44:37,Auto-discovered
 Jobgether,jobgether,lever,verified,2026-08-20T23:29:03,Auto-discovered
 15Five,15five,lever,verified,2026-08-20T17:59:18,Auto-discovered
-Petvisor,petvisor,lever,verified,2026-08-17T14:44:01,Auto-discovered
 Spotify,spotify,lever,verified,2026-08-14T23:30:40,Auto-discovered
 Windfalldata,windfalldata,lever,verified,2026-08-20T15:50:57,Auto-discovered
 Netomi,netomi,lever,verified,2026-08-30T03:41:21,Auto-discovered
@@ -212,13 +207,11 @@ Ridezum,ridezum,lever,verified,2026-08-20T13:57:29,Auto-discovered
 Bellese,bellese,lever,verified,2026-08-18T05:40:49,Auto-discovered
 Elorian,elorian-ai-inc,ashby,verified,,Confirmed via their own Join Us link (jobs.ashbyhq.com/elorian-ai-inc)
 Pencil,pencil,ashby,verified,2026-08-24T16:24:07,Auto-discovered
-American Terawatt,american terawatt,ashby,verified,2026-07-31T22:21:39,Auto-discovered
 Effective-Ai,effective-ai,ashby,verified,2026-08-03T21:17:52,Auto-discovered
 Angi,angi,ashby,verified,2026-08-06T22:38:49,Auto-discovered
 Kiddom,kiddom,ashby,verified,2026-08-10T22:26:28,Auto-discovered
 Biograph,biograph,ashby,verified,2026-08-12T11:48:51,Auto-discovered
 Fireworks,fireworks,ashby,verified,2026-08-12T13:09:26,Auto-discovered
-Instrumentl,instrumentl,lever,verified,2026-08-14T23:30:40,Auto-discovered
 seekr,seekr,greenhouse,verified,2026-08-15T09:06:11,Auto-discovered
 OhMD,ohmd,greenhouse,verified,2026-08-15T09:48:12,Auto-discovered
 Knit,knit,greenhouse,verified,2026-08-17T15:01:04,Auto-discovered
@@ -232,10 +225,336 @@ Survey Monkey,surveymonkey,ashby,verified,2026-08-21T03:21:55,Auto-discovered
 Quinstreet,quinstreet,greenhouse,verified,2026-08-21T04:36:46,Auto-discovered
 neighborly Software,neighborly-software,ashby,verified,2026-08-24T17:44:37,Auto-discovered
 Work Hero,workhero,ashby,verified,2026-08-23T10:19:52,Auto-discovered
-Wand,wand,ashby,verified,2026-08-24T22:44:19,Auto-discovered
 Lance,lance,ashby,verified,2026-08-25T09:15:25,Auto-discovered
 Revin,revin,ashby,verified,2026-08-25T16:03:43,Auto-discovered
 within-ai,within-ai,ashby,verified,2026-08-25T21:08:09,Auto-discovered
 Chalk,chalk,ashby,verified,2026-08-29T03:24:06,Auto-discovered
 Gen Digital,gen-digital,ashby,verified,2026-08-31T12:43:23,Auto-discovered
 P-1%20AI,P-1%20AI,ashby,verified,2026-09-02T07:32:23,Auto-discovered
+Gopuff,gopuff,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Stripe,stripe,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Lyra Health,lyrahealth,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Rocket Lab,rocketlab,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Shield AI,shield-ai,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Datadog,datadog,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Lucid Motors,lucidmotors,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Crusoe Energy,crusoe,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Cloudflare,cloudflare,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Elastic,elastic,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Relativity Space,relativity,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Waymo,waymo,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Toast,toast,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Okta,okta,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Palantir,palantir,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Braze,braze,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Verkada,verkada,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+CoreWeave,coreweave,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Oscar Health,oscar,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Applied Intuition,applied,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Samsara,samsara,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Zoox,zoox,lever,verified,2026-09-17T17:33:11,Auto-discovered
+ElevenLabs,elevenlabs,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Coinbase,coinbase,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+TripActions,tripactions,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Natera,natera,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sezzle,sezzle,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Formlabs,formlabs,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Affirm,affirm,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Form Energy,formenergy,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Fivetran,fivetran,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Flexport,flexport,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Lyft,lyft,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Airbnb,airbnb,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Scopely,scopely,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Whoop,whoop,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Riot Games,riotgames,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Robinhood,robinhood,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Epic Games,epicgames,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Twilio,twilio,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Redwood Materials,redwoodmaterials,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Klaviyo,klaviyo,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Skydio,skydio,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Hims & Hers,hims-and-hers,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Cerebras,cerebras,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Intercom,intercom,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Grafana Labs,grafanalabs,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+IXL Learning,ixllearning,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Instacart,instacart,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Nuro,nuro,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+LangChain,langchain,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Voodoo,voodoo,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+TRM Labs,trm-labs,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Asana,asana,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Gusto,gusto,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Oura,oura,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Mixpanel,mixpanel,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+OneTrust,onetrust,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Lambda Labs,lambda,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Headway,headway,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Socure,socure,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Duolingo,duolingo,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Uber Freight,uberfreight,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Geotab,geotab,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Hightouch,hightouch,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+N26,n26,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Workato,workato,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Commure,commure,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Aircall,aircall,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Hinge Health,hinge-health,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Dialpad,dialpad,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Chime,chime,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Handshake,handshake,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Monzo,monzo,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Ethos Life,ethoslife,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Fireblocks,fireblocks,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Alpaca,alpaca,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Science 37,science37,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Clover Health,cloverhealth,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Carta,carta,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Cabify,cabify,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Together AI,togetherai,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sigma Computing,sigmacomputing,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Helion Energy,helion,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+1Password,1password,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+JetBrains,jetbrains,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Temporal,temporal,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Kodiak Robotics,kodiak,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Docker,docker,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+SoFi,sofi,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Peloton,peloton,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Included Health,includedhealth,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Synthesia,synthesia,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Ro,ro,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Writer,writer,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Checkr,checkr,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Discord,discord,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+DeepL,deepl,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+New Relic,newrelic,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Fastly,fastly,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Aeva,aeva,lever,verified,2026-09-17T17:33:11,Auto-discovered
+SimpliSafe,simplisafe,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sentry,sentry,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Supercell,supercell,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Bill.com,billcom,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Eight Sleep,eightsleep,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Truveta,truveta,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Drata,drata,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Snorkel AI,snorkelai,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Dropbox,dropbox,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sardine,sardine,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Amplitude,amplitude,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+n8n,n8n,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Culture Amp,cultureamp,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Render,render,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+StockX,stockx,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sword Health,swordhealth,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Lemonade,lemonade,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Coalition,coalition,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+BitGo,bitgo,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Collibra,collibra,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+project44,project44,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Modal,modal,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Algolia,algolia,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Attentive,attentive,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Backblaze,backblaze,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Salesloft,salesloft,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Elliptic,elliptic,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+AppLovin,applovin,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sanity,sanity,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Squarespace,squarespace,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Bird,bird,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+HackerRank,hackerrank,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Forter,forter,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Miro,miro,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Flatiron Health,flatironhealth,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Outreach,outreach,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Grow Therapy,grow-therapy,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Otter.ai,otterai,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Slice,slice,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Merkle Science,merklescience,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Bandwidth,bandwidth,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Wealthfront,wealthfront,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Betterment,betterment,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Redis,redis,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Fieldwire,fieldwire,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Bestow,bestow,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Alloy,alloy,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Riskified,riskified,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Oyster HR,oyster,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Virta Health,virtahealth,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Pie Insurance,pieinsurance,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Butterfly MX,butterflymx,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Easyship,easyship,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Homebase,homebase,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Uplift,uplift,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Anchorage Digital,anchorage,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Dapper Labs,dapper,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Pendo,pendo,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Confluent,confluent,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Astronomer,astronomer,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Fleetio,fleetio,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Vonage,vonage,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Cockroach Labs,cockroachlabs,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+AfterShip,aftership,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Alchemy,alchemy,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Khan Academy,khanacademy,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Talkspace,talkspace,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Jam City,jamcity,lever,verified,2026-09-17T17:33:11,Auto-discovered
+LastPass,lastpass,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+HackerOne,hackerone,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Greenhouse Software,greenhouse,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Color Health,color-health,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Wise,wise,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Tastytrade,tastytrade,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Persona,persona,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Substack,substack,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Iterable,iterable,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Dashlane,dashlane,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Omada Health,omadahealth,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Cargomatic,cargomatic,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Yotpo,yotpo,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Kin Insurance,kin,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+ChowNow,chownow,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Paxos,paxos,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Gorgias,gorgias,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Secureframe,secureframe,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Demandbase,demandbase,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Kasa,kasa,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Loadsmart,loadsmart,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Storyblok,storyblok,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Ambience Healthcare,ambiencehealthcare,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Omnisend,omnisend,lever,verified,2026-09-17T17:33:11,Auto-discovered
+PlanetScale,planetscale,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Airbyte,airbyte,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Make,make,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Newsela,newsela,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Bright Machines,brightmachines,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Arlo,arlo,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+FourKites,fourkites,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+7shifts,7shifts,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Constant Contact,constantcontact,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Wasabi,wasabi,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Neon,neon,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Immuta,immuta,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Pika,pika,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Blend,blend,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Roofstock,roofstock,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Modern Health,modernhealth,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Neighbor,neighbor,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Deputy,deputy,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Patreon,patreon,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+ActiveCampaign,activecampaign,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Orca Security,orcasecurity,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Notable Health,notable,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+LlamaIndex,llamaindex,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Contentful,contentful,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Semgrep,semgrep,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Bugcrowd,bugcrowd,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Labelbox,labelbox,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Descript,descript,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Mutiny,mutiny,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Astra,astra,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Titan Invest,titan,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Olo,olo,lever,verified,2026-09-17T17:33:11,Auto-discovered
+PandaDoc,pandadoc,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Calendly,calendly,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Help Scout,helpscout,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Lattice,lattice,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Karat,karat,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+BetterUp,betterup,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Capsule,capsule,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Solid Power,solidpower,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Loop Returns,loopreturns,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Circle,circle,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Resend,resend,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Railway,railway,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Atlan,atlan,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Prefect,prefect,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Suki AI,suki,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Patch,patch,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Phrase,phrase,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+LogRocket,logrocket,lever,verified,2026-09-17T17:33:11,Auto-discovered
+BigID,bigid,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Udemy,udemy,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Charm Industrial,charmindustrial,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Rhombus Systems,rhombus-systems,lever,verified,2026-09-17T17:33:11,Auto-discovered
+CompanyCam,companycam,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Built Robotics,built-robotics,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Current,current,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sift,sift,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Immutable,immutable,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Pinecone,pinecone,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Smartling,smartling,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+FullStory,fullstory,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Inflection AI,inflectionai,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+MasterClass,masterclass,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Okendo,okendo,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Recharge,recharge,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Ledger,ledger,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Magic Eden,magiceden,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Sky Mavis,skymavis,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Outschool,outschool,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Corti,corti,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Sylvera,sylvera,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Berlin Brands Group,berlinbrands,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Expensify,expensify,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Beamery,beamery,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Dave,dave,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Ladder,ladder,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Lightspeed,lightspeed,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Vanilla Forums,vanilla,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Cedar,cedar,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Heirloom Carbon,heirloomcarbon,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Beyond Meat,beyond,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Narvar,narvar,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Resilience,resilience,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Flexe,flexe,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sorare,sorare,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Rumble,rumble,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Prismic,prismic,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Remote,remote,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Latch,latch,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Motive,motive,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+GOAT Group,goatgroup,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Curated,curated,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Public Storage,public,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+OpenSea,opensea,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Thinkific,thinkific,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Mighty Networks,mightynetworks,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Orbit,orbit,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Weaviate,weaviate,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Lokalise,lokalise,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Netlify,netlify,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Snyk,snyk,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Unbounce,unbounce,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Calm,calm,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Levels,levels,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Archer Aviation,archer,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Impossible Foods,impossible-foods,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Bold Commerce,bold,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Rebuy,rebuy,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+When I Work,when,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+QuickNode,quicknode,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+QuillBot,quillbot,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Anomalo,anomalo,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Deel,deel,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Loom,loom,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Freshworks,freshworks,lever,verified,2026-09-17T17:33:11,Auto-discovered
+HubSpot,hubspot,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Hex,hex,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Wiz,wiz,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Mistral AI,mistral,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Clari,clari,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Grailed,grailed,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Sonder,sonder,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Papaya Global,papaya,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Lever,lever,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Course Hero,coursehero,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+Function Health,function-health,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Pachama,pachama,lever,verified,2026-09-17T17:33:11,Auto-discovered
+KeepTruckin,keeptruckin,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Kraken,kraken,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Niantic,niantic,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Playco,playco,lever,verified,2026-09-17T17:33:11,Auto-discovered
+Beacons,beacons,ashby,verified,2026-09-17T17:33:11,Auto-discovered
+Polytomic,polytomic,ashby,verified,2026-09-17T17:33:11,Auto-discovered
