@@ -1,9 +1,12 @@
 /**
  * ingestion/geocode.ts
- * Populates companies.latitude/longitude (and city/state) so the map has
- * something to plot. ATS APIs don't give us a company HQ address, so this
- * infers a representative location from the company's own active job
- * postings, using the most frequent parseable location among them.
+ * Resolves each ACTIVE ROLE's own location string to a city/state and
+ * lat/lng — not the company's. A company can have PM roles open in more
+ * than one office at once, and the map should show a pin at each one
+ * rather than guessing a single "representative" location for the whole
+ * company (that guess also used to be skewed by small sample size: with
+ * only a couple of PM postings, whichever city happened to have more of
+ * them got mislabeled as if it meant something about the company overall).
  *
  * Location strings are messy and inconsistent across boards. This handles,
  * in order:
@@ -17,13 +20,17 @@
  *      at all (e.g. "San Francisco", "NYC", "Austin").
  * What's left after all of that (bare "Remote", "United States", country
  * names like "Portugal"/"India") genuinely has no specific place to pin —
- * those companies are left ungeocoded on purpose rather than guessed at.
+ * those roles are left ungeocoded on purpose rather than guessed at.
  *
  * Geocoding itself uses OpenStreetMap's Nominatim (free, no API key) —
  * rate-limited to 1 request/second per Nominatim's usage policy
- * (https://operations.osmfoundation.org/policies/nominatim/), so this is
- * slow by design. Only companies missing geocoded_at are processed, so
- * re-running is cheap.
+ * (https://operations.osmfoundation.org/policies/nominatim/). Many roles
+ * resolve to the same city (e.g. dozens of "San Francisco, CA, USA"
+ * postings across different companies), so this caches results by query
+ * string within a run and only sleeps before an actual network call —
+ * this is what keeps re-running cheap even though it's now per-role
+ * rather than per-company. Only roles missing geocoded_at are processed,
+ * so a re-run only pays for genuinely new locations.
  *
  * Usage: npm run geocode
  */
@@ -102,11 +109,6 @@ const KNOWN_CITIES: Record<string, { city: string; state: string }> = {
   pittsburgh: { city: "Pittsburgh", state: "PA" },
 };
 
-interface RoleLocation {
-  company_id: number;
-  location: string;
-}
-
 interface ParsedLocation {
   city: string;
   state: string;
@@ -125,11 +127,8 @@ function toParsed(city: string, state: string): ParsedLocation {
 /** Strips noise this dataset actually contains, without touching the core place name. */
 function stripNoise(raw: string): string {
   let s = raw.trim();
-  // Leading work-mode qualifiers: "Hybrid - New York City" -> "New York City"
   s = s.replace(/^(?:hybrid|remote|onsite|on-site|in-office|in office)\s*[-:]\s*/i, "");
-  // Trailing office/HQ labels: "San Francisco HQ" / "New York City Office" / "... - Office"
   s = s.replace(/\s*[-–]?\s*(?:headquarters|hq|office)\s*$/i, "");
-  // Parenthetical qualifiers anywhere: "United States (Remote)" -> "United States"
   s = s.replace(/\([^)]*\)/g, "").trim();
   return s.trim();
 }
@@ -175,13 +174,13 @@ function parseSegment(segment: string): ParsedLocation | null {
     if (stateAbbrev && isPlausibleCity(city)) return toParsed(city, stateAbbrev);
   }
 
-  // Bare known city, no state in the string at all ("San Francisco", "NYC").
   const known = KNOWN_CITIES[cleaned.toLowerCase()];
   if (known) return toParsed(known.city, known.state);
 
   return null;
 }
 
+/** A posting can list several offices separated by ";" — this takes the first that parses. */
 function extractCityState(raw: string): ParsedLocation | null {
   if (!raw) return null;
 
@@ -199,7 +198,7 @@ function extractCityState(raw: string): ParsedLocation | null {
   return null;
 }
 
-async function geocode(query: string): Promise<{ lat: number; lon: number } | null> {
+async function geocodeQuery(query: string): Promise<{ lat: number; lon: number } | null> {
   const url = new URL(NOMINATIM_URL);
   url.searchParams.set("q", query);
   url.searchParams.set("format", "json");
@@ -224,66 +223,62 @@ function sleep(ms: number): Promise<void> {
 async function main() {
   const db = getDb();
 
-  const companies = db
-    .prepare(`SELECT id, name FROM companies WHERE geocoded_at IS NULL`)
-    .all() as Array<{ id: number; name: string }>;
+  const roles = db
+    .prepare(
+      `SELECT id, location FROM roles WHERE status = 'active' AND geocoded_at IS NULL`,
+    )
+    .all() as Array<{ id: number; location: string | null }>;
 
-  if (companies.length === 0) {
-    console.log("Nothing to geocode — every company already has geocoded_at set.");
+  if (roles.length === 0) {
+    console.log("Nothing to geocode — every active role already has geocoded_at set.");
     return;
   }
 
-  console.log(`Geocoding ${companies.length} companies (1 req/sec, so this will take a bit)...`);
+  console.log(`Geocoding ${roles.length} active roles (1 req/sec per new location, cached by query)...`);
 
-  const getRoleLocations = db.prepare(
-    `SELECT location FROM roles WHERE company_id = ? AND status = 'active' AND location IS NOT NULL AND location != ''`,
+  const updateRole = db.prepare(
+    `UPDATE roles SET resolved_city = ?, resolved_state = ?, latitude = ?, longitude = ?, geocoded_at = datetime('now') WHERE id = ?`,
   );
-  const updateCompany = db.prepare(
-    `UPDATE companies SET city = ?, state = ?, latitude = ?, longitude = ?, geocoded_at = datetime('now'), updated_at = datetime('now') WHERE id = ?`,
-  );
-  const markAttempted = db.prepare(
-    `UPDATE companies SET geocoded_at = datetime('now') WHERE id = ?`,
-  );
+  const markAttempted = db.prepare(`UPDATE roles SET geocoded_at = datetime('now') WHERE id = ?`);
+
+  // query string -> result (or null for "resolved to nothing"), so repeat
+  // cities across many roles cost one network call instead of one each.
+  const cache = new Map<string, { lat: number; lon: number } | null>();
 
   let geocoded = 0;
   let skipped = 0;
+  let cacheHits = 0;
 
-  for (const company of companies) {
-    const locations = (getRoleLocations.all(company.id) as RoleLocation[]).map((r) => r.location);
-
-    const counts = new Map<string, { count: number } & ParsedLocation>();
-    for (const raw of locations) {
-      const parsed = extractCityState(raw);
-      if (!parsed) continue;
-      const key = `${parsed.city}|${parsed.state}`;
-      const existing = counts.get(key);
-      if (existing) existing.count += 1;
-      else counts.set(key, { count: 1, ...parsed });
-    }
-
-    const best = [...counts.values()].sort((a, b) => b.count - a.count)[0];
-    if (!best) {
-      console.log(`  skip: ${company.name} (no city/state found in ${locations.length} posting locations)`);
-      markAttempted.run(company.id);
+  for (const role of roles) {
+    const parsed = extractCityState(role.location ?? "");
+    if (!parsed) {
+      markAttempted.run(role.id);
       skipped += 1;
       continue;
     }
 
-    const result = await geocode(best.query);
-    if (result) {
-      updateCompany.run(best.city, best.state, result.lat, result.lon, company.id);
-      console.log(`  ok:   ${company.name} -> ${best.city}, ${best.state} (${result.lat}, ${result.lon})`);
-      geocoded += 1;
+    let result: { lat: number; lon: number } | null;
+    if (cache.has(parsed.query)) {
+      result = cache.get(parsed.query)!;
+      cacheHits += 1;
     } else {
-      console.log(`  fail: ${company.name} -> "${best.query}" did not resolve`);
-      markAttempted.run(company.id);
-      skipped += 1;
+      result = await geocodeQuery(parsed.query);
+      cache.set(parsed.query, result);
+      await sleep(1100);
     }
 
-    await sleep(1100);
+    if (result) {
+      updateRole.run(parsed.city, parsed.state, result.lat, result.lon, role.id);
+      geocoded += 1;
+    } else {
+      markAttempted.run(role.id);
+      skipped += 1;
+    }
   }
 
-  console.log(`\nGeocoding complete: ${geocoded} resolved, ${skipped} skipped/failed.`);
+  console.log(
+    `\nGeocoding complete: ${geocoded} roles resolved, ${skipped} skipped/failed, ${cacheHits} served from cache (${cache.size} unique locations looked up).`,
+  );
 }
 
 main().catch((err) => {

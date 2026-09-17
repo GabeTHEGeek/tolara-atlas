@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import MapView from "./components/MapView.js";
 import CompanyPanel from "./components/CompanyPanel.js";
-import type { CompanyData, MapData } from "./types.js";
+import type { LocationPinData, MapData } from "./types.js";
 
 export default function App() {
   const [mapData, setMapData] = useState<MapData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCompany, setSelectedCompany] = useState<CompanyData | null>(null);
+  const [selectedPin, setSelectedPin] = useState<LocationPinData | null>(null);
 
   useEffect(() => {
     fetch("/data/map-data.json")
@@ -36,8 +36,8 @@ export default function App() {
             <code>public/data/map-data.json</code>.
           </div>
         )}
-        {mapData && <MapView companies={mapData.companies} onSelectCompany={setSelectedCompany} />}
-        <CompanyPanel company={selectedCompany} onClose={() => setSelectedCompany(null)} />
+        {mapData && <MapView pins={mapData.pins} onSelectPin={setSelectedPin} />}
+        <CompanyPanel pin={selectedPin} onClose={() => setSelectedPin(null)} />
       </main>
     </div>
   );

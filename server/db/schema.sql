@@ -70,6 +70,16 @@ CREATE TABLE IF NOT EXISTS roles (
   last_seen_at    TEXT NOT NULL DEFAULT (datetime('now')),
   status          TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'closed')),
   content_hash    TEXT NOT NULL,           -- hash of title+description+salary, detects real changes vs. just "still open"
+  -- Per-ROLE geocoding (not per-company): a role's own location string is
+  -- what gets placed on the map, so a company with offices in more than
+  -- one city gets a pin per office instead of one company-wide guess.
+  -- companies.city/state/latitude/longitude below are legacy from the v1
+  -- company-level approach and are no longer used to plot pins.
+  resolved_city   TEXT,
+  resolved_state  TEXT,
+  latitude        REAL,
+  longitude       REAL,
+  geocoded_at     TEXT,                    -- when this role's location was last resolved; null = not yet attempted
   UNIQUE (company_id, source_job_id)
 );
 

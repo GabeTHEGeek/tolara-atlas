@@ -1,6 +1,10 @@
 /**
  * Mirrors the JSON shape written by server/export/exportMapData.ts. Keep
  * these two in sync by hand — the export script is the source of truth.
+ *
+ * A "pin" is one (company, city) pair, not one per company — a company
+ * with active roles in more than one city has one LocationPinData entry
+ * per city, each carrying only the roles actually posted there.
  */
 
 export interface RoleData {
@@ -12,13 +16,13 @@ export interface RoleData {
   salaryCurrency: string | null;
   url: string | null;
   postedAt: string | null;
-  differentOffice: boolean;
 }
 
-export interface CompanyData {
-  id: number;
-  name: string;
-  slug: string;
+export interface LocationPinData {
+  id: string;
+  companyId: number;
+  companyName: string;
+  companySlug: string;
   city: string | null;
   state: string | null;
   latitude: number;
@@ -30,6 +34,7 @@ export interface CompanyData {
 export interface MapData {
   generatedAt: string;
   companyCount: number;
+  pinCount: number;
   roleCount: number;
-  companies: CompanyData[];
+  pins: LocationPinData[];
 }

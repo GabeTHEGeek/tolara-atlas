@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import maplibregl, { type GeoJSONSource } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import type { CompanyData } from "../types.js";
+import type { LocationPinData } from "../types.js";
 
 // CARTO's free, no-API-key-required basemap tiles (Positron: clean, light,
 // good contrast for data points on top of it). Fine for this traffic level
@@ -13,32 +13,32 @@ const BASEMAP_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.
 const INITIAL_VIEW = { center: [-98.5, 39.5] as [number, number], zoom: 3.4 };
 
 interface MapViewProps {
-  companies: CompanyData[];
-  onSelectCompany: (company: CompanyData) => void;
+  pins: LocationPinData[];
+  onSelectPin: (pin: LocationPinData) => void;
 }
 
-function companiesToGeoJSON(companies: CompanyData[]): GeoJSON.FeatureCollection<GeoJSON.Point> {
+function pinsToGeoJSON(pins: LocationPinData[]): GeoJSON.FeatureCollection<GeoJSON.Point> {
   return {
     type: "FeatureCollection",
-    features: companies.map((c) => ({
+    features: pins.map((p) => ({
       type: "Feature",
-      geometry: { type: "Point", coordinates: [c.longitude, c.latitude] },
-      properties: { id: c.id, name: c.name, roleCount: c.roleCount },
+      geometry: { type: "Point", coordinates: [p.longitude, p.latitude] },
+      properties: { id: p.id, name: p.companyName, roleCount: p.roleCount },
     })),
   };
 }
 
-export default function MapView({ companies, onSelectCompany }: MapViewProps) {
+export default function MapView({ pins, onSelectPin }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   // Kept alongside the map instance so click handlers (registered once,
-  // when the map loads) can look up the current company list without
-  // re-registering every time `companies` changes identity.
-  const companiesByIdRef = useRef<Map<number, CompanyData>>(new Map());
+  // when the map loads) can look up the current pin list without
+  // re-registering every time `pins` changes identity.
+  const pinsByIdRef = useRef<Map<string, LocationPinData>>(new Map());
 
   useEffect(() => {
-    companiesByIdRef.current = new Map(companies.map((c) => [c.id, c]));
-  }, [companies]);
+    pinsByIdRef.current = new Map(pins.map((p) => [p.id, p]));
+  }, [pins]);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -55,9 +55,9 @@ export default function MapView({ companies, onSelectCompany }: MapViewProps) {
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
     map.on("load", () => {
-      map.addSource("companies", {
+      map.addSource("pins", {
         type: "geojson",
-        data: companiesToGeoJSON(companiesByIdRef.current.size ? [...companiesByIdRef.current.values()] : []),
+        data: pinsToGeoJSON(pinsByIdRef.current.size ? [...pinsByIdRef.current.values()] : []),
         cluster: true,
         clusterMaxZoom: 12,
         clusterRadius: 45,
@@ -66,7 +66,7 @@ export default function MapView({ companies, onSelectCompany }: MapViewProps) {
       map.addLayer({
         id: "clusters",
         type: "circle",
-        source: "companies",
+        source: "pins",
         filter: ["has", "point_count"],
         paint: {
           "circle-color": ["step", ["get", "point_count"], "#5B8DEF", 10, "#3D6FD1", 30, "#274B94"],
@@ -79,7 +79,7 @@ export default function MapView({ companies, onSelectCompany }: MapViewProps) {
       map.addLayer({
         id: "cluster-count",
         type: "symbol",
-        source: "companies",
+        source: "pins",
         filter: ["has", "point_count"],
         layout: {
           "text-field": ["get", "point_count_abbreviated"],
@@ -92,7 +92,7 @@ export default function MapView({ companies, onSelectCompany }: MapViewProps) {
       map.addLayer({
         id: "unclustered-point",
         type: "circle",
-        source: "companies",
+        source: "pins",
         filter: ["!", ["has", "point_count"]],
         paint: {
           "circle-color": "#E8543E",
@@ -106,7 +106,7 @@ export default function MapView({ companies, onSelectCompany }: MapViewProps) {
         const features = map.queryRenderedFeatures(e.point, { layers: ["clusters"] });
         const clusterId = features[0]?.properties?.cluster_id;
         if (clusterId == null) return;
-        const source = map.getSource("companies") as GeoJSONSource;
+        const source = map.getSource("pins") as GeoJSONSource;
         const zoom = await source.getClusterExpansionZoom(clusterId);
         const coords = (features[0].geometry as GeoJSON.Point).coordinates as [number, number];
         map.easeTo({ center: coords, zoom });
@@ -116,8 +116,8 @@ export default function MapView({ companies, onSelectCompany }: MapViewProps) {
         const feature = e.features?.[0];
         const id = feature?.properties?.id;
         if (id == null) return;
-        const company = companiesByIdRef.current.get(id);
-        if (company) onSelectCompany(company);
+        const pin = pinsByIdRef.current.get(id);
+        if (pin) onSelectPin(pin);
       });
 
       map.on("mouseenter", "clusters", () => (map.getCanvas().style.cursor = "pointer"));
@@ -133,14 +133,14 @@ export default function MapView({ companies, onSelectCompany }: MapViewProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Keep the map's data source in sync whenever the company list changes
+  // Keep the map's data source in sync whenever the pin list changes
   // after the map has already loaded (e.g. once the fetch resolves).
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    const source = map.getSource("companies") as GeoJSONSource | undefined;
-    if (source) source.setData(companiesToGeoJSON(companies));
-  }, [companies]);
+    const source = map.getSource("pins") as GeoJSONSource | undefined;
+    if (source) source.setData(pinsToGeoJSON(pins));
+  }, [pins]);
 
   return <div ref={containerRef} className="map-container" />;
 }

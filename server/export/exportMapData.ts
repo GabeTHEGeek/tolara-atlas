@@ -1,35 +1,31 @@
 /**
  * export/exportMapData.ts
- * Reads geocoded companies and their active roles out of SQLite and writes
- * a single static JSON file the frontend fetches at runtime. Kept as a
- * separate export step (rather than the frontend querying SQLite directly,
- * which isn't possible from a browser) so the site can be a plain static
- * build — no backend server to host or keep running, just a JSON file that
- * gets regenerated after every daily sync.
+ * Reads geocoded, active roles out of SQLite and writes a single static
+ * JSON file the frontend fetches at runtime. Kept as a separate export
+ * step (rather than the frontend querying SQLite directly, which isn't
+ * possible from a browser) so the site can be a plain static build — no
+ * backend server to host or keep running, just a JSON file that gets
+ * regenerated after every daily sync.
  *
  * Deliberately excludes each role's full description (can run to 4000
  * chars) — Phase 1 only needs enough to plot a pin and list open roles;
  * the full posting is one click away via role.url, and a richer per-role
  * dossier is Phase 2's job, not this export's.
  *
- * Two adjustments happen here rather than at geocode time, because both
- * are display concerns, not facts about the company:
+ * One pin per (company, resolved location) — NOT one pin per company. A
+ * company with active roles in more than one city gets a pin in each city,
+ * and each pin only lists the roles actually posted there. This replaced
+ * an earlier "one pin per company, most frequent location wins" design,
+ * which both hid multi-office companies under a single city and, with
+ * small posting counts, could mislabel which office looked "primary."
  *
- *   1. City-level geocoding (server/ingestion/geocode.ts) returns the same
- *      exact coordinate for every company in the same city — Nominatim
- *      geocodes "San Francisco, CA, USA" to one fixed point regardless of
- *      which company asked. Left as-is, every SF company would stack on
- *      the identical pixel, which both looks like "one dot" at low zoom
- *      and makes individual companies unclickable even fully zoomed in
- *      (they're pixel-identical, so a click only ever hits the topmost
- *      one). Companies sharing a coordinate get spread into a small ring
- *      around that city center, stable per company id, so each has its
- *      own clickable position. The database's stored latitude/longitude
- *      stay untouched — this jitter exists only in the exported JSON.
- *   2. A role whose own `location` string doesn't match the company's
- *      pin city is flagged `differentOffice: true`, so the frontend can
- *      make clear that role isn't at the pinned location (e.g. Fictiv's
- *      Illinois pin listing a role that's actually in Oakland, CA).
+ * A remaining display concern, unrelated to which office a role belongs
+ * to: geocoding is city-level (server/ingestion/geocode.ts), so pins that
+ * happen to land on the exact same coordinate (e.g. two different
+ * companies' "San Francisco, CA" pins) get spread into a small ring
+ * around that point so each stays individually visible and clickable.
+ * This jitter exists only in the exported JSON — stored lat/lng on the
+ * roles table stay untouched.
  *
  * Usage: npm run export
  */
@@ -56,13 +52,13 @@ interface RoleExport {
   salaryCurrency: string | null;
   url: string | null;
   postedAt: string | null;
-  differentOffice: boolean;
 }
 
-interface CompanyExport {
-  id: number;
-  name: string;
-  slug: string;
+interface PinExport {
+  id: string;
+  companyId: number;
+  companyName: string;
+  companySlug: string;
   city: string | null;
   state: string | null;
   latitude: number;
@@ -71,105 +67,125 @@ interface CompanyExport {
   roles: RoleExport[];
 }
 
-interface CompanyRow {
+interface RoleRow {
   id: number;
-  name: string;
-  slug: string;
-  city: string | null;
-  state: string | null;
+  company_id: number;
+  company_name: string;
+  company_slug: string;
+  title: string;
+  location: string | null;
+  salary_min: number | null;
+  salary_max: number | null;
+  salary_currency: string | null;
+  url: string | null;
+  posted_at: string | null;
+  resolved_city: string | null;
+  resolved_state: string | null;
   latitude: number;
   longitude: number;
 }
 
-/** Spreads companies that share an exact coordinate into a small ring around it. */
-function jitterSharedCoordinates(companies: CompanyRow[]): Map<number, { lat: number; lng: number }> {
-  const groups = new Map<string, CompanyRow[]>();
-  for (const c of companies) {
-    const key = `${c.latitude},${c.longitude}`;
+function slugifyLocation(city: string, state: string): string {
+  return `${city}-${state}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Spreads pins that share an exact coordinate into a small ring around it. */
+function jitterSharedCoordinates(
+  pins: Array<{ id: string; latitude: number; longitude: number }>,
+): Map<string, { lat: number; lng: number }> {
+  const groups = new Map<string, typeof pins>();
+  for (const p of pins) {
+    const key = `${p.latitude},${p.longitude}`;
     const list = groups.get(key) ?? [];
-    list.push(c);
+    list.push(p);
     groups.set(key, list);
   }
 
-  const jittered = new Map<number, { lat: number; lng: number }>();
+  const jittered = new Map<string, { lat: number; lng: number }>();
   for (const group of groups.values()) {
     if (group.length === 1) {
       jittered.set(group[0].id, { lat: group[0].latitude, lng: group[0].longitude });
       continue;
     }
     // Stable order (by id) so re-running the export doesn't shuffle pins.
-    const sorted = [...group].sort((a, b) => a.id - b.id);
+    const sorted = [...group].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
     const latRad = (sorted[0].latitude * Math.PI) / 180;
-    sorted.forEach((c, i) => {
+    sorted.forEach((p, i) => {
       const angle = (2 * Math.PI * i) / sorted.length;
       const dLat = JITTER_RADIUS_DEG * Math.cos(angle);
-      // Longitude degrees compress toward the poles; correct so the ring
-      // looks circular rather than elliptical.
       const dLng = (JITTER_RADIUS_DEG * Math.sin(angle)) / Math.cos(latRad);
-      jittered.set(c.id, { lat: c.latitude + dLat, lng: c.longitude + dLng });
+      jittered.set(p.id, { lat: p.latitude + dLat, lng: p.longitude + dLng });
     });
   }
   return jittered;
 }
 
-/** True if a role's own location string doesn't mention the company's pinned city. */
-function isDifferentOffice(roleLocation: string | null, companyCity: string | null): boolean {
-  if (!roleLocation || !companyCity) return false;
-  return !roleLocation.toLowerCase().includes(companyCity.toLowerCase());
-}
-
 function main() {
   const db = getDb();
 
-  const companies = db
+  const rows = db
     .prepare(
-      `SELECT id, name, slug, city, state, latitude, longitude
-       FROM companies
-       WHERE latitude IS NOT NULL AND longitude IS NOT NULL`,
+      `SELECT
+         roles.id, roles.company_id, companies.name AS company_name, companies.slug AS company_slug,
+         roles.title, roles.location, roles.salary_min, roles.salary_max, roles.salary_currency,
+         roles.url, roles.posted_at, roles.resolved_city, roles.resolved_state, roles.latitude, roles.longitude
+       FROM roles
+       JOIN companies ON companies.id = roles.company_id
+       WHERE roles.status = 'active' AND roles.latitude IS NOT NULL AND roles.longitude IS NOT NULL
+       ORDER BY roles.posted_at DESC`,
     )
-    .all() as CompanyRow[];
+    .all() as RoleRow[];
 
-  const jitteredCoords = jitterSharedCoordinates(companies);
+  // Group roles into pins keyed by (company, resolved city/state).
+  const pinsByKey = new Map<
+    string,
+    { companyId: number; companyName: string; companySlug: string; city: string; state: string; latitude: number; longitude: number; roles: RoleRow[] }
+  >();
 
-  const getRoles = db.prepare(
-    `SELECT id, title, location, salary_min, salary_max, salary_currency, url, posted_at
-     FROM roles
-     WHERE company_id = ? AND status = 'active'
-     ORDER BY posted_at DESC`,
-  );
+  for (const row of rows) {
+    const city = row.resolved_city ?? "Unknown";
+    const state = row.resolved_state ?? "";
+    const key = `${row.company_id}|${city}|${state}`;
+    const existing = pinsByKey.get(key);
+    if (existing) {
+      existing.roles.push(row);
+    } else {
+      pinsByKey.set(key, {
+        companyId: row.company_id,
+        companyName: row.company_name,
+        companySlug: row.company_slug,
+        city,
+        state,
+        latitude: row.latitude,
+        longitude: row.longitude,
+        roles: [row],
+      });
+    }
+  }
 
-  const result: CompanyExport[] = [];
-  let totalRoles = 0;
+  const pinList = [...pinsByKey.values()].map((p) => ({
+    id: `${p.companyId}-${slugifyLocation(p.city, p.state)}`,
+    ...p,
+  }));
 
-  for (const company of companies) {
-    const roles = getRoles.all(company.id) as Array<{
-      id: number;
-      title: string;
-      location: string | null;
-      salary_min: number | null;
-      salary_max: number | null;
-      salary_currency: string | null;
-      url: string | null;
-      posted_at: string | null;
-    }>;
+  const jitteredCoords = jitterSharedCoordinates(pinList);
 
-    // A geocoded company with zero currently-active roles shouldn't get a
-    // pin — its office was real once, but there's nothing to show there
-    // now (e.g. its only postings closed since the last geocode pass).
-    if (roles.length === 0) continue;
-
-    const coord = jitteredCoords.get(company.id) ?? { lat: company.latitude, lng: company.longitude };
-
-    result.push({
-      id: company.id,
-      name: company.name,
-      slug: company.slug,
-      city: company.city,
-      state: company.state,
+  const pins: PinExport[] = pinList.map((p) => {
+    const coord = jitteredCoords.get(p.id) ?? { lat: p.latitude, lng: p.longitude };
+    return {
+      id: p.id,
+      companyId: p.companyId,
+      companyName: p.companyName,
+      companySlug: p.companySlug,
+      city: p.city,
+      state: p.state,
       latitude: coord.lat,
       longitude: coord.lng,
-      roleCount: roles.length,
-      roles: roles.map((r) => ({
+      roleCount: p.roles.length,
+      roles: p.roles.map((r) => ({
         id: r.id,
         title: r.title,
         location: r.location,
@@ -178,11 +194,12 @@ function main() {
         salaryCurrency: r.salary_currency,
         url: r.url,
         postedAt: r.posted_at,
-        differentOffice: isDifferentOffice(r.location, company.city),
       })),
-    });
-    totalRoles += roles.length;
-  }
+    };
+  });
+
+  const companyCount = new Set(pins.map((p) => p.companyId)).size;
+  const roleCount = pins.reduce((sum, p) => sum + p.roleCount, 0);
 
   mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   writeFileSync(
@@ -190,16 +207,19 @@ function main() {
     JSON.stringify(
       {
         generatedAt: new Date().toISOString(),
-        companyCount: result.length,
-        roleCount: totalRoles,
-        companies: result,
+        companyCount,
+        pinCount: pins.length,
+        roleCount,
+        pins,
       },
       null,
       2,
     ),
   );
 
-  console.log(`Exported ${result.length} companies / ${totalRoles} roles to ${OUTPUT_PATH}`);
+  console.log(
+    `Exported ${pins.length} pins across ${companyCount} companies / ${roleCount} roles to ${OUTPUT_PATH}`,
+  );
 }
 
 main();

@@ -1,7 +1,7 @@
-import type { CompanyData } from "../types.js";
+import type { LocationPinData } from "../types.js";
 
 interface CompanyPanelProps {
-  company: CompanyData | null;
+  pin: LocationPinData | null;
   onClose: () => void;
 }
 
@@ -13,17 +13,17 @@ function formatSalary(min: number | null, max: number | null, currency: string |
   return fmt(min ?? max!);
 }
 
-export default function CompanyPanel({ company, onClose }: CompanyPanelProps) {
-  if (!company) return null;
+export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
+  if (!pin) return null;
 
-  const pinLocation = [company.city, company.state].filter(Boolean).join(", ") || "Location unknown";
+  const location = [pin.city, pin.state].filter(Boolean).join(", ") || "Location unknown";
 
   return (
     <aside className="company-panel">
       <div className="company-panel-header">
         <div>
-          <h2>{company.name}</h2>
-          <p className="company-panel-location">{pinLocation}</p>
+          <h2>{pin.companyName}</h2>
+          <p className="company-panel-location">{location}</p>
         </div>
         <button className="company-panel-close" onClick={onClose} aria-label="Close">
           ×
@@ -31,11 +31,11 @@ export default function CompanyPanel({ company, onClose }: CompanyPanelProps) {
       </div>
 
       <p className="company-panel-role-count">
-        {company.roleCount} open Product Manager {company.roleCount === 1 ? "role" : "roles"}
+        {pin.roleCount} open Product Manager {pin.roleCount === 1 ? "role" : "roles"} in {location}
       </p>
 
       <ul className="role-list">
-        {company.roles.map((role) => {
+        {pin.roles.map((role) => {
           const salary = formatSalary(role.salaryMin, role.salaryMax, role.salaryCurrency);
           return (
             <li key={role.id} className="role-item">
@@ -50,14 +50,6 @@ export default function CompanyPanel({ company, onClose }: CompanyPanelProps) {
                   </span>
                 )}
               </div>
-              {role.differentOffice && (
-                <div
-                  className="role-different-office"
-                  title={`This pin is placed at ${pinLocation}, but this role's posting lists a different location.`}
-                >
-                  ⚠ Different office than the pin ({pinLocation})
-                </div>
-              )}
             </li>
           );
         })}
