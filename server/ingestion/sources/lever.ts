@@ -37,13 +37,18 @@ interface LeverJob {
 }
 
 /**
- * Fetch all postings from one company's Lever board. Returns [] on any
- * failure rather than throwing. Retries once on timeout/abort before giving
- * up — some Lever boards return very large payloads that intermittently
- * exceed the timeout even though the board is genuinely live; a single
- * retry avoids permanently treating a real, working company as failed.
+ * Fetch all postings from one company's Lever board. Never throws --
+ * returns `failed: true` for anything that means "couldn't tell what's on
+ * this board" (network error, timeout, non-2xx response), and `failed:
+ * false` with an empty `jobs` array for a board that loaded fine but
+ * genuinely has zero current postings (or an unexpected response shape),
+ * so a dead token isn't confused with a real company with nothing open.
+ * Retries once on timeout/abort before giving up — some Lever boards
+ * return very large payloads that intermittently exceed the timeout even
+ * though the board is genuinely live; a single retry avoids permanently
+ * treating a real, working company as failed.
  */
-async function fetchBoard(boardToken: string, timeoutMs = 15000): Promise<LeverJob[]> {
+async function fetchBoard(boardToken: string, timeoutMs = 15000): Promise<{ jobs: LeverJob[]; failed: boolean }> {
   for (let attempt = 0; attempt < 2; attempt++) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -52,19 +57,20 @@ async function fetchBoard(boardToken: string, timeoutMs = 15000): Promise<LeverJ
       url.searchParams.set("mode", "json");
       const resp = await fetch(url, { signal: controller.signal });
       clearTimeout(timer);
-      if (!resp.ok) return [];
+      if (!resp.ok) return { jobs: [], failed: true };
       const data = await resp.json();
       // Lever returns a bare JSON array, not a wrapped object like
       // Greenhouse/Ashby — an unexpected shape (e.g. an error page that
-      // still returned 200) means treat it as no postings found.
-      return Array.isArray(data) ? (data as LeverJob[]) : [];
+      // still returned 200) means treat it as no postings found, not a
+      // failure: the board responded, just not with job data.
+      return { jobs: Array.isArray(data) ? (data as LeverJob[]) : [], failed: false };
     } catch (err) {
       clearTimeout(timer);
       if (attempt === 0) continue;
-      return [];
+      return { jobs: [], failed: true };
     }
   }
-  return [];
+  return { jobs: [], failed: true };
 }
 
 /**
@@ -118,8 +124,9 @@ export async function searchLever(
   const jobs: RawJob[] = [];
   const boardsChecked: string[] = [];
   const boardsFailed: string[] = [];
+  const boardsEmpty: string[] = [];
 
-  const rawByBoard = new Map<string, LeverJob[]>();
+  const rawByBoard = new Map<string, { jobs: LeverJob[]; failed: boolean }>();
   await Promise.all(
     boards.map(async (board) => {
       rawByBoard.set(board, await fetchBoard(board));
@@ -127,12 +134,17 @@ export async function searchLever(
   );
 
   for (const board of boards) {
-    const rawJobs = rawByBoard.get(board) ?? [];
-    if (rawJobs.length === 0) {
+    const result = rawByBoard.get(board) ?? { jobs: [], failed: true };
+    if (result.failed) {
       boardsFailed.push(board);
       continue;
     }
     boardsChecked.push(board);
+    const rawJobs = result.jobs;
+    if (rawJobs.length === 0) {
+      boardsEmpty.push(board);
+      continue;
+    }
 
     let boardJobCount = 0;
     for (const job of rawJobs) {
@@ -174,5 +186,5 @@ export async function searchLever(
     }
   }
 
-  return { jobs, meta: { boardsChecked, boardsFailed } };
+  return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty } };
 }

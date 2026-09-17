@@ -18,7 +18,15 @@ export interface RawJob {
 
 export interface SearchMeta {
   boardsChecked: string[];
+  // A board the fetch could not complete at all -- timed out (even after
+  // retry), a network error, or a non-2xx response. Distinct from a board
+  // that loaded fine but genuinely has zero current postings, which now
+  // counts as checked, not failed.
   boardsFailed: string[];
+  // A board that loaded successfully but returned zero postings. Counted
+  // separately from boardsFailed so a dead token/timeout isn't confused
+  // with a real company that simply has nothing open right now.
+  boardsEmpty: string[];
 }
 
 export interface SearchOptions {

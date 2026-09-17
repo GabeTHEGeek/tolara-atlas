@@ -29,33 +29,48 @@ interface GreenhouseJob {
 }
 
 /**
- * Fetch all postings from one company's Greenhouse board. Returns [] on any
- * failure (bad token, board not on Greenhouse, network issue) rather than
- * throwing, so one dead board doesn't kill a multi-board search.
+ * Fetch all postings from one company's Greenhouse board. Never throws --
+ * returns `failed: true` for anything that means "couldn't tell what's on
+ * this board" (network error, timeout, non-2xx response), and `failed:
+ * false` with an empty `jobs` array for a board that loaded fine but
+ * genuinely has zero current postings. Collapsing those two into one "no
+ * jobs" result made every failed/timed-out fetch look identical to a real
+ * company with nothing open, so the caller couldn't tell a dead token from
+ * a live one under load.
+ *
+ * Retries once on timeout/abort/network error before giving up -- some
+ * boards return large payloads that intermittently exceed the timeout
+ * under concurrent fetch load even though the board itself is fine, and
+ * this mirrors lever.ts's existing retry-once behavior.
  */
-async function fetchBoard(boardToken: string, timeoutMs = 15000): Promise<GreenhouseJob[]> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const url = new URL(GREENHOUSE_URL.replace("{board}", boardToken));
-    url.searchParams.set("content", "true");
-    const resp = await fetch(url, { signal: controller.signal });
-    if (!resp.ok) return [];
-    const data = (await resp.json()) as { jobs?: GreenhouseJob[] };
-    return data.jobs ?? [];
-  } catch {
-    return [];
-  } finally {
-    clearTimeout(timer);
+async function fetchBoard(boardToken: string, timeoutMs = 15000): Promise<{ jobs: GreenhouseJob[]; failed: boolean }> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const url = new URL(GREENHOUSE_URL.replace("{board}", boardToken));
+      url.searchParams.set("content", "true");
+      const resp = await fetch(url, { signal: controller.signal });
+      clearTimeout(timer);
+      if (!resp.ok) return { jobs: [], failed: true };
+      const data = (await resp.json()) as { jobs?: GreenhouseJob[] };
+      return { jobs: data.jobs ?? [], failed: false };
+    } catch (err) {
+      clearTimeout(timer);
+      if (attempt === 0) continue;
+      return { jobs: [], failed: true };
+    }
   }
+  return { jobs: [], failed: true };
 }
 
 /**
  * Pull postings from each board in `boards`, filter by `query` words
  * appearing in the title, then apply include/exclude title logic.
  *
- * Returns { jobs, meta } where meta = { boardsChecked, boardsFailed } so the
- * caller can see which boards actually returned data.
+ * Returns { jobs, meta } where meta = { boardsChecked, boardsFailed,
+ * boardsEmpty } so the caller can tell a board that returned data, a board
+ * that's genuinely empty, and a board the fetch couldn't complete apart.
  */
 export async function searchGreenhouse(
   query: string,
@@ -71,11 +86,12 @@ export async function searchGreenhouse(
   const jobs: RawJob[] = [];
   const boardsChecked: string[] = [];
   const boardsFailed: string[] = [];
+  const boardsEmpty: string[] = [];
 
   // Fetch every board in parallel — network-bound, boards don't depend on
   // each other. Filtering afterward stays sequential (in board order) so
   // results are deterministic.
-  const rawByBoard = new Map<string, GreenhouseJob[]>();
+  const rawByBoard = new Map<string, { jobs: GreenhouseJob[]; failed: boolean }>();
   await Promise.all(
     boards.map(async (board) => {
       rawByBoard.set(board, await fetchBoard(board));
@@ -83,12 +99,17 @@ export async function searchGreenhouse(
   );
 
   for (const board of boards) {
-    const rawJobs = rawByBoard.get(board) ?? [];
-    if (rawJobs.length === 0) {
+    const result = rawByBoard.get(board) ?? { jobs: [], failed: true };
+    if (result.failed) {
       boardsFailed.push(board);
       continue;
     }
     boardsChecked.push(board);
+    const rawJobs = result.jobs;
+    if (rawJobs.length === 0) {
+      boardsEmpty.push(board);
+      continue;
+    }
 
     let boardJobCount = 0;
     for (const job of rawJobs) {
@@ -149,5 +170,5 @@ export async function searchGreenhouse(
     }
   }
 
-  return { jobs, meta: { boardsChecked, boardsFailed } };
+  return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty } };
 }

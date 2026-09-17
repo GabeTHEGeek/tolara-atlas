@@ -27,21 +27,36 @@ interface AshbyJob {
   compensation?: { compensationTierSummary?: string; summaryComponents?: unknown };
 }
 
-async function fetchBoard(boardToken: string, timeoutMs = 15000): Promise<AshbyJob[]> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const url = new URL(ASHBY_URL.replace("{board}", boardToken));
-    url.searchParams.set("includeCompensation", "true");
-    const resp = await fetch(url, { signal: controller.signal });
-    if (!resp.ok) return [];
-    const data = (await resp.json()) as { jobs?: AshbyJob[] };
-    return data.jobs ?? [];
-  } catch {
-    return [];
-  } finally {
-    clearTimeout(timer);
+/**
+ * Fetch all postings from one company's Ashby board. Never throws --
+ * returns `failed: true` for anything that means "couldn't tell what's on
+ * this board" (network error, timeout, non-2xx response), and `failed:
+ * false` with an empty `jobs` array for a board that loaded fine but
+ * genuinely has zero current postings, so a dead token isn't confused with
+ * a real company that has nothing open right now.
+ *
+ * Retries once on timeout/abort/network error before giving up, mirroring
+ * lever.ts's existing retry-once behavior.
+ */
+async function fetchBoard(boardToken: string, timeoutMs = 15000): Promise<{ jobs: AshbyJob[]; failed: boolean }> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const url = new URL(ASHBY_URL.replace("{board}", boardToken));
+      url.searchParams.set("includeCompensation", "true");
+      const resp = await fetch(url, { signal: controller.signal });
+      clearTimeout(timer);
+      if (!resp.ok) return { jobs: [], failed: true };
+      const data = (await resp.json()) as { jobs?: AshbyJob[] };
+      return { jobs: data.jobs ?? [], failed: false };
+    } catch (err) {
+      clearTimeout(timer);
+      if (attempt === 0) continue;
+      return { jobs: [], failed: true };
+    }
   }
+  return { jobs: [], failed: true };
 }
 
 /**
@@ -92,8 +107,9 @@ export async function searchAshby(
   const jobs: RawJob[] = [];
   const boardsChecked: string[] = [];
   const boardsFailed: string[] = [];
+  const boardsEmpty: string[] = [];
 
-  const rawByBoard = new Map<string, AshbyJob[]>();
+  const rawByBoard = new Map<string, { jobs: AshbyJob[]; failed: boolean }>();
   await Promise.all(
     boards.map(async (board) => {
       rawByBoard.set(board, await fetchBoard(board));
@@ -101,12 +117,17 @@ export async function searchAshby(
   );
 
   for (const board of boards) {
-    const rawJobs = rawByBoard.get(board) ?? [];
-    if (rawJobs.length === 0) {
+    const result = rawByBoard.get(board) ?? { jobs: [], failed: true };
+    if (result.failed) {
       boardsFailed.push(board);
       continue;
     }
     boardsChecked.push(board);
+    const rawJobs = result.jobs;
+    if (rawJobs.length === 0) {
+      boardsEmpty.push(board);
+      continue;
+    }
 
     let boardJobCount = 0;
     for (const job of rawJobs) {
@@ -131,5 +152,5 @@ export async function searchAshby(
     }
   }
 
-  return { jobs, meta: { boardsChecked, boardsFailed } };
+  return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty } };
 }

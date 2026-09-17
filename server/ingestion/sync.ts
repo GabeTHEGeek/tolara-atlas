@@ -154,11 +154,20 @@ async function main() {
 
       const { jobs: allJobs, meta } = await fetchPlatform(platform as "greenhouse" | "ashby" | "lever", boards);
       const jobs = allJobs.filter((job) => matchesProductManagerFilter(job.title));
+      // "checked" = boards that actually returned data, whether or not that
+      // data included any postings. "failed" is now only boards whose fetch
+      // genuinely couldn't complete (timeout even after retry, network
+      // error, non-2xx response) -- a board that loaded fine with zero
+      // current postings shows up in boardsEmpty instead, so a dead token
+      // doesn't get lost in the noise of real companies with nothing open.
       console.log(
-        `[${platform}] checked ${meta.boardsChecked.length} boards, ${meta.boardsFailed.length} failed, ${allJobs.length} total postings, ${jobs.length} classified as PM`,
+        `[${platform}] checked ${meta.boardsChecked.length} boards (${meta.boardsEmpty.length} empty), ${meta.boardsFailed.length} failed, ${allJobs.length} total postings, ${jobs.length} classified as PM`,
       );
       if (meta.boardsFailed.length > 0) {
         console.log(`[${platform}] failed boards: ${meta.boardsFailed.join(", ")}`);
+      }
+      if (meta.boardsEmpty.length > 0) {
+        console.log(`[${platform}] empty boards (loaded fine, 0 postings): ${meta.boardsEmpty.join(", ")}`);
       }
 
       const jobsByBoard = new Map<string, RawJob[]>();
