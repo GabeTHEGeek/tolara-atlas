@@ -25,10 +25,11 @@
  * Washington, DC"); server/ingestion/geocode.ts resolves every office it
  * finds in a role's raw location string into its own role_locations row,
  * so a role like that contributes to a pin in each city, not just
- * whichever one happened to be geocoded first. That also means a
- * multi-office role is counted once per city it's pinned in, so the
- * exported roleCount totals are a count of (role, office) pairs, not of
- * distinct roles.
+ * whichever one happened to be geocoded first. Each pin's own roleCount
+ * reflects only the roles actually posted at that pin's city, but the
+ * top-level roleCount in the exported JSON is deliberately deduped back
+ * down to distinct roles.id -- a role open in 3 offices still counts as
+ * 1 role site-wide, even though it appears in 3 pins.
  *
  * A remaining display concern, unrelated to which office a role belongs
  * to: geocoding is city-level (server/ingestion/geocode.ts), so pins that
@@ -257,7 +258,11 @@ function main() {
   });
 
   const companyCount = new Set(pins.map((p) => p.companyId)).size;
-  const roleCount = pins.reduce((sum, p) => sum + p.roleCount, 0);
+  // Distinct roles, not (role, office) pairs -- a role open in 3 offices
+  // adds 1 here even though it contributes to 3 pins' individual
+  // roleCount. rows is one row per role_locations entry, so the same
+  // role.id can repeat; dedupe by id for the headline total.
+  const roleCount = new Set(rows.map((r) => r.id)).size;
 
   mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   writeFileSync(
