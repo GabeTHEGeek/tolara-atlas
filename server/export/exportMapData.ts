@@ -19,6 +19,17 @@
  * which both hid multi-office companies under a single city and, with
  * small posting counts, could mislabel which office looked "primary."
  *
+ * Reads from role_locations, not roles.latitude/longitude directly. A
+ * single ATS posting can itself be open across several offices at once
+ * (e.g. one Greenhouse listing for "Menlo Park, CA; New York, NY;
+ * Washington, DC"); server/ingestion/geocode.ts resolves every office it
+ * finds in a role's raw location string into its own role_locations row,
+ * so a role like that contributes to a pin in each city, not just
+ * whichever one happened to be geocoded first. That also means a
+ * multi-office role is counted once per city it's pinned in, so the
+ * exported roleCount totals are a count of (role, office) pairs, not of
+ * distinct roles.
+ *
  * A remaining display concern, unrelated to which office a role belongs
  * to: geocoding is city-level (server/ingestion/geocode.ts), so pins that
  * happen to land on the exact same coordinate (e.g. two different
@@ -83,6 +94,13 @@ interface RoleRow {
   resolved_state: string | null;
   latitude: number;
   longitude: number;
+}
+
+// One row per (role, office), from role_locations -- a role open in
+// several offices at once produces one of these per office, so it can
+// contribute to a pin at each one instead of just its first-listed city.
+interface RoleLocationRow extends RoleRow {
+  location_id: number;
 }
 
 function slugifyLocation(city: string, state: string): string {
@@ -157,18 +175,27 @@ function jitterSharedCoordinates(
 function main() {
   const db = getDb();
 
+  // Reads from role_locations (one row per office a role is actually open
+  // in), not roles.latitude/longitude directly -- a role listed as open in
+  // several offices at once (one Greenhouse/Ashby/Lever posting, several
+  // cities in its location string) needs to contribute a pin at EACH of
+  // them, not just whichever city geocode.ts saw first.
   const rows = db
     .prepare(
       `SELECT
+         role_locations.id AS location_id,
          roles.id, roles.company_id, companies.name AS company_name, companies.slug AS company_slug,
          roles.title, roles.location, roles.salary_min, roles.salary_max, roles.salary_currency,
-         roles.url, roles.posted_at, roles.resolved_city, roles.resolved_state, roles.latitude, roles.longitude
-       FROM roles
+         roles.url, roles.posted_at,
+         role_locations.resolved_city, role_locations.resolved_state,
+         role_locations.latitude, role_locations.longitude
+       FROM role_locations
+       JOIN roles ON roles.id = role_locations.role_id
        JOIN companies ON companies.id = roles.company_id
-       WHERE roles.status = 'active' AND roles.latitude IS NOT NULL AND roles.longitude IS NOT NULL
+       WHERE roles.status = 'active'
        ORDER BY roles.posted_at DESC`,
     )
-    .all() as RoleRow[];
+    .all() as RoleLocationRow[];
 
   // Group roles into pins keyed by (company, resolved city/state).
   const pinsByKey = new Map<

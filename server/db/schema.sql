@@ -87,6 +87,27 @@ CREATE INDEX IF NOT EXISTS roles_company_idx ON roles(company_id);
 CREATE INDEX IF NOT EXISTS roles_status_idx ON roles(status);
 CREATE INDEX IF NOT EXISTS roles_category_idx ON roles(category);
 
+-- One row per (role, office it's actually open in). Most roles have
+-- exactly one row here; a role posted as open in several offices at once
+-- (e.g. "Menlo Park, CA; New York, NY; Washington, DC" as a single
+-- listing) gets one row per office, so the map can place a pin at each
+-- one instead of only the first city mentioned in the raw string.
+-- roles.resolved_city/state/latitude/longitude (above) still hold the
+-- FIRST location as a summary/back-compat column; this table is the full
+-- set and what the map export actually reads pins from.
+CREATE TABLE IF NOT EXISTS role_locations (
+  id             INTEGER PRIMARY KEY,
+  role_id        INTEGER NOT NULL REFERENCES roles(id) ON DELETE CASCADE,
+  raw_segment    TEXT,                    -- the geocoding query this row was resolved from
+  resolved_city  TEXT NOT NULL,
+  resolved_state TEXT NOT NULL,
+  latitude       REAL NOT NULL,
+  longitude      REAL NOT NULL,
+  geocoded_at    TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS role_locations_role_idx ON role_locations(role_id);
+
 -- Where a role's data literally came from (mostly redundant with roles.url,
 -- but keeps a per-fact source/timestamp trail if role enrichment ever pulls
 -- from more than the original posting).

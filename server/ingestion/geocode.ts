@@ -1,29 +1,36 @@
 /**
  * ingestion/geocode.ts
- * Resolves each ACTIVE ROLE's own location string to a city/state and
- * lat/lng — not the company's. A company can have PM roles open in more
- * than one office at once, and the map should show a pin at each one
- * rather than guessing a single "representative" location for the whole
- * company (that guess also used to be skewed by small sample size: with
- * only a couple of PM postings, whichever city happened to have more of
- * them got mislabeled as if it meant something about the company overall).
+ * Resolves each ACTIVE ROLE's own location string to one or more
+ * city/state + lat/lng pairs — not the company's, and not just the first
+ * one mentioned. A single posting is frequently open in SEVERAL offices
+ * at once ("Menlo Park, CA; New York, NY; Washington, DC" as one
+ * listing), and the map should show a pin at every one of them, not just
+ * whichever city happened to be listed first. Each resolved location
+ * becomes a row in role_locations (see schema.sql); roles.resolved_city/
+ * state/latitude/longitude keep only the FIRST one as a summary column
+ * (used to mark a role "processed" and by any older code path that
+ * doesn't need the full set).
  *
  * Location strings are messy and inconsistent across boards. This handles,
  * in order:
- *   1. "US-XX-City" (e.g. "US-CA-Menlo Park")
- *   2. "US <Full State Name> (<City>)..." (e.g. "US California (Redwood City) - Office")
- *   3. A left-to-right SEARCH (not a whole-string match) for the first
+ *   1. "US-XX-City" (e.g. "US-CA-Menlo Park") -- single-location by
+ *      construction, so this short-circuits to just that one.
+ *   2. "US <Full State Name> (<City>)..." (e.g. "US California (Redwood
+ *      City) - Office") -- also single-location, same short-circuit.
+ *   3. A left-to-right SEARCH (not a whole-string match) collecting EVERY
  *      plausible "City, ST" or "City, Full State Name" pair anywhere in
- *      the string — handles trailing/interleaved noise of all shapes
- *      without needing a rule for each one: "Washington, DC - Remote",
- *      "Burlington, MA | Hybrid", "San Francisco, CA • New York, NY •
- *      United States", "New York, NY, US" (bare "US"), and multi-office
- *      strings with no delimiter at all ("San Francisco, CA, New York,
- *      NY, Portland, OR, or Remote ..."). Non-US pairs (e.g. "Toronto,
- *      ON") are correctly rejected since ON isn't a US state abbreviation.
+ *      the string, not stopping at the first — handles trailing/
+ *      interleaved noise of all shapes without needing a rule for each
+ *      one: "Washington, DC - Remote", "Burlington, MA | Hybrid",
+ *      "San Francisco, CA • New York, NY • United States", "New York,
+ *      NY, US" (bare "US"), and multi-office strings with no delimiter
+ *      at all ("San Francisco, CA, New York, NY, Portland, OR, or Remote
+ *      ..."). Non-US pairs (e.g. "Toronto, ON") are correctly rejected
+ *      since ON isn't a US state abbreviation. Duplicate (city, state)
+ *      matches within one string are deduped to one location.
  *   4. A short list of major US tech-hub cities given bare, with no state
- *      at all (e.g. "San Francisco", "NYC", "Austin"), tried per
- *      ";"/"•"/"|"-separated segment.
+ *      at all (e.g. "San Francisco", "NYC", "Austin"), checked per
+ *      ";"/"•"/"|"-separated segment (so "Austin; NYC" catches both).
  * What's left after all of that (bare "Remote", "United States", country
  * names like "Portugal"/"India") genuinely has no specific place to pin —
  * those roles are left ungeocoded on purpose rather than guessed at.
@@ -32,11 +39,11 @@
  * rate-limited to 1 request/second per Nominatim's usage policy
  * (https://operations.osmfoundation.org/policies/nominatim/). Many roles
  * resolve to the same city (e.g. dozens of "San Francisco, CA, USA"
- * postings across different companies), so this caches results by query
- * string within a run and only sleeps before an actual network call —
- * this is what keeps re-running cheap even though it's now per-role
- * rather than per-company. Only roles missing geocoded_at are processed,
- * so a re-run only pays for genuinely new locations.
+ * postings across different companies, or the same city appearing twice
+ * within one multi-office role), so this caches results by query string
+ * within a run and only sleeps before an actual network call — this is
+ * what keeps re-running cheap. Only roles missing geocoded_at are
+ * processed, so a re-run only pays for genuinely new locations.
  *
  * Usage: npm run geocode
  */
@@ -160,62 +167,77 @@ function parseUsStateParenCity(raw: string): ParsedLocation | null {
 }
 
 /**
- * Searches (not anchors) for the first plausible "City, ST" or
- * "City, Full State Name" pair anywhere in the text, left to right. This
- * is deliberately a search rather than a whole-string match: real
- * location strings put a valid office ahead of all kinds of trailing or
+ * Searches (not anchors) for EVERY plausible "City, ST" or "City, Full
+ * State Name" pair anywhere in the text, left to right -- not just the
+ * first. This is deliberately a search rather than a whole-string match:
+ * real location strings put valid offices amid all kinds of trailing or
  * interleaved noise a fixed set of separator rules can't keep up with —
  * "Washington, DC - Remote", "Burlington, MA | Hybrid",
  * "San Francisco, CA • New York, NY • United States", "New York, NY, US"
- * (bare "US", not "United States"), and even multiple offices joined by
- * plain commas with no delimiter at all ("San Francisco, CA, New York,
- * NY, Portland, OR, or Remote ..."). A search naturally finds the first
- * valid pair and ignores everything around it; an implausible match
- * (e.g. "Remote, CA") is skipped in favor of the next candidate rather
- * than failing the whole string.
+ * (bare "US", not "United States"), and multiple offices joined by plain
+ * commas with no delimiter at all ("San Francisco, CA, New York, NY,
+ * Portland, OR, or Remote ..."). A search naturally finds every valid
+ * pair and ignores everything around it; an implausible match (e.g.
+ * "Remote, CA") is skipped in favor of the next candidate rather than
+ * failing the whole string. Dedupes by (city, state) so "New York, NY,
+ * New York, NY" style repeats in noisy strings don't produce duplicate
+ * locations for one role.
  */
-function findCityState(text: string): ParsedLocation | null {
+function findAllCityStates(text: string): ParsedLocation[] {
+  const results: ParsedLocation[] = [];
+  const seen = new Set<string>();
+  const add = (p: ParsedLocation) => {
+    const key = `${p.city.toLowerCase()}|${p.state}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      results.push(p);
+    }
+  };
+
   const abbrevPattern = /([A-Za-z][A-Za-z.'-]*(?:\s[A-Za-z.'-]+)*),\s*([A-Z]{2})\b/g;
   let m: RegExpExecArray | null;
   while ((m = abbrevPattern.exec(text))) {
     const city = m[1].trim();
     const state = m[2].trim();
-    if (US_STATE_ABBREVS.has(state) && isPlausibleCity(city)) return toParsed(city, state);
+    if (US_STATE_ABBREVS.has(state) && isPlausibleCity(city)) add(toParsed(city, state));
   }
 
   const fullNamePattern = /([A-Za-z][A-Za-z.'-]*(?:\s[A-Za-z.'-]+)*),\s*([A-Za-z]+(?:\s[A-Za-z]+)*)/g;
   while ((m = fullNamePattern.exec(text))) {
     const city = m[1].trim();
     const stateAbbrev = US_STATE_NAMES[m[2].trim().toLowerCase()];
-    if (stateAbbrev && isPlausibleCity(city)) return toParsed(city, stateAbbrev);
+    if (stateAbbrev && isPlausibleCity(city)) add(toParsed(city, stateAbbrev));
   }
 
-  return null;
-}
-
-/** Bare known city, no state anywhere in the string ("San Francisco", "NYC"). */
-function findKnownCity(raw: string): ParsedLocation | null {
-  const segments = raw.split(/[;•|]/).map((s) => s.trim()).filter(Boolean);
-  for (const segment of segments.length ? segments : [raw]) {
+  // Bare known cities with no state at all ("San Francisco", "NYC"),
+  // checked per ;/•/|-separated segment so e.g. "Austin; NYC" catches both.
+  const segments = text.split(/[;•|]/).map((s) => s.trim()).filter(Boolean);
+  for (const segment of segments.length ? segments : [text]) {
     const known = KNOWN_CITIES[stripNoise(segment).toLowerCase()];
-    if (known) return toParsed(known.city, known.state);
+    if (known) add(toParsed(known.city, known.state));
   }
-  return null;
+
+  return results;
 }
 
-function extractCityState(raw: string): ParsedLocation | null {
-  if (!raw) return null;
+/**
+ * All plausible locations in a role's raw location string, not just one --
+ * a single posting is frequently open in more than one office at once, and
+ * the map should place a pin in each rather than only the first-mentioned
+ * city. "US-CA-Menlo Park"-style and "US California (Redwood City)"-style
+ * strings are single-location formats by construction, so those short-
+ * circuit; everything else goes through the multi-match search.
+ */
+function extractAllCityStates(raw: string): ParsedLocation[] {
+  if (!raw) return [];
 
   const dashFormat = parseUsDashFormat(raw);
-  if (dashFormat) return dashFormat;
+  if (dashFormat) return [dashFormat];
 
   const stateParenCity = parseUsStateParenCity(raw);
-  if (stateParenCity) return stateParenCity;
+  if (stateParenCity) return [stateParenCity];
 
-  const general = findCityState(raw);
-  if (general) return general;
-
-  return findKnownCity(raw);
+  return findAllCityStates(raw);
 }
 
 async function geocodeQuery(query: string): Promise<{ lat: number; lon: number } | null> {
@@ -256,39 +278,65 @@ async function main() {
 
   console.log(`Geocoding ${roles.length} active roles (1 req/sec per new location, cached by query)...`);
 
-  const updateRole = db.prepare(
+  // roles.resolved_city/state/latitude/longitude stay populated from the
+  // FIRST location found, same as before -- geocoded_at is what marks a
+  // role as "processed" so re-runs skip it, and a handful of older/other
+  // code paths still read the single-location columns. The full set of
+  // locations (one row per office a role is actually open in) lives in
+  // role_locations, which is what the export now reads pins from.
+  const updateRoleSummary = db.prepare(
     `UPDATE roles SET resolved_city = ?, resolved_state = ?, latitude = ?, longitude = ?, geocoded_at = datetime('now') WHERE id = ?`,
   );
   const markAttempted = db.prepare(`UPDATE roles SET geocoded_at = datetime('now') WHERE id = ?`);
+  const clearLocations = db.prepare(`DELETE FROM role_locations WHERE role_id = ?`);
+  const insertLocation = db.prepare(
+    `INSERT INTO role_locations (role_id, raw_segment, resolved_city, resolved_state, latitude, longitude, geocoded_at)
+     VALUES (?, ?, ?, ?, ?, ?, datetime('now'))`,
+  );
 
   // query string -> result (or null for "resolved to nothing"), so repeat
-  // cities across many roles cost one network call instead of one each.
+  // cities across many roles (and repeat cities WITHIN one multi-office
+  // role) cost one network call instead of one each.
   const cache = new Map<string, { lat: number; lon: number } | null>();
 
   let geocoded = 0;
   let skipped = 0;
   let cacheHits = 0;
+  let extraLocations = 0;
 
   for (const role of roles) {
-    const parsed = extractCityState(role.location ?? "");
-    if (!parsed) {
+    const parsedList = extractAllCityStates(role.location ?? "");
+    if (parsedList.length === 0) {
       markAttempted.run(role.id);
       skipped += 1;
       continue;
     }
 
-    let result: { lat: number; lon: number } | null;
-    if (cache.has(parsed.query)) {
-      result = cache.get(parsed.query)!;
-      cacheHits += 1;
-    } else {
-      result = await geocodeQuery(parsed.query);
-      cache.set(parsed.query, result);
-      await sleep(1100);
+    clearLocations.run(role.id);
+
+    let firstResolved: { parsed: ParsedLocation; result: { lat: number; lon: number } } | null = null;
+
+    for (const parsed of parsedList) {
+      let result: { lat: number; lon: number } | null;
+      if (cache.has(parsed.query)) {
+        result = cache.get(parsed.query)!;
+        cacheHits += 1;
+      } else {
+        result = await geocodeQuery(parsed.query);
+        cache.set(parsed.query, result);
+        await sleep(1100);
+      }
+
+      if (result) {
+        insertLocation.run(role.id, parsed.query, parsed.city, parsed.state, result.lat, result.lon);
+        if (!firstResolved) firstResolved = { parsed, result };
+        else extraLocations += 1;
+      }
     }
 
-    if (result) {
-      updateRole.run(parsed.city, parsed.state, result.lat, result.lon, role.id);
+    if (firstResolved) {
+      const { parsed, result } = firstResolved;
+      updateRoleSummary.run(parsed.city, parsed.state, result.lat, result.lon, role.id);
       geocoded += 1;
     } else {
       markAttempted.run(role.id);
@@ -297,7 +345,8 @@ async function main() {
   }
 
   console.log(
-    `\nGeocoding complete: ${geocoded} roles resolved, ${skipped} skipped/failed, ${cacheHits} served from cache (${cache.size} unique locations looked up).`,
+    `\nGeocoding complete: ${geocoded} roles resolved, ${skipped} skipped/failed, ${cacheHits} served from cache ` +
+      `(${cache.size} unique locations looked up), ${extraLocations} additional office locations found for multi-office postings.`,
   );
 }
 
