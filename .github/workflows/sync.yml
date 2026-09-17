@@ -30,10 +30,13 @@ jobs:
       - name: Run sync
         run: npm run sync
 
-      - name: Commit updated database
+      - name: Export map data for the frontend
+        run: npm run export
+
+      - name: Commit updated database and map data
         run: |
           git config user.name "tolara-atlas-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/tolara.db
+          git add data/tolara.db public/data/map-data.json
           git diff --cached --quiet || git commit -m "chore: daily jobs sync"
           git push
