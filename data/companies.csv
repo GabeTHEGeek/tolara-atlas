@@ -540,7 +540,7 @@ Anomalo,anomalo,ashby,verified,2026-09-17T17:33:11,Auto-discovered
 Deel,deel,ashby,verified,2026-09-17T17:33:11,Auto-discovered
 Loom,loom,ashby,verified,2026-09-17T17:33:11,Auto-discovered
 Freshworks,freshworks,lever,verified,2026-09-17T17:33:11,Auto-discovered
-HubSpot,hubspot,greenhouse,verified,2026-09-17T17:33:11,Auto-discovered
+HubSpot,hubspotjobs,greenhouse,verified,2026-09-17T17:33:11,Corrected token (hubspot -> hubspotjobs)
 Hex,hex,ashby,verified,2026-09-17T17:33:11,Auto-discovered
 Wiz,wiz,ashby,verified,2026-09-17T17:33:11,Auto-discovered
 Mistral AI,mistral,lever,verified,2026-09-17T17:33:11,Auto-discovered
