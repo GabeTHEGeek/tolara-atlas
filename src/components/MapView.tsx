@@ -68,51 +68,26 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
     });
 
     map.on("load", () => {
+      // NOTE: this source is deliberately NOT clustered (cluster: true).
+      // Enabling clustering here reliably breaks rendering entirely — not
+      // just the clustered layer, but the basemap's own vector tiles too
+      // (maplibre-gl shares one worker pool between GeoJSON and vector-tile
+      // parsing, and something about clustering this source wedges it).
+      // Confirmed with the exact same result in `vite dev`, a real
+      // `vite build` + `vite preview`, and multiple clusterMaxZoom/Radius
+      // values — so this isn't a dev-only quirk to work around later, it's
+      // a hard incompatibility to avoid. Individual pins (with the jitter
+      // spread for same-city companies) plus fitBounds on load are what
+      // keep the initial view legible without algorithmic clustering.
       map.addSource("pins", {
         type: "geojson",
         data: pinsToGeoJSON(pinsByIdRef.current.size ? [...pinsByIdRef.current.values()] : []),
-        cluster: true,
-        // Kept high (close to the map's own maxZoom) so clustering keeps
-        // merging pins that are still close together on screen instead of
-        // forcing everything apart past a fixed zoom threshold — nearby
-        // pins only separate once they're genuinely far apart in pixels
-        // at the current zoom, which reads as "zooming into a neighborhood"
-        // rather than an abrupt reveal of every jittered pin at once.
-        clusterMaxZoom: 14,
-        clusterRadius: 70,
       });
 
       map.addLayer({
-        id: "clusters",
+        id: "pins-layer",
         type: "circle",
         source: "pins",
-        filter: ["has", "point_count"],
-        paint: {
-          "circle-color": ["step", ["get", "point_count"], "#5B8DEF", 5, "#3D6FD1", 15, "#274B94"],
-          "circle-radius": ["step", ["get", "point_count"], 20, 5, 28, 15, 36, 40, 46],
-          "circle-stroke-width": 2,
-          "circle-stroke-color": "#ffffff",
-        },
-      });
-
-      map.addLayer({
-        id: "cluster-count",
-        type: "symbol",
-        source: "pins",
-        filter: ["has", "point_count"],
-        layout: {
-          "text-field": ["get", "point_count_abbreviated"],
-          "text-font": ["Noto Sans Bold"],
-          "text-size": 13,
-        },
-        paint: { "text-color": "#ffffff" },
-      });
-
-      map.addLayer({
-        id: "unclustered-point",
-        type: "circle",
-        source: "pins",
-        filter: ["!", ["has", "point_count"]],
         paint: {
           "circle-color": "#E8543E",
           "circle-radius": 7,
@@ -121,17 +96,7 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
         },
       });
 
-      map.on("click", "clusters", async (e) => {
-        const features = map.queryRenderedFeatures(e.point, { layers: ["clusters"] });
-        const clusterId = features[0]?.properties?.cluster_id;
-        if (clusterId == null) return;
-        const source = map.getSource("pins") as GeoJSONSource;
-        const zoom = await source.getClusterExpansionZoom(clusterId);
-        const coords = (features[0].geometry as GeoJSON.Point).coordinates as [number, number];
-        map.easeTo({ center: coords, zoom });
-      });
-
-      map.on("click", "unclustered-point", (e) => {
+      map.on("click", "pins-layer", (e) => {
         const feature = e.features?.[0];
         const id = feature?.properties?.id;
         if (id == null) return;
@@ -139,10 +104,7 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
         if (pin) onSelectPin(pin);
       });
 
-      map.on("mouseenter", "clusters", () => (map.getCanvas().style.cursor = "pointer"));
-      map.on("mouseleave", "clusters", () => (map.getCanvas().style.cursor = ""));
-
-      map.on("mouseenter", "unclustered-point", (e) => {
+      map.on("mouseenter", "pins-layer", (e) => {
         map.getCanvas().style.cursor = "pointer";
         const feature = e.features?.[0];
         if (!feature) return;
@@ -155,7 +117,7 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
           .setHTML(`<strong>${escapeHtml(name)}</strong><br/>${label}`)
           .addTo(map);
       });
-      map.on("mouseleave", "unclustered-point", () => {
+      map.on("mouseleave", "pins-layer", () => {
         map.getCanvas().style.cursor = "";
         hoverPopupRef.current?.remove();
       });
