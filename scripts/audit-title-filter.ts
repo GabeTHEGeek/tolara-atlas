@@ -16,21 +16,11 @@ import { parseCompaniesCsv, type CompanyRow } from "../server/ingestion/csv.js";
 import { searchGreenhouse } from "../server/ingestion/sources/greenhouse.js";
 import { searchAshby } from "../server/ingestion/sources/ashby.js";
 import { searchLever } from "../server/ingestion/sources/lever.js";
-import { normalizeTitle } from "../server/ingestion/sources/common.js";
-import { PM_TITLE_INCLUDE, PM_TITLE_EXCLUDE } from "../server/ingestion/filters/productManager.js";
+import { matchesProductManagerFilter } from "../server/ingestion/filters/productManager.js";
 import type { RawJob } from "../server/ingestion/sources/types.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const COMPANIES_CSV_PATH = path.join(__dirname, "..", "data", "companies.csv");
-
-function currentFilterPasses(title: string): boolean {
-  const normalized = normalizeTitle(title);
-  const includeNormalized = PM_TITLE_INCLUDE.map(normalizeTitle);
-  const excludeNormalized = PM_TITLE_EXCLUDE.map(normalizeTitle);
-  const included = includeNormalized.some((ok) => normalized.includes(ok));
-  const excluded = excludeNormalized.some((bad) => normalized.includes(bad));
-  return included && !excluded;
-}
 
 async function fetchAllUnfiltered(
   platform: "greenhouse" | "ashby" | "lever",
@@ -74,7 +64,7 @@ async function main() {
     for (const job of jobs) {
       if (!job.title.toLowerCase().includes("product")) continue;
       totalContainingProduct += 1;
-      if (!currentFilterPasses(job.title)) {
+      if (!matchesProductManagerFilter(job.title)) {
         missed.push({ company: nameByToken.get(job.board) ?? job.board, title: job.title });
       }
     }

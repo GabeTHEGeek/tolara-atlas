@@ -19,16 +19,17 @@ import { parseCompaniesCsv, type CompanyRow } from "./csv.js";
 import { searchGreenhouse } from "./sources/greenhouse.js";
 import { searchAshby } from "./sources/ashby.js";
 import { searchLever } from "./sources/lever.js";
-import { PM_TITLE_INCLUDE, PM_TITLE_EXCLUDE } from "./filters/productManager.js";
+import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const COMPANIES_CSV_PATH = path.join(__dirname, "..", "..", "data", "companies.csv");
 
-// Per-board result cap. Boards are usually small; this just bounds a
-// pathological case (e.g. a huge multi-hundred-posting board) from
-// dominating one sync run.
-const PER_BOARD_LIMIT = 50;
+// Per-board result cap. This now caps the UNFILTERED fetch (see
+// fetchPlatform below) — boards are per-company, so even a generous cap
+// like this just bounds a pathological case (a board with thousands of
+// postings) from dominating one sync run; it's not the PM filter.
+const PER_BOARD_LIMIT = 500;
 
 function slugify(name: string): string {
   return name
@@ -53,18 +54,17 @@ function parseSalary(salary: string): { min: number | null; max: number | null; 
   return { min: null, max: null, currency };
 }
 
+/**
+ * Fetches EVERY posting from each board, unfiltered — no title include/
+ * exclude passed to the adapter at all. PM classification happens
+ * afterward via matchesProductManagerFilter, so tuning that function
+ * changes what the next sync stores without touching these adapters.
+ */
 async function fetchPlatform(
   platform: "greenhouse" | "ashby" | "lever",
   boards: string[],
 ): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
-  const options = {
-    boards,
-    limit: PER_BOARD_LIMIT,
-    requireTitleKeywords: PM_TITLE_INCLUDE,
-    excludeTitles: PM_TITLE_EXCLUDE,
-  };
-  // Empty query string: no query-word filtering, rely entirely on the
-  // include/exclude title lists to select Product Manager roles.
+  const options = { boards, limit: PER_BOARD_LIMIT };
   switch (platform) {
     case "greenhouse":
       return searchGreenhouse("", options);
@@ -152,9 +152,10 @@ async function main() {
       const boards = platformRows.map((r) => r.token);
       const nameByToken = new Map(platformRows.map((r) => [r.token, r.company]));
 
-      const { jobs, meta } = await fetchPlatform(platform as "greenhouse" | "ashby" | "lever", boards);
+      const { jobs: allJobs, meta } = await fetchPlatform(platform as "greenhouse" | "ashby" | "lever", boards);
+      const jobs = allJobs.filter((job) => matchesProductManagerFilter(job.title));
       console.log(
-        `[${platform}] checked ${meta.boardsChecked.length} boards, ${meta.boardsFailed.length} failed, ${jobs.length} PM postings found`,
+        `[${platform}] checked ${meta.boardsChecked.length} boards, ${meta.boardsFailed.length} failed, ${allJobs.length} total postings, ${jobs.length} classified as PM`,
       );
       if (meta.boardsFailed.length > 0) {
         console.log(`[${platform}] failed boards: ${meta.boardsFailed.join(", ")}`);
