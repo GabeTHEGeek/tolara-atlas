@@ -13,6 +13,11 @@ const BASEMAP_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.
 // and the map can fit itself to where the data actually is.
 const FALLBACK_VIEW = { center: [-98.5, 39.5] as [number, number], zoom: 3.4 };
 
+// Below this zoom, the view spans too much ground for per-pin company
+// names to be legible (or numerous) enough to show; above it, labels
+// fade in above each pin.
+const PIN_LABEL_MIN_ZOOM = 7;
+
 interface MapViewProps {
   pins: LocationPinData[];
   onSelectPin: (pin: LocationPinData) => void;
@@ -93,6 +98,34 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
           "circle-radius": 7,
           "circle-stroke-width": 2,
           "circle-stroke-color": "#ffffff",
+        },
+      });
+
+      // Company-name labels. Hidden below PIN_LABEL_MIN_ZOOM (the initial
+      // fitted view is well below this) so the map isn't a wall of text
+      // at the zoomed-out overview; once you zoom in past a city/region,
+      // names appear above each pin. text-allow-overlap is left false so
+      // MapLibre's own collision detection hides labels that would
+      // overlap rather than piling them on top of each other — zooming
+      // in further naturally reveals the ones that got hidden.
+      map.addLayer({
+        id: "pins-labels",
+        type: "symbol",
+        source: "pins",
+        minzoom: PIN_LABEL_MIN_ZOOM,
+        layout: {
+          "text-field": ["get", "name"],
+          "text-font": ["Noto Sans Regular"],
+          "text-size": 12,
+          "text-anchor": "top",
+          "text-offset": [0, 0.9],
+          "text-allow-overlap": false,
+          "text-optional": true,
+        },
+        paint: {
+          "text-color": "#1A2233",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
         },
       });
 
