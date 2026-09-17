@@ -32,8 +32,15 @@
  *      at all (e.g. "San Francisco", "NYC", "Austin"), checked per
  *      ";"/"•"/"|"-separated segment (so "Austin; NYC" catches both).
  * What's left after all of that (bare "Remote", "United States", country
- * names like "Portugal"/"India") genuinely has no specific place to pin —
- * those roles are left ungeocoded on purpose rather than guessed at.
+ * names like "Portugal"/"India") has no specific place to pin from the
+ * posting's own text. Rather than drop those roles entirely, a second pass
+ * at the end of main() pins each one at its own company's DOMINANT office
+ * (wherever that company already has the most other real, resolved
+ * locations) and marks that role_locations row is_remote = 1 -- so a fully-
+ * remote posting still shows up on the map, associated with the company it
+ * actually belongs to, instead of silently vanishing. A company with no
+ * resolved office at all (every one of its roles is remote) has nothing
+ * reasonable to fall back to, so those stay off the map.
  *
  * Geocoding itself uses OpenStreetMap's Nominatim (free, no API key) —
  * rate-limited to 1 request/second per Nominatim's usage policy
@@ -344,9 +351,81 @@ async function main() {
     }
   }
 
+  // --- Remote-only postings: pinned at the company's dominant office ---
+  // A role whose location string had no resolvable city at all (e.g.
+  // "Remote - USA", "Remote") got zero role_locations rows above and, left
+  // alone, would just vanish from the map -- there's no city to put a pin
+  // at. Rather than drop it, pin it at wherever that company already has
+  // the most OTHER real offices (its "dominant" location), so a fully-
+  // remote posting still shows up somewhere findable instead of silently
+  // disappearing. Runs over every active role still missing role_locations
+  // rows, not just this run's newly-processed ones, so a role that fell
+  // into this bucket before this fallback existed gets picked up too. Once
+  // a role gets a remote-assigned row it's excluded from this query on
+  // later runs (it's no longer "missing"), so the assignment is stable
+  // rather than drifting every time the company's office mix shifts.
+  const unplaced = db
+    .prepare(
+      `SELECT roles.id, roles.company_id, roles.location
+       FROM roles
+       LEFT JOIN role_locations ON role_locations.role_id = roles.id
+       WHERE roles.status = 'active' AND role_locations.id IS NULL`,
+    )
+    .all() as Array<{ id: number; company_id: number; location: string | null }>;
+
+  const dominantForCompany = db.prepare(
+    `SELECT role_locations.resolved_city, role_locations.resolved_state,
+            role_locations.latitude, role_locations.longitude, COUNT(*) AS n
+     FROM role_locations
+     JOIN roles ON roles.id = role_locations.role_id
+     WHERE roles.company_id = ? AND role_locations.is_remote = 0
+     GROUP BY role_locations.resolved_city, role_locations.resolved_state
+     ORDER BY n DESC
+     LIMIT 1`,
+  );
+  const insertRemoteLocation = db.prepare(
+    `INSERT INTO role_locations (role_id, raw_segment, resolved_city, resolved_state, latitude, longitude, is_remote, geocoded_at)
+     VALUES (?, ?, ?, ?, ?, ?, 1, datetime('now'))`,
+  );
+
+  let remoteAssigned = 0;
+  let remoteUnplaceable = 0;
+  // company_id -> its dominant office, or null if it has none (every one
+  // of its OTHER roles is also unplaced) -- cached so a company with many
+  // remote postings only costs one lookup query, not one per role.
+  const dominantCache = new Map<number, { city: string; state: string; lat: number; lon: number } | null>();
+
+  for (const role of unplaced) {
+    let dominant = dominantCache.get(role.company_id);
+    if (dominant === undefined) {
+      const row = dominantForCompany.get(role.company_id) as
+        | { resolved_city: string; resolved_state: string; latitude: number; longitude: number }
+        | undefined;
+      dominant = row
+        ? { city: row.resolved_city, state: row.resolved_state, lat: row.latitude, lon: row.longitude }
+        : null;
+      dominantCache.set(role.company_id, dominant);
+    }
+
+    if (!dominant) {
+      // This company has no resolved office at all (every one of its
+      // roles is remote, or it has no other active roles) -- nowhere
+      // reasonable to pin this one either, so it's left off the map.
+      remoteUnplaceable += 1;
+      continue;
+    }
+
+    insertRemoteLocation.run(role.id, role.location, dominant.city, dominant.state, dominant.lat, dominant.lon);
+    updateRoleSummary.run(dominant.city, dominant.state, dominant.lat, dominant.lon, role.id);
+    remoteAssigned += 1;
+  }
+
   console.log(
     `\nGeocoding complete: ${geocoded} roles resolved, ${skipped} skipped/failed, ${cacheHits} served from cache ` +
       `(${cache.size} unique locations looked up), ${extraLocations} additional office locations found for multi-office postings.`,
+  );
+  console.log(
+    `Remote postings: ${remoteAssigned} pinned at their company's dominant office, ${remoteUnplaceable} left off the map (no resolved office for that company at all).`,
   );
 }
 

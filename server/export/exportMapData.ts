@@ -31,6 +31,13 @@
  * down to distinct roles.id -- a role open in 3 offices still counts as
  * 1 role site-wide, even though it appears in 3 pins.
  *
+ * A role whose posting has no resolvable office at all (e.g. "Remote -
+ * USA") still gets a role_locations row, courtesy of geocode.ts's remote
+ * fallback -- it's pinned at its own company's dominant office rather than
+ * dropped. Each such role's isRemote flag carries through to the exported
+ * RoleExport so the frontend can call it out (e.g. "2 of these are
+ * remote") instead of presenting it as an ordinary office posting.
+ *
  * A remaining display concern, unrelated to which office a role belongs
  * to: geocoding is city-level (server/ingestion/geocode.ts), so pins that
  * happen to land on the exact same coordinate (e.g. two different
@@ -64,6 +71,11 @@ interface RoleExport {
   salaryCurrency: string | null;
   url: string | null;
   postedAt: string | null;
+  // true when this role has no resolvable office of its own (its posting's
+  // location was something like "Remote - USA") and is pinned here only
+  // because it's the company's dominant office -- see geocode.ts. false
+  // for a role genuinely posted at this pin's city.
+  isRemote: boolean;
 }
 
 interface PinExport {
@@ -95,6 +107,7 @@ interface RoleRow {
   resolved_state: string | null;
   latitude: number;
   longitude: number;
+  is_remote: number;
 }
 
 // One row per (role, office), from role_locations -- a role open in
@@ -189,7 +202,7 @@ function main() {
          roles.title, roles.location, roles.salary_min, roles.salary_max, roles.salary_currency,
          roles.url, roles.posted_at,
          role_locations.resolved_city, role_locations.resolved_state,
-         role_locations.latitude, role_locations.longitude
+         role_locations.latitude, role_locations.longitude, role_locations.is_remote
        FROM role_locations
        JOIN roles ON roles.id = role_locations.role_id
        JOIN companies ON companies.id = roles.company_id
@@ -253,6 +266,7 @@ function main() {
         salaryCurrency: r.salary_currency,
         url: r.url,
         postedAt: r.posted_at,
+        isRemote: Boolean(r.is_remote),
       })),
     };
   });

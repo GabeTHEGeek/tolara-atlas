@@ -178,6 +178,17 @@ body {
   font-weight: 600;
 }
 
+/* Marks a role shown at a pin only because it's the company's dominant
+   office, not because the role is actually based in this city (see
+   RoleData.isRemote / geocode.ts's remote-location fallback). */
+.role-remote-badge {
+  color: var(--tolara-blue);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
 /* Hover tooltip on individual map pins (company name + open role count). */
 .pin-tooltip .maplibregl-popup-content {
   padding: 8px 12px;

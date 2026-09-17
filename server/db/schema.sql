@@ -95,6 +95,14 @@ CREATE INDEX IF NOT EXISTS roles_category_idx ON roles(category);
 -- roles.resolved_city/state/latitude/longitude (above) still hold the
 -- FIRST location as a summary/back-compat column; this table is the full
 -- set and what the map export actually reads pins from.
+-- is_remote: 1 when this row doesn't come from a real office mentioned in
+-- the posting -- the posting's location string had no resolvable city at
+-- all (e.g. "Remote - USA", "Remote"), and this row instead pins the role
+-- at the company's dominant office (the city where that company already
+-- has the most other active roles), so a fully-remote posting still shows
+-- up on the map somewhere findable instead of silently vanishing. 0 for
+-- every row that came from an actual city in the posting's own location
+-- string.
 CREATE TABLE IF NOT EXISTS role_locations (
   id             INTEGER PRIMARY KEY,
   role_id        INTEGER NOT NULL REFERENCES roles(id) ON DELETE CASCADE,
@@ -103,6 +111,7 @@ CREATE TABLE IF NOT EXISTS role_locations (
   resolved_state TEXT NOT NULL,
   latitude       REAL NOT NULL,
   longitude      REAL NOT NULL,
+  is_remote      INTEGER NOT NULL DEFAULT 0,
   geocoded_at    TEXT NOT NULL DEFAULT (datetime('now'))
 );
 

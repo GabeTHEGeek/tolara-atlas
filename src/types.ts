@@ -16,6 +16,10 @@ export interface RoleData {
   salaryCurrency: string | null;
   url: string | null;
   postedAt: string | null;
+  // true when this role has no office of its own (e.g. posted as "Remote -
+  // USA") and is shown at this pin only because it's the company's
+  // dominant office, not because the role is actually based here.
+  isRemote: boolean;
 }
 
 export interface LocationPinData {

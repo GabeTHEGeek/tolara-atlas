@@ -33,6 +33,7 @@ const MIGRATIONS: Migration[] = [
   { table: "roles", column: "latitude", definition: "REAL" },
   { table: "roles", column: "longitude", definition: "REAL" },
   { table: "roles", column: "geocoded_at", definition: "TEXT" },
+  { table: "role_locations", column: "is_remote", definition: "INTEGER NOT NULL DEFAULT 0" },
 ];
 
 function applyMigrations(db: Database.Database) {

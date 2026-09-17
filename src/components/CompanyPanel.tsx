@@ -17,6 +17,10 @@ export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
   if (!pin) return null;
 
   const location = [pin.city, pin.state].filter(Boolean).join(", ") || "Location unknown";
+  // Roles with no office of their own, shown here only because this pin is
+  // their company's dominant location -- called out separately so it's
+  // clear they aren't actually based in this city (see types.ts).
+  const remoteCount = pin.roles.filter((role) => role.isRemote).length;
 
   return (
     <aside className="company-panel">
@@ -32,6 +36,7 @@ export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
 
       <p className="company-panel-role-count">
         {pin.roleCount} open Product Manager {pin.roleCount === 1 ? "role" : "roles"} in {location}
+        {remoteCount > 0 && ` (${remoteCount} remote)`}
       </p>
 
       <ul className="role-list">
@@ -43,6 +48,14 @@ export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
                 {role.title}
               </a>
               <div className="role-meta">
+                {role.isRemote && (
+                  <span
+                    className="role-remote-badge"
+                    title={`No office of its own -- shown here because it's ${pin.companyName}'s dominant location`}
+                  >
+                    Remote
+                  </span>
+                )}
                 {role.location && <span>{role.location}</span>}
                 {salary && (
                   <span className="role-salary" title="From the posting, not estimated">
