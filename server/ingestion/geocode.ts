@@ -106,6 +106,7 @@ const KNOWN_CITIES: Record<string, { city: string; state: string }> = {
   oakland: { city: "Oakland", state: "CA" },
   berkeley: { city: "Berkeley", state: "CA" },
   seattle: { city: "Seattle", state: "WA" },
+  sea: { city: "Seattle", state: "WA" },
   bellevue: { city: "Bellevue", state: "WA" },
   austin: { city: "Austin", state: "TX" },
   dallas: { city: "Dallas", state: "TX" },
@@ -145,7 +146,16 @@ interface ParsedLocation {
 
 function isPlausibleCity(city: string): boolean {
   if (city.length < 2) return false;
-  return !/remote|global|anywhere|worldwide|hybrid/i.test(city);
+  if (/remote|global|anywhere|worldwide|hybrid/i.test(city)) return false;
+  // A bare 2-4 letter ALL-CAPS token ("SF", "SEA", "LA", "DC") is a city
+  // abbreviation, not a place name as actually written -- real city names
+  // in these postings are Title Case. Rejecting it here matters most for
+  // a comma-separated list of abbreviations that includes a real state
+  // code ("SF, SEA, NY, Remote-US" -- without this, the "City, ST" regex
+  // below reads "SEA, NY" as city "SEA", state "NY"). The bare-known-city
+  // lookup further down resolves these correctly instead.
+  if (/^[A-Z]{2,4}$/.test(city)) return false;
+  return true;
 }
 
 function toParsed(city: string, state: string): ParsedLocation {
@@ -242,19 +252,36 @@ function findAllCityStates(text: string): ParsedLocation[] {
   }
 
   // Bare known cities with no state at all ("San Francisco", "NYC"),
-  // checked per ;/•/|/,/"or"-separated segment -- covers both a single
-  // bare city ("Austin; NYC") and the common "list every office with no
-  // real delimiter" shape ("NYC, Chicago, Seattle, San Francisco",
-  // "San Francisco Or New York", "New York City, Toronto, Chicago, or
-  // Remote"). Splitting on bare commas here is safe even though commas
-  // also separate "City, ST" pairs above -- a segment that doesn't match
-  // a known bare city (e.g. a state abbreviation left over from an
-  // already-matched pair) is just silently ignored, not misread as one.
-  // Hyphens are normalized to spaces before lookup so "New-York" still
-  // matches "New York".
-  const segments = text.split(/[;•|,]|\bor\b/i).map((s) => s.trim()).filter(Boolean);
-  for (const segment of segments.length ? segments : [text]) {
-    const known = KNOWN_CITIES[stripNoise(segment).replace(/-/g, " ").replace(/\s+/g, " ").toLowerCase()];
+  // checked per-segment. Two separate splits, because commas mean two
+  // different things in this data and mixing them risks a false match:
+  //
+  // 1. ;/•/| never carry "City, ST" pairing meaning, so a bare 2-letter
+  //    match here is unambiguous -- "LA; NYC" safely resolves both.
+  // 2. Bare commas/"or" ALSO separate "City, ST" pairs above, so a plain
+  //    comma-split can land on a token that's a real state postal code
+  //    ("LA" = Louisiana, "DC" = the District) rather than the city
+  //    abbreviation of the same letters -- "Baton Rouge, LA" must NOT
+  //    also produce a Los Angeles pin. Any exactly-2-letter token that's
+  //    a real state abbreviation is skipped in this split only; longer
+  //    matches ("NYC", "Chicago") and non-state 2-letter ones ("SF") are
+  //    unaffected, so "NYC, Chicago, Seattle, San Francisco" and "San
+  //    Francisco Or New York" still resolve every city in the list.
+  //
+  // Hyphens are normalized to spaces before lookup either way, so
+  // "New-York" still matches "New York".
+  const lookupKey = (segment: string) =>
+    stripNoise(segment).replace(/-/g, " ").replace(/\s+/g, " ").toLowerCase();
+
+  const pipeSegments = text.split(/[;•|]/).map((s) => s.trim()).filter(Boolean);
+  for (const segment of pipeSegments.length ? pipeSegments : [text]) {
+    const known = KNOWN_CITIES[lookupKey(segment)];
+    if (known) add(toParsed(known.city, known.state));
+  }
+
+  const commaSegments = text.split(/,|\bor\b/i).map((s) => s.trim()).filter(Boolean);
+  for (const segment of commaSegments) {
+    if (segment.length === 2 && US_STATE_ABBREVS.has(segment.toUpperCase())) continue;
+    const known = KNOWN_CITIES[lookupKey(segment)];
     if (known) add(toParsed(known.city, known.state));
   }
 
