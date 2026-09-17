@@ -92,7 +92,38 @@ function slugifyLocation(city: string, state: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-/** Spreads pins that share an exact coordinate into a small ring around it. */
+/** Deterministic 32-bit string hash (FNV-1a), used to seed each pin's jitter. */
+function hashString(str: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+/** Tiny seeded PRNG (mulberry32) — deterministic per seed, so re-running the export doesn't reshuffle pins. */
+function mulberry32(seed: number): () => number {
+  let a = seed;
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * Spreads pins that share an exact coordinate into a small cloud around it.
+ * Each pin's offset (angle + distance) is derived from a hash of its own id
+ * rather than its index in the group — an evenly-divided ring (angle =
+ * 2π × i/count) reads as an obviously artificial perfect circle once you
+ * zoom in close enough to see it, which undermines trust in the map ("why
+ * are these dots arranged in a circle in the harbor?"). A per-pin random
+ * angle and radius looks organic instead, while staying stable across
+ * re-exports since it's seeded by the pin's own id, not group order.
+ */
 function jitterSharedCoordinates(
   pins: Array<{ id: string; latitude: number; longitude: number }>,
 ): Map<string, { lat: number; lng: number }> {
@@ -110,15 +141,15 @@ function jitterSharedCoordinates(
       jittered.set(group[0].id, { lat: group[0].latitude, lng: group[0].longitude });
       continue;
     }
-    // Stable order (by id) so re-running the export doesn't shuffle pins.
-    const sorted = [...group].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-    const latRad = (sorted[0].latitude * Math.PI) / 180;
-    sorted.forEach((p, i) => {
-      const angle = (2 * Math.PI * i) / sorted.length;
-      const dLat = JITTER_RADIUS_DEG * Math.cos(angle);
-      const dLng = (JITTER_RADIUS_DEG * Math.sin(angle)) / Math.cos(latRad);
+    const latRad = (group[0].latitude * Math.PI) / 180;
+    for (const p of group) {
+      const rand = mulberry32(hashString(p.id));
+      const angle = rand() * 2 * Math.PI;
+      const radiusFrac = 0.45 + rand() * 0.55; // avoid a hollow-center look
+      const dLat = JITTER_RADIUS_DEG * radiusFrac * Math.cos(angle);
+      const dLng = (JITTER_RADIUS_DEG * radiusFrac * Math.sin(angle)) / Math.cos(latRad);
       jittered.set(p.id, { lat: p.latitude + dLat, lng: p.longitude + dLng });
-    });
+    }
   }
   return jittered;
 }

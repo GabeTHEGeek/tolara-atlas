@@ -177,3 +177,17 @@ body {
   color: #1a7f4b;
   font-weight: 600;
 }
+
+/* Hover tooltip on individual map pins (company name + open role count). */
+.pin-tooltip .maplibregl-popup-content {
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(26, 34, 51, 0.18);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--tolara-navy);
+}
+
+.pin-tooltip .maplibregl-popup-tip {
+  border-top-color: #ffffff;
+}
