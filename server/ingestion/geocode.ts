@@ -40,11 +40,17 @@
  * NO resolved office at all (every one of its roles is remote). Either way
  * the resulting role_locations row is marked is_remote = 1 -- so a fully-
  * remote posting still shows up on the map, associated with the company it
- * actually belongs to, instead of silently vanishing. companies.city/state
- * aren't populated automatically; they're filled in by hand for companies
- * worth the one-time lookup. A company with neither a dominant office nor
- * a curated HQ has nothing reasonable to fall back to, so those stay off
- * the map.
+ * actually belongs to, instead of silently vanishing. Below the dominant-
+ * PM-office tier, before falling back to a manually curated HQ, is a
+ * third tier that mines sync.ts's company_board_locations table -- every
+ * distinct location string seen across a company's FULL board (every
+ * department, not just the PM postings this app stores as roles). A
+ * company whose 1-2 PM postings are all "Remote" often still has a real,
+ * discoverable office once you look at its engineering/sales/support
+ * postings too, and that data is already being fetched during sync at no
+ * extra cost -- this tier just stops discarding it. Manually curated HQs
+ * (companies.city/state) remain the last resort, for a company with no
+ * resolved office anywhere in its own data at all.
  *
  * Geocoding itself uses OpenStreetMap's Nominatim (free, no API key) —
  * rate-limited to 1 request/second per Nominatim's usage policy
@@ -60,258 +66,10 @@
  */
 
 import { getDb } from "../db/client.js";
+import { extractAllCityStates, type ParsedLocation } from "./locationParser.js";
 
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/search";
 const USER_AGENT = "tolara-atlas/0.1 (portfolio project; contact: pendletongabriel@gmail.com)";
-
-const US_STATE_NAMES: Record<string, string> = {
-  alabama: "AL", alaska: "AK", arizona: "AZ", arkansas: "AR", california: "CA",
-  colorado: "CO", connecticut: "CT", delaware: "DE", "district of columbia": "DC",
-  florida: "FL", georgia: "GA", hawaii: "HI", idaho: "ID", illinois: "IL",
-  indiana: "IN", iowa: "IA", kansas: "KS", kentucky: "KY", louisiana: "LA",
-  maine: "ME", maryland: "MD", massachusetts: "MA", michigan: "MI", minnesota: "MN",
-  mississippi: "MS", missouri: "MO", montana: "MT", nebraska: "NE", nevada: "NV",
-  "new hampshire": "NH", "new jersey": "NJ", "new mexico": "NM", "new york": "NY",
-  "north carolina": "NC", "north dakota": "ND", ohio: "OH", oklahoma: "OK",
-  oregon: "OR", pennsylvania: "PA", "rhode island": "RI", "south carolina": "SC",
-  "south dakota": "SD", tennessee: "TN", texas: "TX", utah: "UT", vermont: "VT",
-  virginia: "VA", washington: "WA", "west virginia": "WV", wisconsin: "WI",
-  wyoming: "WY",
-};
-const US_STATE_ABBREVS = new Set(Object.values(US_STATE_NAMES));
-
-// Major US tech-hub cities given bare, with no state at all in the
-// original string ("San Francisco", "NYC"). Deliberately conservative —
-// only well-known unambiguous hubs, not every US city, to avoid mismatches
-// like a small-town "Toronto, Ohio" for the Canadian city of the same name.
-const KNOWN_CITIES: Record<string, { city: string; state: string }> = {
-  "san francisco": { city: "San Francisco", state: "CA" },
-  sf: { city: "San Francisco", state: "CA" },
-  "san francisco bay area": { city: "San Francisco", state: "CA" },
-  "sf bay area": { city: "San Francisco", state: "CA" },
-  "bay area": { city: "San Francisco", state: "CA" },
-  "culver city": { city: "Culver City", state: "CA" },
-  "new york city": { city: "New York City", state: "NY" },
-  "new york": { city: "New York", state: "NY" },
-  nyc: { city: "New York City", state: "NY" },
-  "palo alto": { city: "Palo Alto", state: "CA" },
-  "san mateo": { city: "San Mateo", state: "CA" },
-  "menlo park": { city: "Menlo Park", state: "CA" },
-  "redwood city": { city: "Redwood City", state: "CA" },
-  "mountain view": { city: "Mountain View", state: "CA" },
-  sunnyvale: { city: "Sunnyvale", state: "CA" },
-  cupertino: { city: "Cupertino", state: "CA" },
-  "santa clara": { city: "Santa Clara", state: "CA" },
-  "san jose": { city: "San Jose", state: "CA" },
-  oakland: { city: "Oakland", state: "CA" },
-  berkeley: { city: "Berkeley", state: "CA" },
-  seattle: { city: "Seattle", state: "WA" },
-  sea: { city: "Seattle", state: "WA" },
-  bellevue: { city: "Bellevue", state: "WA" },
-  austin: { city: "Austin", state: "TX" },
-  dallas: { city: "Dallas", state: "TX" },
-  houston: { city: "Houston", state: "TX" },
-  boston: { city: "Boston", state: "MA" },
-  cambridge: { city: "Cambridge", state: "MA" },
-  chicago: { city: "Chicago", state: "IL" },
-  atlanta: { city: "Atlanta", state: "GA" },
-  denver: { city: "Denver", state: "CO" },
-  boulder: { city: "Boulder", state: "CO" },
-  "los angeles": { city: "Los Angeles", state: "CA" },
-  la: { city: "Los Angeles", state: "CA" },
-  "san diego": { city: "San Diego", state: "CA" },
-  irvine: { city: "Irvine", state: "CA" },
-  "washington dc": { city: "Washington", state: "DC" },
-  dc: { city: "Washington", state: "DC" },
-  miami: { city: "Miami", state: "FL" },
-  portland: { city: "Portland", state: "OR" },
-  "salt lake city": { city: "Salt Lake City", state: "UT" },
-  phoenix: { city: "Phoenix", state: "AZ" },
-  minneapolis: { city: "Minneapolis", state: "MN" },
-  philadelphia: { city: "Philadelphia", state: "PA" },
-  detroit: { city: "Detroit", state: "MI" },
-  nashville: { city: "Nashville", state: "TN" },
-  charlotte: { city: "Charlotte", state: "NC" },
-  raleigh: { city: "Raleigh", state: "NC" },
-  durham: { city: "Durham", state: "NC" },
-  columbus: { city: "Columbus", state: "OH" },
-  pittsburgh: { city: "Pittsburgh", state: "PA" },
-};
-
-interface ParsedLocation {
-  city: string;
-  state: string;
-  query: string;
-}
-
-function isPlausibleCity(city: string): boolean {
-  if (city.length < 2) return false;
-  if (/remote|global|anywhere|worldwide|hybrid/i.test(city)) return false;
-  // A bare 2-4 letter ALL-CAPS token ("SF", "SEA", "LA", "DC") is a city
-  // abbreviation, not a place name as actually written -- real city names
-  // in these postings are Title Case. Rejecting it here matters most for
-  // a comma-separated list of abbreviations that includes a real state
-  // code ("SF, SEA, NY, Remote-US" -- without this, the "City, ST" regex
-  // below reads "SEA, NY" as city "SEA", state "NY"). The bare-known-city
-  // lookup further down resolves these correctly instead.
-  if (/^[A-Z]{2,4}$/.test(city)) return false;
-  return true;
-}
-
-function toParsed(city: string, state: string): ParsedLocation {
-  return { city, state, query: `${city}, ${state}, USA` };
-}
-
-/** Strips noise this dataset actually contains, without touching the core place name. */
-function stripNoise(raw: string): string {
-  let s = raw.trim();
-  s = s.replace(/^(?:hybrid|remote|onsite|on-site|in-office|in office)\s*[-:]\s*/i, "");
-  s = s.replace(/\s*[-–:|]?\s*(?:headquarters|hq|office|hub|remote|hybrid|onsite|on-site)\s*$/i, "");
-  s = s.replace(/\([^)]*\)/g, "").trim();
-  return s.trim();
-}
-
-/**
- * Strips country/HQ-label noise tokens that sit right next to the real
- * place name with a separator between them -- "USA - Mountain View, CA",
- * "HQ-San Francisco", "US: San Mateo (...)". Applied to the WHOLE raw
- * string before the city/state search below, because the abbrev/full-name
- * regexes are greedy about what counts as the "city" portion of a "City,
- * ST" match: left in place, "USA - Mountain View, CA" would capture "USA -
- * Mountain View" as the city (garbling the geocoding query) rather than
- * just "Mountain View". Only strips a token immediately followed by a
- * dash/colon/pipe separator, so it never touches a token that's actually
- * part of a real match, like the bare "US" at the end of "New York, NY,
- * US" (nothing follows it to trigger this).
- */
-function stripLeadingNoiseTokens(text: string): string {
-  return text.replace(/\b(?:USA?|U\.S\.A?\.?|United States|HQ|Hub|Headquarters)\s*[-–:|]\s*/gi, "");
-}
-
-/** "US-CA-Menlo Park" -> { city: "Menlo Park", state: "CA" } */
-function parseUsDashFormat(raw: string): ParsedLocation | null {
-  const match = raw.trim().match(/^US-([A-Z]{2})-(.+)$/);
-  if (!match) return null;
-  const state = match[1];
-  const city = match[2].trim();
-  if (US_STATE_ABBREVS.has(state) && isPlausibleCity(city)) return toParsed(city, state);
-  return null;
-}
-
-/** "US California (Redwood City) - Office" -> { city: "Redwood City", state: "CA" } */
-function parseUsStateParenCity(raw: string): ParsedLocation | null {
-  const match = raw.trim().match(/^US\s+([A-Za-z\s]+?)\s*\(([^)]+)\)/i);
-  if (!match) return null;
-  const stateAbbrev = US_STATE_NAMES[match[1].trim().toLowerCase()];
-  const city = match[2].trim();
-  if (stateAbbrev && isPlausibleCity(city)) return toParsed(city, stateAbbrev);
-  return null;
-}
-
-/**
- * Searches (not anchors) for EVERY plausible "City, ST" or "City, Full
- * State Name" pair anywhere in the text, left to right -- not just the
- * first. This is deliberately a search rather than a whole-string match:
- * real location strings put valid offices amid all kinds of trailing or
- * interleaved noise a fixed set of separator rules can't keep up with —
- * "Washington, DC - Remote", "Burlington, MA | Hybrid",
- * "San Francisco, CA • New York, NY • United States", "New York, NY, US"
- * (bare "US", not "United States"), and multiple offices joined by plain
- * commas with no delimiter at all ("San Francisco, CA, New York, NY,
- * Portland, OR, or Remote ..."). A search naturally finds every valid
- * pair and ignores everything around it; an implausible match (e.g.
- * "Remote, CA") is skipped in favor of the next candidate rather than
- * failing the whole string. Dedupes by (city, state) so "New York, NY,
- * New York, NY" style repeats in noisy strings don't produce duplicate
- * locations for one role.
- */
-function findAllCityStates(text: string): ParsedLocation[] {
-  const results: ParsedLocation[] = [];
-  const seen = new Set<string>();
-  const add = (p: ParsedLocation) => {
-    const key = `${p.city.toLowerCase()}|${p.state}`;
-    if (!seen.has(key)) {
-      seen.add(key);
-      results.push(p);
-    }
-  };
-
-  const abbrevPattern = /([A-Za-z][A-Za-z.'-]*(?:\s[A-Za-z.'-]+)*),\s*([A-Z]{2})\b/g;
-  let m: RegExpExecArray | null;
-  while ((m = abbrevPattern.exec(text))) {
-    const city = m[1].trim();
-    const state = m[2].trim();
-    if (US_STATE_ABBREVS.has(state) && isPlausibleCity(city)) add(toParsed(city, state));
-  }
-
-  const fullNamePattern = /([A-Za-z][A-Za-z.'-]*(?:\s[A-Za-z.'-]+)*),\s*([A-Za-z]+(?:\s[A-Za-z]+)*)/g;
-  while ((m = fullNamePattern.exec(text))) {
-    const city = m[1].trim();
-    const stateAbbrev = US_STATE_NAMES[m[2].trim().toLowerCase()];
-    if (stateAbbrev && isPlausibleCity(city)) add(toParsed(city, stateAbbrev));
-  }
-
-  // Bare known cities with no state at all ("San Francisco", "NYC"),
-  // checked per-segment. Two separate splits, because commas mean two
-  // different things in this data and mixing them risks a false match:
-  //
-  // 1. ;/•/| never carry "City, ST" pairing meaning, so a bare 2-letter
-  //    match here is unambiguous -- "LA; NYC" safely resolves both.
-  // 2. Bare commas/"or" ALSO separate "City, ST" pairs above, so a plain
-  //    comma-split can land on a token that's a real state postal code
-  //    ("LA" = Louisiana, "DC" = the District) rather than the city
-  //    abbreviation of the same letters -- "Baton Rouge, LA" must NOT
-  //    also produce a Los Angeles pin. Any exactly-2-letter token that's
-  //    a real state abbreviation is skipped in this split only; longer
-  //    matches ("NYC", "Chicago") and non-state 2-letter ones ("SF") are
-  //    unaffected, so "NYC, Chicago, Seattle, San Francisco" and "San
-  //    Francisco Or New York" still resolve every city in the list.
-  //
-  // Hyphens are normalized to spaces before lookup either way, so
-  // "New-York" still matches "New York".
-  const lookupKey = (segment: string) =>
-    stripNoise(segment).replace(/-/g, " ").replace(/\s+/g, " ").toLowerCase();
-
-  const pipeSegments = text.split(/[;•|]/).map((s) => s.trim()).filter(Boolean);
-  for (const segment of pipeSegments.length ? pipeSegments : [text]) {
-    const known = KNOWN_CITIES[lookupKey(segment)];
-    if (known) add(toParsed(known.city, known.state));
-  }
-
-  const commaSegments = text.split(/,|\bor\b/i).map((s) => s.trim()).filter(Boolean);
-  for (const segment of commaSegments) {
-    if (segment.length === 2 && US_STATE_ABBREVS.has(segment.toUpperCase())) continue;
-    const known = KNOWN_CITIES[lookupKey(segment)];
-    if (known) add(toParsed(known.city, known.state));
-  }
-
-  return results;
-}
-
-/**
- * All plausible locations in a role's raw location string, not just one --
- * a single posting is frequently open in more than one office at once, and
- * the map should place a pin in each rather than only the first-mentioned
- * city. "US-CA-Menlo Park"-style and "US California (Redwood City)"-style
- * strings are single-location formats by construction, so those short-
- * circuit; everything else goes through the multi-match search.
- */
-function extractAllCityStates(raw: string): ParsedLocation[] {
-  if (!raw) return [];
-
-  // "US-CA-Menlo Park" is checked against the ORIGINAL string -- it's
-  // anchored at the start, so a leading noise token would break the
-  // anchor anyway, and the format is unambiguous as-is.
-  const dashFormat = parseUsDashFormat(raw);
-  if (dashFormat) return [dashFormat];
-
-  const cleaned = stripLeadingNoiseTokens(raw);
-
-  const stateParenCity = parseUsStateParenCity(cleaned);
-  if (stateParenCity) return [stateParenCity];
-
-  return findAllCityStates(cleaned);
-}
 
 async function geocodeQuery(query: string): Promise<{ lat: number; lon: number } | null> {
   const url = new URL(NOMINATIM_URL);
@@ -454,14 +212,50 @@ async function main() {
      ORDER BY n DESC
      LIMIT 1`,
   );
-  // Fallback below the dominant-OTHER-role lookup: a manually-curated
-  // headquarters on the companies row itself (companies.city/state), for a
-  // company with no resolved office at all -- every one of its roles is
-  // remote, so there's no "other role" to learn a dominant city from.
-  // companies.city/state/latitude/longitude aren't populated by the sync
-  // pipeline; they're filled in by hand (or a future enrichment step) for
-  // companies worth the one-time lookup. latitude/longitude are geocoded
-  // here on first use if city/state are set but coordinates aren't yet.
+  // Second-tier fallback, below the dominant-OWN-PM-office lookup: mine
+  // sync.ts's company_board_locations -- every distinct location string
+  // seen across the company's FULL board (all departments), not just its
+  // PM postings. A company can easily have zero resolved PM offices (all
+  // its PM roles say "Remote") while still having a real, findable office
+  // according to its engineering/sales/support postings; this reuses that
+  // signal instead of requiring a person to look it up by hand. Weighted
+  // by how many postings on the board actually use each raw location
+  // string, so a company's true office footprint wins over a stray one-off
+  // mention.
+  const boardLocationsForCompany = db.prepare(
+    `SELECT raw_location, posting_count FROM company_board_locations WHERE company_id = ?`,
+  );
+
+  function dominantFromBoardLocations(companyId: number): { city: string; state: string } | null {
+    const rows = boardLocationsForCompany.all(companyId) as Array<{
+      raw_location: string;
+      posting_count: number;
+    }>;
+    const tally = new Map<string, { city: string; state: string; weight: number }>();
+    for (const row of rows) {
+      for (const parsed of extractAllCityStates(row.raw_location)) {
+        const key = `${parsed.city.toLowerCase()}|${parsed.state}`;
+        const existing = tally.get(key);
+        if (existing) existing.weight += row.posting_count;
+        else tally.set(key, { city: parsed.city, state: parsed.state, weight: row.posting_count });
+      }
+    }
+    let best: { city: string; state: string; weight: number } | null = null;
+    for (const candidate of tally.values()) {
+      if (!best || candidate.weight > best.weight) best = candidate;
+    }
+    return best ? { city: best.city, state: best.state } : null;
+  }
+
+  // Last-resort fallback: a manually-curated headquarters on the companies
+  // row itself (companies.city/state), for a company with no resolved
+  // office anywhere in its own data -- every one of its roles is remote
+  // AND its full board has nothing resolvable either (or it has no board
+  // data at all, e.g. before its next sync run). companies.city/state/
+  // latitude/longitude aren't populated by the sync pipeline; they're
+  // filled in by hand for companies worth the one-time lookup.
+  // latitude/longitude are geocoded here on first use if city/state are
+  // set but coordinates aren't yet.
   const companyHqRow = db.prepare(`SELECT city, state, latitude, longitude FROM companies WHERE id = ?`);
   const saveCompanyHqCoords = db.prepare(
     `UPDATE companies SET latitude = ?, longitude = ?, geocoded_at = datetime('now') WHERE id = ?`,
@@ -472,12 +266,17 @@ async function main() {
   );
 
   let remoteAssigned = 0;
+  let boardAssigned = 0;
   let hqAssigned = 0;
   let remoteUnplaceable = 0;
   // company_id -> its dominant office, or null if it has none (every one
   // of its OTHER roles is also unplaced) -- cached so a company with many
   // remote postings only costs one lookup query, not one per role.
   const dominantCache = new Map<number, { city: string; state: string; lat: number; lon: number } | null>();
+  // company_id -> its dominant office computed from the full board (all
+  // departments), or null if that yielded nothing either -- same caching
+  // reasoning as dominantCache.
+  const boardCache = new Map<number, { city: string; state: string } | null>();
   // company_id -> its curated HQ (from companies.city/state), or null if
   // it has none set -- same caching reasoning as dominantCache.
   const hqCache = new Map<number, { city: string; state: string; lat: number; lon: number } | null>();
@@ -499,6 +298,28 @@ async function main() {
       updateRoleSummary.run(dominant.city, dominant.state, dominant.lat, dominant.lon, role.id);
       remoteAssigned += 1;
       continue;
+    }
+
+    let boardDominant = boardCache.get(role.company_id);
+    if (boardDominant === undefined) {
+      boardDominant = dominantFromBoardLocations(role.company_id);
+      boardCache.set(role.company_id, boardDominant);
+    }
+
+    if (boardDominant) {
+      const query = `${boardDominant.city}, ${boardDominant.state}, USA`;
+      let result = cache.has(query) ? cache.get(query)! : null;
+      if (!cache.has(query)) {
+        result = await geocodeQuery(query);
+        cache.set(query, result);
+        await sleep(1100);
+      }
+      if (result) {
+        insertRemoteLocation.run(role.id, role.location, boardDominant.city, boardDominant.state, result.lat, result.lon);
+        updateRoleSummary.run(boardDominant.city, boardDominant.state, result.lat, result.lon, role.id);
+        boardAssigned += 1;
+        continue;
+      }
     }
 
     let hq = hqCache.get(role.company_id);
@@ -547,8 +368,9 @@ async function main() {
       `(${cache.size} unique locations looked up), ${extraLocations} additional office locations found for multi-office postings.`,
   );
   console.log(
-    `Remote postings: ${remoteAssigned} pinned at their company's dominant office, ${hqAssigned} pinned at a ` +
-      `curated headquarters, ${remoteUnplaceable} left off the map (no resolved office or curated HQ for that company).`,
+    `Remote postings: ${remoteAssigned} pinned at their company's dominant PM office, ${boardAssigned} pinned at ` +
+      `a dominant office learned from the company's full board, ${hqAssigned} pinned at a curated headquarters, ` +
+      `${remoteUnplaceable} left off the map (no resolved office, board office, or curated HQ for that company).`,
   );
 }
 

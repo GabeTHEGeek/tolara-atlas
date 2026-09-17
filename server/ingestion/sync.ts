@@ -146,6 +146,14 @@ async function main() {
       WHERE company_id = ? AND status = 'active' AND last_seen_at < datetime('now', '-1 day')
     `);
 
+    // Replaced wholesale per company on every sync -- see schema.sql's
+    // comment on company_board_locations for why this isn't incremental.
+    const deleteBoardLocations = db.prepare(`DELETE FROM company_board_locations WHERE company_id = ?`);
+    const insertBoardLocation = db.prepare(`
+      INSERT INTO company_board_locations (company_id, raw_location, posting_count)
+      VALUES (?, ?, ?)
+    `);
+
     const seenCompanySlugs = new Set<string>();
 
     for (const [platform, platformRows] of byPlatform) {
@@ -177,6 +185,17 @@ async function main() {
         jobsByBoard.set(job.board, list);
       }
 
+      // Same grouping, but over allJobs (every department, unfiltered) --
+      // this feeds geocode.ts's board-wide dominant-office fallback so a
+      // company with no resolved PM office can still be pinned from its
+      // other postings' real locations instead of vanishing off the map.
+      const allJobsByBoard = new Map<string, RawJob[]>();
+      for (const job of allJobs) {
+        const list = allJobsByBoard.get(job.board) ?? [];
+        list.push(job);
+        allJobsByBoard.set(job.board, list);
+      }
+
       for (const board of meta.boardsChecked) {
         const companyName = nameByToken.get(board) ?? board;
         const slug = slugify(companyName);
@@ -190,6 +209,22 @@ async function main() {
         if (!seenCompanySlugs.has(slug)) {
           seenCompanySlugs.add(slug);
           companiesSynced += 1;
+        }
+
+        // Tally raw location strings across the company's FULL board (all
+        // departments, from allJobsByBoard) -- not just its PM postings --
+        // and replace this company's company_board_locations rows with the
+        // fresh count. See schema.sql for why geocode.ts wants this.
+        const boardAllJobs = allJobsByBoard.get(board) ?? [];
+        const locationTally = new Map<string, number>();
+        for (const job of boardAllJobs) {
+          const loc = job.location?.trim();
+          if (!loc) continue;
+          locationTally.set(loc, (locationTally.get(loc) ?? 0) + 1);
+        }
+        deleteBoardLocations.run(companyId);
+        for (const [rawLocation, count] of locationTally) {
+          insertBoardLocation.run(companyId, rawLocation, count);
         }
 
         const boardJobs = jobsByBoard.get(board) ?? [];

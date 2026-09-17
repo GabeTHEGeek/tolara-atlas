@@ -117,6 +117,30 @@ CREATE TABLE IF NOT EXISTS role_locations (
 
 CREATE INDEX IF NOT EXISTS role_locations_role_idx ON role_locations(role_id);
 
+-- One row per (company, distinct raw location string) seen across that
+-- company's FULL ATS board on the most recent sync -- every department,
+-- not just the Product Manager postings stored in `roles`. sync.ts
+-- captures this from the unfiltered board fetch, before the PM title
+-- filter is applied, specifically so geocode.ts's remote-role fallback can
+-- learn a company's real office footprint from its whole hiring activity
+-- instead of just its 1-2 PM postings, which are often "Remote" with no
+-- resolvable office at all even when the company clearly has real offices
+-- (visible in its engineering/sales/support postings). posting_count is
+-- how many of the board's current postings use that exact raw string, so
+-- the fallback can weight a company's true office mix rather than treating
+-- a one-off mention the same as its main hub. Wiped and rewritten wholesale
+-- for a company on every sync run (not incremental) -- board composition
+-- changes daily, and a stale tally would skew the fallback toward
+-- yesterday's mix of openings.
+CREATE TABLE IF NOT EXISTS company_board_locations (
+  id             INTEGER PRIMARY KEY,
+  company_id     INTEGER NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
+  raw_location   TEXT NOT NULL,
+  posting_count  INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE INDEX IF NOT EXISTS company_board_locations_company_idx ON company_board_locations(company_id);
+
 -- Where a role's data literally came from (mostly redundant with roles.url,
 -- but keeps a per-fact source/timestamp trail if role enrichment ever pulls
 -- from more than the original posting).
