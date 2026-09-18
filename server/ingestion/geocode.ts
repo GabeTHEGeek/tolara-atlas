@@ -66,7 +66,7 @@
  */
 
 import { getDb } from "../db/client.js";
-import { extractAllCityStates, type ParsedLocation } from "./locationParser.js";
+import { extractAllCityStates, isExplicitlyNonUS, type ParsedLocation } from "./locationParser.js";
 
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/search";
 const USER_AGENT = "tolara-atlas/0.1 (portfolio project; contact: pendletongabriel@gmail.com)";
@@ -269,6 +269,7 @@ async function main() {
   let boardAssigned = 0;
   let hqAssigned = 0;
   let remoteUnplaceable = 0;
+  let nonUsExcluded = 0;
   // company_id -> its dominant office, or null if it has none (every one
   // of its OTHER roles is also unplaced) -- cached so a company with many
   // remote postings only costs one lookup query, not one per role.
@@ -282,6 +283,21 @@ async function main() {
   const hqCache = new Map<number, { city: string; state: string; lat: number; lon: number } | null>();
 
   for (const role of unplaced) {
+    // A role whose own location text couldn't be resolved to a US city
+    // falls into two very different buckets: genuinely ambiguous ("Remote",
+    // "United States", blank) -- a real US posting this fallback SHOULD pin
+    // at the company's US office -- versus explicitly naming a non-US place
+    // ("Paris Area, France", "Barcelona Area", "EMEA"). The two used to be
+    // treated identically, which meant a French or Spanish posting got
+    // silently pinned at the company's US office and shown as "remote" —
+    // wrong on a map that's specifically about US jobs. Those roles are
+    // left off the map entirely instead (no role_locations row at all), the
+    // same outcome as remoteUnplaceable below, just for a different reason.
+    if (isExplicitlyNonUS(role.location)) {
+      nonUsExcluded += 1;
+      continue;
+    }
+
     let dominant = dominantCache.get(role.company_id);
     if (dominant === undefined) {
       const row = dominantForCompany.get(role.company_id) as
@@ -370,7 +386,8 @@ async function main() {
   console.log(
     `Remote postings: ${remoteAssigned} pinned at their company's dominant PM office, ${boardAssigned} pinned at ` +
       `a dominant office learned from the company's full board, ${hqAssigned} pinned at a curated headquarters, ` +
-      `${remoteUnplaceable} left off the map (no resolved office, board office, or curated HQ for that company).`,
+      `${remoteUnplaceable} left off the map (no resolved office, board office, or curated HQ for that company), ` +
+      `${nonUsExcluded} excluded (posting explicitly names a non-US location).`,
   );
 }
 

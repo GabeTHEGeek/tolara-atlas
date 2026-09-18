@@ -67,6 +67,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import { getDb } from "../db/client.js";
+import { isExplicitlyNonUS } from "../ingestion/locationParser.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUTPUT_PATH = path.join(__dirname, "..", "..", "public", "data", "map-data.json");
@@ -325,11 +326,22 @@ function main() {
     posted_at: string | null;
   }>;
 
+  // geocode.ts's fallback tiers already exclude a role whose own location
+  // text explicitly names a non-US place (see isExplicitlyNonUS) from
+  // getting pinned at a US office -- but a role can still show up here from
+  // BEFORE that fix ran, if it was left with a stale role_locations row from
+  // the old behavior and hasn't been re-geocoded since, or from any other
+  // path that reaches this query. Filtering again here, right before the
+  // unmapped/"remote" panel is built, means a French or Spanish posting
+  // never gets shown to a US job-seeker mislabeled as "remote" even if the
+  // DB itself hasn't been fully cleaned up yet.
+  const usUnplacedRows = unplacedRows.filter((r) => !isExplicitlyNonUS(r.location));
+
   const remoteCompaniesByCompany = new Map<
     number,
     { companyId: number; companyName: string; companySlug: string; roles: RoleExport[] }
   >();
-  for (const row of unplacedRows) {
+  for (const row of usUnplacedRows) {
     const existing = remoteCompaniesByCompany.get(row.company_id);
     const roleExport: RoleExport = {
       id: row.id,
@@ -367,7 +379,7 @@ function main() {
   // adds 1 here even though it contributes to 3 pins' individual
   // roleCount. rows is one row per role_locations entry, so the same
   // role.id can repeat; dedupe by id for the headline total.
-  const roleCount = new Set(rows.map((r) => r.id)).size + unplacedRows.length;
+  const roleCount = new Set(rows.map((r) => r.id)).size + usUnplacedRows.length;
 
   mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   writeFileSync(
@@ -386,9 +398,11 @@ function main() {
     ),
   );
 
+  const nonUsFiltered = unplacedRows.length - usUnplacedRows.length;
   console.log(
     `Exported ${pins.length} pins across ${companyCount} companies / ${roleCount} roles to ${OUTPUT_PATH} ` +
-      `(${remoteCompanies.length} companies / ${unplacedRows.length} roles with no resolvable location, shown unmapped).`,
+      `(${remoteCompanies.length} companies / ${usUnplacedRows.length} roles with no resolvable location, shown unmapped` +
+      (nonUsFiltered > 0 ? `; ${nonUsFiltered} additional roles excluded as explicitly non-US)` : ")"),
   );
 }
 

@@ -95,6 +95,58 @@ const KNOWN_CITIES: Record<string, { city: string; state: string }> = {
   pittsburgh: { city: "Pittsburgh", state: "PA" },
 };
 
+// Explicit non-US signals, checked against the RAW (unstripped) location
+// string. A location with no resolvable US city/state pair falls into one
+// of two very different buckets: genuinely ambiguous ("Remote", "United
+// States", blank) — a real US-based posting geocode.ts's remote/HQ fallback
+// SHOULD pin at the company's US office — versus explicitly naming a
+// non-US place ("Paris Area, France", "Barcelona Area", "EMEA") — a
+// posting for a role that isn't US-based at all, which that same fallback
+// was wrongly treating identically, pinning French/Spanish/etc. roles at
+// a US office and mislabeling them "remote" on a US jobs map. This list
+// lets the fallback tell the two apart and leave the second group off the
+// map entirely instead of guessing a US city for them.
+//
+// Deliberately NOT exhaustive -- covers the countries/regions/hub cities
+// most common in ATS postings for companies that also hire in the US.
+// Missing a rarer one just means that particular non-US role falls back to
+// "ambiguous" and gets pinned at a US office (the old behavior); that's a
+// false negative, not a false positive, so it's the safer direction to
+// under-cover in.
+const NON_US_COUNTRIES = [
+  "france", "spain", "germany", "italy", "portugal", "netherlands", "belgium", "switzerland",
+  "austria", "poland", "ireland", "sweden", "norway", "denmark", "finland", "iceland",
+  "united kingdom", "scotland", "wales", "northern ireland",
+  "india", "singapore", "japan", "china", "hong kong", "taiwan", "australia", "new zealand",
+  "canada", "mexico", "brazil", "argentina", "chile", "colombia", "peru", "uruguay",
+  "south africa", "israel", "united arab emirates", "philippines", "vietnam", "indonesia",
+  "malaysia", "thailand", "south korea", "pakistan", "bangladesh", "saudi arabia", "qatar",
+  "romania", "ukraine", "czech republic", "czechia", "hungary", "greece", "turkey", "egypt",
+  "nigeria", "kenya", "luxembourg", "estonia", "latvia", "lithuania", "croatia", "serbia", "bulgaria",
+];
+const NON_US_REGIONS = ["emea", "apac", "latam", "uk & ireland", "uk&i", "nordics", "benelux"];
+const NON_US_CITIES = [
+  "paris", "barcelona", "madrid", "berlin", "munich", "hamburg", "frankfurt", "amsterdam", "rotterdam",
+  "dublin", "london", "manchester", "edinburgh", "toronto", "vancouver", "montreal", "ottawa",
+  "sydney", "melbourne", "brisbane", "auckland", "wellington", "tokyo", "osaka",
+  "bangalore", "bengaluru", "mumbai", "delhi", "hyderabad", "pune", "chennai", "gurgaon", "gurugram",
+  "tel aviv", "warsaw", "krakow", "prague", "lisbon", "porto", "milan", "rome", "turin",
+  "stockholm", "copenhagen", "oslo", "helsinki", "zurich", "geneva", "basel", "vienna", "brussels",
+  "sao paulo", "são paulo", "mexico city", "bogota", "bogotá", "buenos aires", "santiago", "lima",
+  "cape town", "johannesburg", "nairobi", "lagos", "dubai", "abu dhabi", "seoul", "shanghai",
+  "beijing", "shenzhen", "kuala lumpur", "jakarta", "manila", "bangkok", "ho chi minh",
+];
+const NON_US_PATTERN = new RegExp(
+  `\\b(?:${[...NON_US_COUNTRIES, ...NON_US_REGIONS, ...NON_US_CITIES].join("|")})\\b`,
+  "i",
+);
+
+/** True when a raw location string explicitly names a non-US place — see NON_US_PATTERN's comment. */
+export function isExplicitlyNonUS(raw: string | null | undefined): boolean {
+  if (!raw) return false;
+  return NON_US_PATTERN.test(raw);
+}
+
 function isPlausibleCity(city: string): boolean {
   if (city.length < 2) return false;
   if (/remote|global|anywhere|worldwide|hybrid/i.test(city)) return false;
