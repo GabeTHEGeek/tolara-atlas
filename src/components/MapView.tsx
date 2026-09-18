@@ -18,6 +18,37 @@ const FALLBACK_VIEW = { center: [-98.5, 39.5] as [number, number], zoom: 3.4 };
 // fade in above each pin.
 const PIN_LABEL_MIN_ZOOM = 7;
 
+// The classic MapLibre/Mapbox "marching ants" dash sequence: each entry is
+// a line-dasharray that's slightly further along than the last, so cycling
+// through them on a timer reads as a dash animating along the line rather
+// than a static pattern. Half of the sequence is the dash growing from a
+// point into a full dash (indices 0-6), the other half is that same dash
+// sliding along the line (7-19) -- stepping through both halves in order
+// gives one full, seamless loop.
+const DASH_SEQUENCE: number[][] = [
+  [0, 4, 3],
+  [0.5, 4, 2.5],
+  [1, 4, 2],
+  [1.5, 4, 1.5],
+  [2, 4, 1],
+  [2.5, 4, 0.5],
+  [3, 4, 0],
+  [0, 0.3, 3, 3.7],
+  [0, 0.6, 3, 3.4],
+  [0, 0.9, 3, 3.1],
+  [0, 1.2, 3, 2.8],
+  [0, 1.5, 3, 2.5],
+  [0, 1.8, 3, 2.2],
+  [0, 2.1, 3, 1.9],
+  [0, 2.4, 3, 1.6],
+  [0, 2.7, 3, 1.3],
+  [0, 3, 3, 1],
+  [0, 3.3, 3, 0.7],
+  [0, 3.6, 3, 0.4],
+  [0, 3.9, 3, 0.1],
+];
+const DASH_STEP_MS = 40; // ~25fps -- smooth enough for a slow "marching" read, cheap enough to run indefinitely
+
 interface MapViewProps {
   pins: LocationPinData[];
   onSelectPin: (pin: LocationPinData) => void;
@@ -34,6 +65,39 @@ function pinsToGeoJSON(pins: LocationPinData[]): GeoJSON.FeatureCollection<GeoJS
   };
 }
 
+const EMPTY_LINES: GeoJSON.FeatureCollection<GeoJSON.LineString> = { type: "FeatureCollection", features: [] };
+
+/**
+ * One line per OTHER office of the same company, radiating out from
+ * `originId`'s pin -- not a fully-connected mesh between every pair, which
+ * would double-draw edges and get messy past 3 offices. A company with
+ * only one pin (no other office to connect to) produces no lines.
+ */
+function officeLinksFromPin(
+  allPins: LocationPinData[],
+  originId: string,
+): GeoJSON.FeatureCollection<GeoJSON.LineString> {
+  const origin = allPins.find((p) => p.id === originId);
+  if (!origin) return EMPTY_LINES;
+  const siblings = allPins.filter((p) => p.companyId === origin.companyId && p.id !== origin.id);
+  if (siblings.length === 0) return EMPTY_LINES;
+
+  return {
+    type: "FeatureCollection",
+    features: siblings.map((s) => ({
+      type: "Feature",
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [origin.longitude, origin.latitude],
+          [s.longitude, s.latitude],
+        ],
+      },
+      properties: {},
+    })),
+  };
+}
+
 export default function MapView({ pins, onSelectPin }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -46,6 +110,11 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
   // arrive — otherwise every re-render (e.g. after a click) would yank
   // the view back to "fit everything."
   const hasFitBoundsRef = useRef(false);
+  // Drives the marching-ants animation on the office-links layer. Only
+  // running while a multi-office company is actually hovered (started in
+  // mouseenter, cancelled in mouseleave below) rather than continuously --
+  // no point animating an invisible, empty-data layer.
+  const dashAnimFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     pinsByIdRef.current = new Map(pins.map((p) => [p.id, p]));
@@ -87,6 +156,25 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
       map.addSource("pins", {
         type: "geojson",
         data: pinsToGeoJSON(pinsByIdRef.current.size ? [...pinsByIdRef.current.values()] : []),
+      });
+
+      // Connector lines between a hovered pin and its company's OTHER
+      // offices -- empty until a multi-office company is hovered (see the
+      // mouseenter/mouseleave handlers below). Added, and drawn, before
+      // "pins-layer" so the lines sit under the pin circles instead of
+      // covering them.
+      map.addSource("office-links", { type: "geojson", data: EMPTY_LINES });
+      map.addLayer({
+        id: "office-links-layer",
+        type: "line",
+        source: "office-links",
+        layout: { "line-cap": "round" },
+        paint: {
+          "line-color": "#E8543E",
+          "line-width": 2,
+          "line-opacity": 0.75,
+          "line-dasharray": DASH_SEQUENCE[0],
+        },
       });
 
       map.addLayer({
@@ -149,14 +237,48 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
           ?.setLngLat(coords)
           .setHTML(`<strong>${escapeHtml(name)}</strong><br/>${label}`)
           .addTo(map);
+
+        const id = feature.properties?.id;
+        if (id == null) return;
+        const linksSource = map.getSource("office-links") as GeoJSONSource | undefined;
+        const links = officeLinksFromPin([...pinsByIdRef.current.values()], String(id));
+        linksSource?.setData(links);
+        if (links.features.length > 0) startDashAnimation(map);
       });
       map.on("mouseleave", "pins-layer", () => {
         map.getCanvas().style.cursor = "";
         hoverPopupRef.current?.remove();
+        stopDashAnimation();
+        (map.getSource("office-links") as GeoJSONSource | undefined)?.setData(EMPTY_LINES);
       });
+
+      function startDashAnimation(mapInstance: maplibregl.Map) {
+        if (dashAnimFrameRef.current != null) return; // already running
+        let step = 0;
+        let lastTick = 0;
+        const tick = (now: number) => {
+          if (now - lastTick >= DASH_STEP_MS) {
+            lastTick = now;
+            step = (step + 1) % DASH_SEQUENCE.length;
+            mapInstance.setPaintProperty("office-links-layer", "line-dasharray", DASH_SEQUENCE[step]);
+          }
+          dashAnimFrameRef.current = requestAnimationFrame(tick);
+        };
+        dashAnimFrameRef.current = requestAnimationFrame(tick);
+      }
+      function stopDashAnimation() {
+        if (dashAnimFrameRef.current != null) {
+          cancelAnimationFrame(dashAnimFrameRef.current);
+          dashAnimFrameRef.current = null;
+        }
+      }
     });
 
     return () => {
+      if (dashAnimFrameRef.current != null) {
+        cancelAnimationFrame(dashAnimFrameRef.current);
+        dashAnimFrameRef.current = null;
+      }
       hoverPopupRef.current?.remove();
       map.remove();
       mapRef.current = null;
