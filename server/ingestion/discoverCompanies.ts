@@ -5,17 +5,18 @@
  * a time. sync.ts only ever checks companies ALREADY in companies.csv --
  * this is what actually grows that list.
  *
- * data/discovery/{greenhouse,ashby,lever}_tokens.json are plain arrays of
- * board-token strings pulled from github.com/Feashliaa/job-board-aggregator
- * (data/ licensed CC BY-NC 4.0 -- non-commercial use only; fine for this
- * portfolio project, but revisit before ever monetizing Tolara Scout). They
- * carry no company display names or confirmation that a token is even
- * live -- just candidate slugs scraped from Common Crawl by that project.
+ * data/discovery/{greenhouse,ashby,lever,bamboohr}_tokens.json are plain
+ * arrays of board-token strings pulled from
+ * github.com/Feashliaa/job-board-aggregator (data/ licensed CC BY-NC 4.0 --
+ * non-commercial use only; fine for this portfolio project, but revisit
+ * before ever monetizing Tolara Scout). They carry no company display names
+ * or confirmation that a token is even live -- just candidate slugs scraped
+ * from Common Crawl by that project.
  *
  * For each candidate token NOT already in companies.csv, this hits the
  * same live ATS APIs sync.ts uses (via the same searchGreenhouse/
- * searchAshby/searchLever adapters, so retry/timeout/failed-vs-empty
- * handling is identical) and keeps only the ones that are both (a) a real,
+ * searchAshby/searchLever/searchBambooHr adapters, so retry/timeout/failed-
+ * vs-empty handling is identical) and keeps only the ones that are both (a) a real,
  * responding board and (b) currently have at least one Product-Manager-
  * classified posting on it right now -- companies.csv is meant to be a
  * verified, currently-relevant list, not 15,000 unconfirmed slugs. A
@@ -46,6 +47,7 @@ import { parseCompaniesCsv } from "./csv.js";
 import { searchGreenhouse } from "./sources/greenhouse.js";
 import { searchAshby } from "./sources/ashby.js";
 import { searchLever } from "./sources/lever.js";
+import { searchBambooHr } from "./sources/bamboohr.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
@@ -58,7 +60,7 @@ const DISCOVERY_DIR = path.join(__dirname, "..", "..", "data", "discovery");
 const BATCH_SIZE = 25;
 const PAUSE_BETWEEN_BATCHES_MS = 300;
 
-type Platform = "greenhouse" | "ashby" | "lever";
+type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr";
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -85,6 +87,8 @@ async function fetchPlatform(
       return searchAshby("", options);
     case "lever":
       return searchLever("", options);
+    case "bamboohr":
+      return searchBambooHr("", options);
   }
 }
 
@@ -94,7 +98,7 @@ async function main() {
 
   const existingKeys = new Set(existingRows.map((r) => `${r.platform}:${r.token.toLowerCase()}`));
 
-  const platforms: Platform[] = ["greenhouse", "ashby", "lever"];
+  const platforms: Platform[] = ["greenhouse", "ashby", "lever", "bamboohr"];
 
   let totalCandidates = 0;
   let totalAlreadyKnown = 0;

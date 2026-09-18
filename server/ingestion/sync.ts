@@ -19,6 +19,7 @@ import { parseCompaniesCsv, type CompanyRow } from "./csv.js";
 import { searchGreenhouse } from "./sources/greenhouse.js";
 import { searchAshby } from "./sources/ashby.js";
 import { searchLever } from "./sources/lever.js";
+import { searchBambooHr } from "./sources/bamboohr.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
@@ -61,7 +62,7 @@ function parseSalary(salary: string): { min: number | null; max: number | null; 
  * changes what the next sync stores without touching these adapters.
  */
 async function fetchPlatform(
-  platform: "greenhouse" | "ashby" | "lever",
+  platform: "greenhouse" | "ashby" | "lever" | "bamboohr",
   boards: string[],
 ): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
   const options = { boards, limit: PER_BOARD_LIMIT };
@@ -72,6 +73,8 @@ async function fetchPlatform(
       return searchAshby("", options);
     case "lever":
       return searchLever("", options);
+    case "bamboohr":
+      return searchBambooHr("", options);
   }
 }
 
@@ -80,7 +83,7 @@ async function main() {
 
   const csvText = readFileSync(COMPANIES_CSV_PATH, "utf-8");
   const rows = parseCompaniesCsv(csvText).filter(
-    (r) => r.status === "verified" && ["greenhouse", "ashby", "lever"].includes(r.platform),
+    (r) => r.status === "verified" && ["greenhouse", "ashby", "lever", "bamboohr"].includes(r.platform),
   );
 
   const byPlatform = new Map<string, CompanyRow[]>();
@@ -160,7 +163,7 @@ async function main() {
       const boards = platformRows.map((r) => r.token);
       const nameByToken = new Map(platformRows.map((r) => [r.token, r.company]));
 
-      const { jobs: allJobs, meta } = await fetchPlatform(platform as "greenhouse" | "ashby" | "lever", boards);
+      const { jobs: allJobs, meta } = await fetchPlatform(platform as "greenhouse" | "ashby" | "lever" | "bamboohr", boards);
       const jobs = allJobs.filter((job) => matchesProductManagerFilter(job.title));
       // "checked" = boards that actually returned data, whether or not that
       // data included any postings. "failed" is now only boards whose fetch
