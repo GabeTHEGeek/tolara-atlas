@@ -30,6 +30,9 @@ jobs:
       - name: Run sync
         run: npm run sync
 
+      - name: Geocode newly-synced roles
+        run: npm run geocode
+
       - name: Export map data for the frontend
         run: npm run export
 
