@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-18T07:35:14.520Z",
-  "companyCount": 548,
-  "pinCount": 566,
-  "roleCount": 1483,
+  "generatedAt": "2026-09-18T08:00:21.298Z",
+  "companyCount": 549,
+  "pinCount": 568,
+  "roleCount": 1548,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -25,6 +25,41 @@
           "url": "https://assetmark.wd5.myworkdayjobs.com/assetmark_careers/job/Charlotte-NC/Product-Manager_Req-003969",
           "postedAt": "Posted Yesterday",
           "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1046-san-jose-ca",
+      "companyId": 1046,
+      "companyName": "Cloudera|wd5|external Career",
+      "companySlug": "cloudera-wd5-external-career",
+      "city": "San Jose",
+      "state": "CA",
+      "latitude": 37.34147846236221,
+      "longitude": -121.89756340458742,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 1974,
+          "title": "Senior Manager | Product Management - Cloudera Data Platform - Hybrid Cloud",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://cloudera.wd5.myworkdayjobs.com/external_career/job/US-California-San-Jose/Senior-Manager---Product-Management---Cloudera-Data-Platform---Hybrid-Cloud_261174-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 1975,
+          "title": "Senior Product Manager - Unified Data Fabric",
+          "location": "US-California-San Jose",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://cloudera.wd5.myworkdayjobs.com/external_career/job/US-California-San-Jose/Senior-Product-Manager---Unified-Data-Fabric_261180-2",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
         }
       ]
     },
@@ -208,6 +243,734 @@
           "salaryCurrency": null,
           "url": "https://texascapitalbank.wd12.myworkdayjobs.com/careers/job/Austin-TX/Marketing-Technologies-Product-Manager_JR105434",
           "postedAt": "Posted Yesterday",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1094-plano-tx",
+      "companyId": 1094,
+      "companyName": "Capital One",
+      "companySlug": "capital-one",
+      "city": "Plano",
+      "state": "TX",
+      "latitude": 33.0136764,
+      "longitude": -96.6925096,
+      "roleCount": 65,
+      "roles": [
+        {
+          "id": 2066,
+          "title": "Director, Product Management - Enterprise Services & Supplier Product, Risk & Operations",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Director--Product-Management---Enterprise-Services---Supplier-Product--Risk---Operations_R1000966-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 2067,
+          "title": "Senior Director, Product Management - Enterprise Services & Supplier Product, Risk & Operations",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Director--Product-Management---Enterprise-Services---Supplier-Product--Risk---Operations_R1000967-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 2068,
+          "title": "Manager, Product Management- Credit Card Posted Transactions Data Product",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Management--Credit-Card-Posted-Transactions-Data-Product_R246373-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 2069,
+          "title": "Senior Associate, Product Management- Card Core",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate--Product-Management--Card-Core_R1000950-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 2070,
+          "title": "Senior Associate, Product Manager-Small Business Bank",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate--Product-Manager-Money-Movement_R246422-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 2071,
+          "title": "Senior Manager, Product Manager, Customer Restrictions-Product Manager",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Manager--Customer-Restrictions-Product-Manager_R1000873-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 2072,
+          "title": "Senior Manager, Product Management - Enterprise Data",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Management---Enterprise-Data_R246328-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 2073,
+          "title": "Senior Director, Product Management- Customer Contactability",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Director--Product-Management--Customer-Contactability_R249099-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 2118,
+          "title": "Manager, Product Management, Card Intelligence",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management--Card-Intelligence_R249851-2",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2119,
+          "title": "Product Manager - Mainstreet Card",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Product-Manager---Mainstreet-Card-Team_R246380-1",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2120,
+          "title": "Senior Associate, Product Management",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Management_R246509",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2121,
+          "title": "Manager, Product Manager - Enterprise Payments - Core Platform",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Manager---Enterprise-Payments---Core-Platform_R246402-1",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2122,
+          "title": "Manager, Product Manager - Case Servicing",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Manager---Case-Servicing_R247126-1",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2123,
+          "title": "Senior Associate, Debit Platform Data Product Manager",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Senior-Associate--Debit-Platform-Data-Product-Manager_R246642-1",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2124,
+          "title": "Manager, Product Management- Credit Card Data Team",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management--Credit-Card-Data-Team_R1000257-1",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2125,
+          "title": "Senior Associate, Product Manager - Card Partnerships",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management---Card-Partnerships-Team_R246370-1",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2126,
+          "title": "Senior Associate, Product Management - Card Integration Team",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Management---Card-Integration-Team_R246797-1",
+          "postedAt": "Posted 9 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2102,
+          "title": "Senior Associate, Product Management - Partnerships Customer Experience",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management---Partnerships-Customer-Experience_R249003-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2103,
+          "title": "Senior Associate, Product Management - Card Offer Experiences",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management---Card-Offer-Experiences_R249849-2",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2104,
+          "title": "Manager, Product Management - Office of Corporate Integrity",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Management---Office-of-Corporate-Integrity_R1000434-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2105,
+          "title": "Senior Associate, Product Manager - Conversions",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management---Partnerships-Conversions_R248361-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2106,
+          "title": "Senior Director, Product Management- Global Payment Network",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Director--Product-Management--Global-Payment-Network_R1000410-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2107,
+          "title": "Manager, Product Management - CreditWise",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management---CreditWise_R1000243",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2108,
+          "title": "Senior Associate, Product Manager - CreditWise",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Manager---CreditWise_R1000403-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2109,
+          "title": "Senior Associate, Product Management | Capital One Travel - Agent Tooling",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate--Product-Management---Capital-One-Travel---Agent-Tooling_R1000265",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2111,
+          "title": "Senior Associate, Product Manager-Small Business Bank",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate--Product-Manager-Small-Business-Bank_R246423-2",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2112,
+          "title": "Senior Manager, Product Manager, Customer Data",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Manager--Customer-Data_R1000372-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2113,
+          "title": "Manager, Product Management, Credit Card Offers",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management--Credit-Card-Offers_R1000146-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2114,
+          "title": "Senior Associate, Product Management, Card Acquisitions Decisioning",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management--Card-Acquisitions-Decisioning_R999726-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2115,
+          "title": "Director of Product Management, Capital One Travel",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Director-of-Product-Management--Capital-One-Travel_R1000366-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2116,
+          "title": "Manager, Product Management- Bedrock Payments Team",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management--Bedrock-Payments-Team_R999632-1",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2117,
+          "title": "Senior Digital Product Manager",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Nottingham--Eng/Senior-Digital-Product-Manager_R231301-2",
+          "postedAt": "Posted 8 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2096,
+          "title": "Cyber Product Lead",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Cyber-Product-Lead_R1000556-1",
+          "postedAt": "Posted 7 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2097,
+          "title": "Senior Associate, Product Manager - Trade Credit Settlements",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate--Product-Management---Trade-Credit-Customer-Experience_R247585-1",
+          "postedAt": "Posted 7 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2098,
+          "title": "Senior Associate, Product Manager - Data Modernization",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management---Partnerships-Data-Modernization_R247066-1",
+          "postedAt": "Posted 7 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2099,
+          "title": "Sr. Associate, Product Management - Auto",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Plano-TX/Sr-Associate--Product-Management---Auto_R247626-2",
+          "postedAt": "Posted 7 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2100,
+          "title": "Manager, Product Management - Data",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management---Data_R1000452-1",
+          "postedAt": "Posted 7 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2101,
+          "title": "Senior Manager, Product Management - Enterprise Services Risk",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Management---Enterprise-Services-Risk_R1000450-1",
+          "postedAt": "Posted 7 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2094,
+          "title": "Manager, Product Manager- Move & Manage Decisioning",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Manager--Move---Manage-Decisioning_R249580-1",
+          "postedAt": "Posted 6 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2095,
+          "title": "Manager, Product Manager-Small Business Bank Digital Servicing",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Manager-Small-Business-Bank-Digital-Servicing_R246759-1",
+          "postedAt": "Posted 6 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2089,
+          "title": "Manager, Product Management - Enterprise Data",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management---Enterprise-Data_R246324-1",
+          "postedAt": "Posted 4 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2090,
+          "title": "Manager, Product Manager - Incentive Core Platform",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Manager---Incentive-Platform_R246607-1",
+          "postedAt": "Posted 4 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2091,
+          "title": "Senior Manager, Product Manager - Bank Marketing Adtech",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Manager---Bank-Marketing-Adtech_R248321-1",
+          "postedAt": "Posted 4 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2092,
+          "title": "Senior Manager, Product Manager - Controls & Process Automation",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Manager---Controls---Process-Automation_R249356",
+          "postedAt": "Posted 4 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2093,
+          "title": "Manager, Product Manager-Small Business Bank",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Manager-Small-Business-Bank_R1000555-1",
+          "postedAt": "Posted 4 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2080,
+          "title": "Senior Associate, Product Manager, Small Business Bank Fraud Decisioning",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Manager--Small-Business-Bank-Fraud-Decisioning_R247523-1",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2081,
+          "title": "Sr Associate, Product Management - PULSE",
+          "location": "6 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Houston-TX/Sr-Associate--Product-Management---PULSE_R248860-1",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2082,
+          "title": "Senior Associate Product Manager, Enterprise Payments",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate-Product-Manager--Enterprise-Payments_R999381-1",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2083,
+          "title": "Manager, Product Management - CreditWise",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management---CreditWise_R1000715",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2084,
+          "title": "Sr Manager, Product Management - Core HR",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Sr-Manager--Product-Management---Core-HR_R247485-2",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2085,
+          "title": "Senior Manager, Product Manager- Risk Management, Compliance and Ethics",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Manager--Product-Manager--Risk-Management--Compliance-and-Ethics_R1000719-1",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2086,
+          "title": "Manager, Product Manager, Audit Insights & Innovation, AI and Data Engineering",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Manager--Audit-Insights---Innovation--AI-and-Data-Engineering_R1000725-2",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2087,
+          "title": "Manager, Product Manager - Retail Bank Account Opening, Web Platform",
+          "location": "5 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Manager---Retail-Bank-Account-Opening--Web-Platform_R1000358-1",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2088,
+          "title": "Director, Product Management - Capital One Business Travel",
+          "location": "2 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Director--Product-Management---Capital-One-Business-Travel_R247535-1",
+          "postedAt": "Posted 3 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2074,
+          "title": "Senior Associate, Product Management - Customer Resiliency, Payments and Offers Capabilities",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Management---Customer-Resiliency--Payments-and-Offers-Capabilities_R1000868-2",
+          "postedAt": "Posted 2 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2075,
+          "title": "Manager, Product Management, Card Data",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management--Card-Data_R1000854-1",
+          "postedAt": "Posted 2 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2076,
+          "title": "Senior Associate, Product Management - Applied AI Servicing",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate--Product-Management---Servicing_R247003-1",
+          "postedAt": "Posted 2 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2077,
+          "title": "Sr Associate, Product Manager",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Sr-Associate--Product-Manager_R1000612-1",
+          "postedAt": "Posted 2 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2078,
+          "title": "Manager, Product Management - Personal Loans Application Fraud Decisioning",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management---Personal-Loans-Application-Fraud-Decisioning_R246844",
+          "postedAt": "Posted 2 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2079,
+          "title": "Manager, Product Management - Card Customer Resiliency: Recoveries Offers Delivery",
+          "location": "4 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management---Card-Customer-Resiliency--Delinquency-Offers_R246405-1",
+          "postedAt": "Posted 2 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2127,
+          "title": "Senior Associate, Product Management - Commercial Lending",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Management---Commercial-Lending_R1000185-2",
+          "postedAt": "Posted 10 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2128,
+          "title": "Senior Associate, Product Manager - Business Cards & Payments",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Manager---Business-Cards---Payments_R1000193-1",
+          "postedAt": "Posted 10 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2129,
+          "title": "Manager, Product Management - Business Cards & Payments",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management---Business-Cards---Payments_R1000202-1",
+          "postedAt": "Posted 10 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2130,
+          "title": "Senior Manager, Product Management - Business Cards & Payments",
+          "location": "3 Locations",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Management---Business-Cards---Payments_R246490-1",
+          "postedAt": "Posted 10 Days Ago",
+          "isRemote": true
+        },
+        {
+          "id": 2131,
+          "title": "Manager, Product Management - Auto",
+          "location": "Plano, TX",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Plano-TX/Manager--Product-Management---Auto_R1000196-1",
+          "postedAt": "Posted 10 Days Ago",
           "isRemote": false
         }
       ]
@@ -24741,36 +25504,6 @@
         }
       ],
       "roleCount": 1
-    },
-    {
-      "companyId": 1046,
-      "companyName": "Cloudera|wd5|external Career",
-      "companySlug": "cloudera-wd5-external-career",
-      "roles": [
-        {
-          "id": 1974,
-          "title": "Senior Manager | Product Management - Cloudera Data Platform - Hybrid Cloud",
-          "location": "2 Locations",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://cloudera.wd5.myworkdayjobs.com/external_career/job/US-California-San-Jose/Senior-Manager---Product-Management---Cloudera-Data-Platform---Hybrid-Cloud_261174-1",
-          "postedAt": "Posted Yesterday",
-          "isRemote": true
-        },
-        {
-          "id": 1975,
-          "title": "Senior Product Manager - Unified Data Fabric",
-          "location": "US-California-San Jose",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://cloudera.wd5.myworkdayjobs.com/external_career/job/US-California-San-Jose/Senior-Product-Manager---Unified-Data-Fabric_261180-2",
-          "postedAt": "Posted Yesterday",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 2
     },
     {
       "companyId": 302,
