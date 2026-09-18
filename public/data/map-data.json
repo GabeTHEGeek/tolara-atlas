@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-18T08:16:29.885Z",
-  "companyCount": 548,
-  "pinCount": 580,
-  "roleCount": 1544,
+  "generatedAt": "2026-09-18T08:40:45.035Z",
+  "companyCount": 549,
+  "pinCount": 581,
+  "roleCount": 1548,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -1209,6 +1209,63 @@
           "salaryCurrency": null,
           "url": "https://peak6group.wd1.myworkdayjobs.com/apexfintechsolutions/job/Dallas-TX/Product-Manager-I_JR105044",
           "postedAt": "Posted 23 Days Ago",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1095-san-francisco-ca",
+      "companyId": 1095,
+      "companyName": "Turo",
+      "companySlug": "turo",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.799735861326546,
+      "longitude": -122.41545353617228,
+      "roleCount": 4,
+      "roles": [
+        {
+          "id": 2135,
+          "title": "Director of Product Management, Pricing",
+          "location": "San Francisco",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://turo.wd12.myworkdayjobs.com/turo_careers/job/San-Francisco/Director-of-Product-Management--Pricing_R-102646",
+          "postedAt": "Posted 30+ Days Ago",
+          "isRemote": false
+        },
+        {
+          "id": 2133,
+          "title": "Lead Product Manager, Host",
+          "location": "San Francisco",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://turo.wd12.myworkdayjobs.com/turo_careers/job/San-Francisco/Lead-Product-Manager--Host_R-102683",
+          "postedAt": "Posted 30 Days Ago",
+          "isRemote": false
+        },
+        {
+          "id": 2134,
+          "title": "Lead Product Manager, Guest – Discovery & Search",
+          "location": "San Francisco",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://turo.wd12.myworkdayjobs.com/turo_careers/job/San-Francisco/Lead-Product-Manager--Guest-Growth_R-102630",
+          "postedAt": "Posted 30 Days Ago",
+          "isRemote": false
+        },
+        {
+          "id": 2132,
+          "title": "Senior Product Manager,  Discovery & Search",
+          "location": "San Francisco",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://turo.wd12.myworkdayjobs.com/turo_careers/job/San-Francisco/Senior-Product-Manager---Discovery---Search_R-102685",
+          "postedAt": "Posted 24 Days Ago",
           "isRemote": false
         }
       ]
@@ -24377,11 +24434,11 @@
       "roles": [
         {
           "id": 1867,
-          "title": "AI Product Manager",
+          "title": "Founding Product Manager, AI Lab",
           "location": "United States",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
+          "salaryMin": 160000,
+          "salaryMax": 240000,
+          "salaryCurrency": "USD",
           "url": "https://jobs.lever.co/airslate/5e6dec30-136f-4d26-91f4-ff2ac33ea167",
           "postedAt": "1783954170591",
           "isRemote": true
