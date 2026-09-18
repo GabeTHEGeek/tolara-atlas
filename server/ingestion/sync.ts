@@ -43,8 +43,17 @@ function slugify(name: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+// `location` is included alongside title/description/salary so an adapter
+// improvement that changes what location text a role reports (e.g.
+// workday.ts's locationFromExternalPath fix) is picked up as a real change
+// on the next sync instead of being silently invisible -- content_hash
+// staying the same means updateRole never runs and the role's stale
+// location/geocoding sits there forever. See updateRole below for the
+// other half of this: a changed hash also needs to clear geocoded_at so
+// geocode.ts actually re-resolves it rather than skipping an already-
+// geocoded role.
 function contentHash(job: RawJob): string {
-  return createHash("sha256").update(`${job.title}\n${job.description}\n${job.salary}`).digest("hex");
+  return createHash("sha256").update(`${job.title}\n${job.description}\n${job.salary}\n${job.location}`).digest("hex");
 }
 
 function parseSalary(salary: string): { min: number | null; max: number | null; currency: string | null } {
@@ -145,12 +154,20 @@ async function main() {
     const touchRole = db.prepare(`
       UPDATE roles SET last_seen_at = datetime('now'), status = 'active' WHERE id = ?
     `);
+    // Resets geocoded_at/resolved_city/resolved_state/latitude/longitude to
+    // NULL whenever content_hash actually changed -- that's the ONLY thing
+    // that makes geocode.ts (which only looks at roles WHERE geocoded_at IS
+    // NULL) re-resolve a role whose location text changed since the last
+    // sync, rather than leaving it pointed at a now-stale city forever. The
+    // role's role_locations rows are separately cleared and rebuilt by
+    // geocode.ts itself once it reprocesses the role.
     const updateRole = db.prepare(`
       UPDATE roles SET
         title = @title, description = @description, location = @location,
         salary_min = @salaryMin, salary_max = @salaryMax, salary_currency = @salaryCurrency,
         category = @category, url = @url, posted_at = @postedAt,
-        content_hash = @contentHash, last_seen_at = datetime('now'), status = 'active'
+        content_hash = @contentHash, last_seen_at = datetime('now'), status = 'active',
+        geocoded_at = NULL, resolved_city = NULL, resolved_state = NULL, latitude = NULL, longitude = NULL
       WHERE id = @id
     `);
     const closeStaleRoles = db.prepare(`
