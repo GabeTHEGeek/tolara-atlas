@@ -70,6 +70,12 @@ function isLocationCountPlaceholder(text: string): boolean {
  * "/job/Toronto-ON/..." -> "Toronto, ON" (non-US; left for the shared
  * locationParser's own city/state and non-US-name matching to sort out
  * downstream, same as any other raw location string this project stores)
+ * "/job/Boston/Head-of-Product..." -> "Boston" (some tenants -- confirmed
+ * on Roche's board -- omit the state suffix entirely for a single-office
+ * segment; passed through bare rather than dropped, since the shared
+ * parser's own known-US-city table resolves plenty of these unambiguously
+ * (Boston -> MA) while still safely leaving a genuinely ambiguous or
+ * non-US bare name unresolved rather than guessing)
  *
  * Workday's externalPath always leads with the posting's PRIMARY office as
  * a hyphen-joined "City-Name-ST"-shaped segment -- confirmed live against
@@ -87,7 +93,8 @@ function locationFromExternalPath(externalPath: string): string {
   const segment = externalPath.match(/^\/job\/([^/]+)\//)?.[1];
   if (!segment) return "";
   const parts = segment.split("-").filter(Boolean);
-  if (parts.length < 2) return "";
+  if (parts.length === 0) return "";
+  if (parts.length === 1) return parts[0]; // no state suffix in the slug -- pass the bare name through, see header
   const state = parts[parts.length - 1];
   const city = parts.slice(0, -1).join(" ");
   return city ? `${city}, ${state}` : "";
