@@ -201,6 +201,24 @@ function parseUsDashFormat(raw: string): ParsedLocation | null {
   return null;
 }
 
+/**
+ * "US-California-San Jose" -> { city: "San Jose", state: "CA" }
+ * Same shape as parseUsDashFormat, but some Workday tenants (confirmed on
+ * Cloudera's board) spell the middle segment out as the full state name
+ * instead of the two-letter abbreviation. State names never contain a
+ * dash themselves, so a non-greedy match up to the NEXT "-" safely finds
+ * the state/city boundary even when the city portion has one of its own
+ * ("US-North Carolina-Winston-Salem").
+ */
+function parseUsDashFullStateFormat(raw: string): ParsedLocation | null {
+  const match = raw.trim().match(/^US-([A-Za-z][A-Za-z ]+?)-(.+)$/);
+  if (!match) return null;
+  const state = US_STATE_NAMES[match[1].trim().toLowerCase()];
+  const city = match[2].trim();
+  if (state && isPlausibleCity(city)) return toParsed(city, state);
+  return null;
+}
+
 /** "US California (Redwood City) - Office" -> { city: "Redwood City", state: "CA" } */
 function parseUsStateParenCity(raw: string): ParsedLocation | null {
   const match = raw.trim().match(/^US\s+([A-Za-z\s]+?)\s*\(([^)]+)\)/i);
@@ -302,10 +320,11 @@ function findAllCityStates(text: string): ParsedLocation[] {
 export function extractAllCityStates(raw: string): ParsedLocation[] {
   if (!raw) return [];
 
-  // "US-CA-Menlo Park" is checked against the ORIGINAL string -- it's
-  // anchored at the start, so a leading noise token would break the
-  // anchor anyway, and the format is unambiguous as-is.
-  const dashFormat = parseUsDashFormat(raw);
+  // "US-CA-Menlo Park" and "US-California-Menlo Park" are both checked
+  // against the ORIGINAL string -- they're anchored at the start, so a
+  // leading noise token would break the anchor anyway, and both formats
+  // are unambiguous as-is.
+  const dashFormat = parseUsDashFormat(raw) ?? parseUsDashFullStateFormat(raw);
   if (dashFormat) return [dashFormat];
 
   const cleaned = stripLeadingNoiseTokens(raw);
