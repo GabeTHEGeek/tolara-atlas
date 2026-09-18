@@ -9,7 +9,7 @@
 export interface CompanyRow {
   company: string;
   token: string;
-  platform: "greenhouse" | "ashby" | "lever" | "bamboohr" | "gem" | string;
+  platform: "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "gem" | string;
   status: "verified" | "unverified" | "failed" | string;
   last_checked: string;
   notes: string;

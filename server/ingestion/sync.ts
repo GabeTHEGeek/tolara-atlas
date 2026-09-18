@@ -20,6 +20,9 @@ import { searchGreenhouse } from "./sources/greenhouse.js";
 import { searchAshby } from "./sources/ashby.js";
 import { searchLever } from "./sources/lever.js";
 import { searchBambooHr } from "./sources/bamboohr.js";
+import { searchWorkday } from "./sources/workday.js";
+import { searchPaylocity } from "./sources/paylocity.js";
+import { searchIcims } from "./sources/icims.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
@@ -61,10 +64,10 @@ function parseSalary(salary: string): { min: number | null; max: number | null; 
  * afterward via matchesProductManagerFilter, so tuning that function
  * changes what the next sync stores without touching these adapters.
  */
-async function fetchPlatform(
-  platform: "greenhouse" | "ashby" | "lever" | "bamboohr",
-  boards: string[],
-): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
+type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims";
+const ALL_PLATFORMS: Platform[] = ["greenhouse", "ashby", "lever", "bamboohr", "workday", "paylocity", "icims"];
+
+async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
   const options = { boards, limit: PER_BOARD_LIMIT };
   switch (platform) {
     case "greenhouse":
@@ -75,6 +78,12 @@ async function fetchPlatform(
       return searchLever("", options);
     case "bamboohr":
       return searchBambooHr("", options);
+    case "workday":
+      return searchWorkday("", options);
+    case "paylocity":
+      return searchPaylocity("", options);
+    case "icims":
+      return searchIcims("", options);
   }
 }
 
@@ -83,7 +92,7 @@ async function main() {
 
   const csvText = readFileSync(COMPANIES_CSV_PATH, "utf-8");
   const rows = parseCompaniesCsv(csvText).filter(
-    (r) => r.status === "verified" && ["greenhouse", "ashby", "lever", "bamboohr"].includes(r.platform),
+    (r) => r.status === "verified" && (ALL_PLATFORMS as string[]).includes(r.platform),
   );
 
   const byPlatform = new Map<string, CompanyRow[]>();
@@ -163,7 +172,7 @@ async function main() {
       const boards = platformRows.map((r) => r.token);
       const nameByToken = new Map(platformRows.map((r) => [r.token, r.company]));
 
-      const { jobs: allJobs, meta } = await fetchPlatform(platform as "greenhouse" | "ashby" | "lever" | "bamboohr", boards);
+      const { jobs: allJobs, meta } = await fetchPlatform(platform as Platform, boards);
       const jobs = allJobs.filter((job) => matchesProductManagerFilter(job.title));
       // "checked" = boards that actually returned data, whether or not that
       // data included any postings. "failed" is now only boards whose fetch
