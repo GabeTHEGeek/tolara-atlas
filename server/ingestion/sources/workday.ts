@@ -31,6 +31,16 @@
  * everything approach doesn't scale here: sync.ts's PER_BOARD_LIMIT (500)
  * would mean up to 25 sequential requests for every large Workday board on
  * every sync, most of it work nothing downstream needs.
+ *
+ * `locationsText` is frequently a bare placeholder ("3 Locations") instead
+ * of naming any office at all, for any posting open in more than one --
+ * confirmed on Capital One's board, where every such posting was landing
+ * on whatever single city geocode.ts's board-wide fallback happened to
+ * resolve from a DIFFERENT, single-location posting (wrong for roles
+ * actually based somewhere else). locationFromExternalPath fixes this
+ * without an extra per-job request: `externalPath` always leads with the
+ * posting's real primary office as a "/job/City-Name-ST/..." slug, so
+ * that's used as the location whenever locationsText is just a count.
  */
 
 import { normalizeTitle, titleMatchesQueryWord } from "./common.js";
@@ -47,6 +57,40 @@ const INTER_PAGE_DELAY_MS = 250;
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/** True for Workday's placeholder text used instead of naming a location when a posting spans multiple offices ("2 Locations", "10 Locations"). */
+function isLocationCountPlaceholder(text: string): boolean {
+  return /^\d+\s+Locations?$/i.test(text.trim());
+}
+
+/**
+ * "/job/Richmond-VA/Manager--Product-Management..." -> "Richmond, VA"
+ * "/job/New-York-NY/Senior-Associate..." -> "New York, NY"
+ * "/job/Toronto-ON/..." -> "Toronto, ON" (non-US; left for the shared
+ * locationParser's own city/state and non-US-name matching to sort out
+ * downstream, same as any other raw location string this project stores)
+ *
+ * Workday's externalPath always leads with the posting's PRIMARY office as
+ * a hyphen-joined "City-Name-ST"-shaped segment -- confirmed live against
+ * Capital One's board, including multi-word cities ("New-York-NY") and
+ * non-US segments ("Bangalore-In", "Mexico-City-Mexico"). That's a real,
+ * specific place even when locationsText is just a bare "3 Locations"
+ * count with no city named at all, so it's used as the fallback whenever
+ * locationsText doesn't already name one. Without this, every multi-office
+ * posting on a board collapsed onto whatever single office geocode.ts's
+ * board-wide fallback happened to resolve from someone else's
+ * single-location posting -- confirmed wrong on Capital One's board, where
+ * NYC/Richmond/McLean roles were all landing on its one Plano, TX posting.
+ */
+function locationFromExternalPath(externalPath: string): string {
+  const segment = externalPath.match(/^\/job\/([^/]+)\//)?.[1];
+  if (!segment) return "";
+  const parts = segment.split("-").filter(Boolean);
+  if (parts.length < 2) return "";
+  const state = parts[parts.length - 1];
+  const city = parts.slice(0, -1).join(" ");
+  return city ? `${city}, ${state}` : "";
 }
 
 interface WorkdayJobPosting {
@@ -214,6 +258,11 @@ export async function searchWorkday(
       }
 
       const externalPath = job.externalPath ?? "";
+      const locationsText = job.locationsText ?? "";
+      const location =
+        locationsText && !isLocationCountPlaceholder(locationsText)
+          ? locationsText
+          : locationFromExternalPath(externalPath) || locationsText;
       jobs.push({
         id: `wd_${externalPath || `${board}_${boardJobCount}`}`,
         title,
@@ -221,7 +270,7 @@ export async function searchWorkday(
         url: externalPath
           ? `https://${parsed.tenant}.${parsed.dataCenter}.myworkdayjobs.com/${parsed.site}${externalPath}`
           : "",
-        location: job.locationsText ?? "",
+        location,
         salary: "", // not available from the list endpoint -- see file header
         category: "",
         published: job.postedOn ?? "",
