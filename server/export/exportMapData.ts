@@ -68,6 +68,7 @@ import path from "node:path";
 
 import { getDb } from "../db/client.js";
 import { isExplicitlyNonUS } from "../ingestion/locationParser.js";
+import { writeCompanyDetails } from "./companyDetails.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUTPUT_PATH = path.join(__dirname, "..", "..", "public", "data", "map-data.json");
@@ -397,6 +398,12 @@ function main() {
       2,
     ),
   );
+
+  // Per-company files for the role pages, covering exactly the roles the
+  // map and the unmapped list show.
+  const visibleRoleIds = new Set([...rows.map((r) => r.id), ...usUnplacedRows.map((r) => r.id)]);
+  const detailFiles = writeCompanyDetails(db, path.join(path.dirname(OUTPUT_PATH), "companies"), visibleRoleIds);
+  console.log(`Wrote ${detailFiles} company detail files to ${path.join(path.dirname(OUTPUT_PATH), "companies")}`);
 
   const nonUsFiltered = unplacedRows.length - usUnplacedRows.length;
   console.log(
