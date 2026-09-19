@@ -27,8 +27,9 @@ const CITY_CLUSTER_MAX_ZOOM = 9;
 
 // How long clicking a city bubble takes to fly into that city. Deliberately
 // slow so the move reads as "zooming into this area" rather than a jump.
-// flyTo also skips the animation for users with prefers-reduced-motion set,
-// since `essential` is left unset.
+// Marked `essential` below: without it MapLibre skips the animation entirely
+// whenever the OS has Reduce Motion on (prefers-reduced-motion), and the
+// click just teleports -- which reads as the feature being broken.
 const CITY_FLY_DURATION_MS = 2500;
 
 // Same-place spellings the geocoder currently emits under different names,
@@ -367,6 +368,7 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
           // opens up into its pins instead of reappearing at the same spot.
           zoom: Math.max(camera?.zoom ?? 0, CITY_CLUSTER_MAX_ZOOM + 1),
           duration: CITY_FLY_DURATION_MS,
+          essential: true,
         });
       });
       map.on("mouseenter", "city-clusters-layer", (e) => {
