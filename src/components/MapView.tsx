@@ -18,6 +18,26 @@ const FALLBACK_VIEW = { center: [-98.5, 39.5] as [number, number], zoom: 3.4 };
 // fade in above each pin.
 const PIN_LABEL_MIN_ZOOM = 7;
 
+// Below this zoom, every city with more than one company's pin collapses
+// into a single city bubble (see cityClustersToGeoJSON); at or above it the
+// bubbles disappear and the individual pins show. This is our own grouping
+// by city name, not MapLibre's `cluster: true` -- see the note on the
+// "pins" source below for why that's off the table.
+const CITY_CLUSTER_MAX_ZOOM = 9;
+
+// How long clicking a city bubble takes to fly into that city. Deliberately
+// slow so the move reads as "zooming into this area" rather than a jump.
+// flyTo also skips the animation for users with prefers-reduced-motion set,
+// since `essential` is left unset.
+const CITY_FLY_DURATION_MS = 2500;
+
+// Same-place spellings the geocoder currently emits under different names,
+// folded together so one city doesn't show up as two bubbles on top of
+// each other.
+const CITY_NAME_ALIASES: Record<string, string> = {
+  "new york city": "new york",
+};
+
 // The classic MapLibre/Mapbox "marching ants" dash sequence: each entry is
 // a line-dasharray that's slightly further along than the last, so cycling
 // through them on a timer reads as a dash animating along the line rather
@@ -54,16 +74,73 @@ interface MapViewProps {
   onSelectPin: (pin: LocationPinData) => void;
 }
 
+function cityKey(pin: LocationPinData): string {
+  const city = (pin.city ?? "").trim().toLowerCase();
+  return `${CITY_NAME_ALIASES[city] ?? city}|${(pin.state ?? "").trim().toLowerCase()}`;
+}
+
+/** Pins grouped by cityKey, keeping only cities with 2+ pins -- a lone company's city just shows its pin. */
+function groupPinsByCity(pins: LocationPinData[]): Map<string, LocationPinData[]> {
+  const groups = new Map<string, LocationPinData[]>();
+  for (const pin of pins) {
+    const key = cityKey(pin);
+    const list = groups.get(key) ?? [];
+    list.push(pin);
+    groups.set(key, list);
+  }
+  for (const [key, list] of groups) {
+    if (list.length < 2) groups.delete(key);
+  }
+  return groups;
+}
+
 function pinsToGeoJSON(pins: LocationPinData[]): GeoJSON.FeatureCollection<GeoJSON.Point> {
+  const clustered = groupPinsByCity(pins);
   return {
     type: "FeatureCollection",
     features: pins.map((p) => ({
       type: "Feature",
       geometry: { type: "Point", coordinates: [p.longitude, p.latitude] },
-      properties: { id: p.id, name: p.companyName, roleCount: p.roleCount },
+      properties: { id: p.id, name: p.companyName, roleCount: p.roleCount, inCluster: clustered.has(cityKey(p)) },
     })),
   };
 }
+
+/**
+ * One bubble per city with 2+ companies, placed at the average of that
+ * city's pins (they're all within the export's ~1.5km jitter ring of the
+ * city's geocoded point anyway). Labeled with the first pin's own spelling
+ * of the city, which after CITY_NAME_ALIASES is the same place for all.
+ */
+function cityClustersToGeoJSON(pins: LocationPinData[]): GeoJSON.FeatureCollection<GeoJSON.Point> {
+  const features: GeoJSON.Feature<GeoJSON.Point>[] = [];
+  for (const [key, cityPins] of groupPinsByCity(pins)) {
+    const lng = cityPins.reduce((sum, p) => sum + p.longitude, 0) / cityPins.length;
+    const lat = cityPins.reduce((sum, p) => sum + p.latitude, 0) / cityPins.length;
+    const { city, state } = cityPins[0];
+    features.push({
+      type: "Feature",
+      geometry: { type: "Point", coordinates: [lng, lat] },
+      properties: {
+        key,
+        label: state ? `${city}, ${state}` : String(city),
+        companyCount: cityPins.length,
+        roleCount: cityPins.reduce((sum, p) => sum + p.roleCount, 0),
+      },
+    });
+  }
+  return { type: "FeatureCollection", features };
+}
+
+// Filter for the per-pin layers: below CITY_CLUSTER_MAX_ZOOM, only pins
+// whose city ISN'T drawn as a bubble; from there up, every pin.
+const PIN_VISIBILITY_FILTER: maplibregl.FilterSpecification = [
+  "step",
+  ["zoom"],
+  ["==", ["get", "inCluster"], false],
+  CITY_CLUSTER_MAX_ZOOM,
+  true,
+];
 
 const EMPTY_LINES: GeoJSON.FeatureCollection<GeoJSON.LineString> = { type: "FeatureCollection", features: [] };
 
@@ -153,10 +230,9 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
       // a hard incompatibility to avoid. Individual pins (with the jitter
       // spread for same-city companies) plus fitBounds on load are what
       // keep the initial view legible without algorithmic clustering.
-      map.addSource("pins", {
-        type: "geojson",
-        data: pinsToGeoJSON(pinsByIdRef.current.size ? [...pinsByIdRef.current.values()] : []),
-      });
+      const initialPins = [...pinsByIdRef.current.values()];
+      map.addSource("pins", { type: "geojson", data: pinsToGeoJSON(initialPins) });
+      map.addSource("city-clusters", { type: "geojson", data: cityClustersToGeoJSON(initialPins) });
 
       // Connector lines between a hovered pin and its company's OTHER
       // offices -- empty until a multi-office company is hovered (see the
@@ -181,6 +257,7 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
         id: "pins-layer",
         type: "circle",
         source: "pins",
+        filter: PIN_VISIBILITY_FILTER,
         paint: {
           "circle-color": "#E8543E",
           "circle-radius": 7,
@@ -201,6 +278,7 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
         type: "symbol",
         source: "pins",
         minzoom: PIN_LABEL_MIN_ZOOM,
+        filter: PIN_VISIBILITY_FILTER,
         layout: {
           "text-field": ["get", "name"],
           "text-font": ["Noto Sans Regular"],
@@ -217,7 +295,110 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
         },
       });
 
+      // City bubbles, drawn above the pins. Sized by how many PM roles the
+      // city has; larger cities sort on top where bubbles overlap (e.g. the
+      // Bay Area at the national view).
+      map.addLayer({
+        id: "city-clusters-layer",
+        type: "circle",
+        source: "city-clusters",
+        maxzoom: CITY_CLUSTER_MAX_ZOOM,
+        layout: { "circle-sort-key": ["get", "roleCount"] },
+        paint: {
+          "circle-color": "#E8543E",
+          "circle-opacity": 0.9,
+          "circle-radius": ["step", ["get", "roleCount"], 13, 10, 16, 40, 20, 150, 25],
+          "circle-stroke-width": 2,
+          "circle-stroke-color": "#ffffff",
+        },
+      });
+      map.addLayer({
+        id: "city-clusters-count",
+        type: "symbol",
+        source: "city-clusters",
+        maxzoom: CITY_CLUSTER_MAX_ZOOM,
+        layout: {
+          "text-field": ["to-string", ["get", "companyCount"]],
+          "text-font": ["Noto Sans Regular"],
+          "text-size": 12,
+          // Where neighboring cities' bubbles overlap (Bay Area, Seattle/
+          // Bellevue), let collision detection keep only the biggest city's
+          // number instead of printing several on top of each other. Lower
+          // sort keys are placed first, so negate roleCount.
+          "symbol-sort-key": ["-", 0, ["get", "roleCount"]],
+        },
+        paint: { "text-color": "#ffffff" },
+      });
+      // City names under the bubbles; collision detection drops the ones
+      // that would overlap at the national view, same as the pin labels.
+      map.addLayer({
+        id: "city-clusters-labels",
+        type: "symbol",
+        source: "city-clusters",
+        maxzoom: CITY_CLUSTER_MAX_ZOOM,
+        layout: {
+          "text-field": ["get", "label"],
+          "text-font": ["Noto Sans Regular"],
+          "text-size": 11,
+          "text-anchor": "top",
+          "text-offset": [0, 1.9],
+          "text-optional": true,
+          "symbol-sort-key": ["-", 0, ["get", "roleCount"]],
+        },
+        paint: {
+          "text-color": "#1A2233",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+        },
+      });
+
+      map.on("click", "city-clusters-layer", (e) => {
+        const key = e.features?.[0]?.properties?.key;
+        if (key == null) return;
+        const cityPins = [...pinsByIdRef.current.values()].filter((p) => cityKey(p) === key);
+        if (cityPins.length === 0) return;
+        const bounds = new maplibregl.LngLatBounds();
+        for (const p of cityPins) bounds.extend([p.longitude, p.latitude]);
+        const camera = map.cameraForBounds(bounds, { padding: 80, maxZoom: 13 });
+        hoverPopupRef.current?.remove();
+        map.flyTo({
+          center: camera?.center ?? bounds.getCenter(),
+          // Always land past CITY_CLUSTER_MAX_ZOOM, so the bubble actually
+          // opens up into its pins instead of reappearing at the same spot.
+          zoom: Math.max(camera?.zoom ?? 0, CITY_CLUSTER_MAX_ZOOM + 1),
+          duration: CITY_FLY_DURATION_MS,
+        });
+      });
+      map.on("mouseenter", "city-clusters-layer", (e) => {
+        map.getCanvas().style.cursor = "pointer";
+        const feature = e.features?.[0];
+        if (!feature) return;
+        const coords = (feature.geometry as GeoJSON.Point).coordinates as [number, number];
+        const label = String(feature.properties?.label ?? "");
+        const companyCount = Number(feature.properties?.companyCount ?? 0);
+        const roleCount = Number(feature.properties?.roleCount ?? 0);
+        hoverPopupRef.current
+          ?.setLngLat(coords)
+          .setHTML(
+            `<strong>${escapeHtml(label)}</strong><br/>${companyCount} companies · ${roleCount} open PM role${roleCount === 1 ? "" : "s"}<br/><span class="pin-tooltip-hint">Click to zoom in</span>`,
+          )
+          .addTo(map);
+      });
+      map.on("mouseleave", "city-clusters-layer", () => {
+        map.getCanvas().style.cursor = "";
+        hoverPopupRef.current?.remove();
+      });
+
+      // A lone-company city's pin can sit underneath a neighboring city's
+      // bubble (e.g. Berkeley under San Francisco at the national view).
+      // The bubble is drawn on top, so it owns the click/hover there --
+      // otherwise one click both flies into the city AND opens that pin's
+      // company panel.
+      const isUnderCityBubble = (point: maplibregl.PointLike) =>
+        map.queryRenderedFeatures(point, { layers: ["city-clusters-layer"] }).length > 0;
+
       map.on("click", "pins-layer", (e) => {
+        if (isUnderCityBubble(e.point)) return;
         const feature = e.features?.[0];
         const id = feature?.properties?.id;
         if (id == null) return;
@@ -226,6 +407,7 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
       });
 
       map.on("mouseenter", "pins-layer", (e) => {
+        if (isUnderCityBubble(e.point)) return;
         map.getCanvas().style.cursor = "pointer";
         const feature = e.features?.[0];
         if (!feature) return;
@@ -245,9 +427,12 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
         linksSource?.setData(links);
         if (links.features.length > 0) startDashAnimation(map);
       });
-      map.on("mouseleave", "pins-layer", () => {
-        map.getCanvas().style.cursor = "";
-        hoverPopupRef.current?.remove();
+      map.on("mouseleave", "pins-layer", (e) => {
+        // Still over a city bubble: leave its cursor and tooltip alone.
+        if (!isUnderCityBubble(e.point)) {
+          map.getCanvas().style.cursor = "";
+          hoverPopupRef.current?.remove();
+        }
         stopDashAnimation();
         (map.getSource("office-links") as GeoJSONSource | undefined)?.setData(EMPTY_LINES);
       });
@@ -296,6 +481,8 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
     const applyData = () => {
       const source = map.getSource("pins") as GeoJSONSource | undefined;
       if (source) source.setData(pinsToGeoJSON(pins));
+      const clusterSource = map.getSource("city-clusters") as GeoJSONSource | undefined;
+      if (clusterSource) clusterSource.setData(cityClustersToGeoJSON(pins));
 
       if (!hasFitBoundsRef.current && pins.length > 0) {
         hasFitBoundsRef.current = true;

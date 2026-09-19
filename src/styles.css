@@ -203,6 +203,12 @@ body {
   border-top-color: #ffffff;
 }
 
+/* "Click to zoom in" line on city-bubble tooltips. */
+.pin-tooltip-hint {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
 /* Header button that opens the unmapped "remote-first companies" list --
    deliberately underlined inline text, not a pill/badge, so it reads as
    part of the stats line rather than a separate call-to-action. */
