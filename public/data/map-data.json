@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-19T07:01:14.427Z",
+  "generatedAt": "2026-09-19T08:30:29.028Z",
   "companyCount": 594,
-  "pinCount": 638,
-  "roleCount": 1633,
+  "pinCount": 646,
+  "roleCount": 1819,
   "pins": [
     {
       "id": "1042-charlotte-nc",
       "companyId": 1042,
-      "companyName": "Assetmark|wd5|assetmark Careers",
-      "companySlug": "assetmark-wd5-assetmark-careers",
+      "companyName": "AssetMark",
+      "companySlug": "assetmark",
       "city": "Charlotte",
       "state": "NC",
       "latitude": 35.234267622024376,
@@ -31,8 +31,8 @@
     {
       "id": "1046-san-jose-ca",
       "companyId": 1046,
-      "companyName": "Cloudera|wd5|external Career",
-      "companySlug": "cloudera-wd5-external-career",
+      "companyName": "Cloudera",
+      "companySlug": "cloudera",
       "city": "San Jose",
       "state": "CA",
       "latitude": 37.34147846236221,
@@ -66,8 +66,8 @@
     {
       "id": "1060-atlanta-ga",
       "companyId": 1060,
-      "companyName": "Mhs|wd1|careers",
-      "companySlug": "mhs-wd1-careers",
+      "companyName": "Fortna",
+      "companySlug": "fortna",
       "city": "Atlanta",
       "state": "GA",
       "latitude": 33.759422048966464,
@@ -76,7 +76,7 @@
       "roles": [
         {
           "id": 2000,
-          "title": "Sr. Product Manager",
+          "title": "Sr. Product Manager – Warehouse Execution Systems (WES) & Automation",
           "location": "Atlanta, Georgia, USA",
           "salaryMin": null,
           "salaryMax": null,
@@ -90,8 +90,8 @@
     {
       "id": "1068-medina-mn",
       "companyId": 1068,
-      "companyName": "Polaris|wd5|polarisjobs",
-      "companySlug": "polaris-wd5-polarisjobs",
+      "companyName": "Polaris",
+      "companySlug": "polaris",
       "city": "Medina",
       "state": "MN",
       "latitude": 45.0151361,
@@ -114,8 +114,8 @@
     {
       "id": "1073-boston-ma",
       "companyId": 1073,
-      "companyName": "Roche|wd3|rog A2o Gene",
-      "companySlug": "roche-wd3-rog-a2o-gene",
+      "companyName": "Genentech",
+      "companySlug": "genentech",
       "city": "Boston",
       "state": "MA",
       "latitude": 42.36396353524364,
@@ -1026,8 +1026,8 @@
     {
       "id": "1072-san-diego-ca",
       "companyId": 1072,
-      "companyName": "Resmed|wd3|resmed External Careers",
-      "companySlug": "resmed-wd3-resmed-external-careers",
+      "companyName": "ResMed",
+      "companySlug": "resmed",
       "city": "San Diego",
       "state": "CA",
       "latitude": 32.71553436269396,
@@ -1300,8 +1300,8 @@
     {
       "id": "1053-richmond-va",
       "companyId": 1053,
-      "companyName": "Gnw|wd1|carescout",
-      "companySlug": "gnw-wd1-carescout",
+      "companyName": "Genworth",
+      "companySlug": "genworth",
       "city": "Richmond",
       "state": "VA",
       "latitude": 37.52679929055237,
@@ -1346,8 +1346,8 @@
     {
       "id": "1069-atlanta-ga",
       "companyId": 1069,
-      "companyName": "Progleasing|wd5|progleasingcareers",
-      "companySlug": "progleasing-wd5-progleasingcareers",
+      "companyName": "Progressive Leasing",
+      "companySlug": "progressive-leasing",
       "city": "Atlanta",
       "state": "GA",
       "latitude": 33.74542278805745,
@@ -1403,8 +1403,8 @@
     {
       "id": "1063-dallas-tx",
       "companyId": 1063,
-      "companyName": "Peak6group|wd1|apexfintechsolutions",
-      "companySlug": "peak6group-wd1-apexfintechsolutions",
+      "companyName": "Apex Fintech Solutions",
+      "companySlug": "apex-fintech-solutions",
       "city": "Dallas",
       "state": "TX",
       "latitude": 32.76773072816591,
@@ -1462,8 +1462,8 @@
     {
       "id": "1063-austin-tx",
       "companyId": 1063,
-      "companyName": "Peak6group|wd1|apexfintechsolutions",
-      "companySlug": "peak6group-wd1-apexfintechsolutions",
+      "companyName": "Apex Fintech Solutions",
+      "companySlug": "apex-fintech-solutions",
       "city": "Austin",
       "state": "TX",
       "latitude": 30.28248805383901,
@@ -1497,13 +1497,13 @@
     {
       "id": "1048-bay-area-ca",
       "companyId": 1048,
-      "companyName": "Duckcreek|wd1|duckcreek Linkedin",
-      "companySlug": "duckcreek-wd1-duckcreek-linkedin",
+      "companyName": "Duck Creek Technologies",
+      "companySlug": "duck-creek-technologies",
       "city": "Bay Area",
       "state": "CA",
       "latitude": 37.78365791437896,
       "longitude": -122.36474693640224,
-      "roleCount": 1,
+      "roleCount": 2,
       "roles": [
         {
           "id": 1977,
@@ -1515,44 +1515,7 @@
           "url": "https://duckcreek.wd1.myworkdayjobs.com/duckcreek-linkedin/job/Bay-Area-CA/Principal-Product-Manager---Billing_REQID55191",
           "postedAt": "Posted 2 Days Ago",
           "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1048-san-francisco-ca",
-      "companyId": 1048,
-      "companyName": "Duckcreek|wd1|duckcreek Linkedin",
-      "companySlug": "duckcreek-wd1-duckcreek-linkedin",
-      "city": "San Francisco",
-      "state": "CA",
-      "latitude": 37.78547073184131,
-      "longitude": -122.39945121440306,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1977,
-          "title": "Principal Product Manager - Billing",
-          "location": "Bay Area, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://duckcreek.wd1.myworkdayjobs.com/duckcreek-linkedin/job/Bay-Area-CA/Principal-Product-Manager---Billing_REQID55191",
-          "postedAt": "Posted 2 Days Ago",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1049-bay-area-ca",
-      "companyId": 1049,
-      "companyName": "Duckcreek|wd1|duckcreekcareers",
-      "companySlug": "duckcreek-wd1-duckcreekcareers",
-      "city": "Bay Area",
-      "state": "CA",
-      "latitude": 37.779710827957864,
-      "longitude": -122.36452168429213,
-      "roleCount": 1,
-      "roles": [
+        },
         {
           "id": 1980,
           "title": "Principal Product Manager - Billing",
@@ -1567,16 +1530,27 @@
       ]
     },
     {
-      "id": "1049-san-francisco-ca",
-      "companyId": 1049,
-      "companyName": "Duckcreek|wd1|duckcreekcareers",
-      "companySlug": "duckcreek-wd1-duckcreekcareers",
+      "id": "1048-san-francisco-ca",
+      "companyId": 1048,
+      "companyName": "Duck Creek Technologies",
+      "companySlug": "duck-creek-technologies",
       "city": "San Francisco",
       "state": "CA",
-      "latitude": 37.792984436954676,
-      "longitude": -122.41550951054906,
-      "roleCount": 1,
+      "latitude": 37.78547073184131,
+      "longitude": -122.39945121440306,
+      "roleCount": 2,
       "roles": [
+        {
+          "id": 1977,
+          "title": "Principal Product Manager - Billing",
+          "location": "Bay Area, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://duckcreek.wd1.myworkdayjobs.com/duckcreek-linkedin/job/Bay-Area-CA/Principal-Product-Manager---Billing_REQID55191",
+          "postedAt": "Posted 2 Days Ago",
+          "isRemote": false
+        },
         {
           "id": 1980,
           "title": "Principal Product Manager - Billing",
@@ -1593,13 +1567,13 @@
     {
       "id": "1048-summer-st-boston-ma",
       "companyId": 1048,
-      "companyName": "Duckcreek|wd1|duckcreek Linkedin",
-      "companySlug": "duckcreek-wd1-duckcreek-linkedin",
+      "companyName": "Duck Creek Technologies",
+      "companySlug": "duck-creek-technologies",
       "city": "Summer St. Boston",
       "state": "MA",
-      "latitude": 42.3606035782995,
-      "longitude": -71.06351062719222,
-      "roleCount": 2,
+      "latitude": 42.3527119,
+      "longitude": -71.0558717,
+      "roleCount": 4,
       "roles": [
         {
           "id": 1978,
@@ -1622,20 +1596,7 @@
           "url": "https://duckcreek.wd1.myworkdayjobs.com/duckcreek-linkedin/job/Remote-CA/Senior-Product-Manager---AI-Gateway_REQID55111",
           "postedAt": "Posted 18 Days Ago",
           "isRemote": true
-        }
-      ]
-    },
-    {
-      "id": "1049-summer-st-boston-ma",
-      "companyId": 1049,
-      "companyName": "Duckcreek|wd1|duckcreekcareers",
-      "companySlug": "duckcreek-wd1-duckcreekcareers",
-      "city": "Summer St. Boston",
-      "state": "MA",
-      "latitude": 42.36218768718053,
-      "longitude": -71.05067534017715,
-      "roleCount": 2,
-      "roles": [
+        },
         {
           "id": 1981,
           "title": "Senior Product Manager - Agentic AI Platform",
@@ -1663,8 +1624,8 @@
     {
       "id": "1065-chicago-il",
       "companyId": 1065,
-      "companyName": "Peak6group|wd1|ppcareers",
-      "companySlug": "peak6group-wd1-ppcareers",
+      "companyName": "PEAK6 EdTech",
+      "companySlug": "peak6-edtech",
       "city": "Chicago",
       "state": "IL",
       "latitude": 41.86968920861634,
@@ -1687,8 +1648,8 @@
     {
       "id": "1066-austin-tx",
       "companyId": 1066,
-      "companyName": "Peak6group|wd1|weinsure",
-      "companySlug": "peak6group-wd1-weinsure",
+      "companyName": "PEAK6 Insurtech",
+      "companySlug": "peak6-insurtech",
       "city": "Austin",
       "state": "TX",
       "latitude": 30.263189641011138,
@@ -1711,8 +1672,8 @@
     {
       "id": "1064-austin-tx",
       "companyId": 1064,
-      "companyName": "Peak6group|wd1|peak6",
-      "companySlug": "peak6group-wd1-peak6",
+      "companyName": "PEAK6",
+      "companySlug": "peak6",
       "city": "Austin",
       "state": "TX",
       "latitude": 30.283037358665542,
@@ -4594,6 +4555,536 @@
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8483831002",
           "postedAt": "2026-08-25T06:12:00-04:00",
           "isRemote": true
+        }
+      ]
+    },
+    {
+      "id": "1167-cupertino-ca",
+      "companyId": 1167,
+      "companyName": "Apple",
+      "companySlug": "apple",
+      "city": "Cupertino",
+      "state": "CA",
+      "latitude": 37.3228934,
+      "longitude": -122.0322895,
+      "roleCount": 47,
+      "roles": [
+        {
+          "id": 2510,
+          "title": "Senior Product Manager, Commerce",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200684457-0836",
+          "postedAt": "2026-09-18T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2555,
+          "title": "Product Manager, US Channel Sales BPR & Data Ops",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200682150-0836",
+          "postedAt": "2026-09-18T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2567,
+          "title": "Manager, Personalization Product Management, Apple Store Online",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200683688-0836",
+          "postedAt": "2026-09-15T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2506,
+          "title": "Product Manager, Health",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200683303-0836",
+          "postedAt": "2026-09-12T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2533,
+          "title": "Sr Product Manager, Apple Savings",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200682755-0836",
+          "postedAt": "2026-09-10T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2571,
+          "title": "Marketing Technology Application Product Management, Wallet, Payment and Commerce ",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200682779-0836",
+          "postedAt": "2026-09-09T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2509,
+          "title": "Pricing Technical Product Manager",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200679672-0836",
+          "postedAt": "2026-09-08T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2523,
+          "title": "Product Manager, Apple Learning Platform",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200680966-0836",
+          "postedAt": "2026-09-04T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2558,
+          "title": "Apple Ads Marketplace Product Manager - Ad Matching & Retrieval",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200682069-0836",
+          "postedAt": "2026-09-04T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2542,
+          "title": "Technical Product Manager, Partner Reporting Solutions",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200680673-0836",
+          "postedAt": "2026-08-28T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2568,
+          "title": "Director of Product Management, Marketplace and Developer Technologies",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200679541-0836",
+          "postedAt": "2026-08-27T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2544,
+          "title": "Product/Senior Product Manager, AI Safety and Policy",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200618566-0836",
+          "postedAt": "2026-08-25T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2517,
+          "title": "Product Manager, Apple Wallet",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200677435-0836",
+          "postedAt": "2026-08-19T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2534,
+          "title": "Product Manager, Apple Payment Services",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200678246-0836",
+          "postedAt": "2026-08-14T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2522,
+          "title": "Product Manager, Apple Gift Card",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200677699-0836",
+          "postedAt": "2026-08-12T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2527,
+          "title": "Product Manager, Apple Intelligence Experiences",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200676399-0836",
+          "postedAt": "2026-08-12T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2511,
+          "title": "Product Manager, Apple AIML",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200677415-0836",
+          "postedAt": "2026-08-11T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2513,
+          "title": "Solutions AI Product Manager ",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200677040-0836",
+          "postedAt": "2026-08-10T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2518,
+          "title": "Data Solutions Product Manager",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200675494-0836",
+          "postedAt": "2026-08-10T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2515,
+          "title": "Product Manager, Siri AI ",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200618567-0836",
+          "postedAt": "2026-08-07T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2521,
+          "title": "Senior Product Manager, Apple AIML ",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200618434-0836",
+          "postedAt": "2026-08-05T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2528,
+          "title": "Product Manager, Apple Intelligence Experiences",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200618440-0836",
+          "postedAt": "2026-08-03T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2548,
+          "title": "Senior Product Manager - Apple Cloud Infrastructure",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200675508-0836",
+          "postedAt": "2026-08-03T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2524,
+          "title": "Senior Product Manager, Environmental Systems",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200673599-0836",
+          "postedAt": "2026-08-01T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2540,
+          "title": "Product Manager - Global Sourcing Solutions",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200674378-0836",
+          "postedAt": "2026-07-28T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2550,
+          "title": "Senior Tax Product Manager, Apple Services Engineering",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200673902-0836",
+          "postedAt": "2026-07-23T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2562,
+          "title": "Senior Product Manager, Games — App Store, Games App & Game Center",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200672008-0836",
+          "postedAt": "2026-07-21T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2552,
+          "title": "Sr. Product Manager, App Marketplaces Child Safety",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200672624-0836",
+          "postedAt": "2026-07-20T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2565,
+          "title": "Senior Leader, Product Management for Pricing Systems",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200668060-0836",
+          "postedAt": "2026-07-20T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2566,
+          "title": "Senior Leader, Product Management for Pricing Systems",
+          "location": "New City",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200668060-5819",
+          "postedAt": "2026-07-20T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2508,
+          "title": "Product Manager, Internet Apps",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200672284-0836",
+          "postedAt": "2026-07-16T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2505,
+          "title": "Product Manager, watchOS",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200670568-0836",
+          "postedAt": "2026-07-02T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2514,
+          "title": "Apple Pay Product Manager ",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200653735-0836",
+          "postedAt": "2026-06-25T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2504,
+          "title": "Product Manager, iPadOS",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200669455-0836",
+          "postedAt": "2026-06-23T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2560,
+          "title": "Technical Product Manager - eCommerce & PSPs (Wallet, Payments & Commerce)",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200669597-0836",
+          "postedAt": "2026-06-23T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2512,
+          "title": "Product Manager, System Apps",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200668930-0836",
+          "postedAt": "2026-06-17T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2507,
+          "title": "Product Manager, User Safety",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200668417-0836",
+          "postedAt": "2026-06-15T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2516,
+          "title": "Product Manager, Apple Pay",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200668024-0836",
+          "postedAt": "2026-06-12T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2526,
+          "title": "Product Manager - Experimentation Platform",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200668020-0836",
+          "postedAt": "2026-06-12T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2519,
+          "title": "Product Manager, AI Finance Transformation",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200665942-0836",
+          "postedAt": "2026-05-29T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2536,
+          "title": "Operations Product Development - Product Manager",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200642014-0836",
+          "postedAt": "2026-05-26T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2563,
+          "title": "Technical Product Manager- Issuers (Wallet, Payments & Commerce) ",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200664301-0836",
+          "postedAt": "2026-05-19T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2520,
+          "title": "Senior Product Manager, Find My",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200660914-0836",
+          "postedAt": "2026-04-30T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2545,
+          "title": "Manager, Product Manager — Finance Transformation, Payments",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200651682-0836",
+          "postedAt": "2026-03-19T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2530,
+          "title": "Senior Product Manager – Databases",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200645328-0836",
+          "postedAt": "2026-02-05T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2561,
+          "title": "Senior Product Manager – Applied Analytics, Data Engineering & AI/GenAI Platforms",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200642548-0836",
+          "postedAt": "2026-01-20T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2551,
+          "title": "Senior Product Manager - Apple Cloud AI/ML",
+          "location": "Cupertino",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200595304-0836",
+          "postedAt": "2025-12-17T00:00:00.000Z",
+          "isRemote": false
         }
       ]
     },
@@ -9528,6 +10019,41 @@
       ]
     },
     {
+      "id": "1167-culver-city-ca",
+      "companyId": 1167,
+      "companyName": "Apple",
+      "companySlug": "apple",
+      "city": "Culver City",
+      "state": "CA",
+      "latitude": 34.028093107409696,
+      "longitude": -118.3999992347663,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2539,
+          "title": "Product Manager, Internal Spend Management Tools",
+          "location": "Culver City",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200684215-0670",
+          "postedAt": "2026-09-16T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2541,
+          "title": "Product Manager, Employee Experience & Productivity",
+          "location": "Culver City",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200677380-0670",
+          "postedAt": "2026-08-25T00:00:00.000Z",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "225-san-francisco-ca",
       "companyId": 225,
       "companyName": "Stripe",
@@ -14340,6 +14866,41 @@
       ]
     },
     {
+      "id": "1167-new-york-city-ny",
+      "companyId": 1167,
+      "companyName": "Apple",
+      "companySlug": "apple",
+      "city": "New York City",
+      "state": "NY",
+      "latitude": 40.70921961710634,
+      "longitude": -73.998890343531,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2532,
+          "title": "Sr Product Manager, Apple Savings",
+          "location": "New York City",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200682755-2459",
+          "postedAt": "2026-09-10T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2525,
+          "title": "Product Manager - Experimentation Platform",
+          "location": "New York City",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200668020-2459",
+          "postedAt": "2026-06-12T00:00:00.000Z",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "652-san-francisco-ca",
       "companyId": 652,
       "companyName": "Harvey AI",
@@ -15047,6 +15608,85 @@
           "salaryCurrency": null,
           "url": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003",
           "postedAt": "2026-09-09T10:35:25-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1167-austin-tx",
+      "companyId": 1167,
+      "companyName": "Apple",
+      "companySlug": "apple",
+      "city": "Austin",
+      "state": "TX",
+      "latitude": 30.264711815409786,
+      "longitude": -97.7422964120953,
+      "roleCount": 6,
+      "roles": [
+        {
+          "id": 2570,
+          "title": "Marketing Technology Application Product Management, Wallet, Payment and Commerce ",
+          "location": "Austin",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200682779-0157",
+          "postedAt": "2026-09-09T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2535,
+          "title": "Product Manager, Apple Learning Platform",
+          "location": "Austin",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200680966-0157",
+          "postedAt": "2026-09-04T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2538,
+          "title": "Technical Product Manager, Partner Reporting Solutions",
+          "location": "Austin",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200680673-0157",
+          "postedAt": "2026-08-28T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2553,
+          "title": "Agentic AI Product Manager, Platform - Sales",
+          "location": "Austin",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200671933-0157",
+          "postedAt": "2026-07-10T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2557,
+          "title": "Sr Technical Product Manager, AI & Data Platforms (AiDP)",
+          "location": "Austin",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200663186-0157",
+          "postedAt": "2026-05-18T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2556,
+          "title": "Product Manager, Manufacturing Data & Analytics, Enterprise Technology Services",
+          "location": "Austin",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200659503-0157",
+          "postedAt": "2026-05-04T00:00:00.000Z",
           "isRemote": false
         }
       ]
@@ -16356,8 +16996,8 @@
       "companySlug": "scopely",
       "city": "Culver City",
       "state": "CA",
-      "latitude": 34.0211224,
-      "longitude": -118.396466,
+      "latitude": 34.014516105342395,
+      "longitude": -118.39726786405585,
       "roleCount": 2,
       "roles": [
         {
@@ -20080,6 +20720,96 @@
       ]
     },
     {
+      "id": "1167-sunnyvale-ca",
+      "companyId": 1167,
+      "companyName": "Apple",
+      "companySlug": "apple",
+      "city": "Sunnyvale",
+      "state": "CA",
+      "latitude": 37.372747455996446,
+      "longitude": -122.02522876814174,
+      "roleCount": 7,
+      "roles": [
+        {
+          "id": 2537,
+          "title": "Product Manager, Employee Experience & Productivity",
+          "location": "Sunnyvale",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200677380-3956",
+          "postedAt": "2026-08-25T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2564,
+          "title": "Manager, Platform Product Management",
+          "location": "Sunnyvale",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200675131-3956",
+          "postedAt": "2026-07-31T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2531,
+          "title": "CapEx Manufacturing Optimization Product Manager",
+          "location": "Sunnyvale",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200661231-3956",
+          "postedAt": "2026-06-26T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2546,
+          "title": "Technical Product Manager, Platform, Apple Store Online",
+          "location": "Sunnyvale",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200664582-3956",
+          "postedAt": "2026-06-16T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2569,
+          "title": "Senior Manager, Product Management - AI & Data Platforms",
+          "location": "Sunnyvale",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200662445-3956",
+          "postedAt": "2026-05-14T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2554,
+          "title": "Sr Technical Product Manager, AI & Data Platforms (AiDP)",
+          "location": "Sunnyvale",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200631963-3956",
+          "postedAt": "2026-04-27T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2547,
+          "title": "Senior Engineering Product Manager, Enterprise Technology Services ",
+          "location": "Sunnyvale",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200653536-3956",
+          "postedAt": "2026-04-10T00:00:00.000Z",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "866-san-francisco-ca",
       "companyId": 866,
       "companyName": "Baton",
@@ -22398,6 +23128,63 @@
           "salaryCurrency": "USD",
           "url": "https://jobs.ashbyhq.com/assorthealth/22aaa0d5-a675-4ec4-9785-8fbc6c1fda2a",
           "postedAt": "2026-07-06T01:13:24.353+00:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1167-seattle-wa",
+      "companyId": 1167,
+      "companyName": "Apple",
+      "companySlug": "apple",
+      "city": "Seattle",
+      "state": "WA",
+      "latitude": 47.6077900257102,
+      "longitude": -122.34790188211292,
+      "roleCount": 4,
+      "roles": [
+        {
+          "id": 2549,
+          "title": "Senior Product Manager - Apple Cloud Infrastructure",
+          "location": "Seattle",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200675508-3337",
+          "postedAt": "2026-08-03T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2529,
+          "title": "Senior Product Manager – Databases",
+          "location": "Seattle",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200645328-3337",
+          "postedAt": "2026-02-05T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2559,
+          "title": "Senior Product Manager – Applied Analytics, Data Engineering & AI/GenAI Platforms",
+          "location": "Seattle",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200642548-3337",
+          "postedAt": "2026-01-20T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2543,
+          "title": "Senior Product Manager - Apple Cloud AI/ML",
+          "location": "Seattle",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.apple.com/en-us/details/200595304-3337",
+          "postedAt": "2025-12-17T00:00:00.000Z",
           "isRemote": false
         }
       ]
@@ -26861,8 +27648,8 @@
     {
       "id": "1045-barnwell-sc",
       "companyId": 1045,
-      "companyName": "Cgm|wd3|cgm",
-      "companySlug": "cgm-wd3-cgm",
+      "companyName": "CompuGroup Medical",
+      "companySlug": "compugroup-medical",
       "city": "Barnwell",
       "state": "SC",
       "latitude": 33.2641009,
@@ -26885,8 +27672,8 @@
     {
       "id": "1074-new-york-ny",
       "companyId": 1074,
-      "companyName": "Shutterstock|wd1|shutterstockcareers",
-      "companySlug": "shutterstock-wd1-shutterstockcareers",
+      "companyName": "Shutterstock",
+      "companySlug": "shutterstock",
       "city": "New York",
       "state": "NY",
       "latitude": 40.70795729578922,
@@ -26960,6 +27747,1358 @@
           "salaryMax": null,
           "salaryCurrency": null,
           "url": "https://nexthopai.bamboohr.com/careers/73",
+          "postedAt": null,
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1166-san-jose-ca",
+      "companyId": 1166,
+      "companyName": "TikTok",
+      "companySlug": "tiktok",
+      "city": "San Jose",
+      "state": "CA",
+      "latitude": 37.344058046102255,
+      "longitude": -121.87864808179842,
+      "roleCount": 91,
+      "roles": [
+        {
+          "id": 2320,
+          "title": "Copyright Solution Product Manager Project Intern (TikTok-Music) - 2026 Start (BS/MS)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7657541997725288757",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2322,
+          "title": "Product Manager, Measurement",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7563419723202529541",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2324,
+          "title": "Product Manager Project Intern (Business Integrity) - 2026 Start (MBA)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7679147369590737205",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2327,
+          "title": "Product Manager Intern (TikTok-Product Infrastructure-Account) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7670009830602721589",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2328,
+          "title": "AI Safety Evaluation & Governance Product Manager  Intern (TikTok-Platform Responsibility-Feed Safety) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7670529537944766773",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2329,
+          "title": "Senior Product Manager, Agentic Lead Industry Solutions (San Jose)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7678328581300947253",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2330,
+          "title": "Senior Product Manager, Measurement ",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7603483881057323317",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2331,
+          "title": "Product Manager Intern (TikTok LIVE-AI & Ecosystem Governance) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7677493272788683013",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2332,
+          "title": "Senior Product Manager, AI Safety Evaluation & Governance - TikTok Safety Product",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7675530274139474181",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2334,
+          "title": "Product Manager Intern (PGC) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673365923163638069",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2338,
+          "title": "Senior Product Manager, Family Pairing",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7675938655679056133",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2339,
+          "title": "Product Manager Project Intern (Business Integrity) - 2026 Start (MBA)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7683651421602433333",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2340,
+          "title": "Product Manager, Ads Agent",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7674027219115772165",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2346,
+          "title": "Product Strategist Project Intern (Advertisement Team) - 2026 Start (MBA)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7675890206373218565",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2348,
+          "title": "AI Agent Product Manager Intern (TikTok-Product Infrastructure-Customer Service Platform) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7670010726514493749",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2350,
+          "title": "Product Manager Lead, Entertainment and Travel Ads (Mandarin Speaker)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7654695963869628725",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2352,
+          "title": "AI Product Manager Intern (TikTok-Product-Social) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7675616554318596357",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2353,
+          "title": "Strategy Product Manager Intern (TikTok-Platform Responsibility) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7670420287191517493",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2356,
+          "title": "Product Manager, Data Management Platform & Partner Audience",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7659528582805932293",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2360,
+          "title": "AI Product Manager Graduate (TikTok-Product-Social) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7675616322118584629",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2362,
+          "title": "Senior Product Manager, Content and Service - Search Ads (Mandarin Speaker)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7661013482796157237",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2369,
+          "title": "Product Manager Intern (Content and Service Ads) - 2027 Summer (MBA)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7676283436713593093",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2370,
+          "title": "AI Product Manager Graduate (TikTok-Product-Content Ecosystem) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7667472978298767621",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2374,
+          "title": "Product Manager Graduate (Content and Service, Search Ads) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7675440171819960629",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2377,
+          "title": "Product Manager Graduate (Content and Service Ads) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673333697095469317",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2379,
+          "title": "Product Manager Graduate (Scaled Growth ) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7675439423287314693",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2382,
+          "title": "Product Manager, Creative AIGC Products ",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7654204982713731333",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2384,
+          "title": "Product Manager Intern (Scaled Growth) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673559305519794437",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2385,
+          "title": "AI Product Manager Project Intern (TikTok LIVE-Ecosystem Governance) - 2026 Start (BS/MS)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7598849238706735365",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2387,
+          "title": "TikTok Ads Platform Product Manager (Creative)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7657660161754777909",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2389,
+          "title": "Product Manager (Ecosystem Governance) - TikTok LIVE",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7612484487448660277",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2390,
+          "title": "Senior Product Manager - Generative AI Safety ",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7657568796283848965",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2391,
+          "title": "Product Manager Graduate (Sales and Operations Management Platform) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673331530758228229",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2393,
+          "title": "Senior Product Manager - Entertainment Ads (Mandarin Speaker)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7621302490100779269",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2394,
+          "title": "User Product Lead(Open Platform) — TikTok （San Jose）",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7654817097395505461",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2395,
+          "title": "Senior Product Manager, API Developer Platform",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7636195056664430853",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2396,
+          "title": "Product Strategist Graduate (Global Monetization Product and Technology) - 2027 Start (MBA)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673554696239089925",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2399,
+          "title": "Product Manager Project Intern (TikTok Ads Agent-Scaled Growth) - 2026 Start (BS/MS)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7657728959042046213",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2400,
+          "title": "Product Manager Graduate (Ads Interface Platform) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673194618236078341",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2402,
+          "title": "Senior Product Manager, Lead Ads (Mandarin Speaker)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7654699331320629509",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2403,
+          "title": "Search Product Manager (Content Ecosystem) - TikTok",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7668299078955075893",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2405,
+          "title": "Creative Product Manager Graduate (Creative and Brand Innovation) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673256057754290437",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2407,
+          "title": "Product Manager Graduate (Signal and Identity Product) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673330687380490501",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2408,
+          "title": "Senior Product Manager, Brand Ads",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7657216785313220869",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2409,
+          "title": "Recommendation Product Manager Intern (TikTok-Product-Content Ecosystem) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7667874197682899205",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2410,
+          "title": "Senior Product Manager-Content Product (POI Details)-TikTok Local Service",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7662503632046786821",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2412,
+          "title": "Senior Product Manager-AI Content Product (LLM)-TikTok Local Service",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7662502468585113909",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2414,
+          "title": "Senior Product Manager, AI-Driven Content Safety - TikTok Safety Product ",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7647404727589079349",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2415,
+          "title": "Senior Product Manager, Shop Ads Platform - San Jose",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7642436049369532725",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2416,
+          "title": "Senior Product Manager-POI-TikTok Local Service",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7655132116172622085",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2417,
+          "title": "Product Manager Intern (Content and Services) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673337777708550405",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2418,
+          "title": "Global Business Product Manager – AIGC Multimodal Content Understanding",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7654206448822290693",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2419,
+          "title": "POI Content Product Manager Graduate (TikTok Local Services) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7667573398700165429",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2422,
+          "title": "Product Manager Intern (Signal and Identity Product) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7672554809555192117",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2423,
+          "title": "TikTok Ads Platform Product Manager (Catalog)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7657657861015259397",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2424,
+          "title": "Product Manager Intern (Commerce Ads) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7672557943224961333",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2426,
+          "title": "Product Manager Intern (Ads Interface and Platform) - 2027 Summer",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7672562486917286149",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2428,
+          "title": "GEO Content Product Manager Graduate (TikTok Local Services) - 2027 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7667573235673073925",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2429,
+          "title": "Product Manager Vertical Search Ads Mandarin Speaking Project intern (Content and Service Ads) - 2026 Start (BS/MS)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7655410730217048373",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2435,
+          "title": "Strategy Product Manager Project Intern (TikTok-Platform Responsibility) - 2026 Start",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7649673091993454853",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2436,
+          "title": "Senior Product Manager - Lead Ads, GMPT (Mandarin Speaker)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7610200965827807493",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2438,
+          "title": " Senior Product Manager (Data Platform) - User Privacy & Transparency (San Jose)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7647287994324601141",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2439,
+          "title": "Product Manager Shop Ads Creative Project Intern (Ads Interface and Platform) - 2026 Start (BS/MS)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7644986569989032197",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2440,
+          "title": "Senior Product Manager (SEO/Web) - User Growth (San Jose)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7538285732869130503",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2441,
+          "title": "Senior Product Manager - Core Ads",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7634995623021136181",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2449,
+          "title": "Senior Product Manager (Video Recommendation and Safety) - TikTok Safety Product (San Jose)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7564093118680221957",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2453,
+          "title": "Senior Product Manager (LLM-Powered Content Moderation) - TikTok Safety Product (San Jose)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7554140353420380424",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2454,
+          "title": "Lead Product Manager (PC & Desktop Recommendation) - TikTok Growth (San Jose) ",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7595376632429398325",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2456,
+          "title": "Senior Product Manager (PC & Desktop Recommendation) - TikTok Growth (San Jose) ",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7584626269569534261",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2457,
+          "title": "Data Product Manager Project Intern (Monetization) - 2026 Start (BS/MS)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7631277919231625525",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2458,
+          "title": "Product Manager Project Intern (Ads Interface and Platform) - 2026 Start (BS/MS)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7634027348048709941",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2460,
+          "title": "Senior Product Manager - Ads Signals (Mandarin Speaker)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7602822081625245957",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2461,
+          "title": "Senior Product Manager, Vertical Ads Platform - San Jose",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7416380801351108890",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2465,
+          "title": "Product Manager, Business Integrity",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7686954588336277813",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2466,
+          "title": "Product Lead, Minor Feed Safety",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7681460262004918533",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2474,
+          "title": "Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7683329695139580213",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2476,
+          "title": "Senior Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7683300256067094837",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2477,
+          "title": "Lead Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7683285612203706677",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2479,
+          "title": "User Growth Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7683237699930933557",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2480,
+          "title": "Senior Product Manager - Business Center and Business Account",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7678904387497920821",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2481,
+          "title": "Technical Sourcer, Product Management - San Jose (Third-party Associate)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7675531441927325957",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2482,
+          "title": "Lead Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673215169733216565",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2483,
+          "title": "Senior Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673188074780985653",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2484,
+          "title": "Lead Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673187264156698885",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2485,
+          "title": "Senior Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7672520731789674757",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2486,
+          "title": "Product Manager Lead (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7672502538157066501",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2488,
+          "title": "Senior Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7672451472517974277",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2490,
+          "title": "Senior Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7660307846798559541",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2492,
+          "title": "Lead Product Manager, Creative - Creator and Ecosystem (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7660269693265103157",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2493,
+          "title": "Senior Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7660251496344488245",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2494,
+          "title": "Senior Product Manager (Multiple Positions)",
+          "location": "San Jose, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7660225422630177077",
+          "postedAt": null,
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1166-seattle-wa",
+      "companyId": 1166,
+      "companyName": "TikTok",
+      "companySlug": "tiktok",
+      "city": "Seattle",
+      "state": "WA",
+      "latitude": 47.61020292879736,
+      "longitude": -122.3428611593598,
+      "roleCount": 19,
+      "roles": [
+        {
+          "id": 2323,
+          "title": "TikTok Shop - Logistics Product Manager",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7683577550217365765",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2333,
+          "title": "Senior Product Manager - Business Center and Business Account",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7680299689825438005",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2345,
+          "title": "TikTok Shop - Global Risk Strategy Product Manager (Buyer Risk)",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7677665960124336437",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2347,
+          "title": "TikTok Shop - WMS Product Manager",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673632479987173637",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2351,
+          "title": "Data Product Manager - TikTok Shop",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7680134139857406261",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2355,
+          "title": "Product Manager Project Intern (Business Integrity) - 2026 Start (MBA)",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673895973460576517",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2365,
+          "title": "TikTok Shop - Global Risk Strategy Product Manager",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7660183699381635333",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2367,
+          "title": "TikTok Shop - Logistics Service Product Manager",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7631715741777463557",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2378,
+          "title": "TikTok Shop - Product Manager Leader, 1P App Store Integration",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7605285317163387189",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2401,
+          "title": "Product Manager Graduate (Ads Interface Platform) - 2027 Start",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673198824630077701",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2404,
+          "title": "TikTok Shop - Product Manager, Livestream Seller Tools",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7623684248197826869",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2406,
+          "title": "Senior Product Manager, API  Developer Platform",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7636202783309744437",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2411,
+          "title": "Product Manager Intern (Ads Interface and Platform) - 2027 Summer",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7672569081632229685",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2434,
+          "title": "Subscription Product Manager - TikTok Shop",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7618134548819216693",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2443,
+          "title": "TikTok Shop - Product Manager, AI Service Experience",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7641883951597914421",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2469,
+          "title": "Product Management Project Intern (TikTok Shop- Operations) - 2026 Start (BS/MS)",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7583141608302987525",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2475,
+          "title": "Group Product Manager, Recommendation Product (Multiple Positions)",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7683318104030202165",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2478,
+          "title": "Senior Product Manager (Multiple Positions)",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7683252815439382789",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2491,
+          "title": "Senior Product Manager, Recommendation (Multiple Positions)",
+          "location": "Seattle, Washington, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7660305777849485621",
+          "postedAt": null,
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1166-los-angeles-ca",
+      "companyId": 1166,
+      "companyName": "TikTok",
+      "companySlug": "tiktok",
+      "city": "Los Angeles",
+      "state": "CA",
+      "latitude": 34.0490942329336,
+      "longitude": -118.23000565290758,
+      "roleCount": 3,
+      "roles": [
+        {
+          "id": 2335,
+          "title": "Product Manager Intern (PGC) - 2027 Summer",
+          "location": "Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7673365416605010229",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2470,
+          "title": "Product Management Project Intern (TikTok Shop- Operations) - 2026 Start (BS/MS)",
+          "location": "Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7584522934515714357",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2502,
+          "title": "Technical Sourcer - Product Management - Los Angeles (Third-party Associate)",
+          "location": "Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7501148946270963975",
+          "postedAt": null,
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1166-washington-d-c-dc",
+      "companyId": 1166,
+      "companyName": "TikTok",
+      "companySlug": "tiktok",
+      "city": "Washington D.C.",
+      "state": "DC",
+      "latitude": 38.88260501722492,
+      "longitude": -77.04178065024091,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2349,
+          "title": "Manager, AI Public Policy - U.S.",
+          "location": "Washington D.C., District of Columbia, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7684328212227606837",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2459,
+          "title": "AMS Public Policy Project Intern (Global Public Policy) - 2026 Start (BS/MS)",
+          "location": "Washington D.C., District of Columbia, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7629798426777307397",
+          "postedAt": null,
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1166-new-york-ny",
+      "companyId": 1166,
+      "companyName": "TikTok",
+      "companySlug": "tiktok",
+      "city": "New York",
+      "state": "NY",
+      "latitude": 40.722402720703656,
+      "longitude": -74.00594394187415,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2487,
+          "title": "Lead Product Manager (Multiple Positions)",
+          "location": "New York, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7672459329171228933",
+          "postedAt": null,
+          "isRemote": false
+        },
+        {
+          "id": 2501,
+          "title": "Technical Sourcer - Product Management - New York (Third-party Associate)",
+          "location": "New York, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lifeattiktok.com/search/7501151410052401416",
           "postedAt": null,
           "isRemote": false
         }
@@ -27289,25 +29428,6 @@
       "roleCount": 1
     },
     {
-      "companyId": 1043,
-      "companyName": "Belron|wd3|carglass Careers",
-      "companySlug": "belron-wd3-carglass-careers",
-      "roles": [
-        {
-          "id": 1970,
-          "title": "Product Owner",
-          "location": "PRT HeadOffice",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://belron.wd3.myworkdayjobs.com/carglass_careers/job/PRT-HeadOffice/Product-Owner_JR72767-1",
-          "postedAt": "Posted 28 Days Ago",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 1
-    },
-    {
       "companyId": 923,
       "companyName": "Benepass",
       "companySlug": "benepass",
@@ -27358,8 +29478,8 @@
     },
     {
       "companyId": 1044,
-      "companyName": "Bose Electronics",
-      "companySlug": "bose-electronics",
+      "companyName": "Bose",
+      "companySlug": "bose",
       "roles": [
         {
           "id": 1972,
@@ -27502,6 +29622,25 @@
         }
       ],
       "roleCount": 2
+    },
+    {
+      "companyId": 1043,
+      "companyName": "Carglass",
+      "companySlug": "carglass",
+      "roles": [
+        {
+          "id": 1970,
+          "title": "Product Owner",
+          "location": "PRT HeadOffice",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://belron.wd3.myworkdayjobs.com/carglass_careers/job/PRT-HeadOffice/Product-Owner_JR72767-1",
+          "postedAt": "Posted 28 Days Ago",
+          "isRemote": true
+        }
+      ],
+      "roleCount": 1
     },
     {
       "companyId": 928,
@@ -27687,8 +29826,8 @@
     },
     {
       "companyId": 1047,
-      "companyName": "Comscore|wd5|external",
-      "companySlug": "comscore-wd5-external",
+      "companyName": "Comscore",
+      "companySlug": "comscore",
       "roles": [
         {
           "id": 1976,
@@ -27861,8 +30000,8 @@
     },
     {
       "companyId": 1051,
-      "companyName": "Fedex|wd1|fdw Eu External Career Site",
-      "companySlug": "fedex-wd1-fdw-eu-external-career-site",
+      "companyName": "FedEx",
+      "companySlug": "fedex",
       "roles": [
         {
           "id": 1985,
@@ -28267,8 +30406,8 @@
     },
     {
       "companyId": 1055,
-      "companyName": "Idexcorp|wd5|idexuk",
-      "companySlug": "idexcorp-wd5-idexuk",
+      "companyName": "IDEX",
+      "companySlug": "idex",
       "roles": [
         {
           "id": 1991,
@@ -28459,55 +30598,6 @@
       "roleCount": 1
     },
     {
-      "companyId": 1057,
-      "companyName": "Lbg|wd3|broadbean External",
-      "companySlug": "lbg-wd3-broadbean-external",
-      "roles": [
-        {
-          "id": 1993,
-          "title": "Senior Product Owner",
-          "location": "St, Helier",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://lbg.wd3.myworkdayjobs.com/broadbean_external/job/St-Helier/Senior-Product-Owner_157098-1",
-          "postedAt": "Posted Yesterday",
-          "isRemote": true
-        },
-        {
-          "id": 1996,
-          "title": "Product Owner",
-          "location": "Bristol",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://lbg.wd3.myworkdayjobs.com/broadbean_external/job/Bristol/Product-Owner_161200-3",
-          "postedAt": "Posted 11 Days Ago",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 2
-    },
-    {
-      "companyId": 1058,
-      "companyName": "Lbg|wd3|lbg Careers",
-      "companySlug": "lbg-wd3-lbg-careers",
-      "roles": [
-        {
-          "id": 1997,
-          "title": "Senior Product Owner",
-          "location": "St, Helier",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://lbg.wd3.myworkdayjobs.com/lbg_careers/job/St-Helier/Senior-Product-Owner_157098",
-          "postedAt": "Posted Yesterday",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 1
-    },
-    {
       "companyId": 596,
       "companyName": "Legion Technologies",
       "companySlug": "legion-technologies",
@@ -28574,6 +30664,47 @@
         }
       ],
       "roleCount": 2
+    },
+    {
+      "companyId": 1057,
+      "companyName": "Lloyds Banking Group",
+      "companySlug": "lloyds-banking-group",
+      "roles": [
+        {
+          "id": 1993,
+          "title": "Senior Product Owner",
+          "location": "St, Helier",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lbg.wd3.myworkdayjobs.com/broadbean_external/job/St-Helier/Senior-Product-Owner_157098-1",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 1997,
+          "title": "Senior Product Owner",
+          "location": "St, Helier",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lbg.wd3.myworkdayjobs.com/lbg_careers/job/St-Helier/Senior-Product-Owner_157098",
+          "postedAt": "Posted Yesterday",
+          "isRemote": true
+        },
+        {
+          "id": 1996,
+          "title": "Product Owner",
+          "location": "Bristol",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://lbg.wd3.myworkdayjobs.com/broadbean_external/job/Bristol/Product-Owner_161200-3",
+          "postedAt": "Posted 11 Days Ago",
+          "isRemote": true
+        }
+      ],
+      "roleCount": 3
     },
     {
       "companyId": 475,
@@ -28821,6 +30952,17 @@
       "companySlug": "navapbc",
       "roles": [
         {
+          "id": 2318,
+          "title": "Product Manager",
+          "location": "Remote",
+          "salaryMin": 112000,
+          "salaryMax": 112000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/navapbc/jobs/4361894009",
+          "postedAt": "2026-09-19T03:00:00-04:00",
+          "isRemote": true
+        },
+        {
           "id": 196,
           "title": "Product Management Resume Drop Off",
           "location": "Remote",
@@ -28832,7 +30974,7 @@
           "isRemote": true
         }
       ],
-      "roleCount": 1
+      "roleCount": 2
     },
     {
       "companyId": 1027,
@@ -28855,8 +30997,8 @@
     },
     {
       "companyId": 1061,
-      "companyName": "Nibcatwork|wd3|external",
-      "companySlug": "nibcatwork-wd3-external",
+      "companyName": "NIBC Bank",
+      "companySlug": "nibc-bank",
       "roles": [
         {
           "id": 2001,
@@ -29207,8 +31349,8 @@
     },
     {
       "companyId": 1070,
-      "companyName": "Pros|wd5|pros Careers",
-      "companySlug": "pros-wd5-pros-careers",
+      "companyName": "PROS",
+      "companySlug": "pros",
       "roles": [
         {
           "id": 2019,
@@ -29691,8 +31833,8 @@
     },
     {
       "companyId": 1075,
-      "companyName": "Strayer|wd1|sophia",
-      "companySlug": "strayer-wd1-sophia",
+      "companyName": "Strategic Education",
+      "companySlug": "strategic-education",
       "roles": [
         {
           "id": 2034,
@@ -29895,8 +32037,8 @@
     },
     {
       "companyId": 1078,
-      "companyName": "Techem|wd3|techemcareeraustria",
-      "companySlug": "techem-wd3-techemcareeraustria",
+      "companyName": "Techem",
+      "companySlug": "techem",
       "roles": [
         {
           "id": 2038,
@@ -30222,8 +32364,8 @@
     },
     {
       "companyId": 1080,
-      "companyName": "Woodbine Entertainment Group",
-      "companySlug": "woodbine-entertainment-group",
+      "companyName": "Woodbine Entertainment",
+      "companySlug": "woodbine-entertainment",
       "roles": [
         {
           "id": 2041,
