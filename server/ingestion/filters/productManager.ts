@@ -136,6 +136,14 @@ const PM_ABBREVIATION =
 const PM_ABBREVIATION_NOT_PRODUCT =
   /\b(?:project|program|programme|construction|property|facilit(?:y|ies)|site|field|superintendent|maintenance|mechanical|electrical|civil|plumbing|hvac|estimat(?:or|ing)|preconstruction|building|capital|shift|evening|night|pm shift)\b|\b\d{1,2}(?::\d{2})?\s*pm\b/i;
 
+// Airbnb titles its PM roles "Platform Manager" ("Staff Platform Manager,
+// AI Personalization", "Senior Manager, Platform Management (Payments)").
+// Across all ~53k synced postings nobody else used the title except as a
+// side phrase ("Field Enablement Manager (Enablement Program and Platform
+// Manager)"), so it only counts leading the title, after seniority words.
+const PLATFORM_MANAGER =
+  /^\s*(?:(?:senior|sr\.?|staff|principal|lead|group|associate)\s+)*platform\s+manager\b|^\s*(?:senior\s+|sr\.?\s+)?(?:manager|director|head),?\s+(?:of\s+)?platform\s+management\b/i;
+
 function isPmAbbreviation(title: string): boolean {
   return PM_ABBREVIATION.test(title) && !PM_ABBREVIATION_NOT_PRODUCT.test(title);
 }
@@ -188,6 +196,7 @@ export function matchesProductManagerFilter(title: string): boolean {
   if (LEADING_CPO.test(title.trim())) return true;
   if (isProductLeadership(title) || PRODUCT_HEAD.test(title)) return true;
   if (isPmAbbreviation(title)) return true;
+  if (PLATFORM_MANAGER.test(title)) return true;
 
   const normalized = normalizeTitle(title);
   const includeNormalized = PM_TITLE_INCLUDE.map(normalizeTitle);
