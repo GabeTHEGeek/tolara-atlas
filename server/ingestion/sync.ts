@@ -159,7 +159,8 @@ async function main() {
       `SELECT company_id AS id FROM company_sources WHERE platform = ? AND token = ?`,
     );
     const renameCompany = db.prepare(
-      `UPDATE companies SET name = @name, slug = @slug, updated_at = datetime('now') WHERE id = @id`,
+      `UPDATE companies SET name = @name, slug = @slug, updated_at = datetime('now')
+       WHERE id = @id AND (name IS NOT @name OR slug IS NOT @slug)`,
     );
 
     // Folds company `fromId` into `intoId`: its boards and roles move over,
@@ -193,7 +194,10 @@ async function main() {
           mergeCompany(bySource.id, bySlug.id);
           return bySlug.id;
         }
-        if (!bySlug) renameCompany.run({ id: bySource.id, name, slug });
+        // Covers both a real rename (new slug) and a display-only fix with
+        // the same slug ("Gitlab" -> "GitLab"); the WHERE clause makes it a
+        // no-op when nothing changed.
+        renameCompany.run({ id: bySource.id, name, slug });
         return bySource.id;
       }
       return bySlug ? bySlug.id : (upsertCompany.get({ name, slug }) as { id: number }).id;
