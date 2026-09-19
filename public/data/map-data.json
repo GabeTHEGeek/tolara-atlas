@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T06:27:48.374Z",
+  "generatedAt": "2026-09-19T06:37:23.890Z",
   "companyCount": 610,
   "pinCount": 652,
   "roleCount": 1653,
@@ -15752,8 +15752,8 @@
     {
       "id": "1140-kansas-city-mo",
       "companyId": 1140,
-      "companyName": "Loop",
-      "companySlug": "loop",
+      "companyName": "Lead Bank",
+      "companySlug": "lead-bank",
       "city": "Kansas City",
       "state": "MO",
       "latitude": 39.100105,
@@ -15776,8 +15776,8 @@
     {
       "id": "1140-new-york-ny",
       "companyId": 1140,
-      "companyName": "Loop",
-      "companySlug": "loop",
+      "companyName": "Lead Bank",
+      "companySlug": "lead-bank",
       "city": "New York",
       "state": "NY",
       "latitude": 40.71139448516831,
@@ -15811,8 +15811,8 @@
     {
       "id": "1140-san-francisco-ca",
       "companyId": 1140,
-      "companyName": "Loop",
-      "companySlug": "loop",
+      "companyName": "Lead Bank",
+      "companySlug": "lead-bank",
       "city": "San Francisco",
       "state": "CA",
       "latitude": 37.79545184474997,
@@ -15846,8 +15846,8 @@
     {
       "id": "1140-sunnyvale-ca",
       "companyId": 1140,
-      "companyName": "Loop",
-      "companySlug": "loop",
+      "companyName": "Lead Bank",
+      "companySlug": "lead-bank",
       "city": "Sunnyvale",
       "state": "CA",
       "latitude": 37.37514899427643,
