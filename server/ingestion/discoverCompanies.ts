@@ -55,7 +55,7 @@ import { searchGreenhouse } from "./sources/greenhouse.js";
 import { searchAshby } from "./sources/ashby.js";
 import { searchLever } from "./sources/lever.js";
 import { searchBambooHr } from "./sources/bamboohr.js";
-import { searchWorkday } from "./sources/workday.js";
+import { searchWorkday, fetchWorkdayCompanyName } from "./sources/workday.js";
 import { searchPaylocity } from "./sources/paylocity.js";
 import { searchIcims } from "./sources/icims.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
@@ -82,7 +82,13 @@ function sleep(ms: number): Promise<void> {
 }
 
 function titleCaseToken(token: string): string {
-  return token
+  let decoded = token;
+  try {
+    decoded = decodeURIComponent(token); // "P-1%20AI" -> "P-1 AI"
+  } catch {
+    // not valid percent-encoding -- use as-is
+  }
+  return decoded
     .replace(/[-_]+/g, " ")
     .split(" ")
     .filter(Boolean)
@@ -133,6 +139,13 @@ function loadCandidates(platform: Platform): Candidate[] {
   }
 
   const tokens = raw as string[];
+  if (platform === "workday") {
+    // Title-casing the whole "tenant|wd1|site" token produced names like
+    // "Duckcreek|wd1|duckcreekcareers". The tenant alone is the stand-in
+    // here; main() swaps in the real hiringOrganization name when a board
+    // actually gets added (see fetchWorkdayCompanyName).
+    return tokens.map((token) => ({ token, displayName: titleCaseToken(token.split("|")[0]) }));
+  }
   if (platform === "icims") {
     return tokens.map((token) => ({ token, displayName: titleCaseToken(stripIcimsPrefix(token)) }));
   }
@@ -218,7 +231,9 @@ async function main() {
           totalNoPmRole += 1;
           continue;
         }
-        const name = displayNameByToken.get(board) ?? titleCaseToken(board);
+        const fallbackName = displayNameByToken.get(board) ?? titleCaseToken(board);
+        const name =
+          platform === "workday" ? ((await fetchWorkdayCompanyName(board)) ?? fallbackName) : fallbackName;
         newLines.push(
           `${csvField(name)},${csvField(board)},${platform},verified,${nowIso()},Auto-discovered (bulk token scan)\r\n`,
         );

@@ -309,3 +309,72 @@ export async function searchWorkday(
 
   return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty, boardsInMaintenance } };
 }
+
+// Legal-entity and regional-subsidiary tails stripped from
+// hiringOrganization names, so "PUMA North America, Inc." reads as "PUMA"
+// and "Bose Electronics Co., Ltd. Shenzhen Branch" as "Bose Electronics".
+const LEGAL_SUFFIX = /\s+(inc|llc|l\.l\.c|ltd|limited|corp|corporation|co|company|plc|gmbh|ag|sa|s\.a|bv|b\.v|lp|l\.p|pty|pte|holdings?)\.?$/i;
+const REGION_SUFFIX = /\s+(north america|americas|usa|us|u\.s\.|united states|international|global)$/i;
+
+function cleanLegalName(name: string): string {
+  // Everything after the first comma is legal/branch detail ("..., Inc.",
+  // "..., Ltd. Shenzhen Branch"); parentheticals are too ("(US)").
+  let cleaned = name.split(",")[0].replace(/\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
+  // Repeat for stacked tails like "Acme Holdings Pty Ltd" or "PUMA North America Inc".
+  for (let i = 0; i < 4; i++) {
+    const next = cleaned.replace(LEGAL_SUFFIX, "").replace(REGION_SUFFIX, "").trim();
+    if (next === cleaned || next === "") break;
+    cleaned = next;
+  }
+  return cleaned;
+}
+
+/**
+ * The real company name behind a Workday board, for display. Tokens are
+ * "{tenant}|{datacenter}|{site}", which say nothing readable about the
+ * company ("duckcreek|wd1|duckcreekcareers", "peak6group|wd1|weinsure"),
+ * but each posting's detail endpoint reports a hiringOrganization.name.
+ * Reads up to 10 postings and takes the most common cleaned name (a tenant
+ * can post for several subsidiaries and regional entities). null when the board
+ * can't be read -- including during Workday's maintenance window -- or has
+ * no postings, so callers can keep whatever name they already have.
+ */
+export async function fetchWorkdayCompanyName(token: string, timeoutMs = 15000): Promise<string | null> {
+  const parsed = parseToken(token);
+  if (!parsed) return null;
+  const { tenant, dataCenter, site } = parsed;
+  const base = `https://${tenant}.${dataCenter}.myworkdayjobs.com/wday/cxs/${tenant}/${site}`;
+
+  const getJson = async (url: string, init?: RequestInit): Promise<unknown | null> => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const resp = await fetch(url, { ...init, signal: controller.signal });
+      if (!resp.ok || resp.url.includes(MAINTENANCE_URL_MARKER)) return null;
+      return await resp.json();
+    } catch {
+      return null;
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
+  const list = (await getJson(`${base}/jobs`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ appliedFacets: {}, limit: 10, offset: 0, searchText: "" }),
+  })) as { jobPostings?: WorkdayJobPosting[] } | null;
+  const paths = (list?.jobPostings ?? []).map((j) => j.externalPath).filter((p): p is string => Boolean(p));
+
+  const counts = new Map<string, number>();
+  for (const externalPath of paths) {
+    const detail = (await getJson(`${base}${externalPath}`)) as { hiringOrganization?: { name?: string } } | null;
+    const name = cleanLegalName(detail?.hiringOrganization?.name ?? "");
+    if (name) counts.set(name, (counts.get(name) ?? 0) + 1);
+  }
+  let best: string | null = null;
+  for (const [name, count] of counts) {
+    if (best === null || count > (counts.get(best) ?? 0)) best = name;
+  }
+  return best;
+}

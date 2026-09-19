@@ -2,3 +2,6 @@ node_modules/
 dist/
 *.log
 .DS_Store
+# SQLite WAL-mode side files (data lives in tolara.db once checkpointed)
+*.db-shm
+*.db-wal

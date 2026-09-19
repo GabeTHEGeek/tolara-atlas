@@ -130,6 +130,49 @@ async function main() {
       RETURNING id
     `);
     const getCompanyBySlug = db.prepare(`SELECT id FROM companies WHERE slug = ?`);
+    const getCompanyBySource = db.prepare(
+      `SELECT company_id AS id FROM company_sources WHERE platform = ? AND token = ?`,
+    );
+    const renameCompany = db.prepare(
+      `UPDATE companies SET name = @name, slug = @slug, updated_at = datetime('now') WHERE id = @id`,
+    );
+
+    // Folds company `fromId` into `intoId`: its boards and roles move over,
+    // then the emptied company row is deleted. A role that already exists
+    // under `intoId` with the same source_job_id (the same posting listed on
+    // two of the company's boards) can't move without breaking
+    // UNIQUE(company_id, source_job_id), so UPDATE OR IGNORE leaves it
+    // behind and the final DELETE's cascade drops that duplicate.
+    const mergeCompany = db.transaction((fromId: number, intoId: number) => {
+      db.prepare(`UPDATE OR IGNORE roles SET company_id = ? WHERE company_id = ?`).run(intoId, fromId);
+      db.prepare(`UPDATE company_sources SET company_id = ? WHERE company_id = ?`).run(intoId, fromId);
+      db.prepare(`UPDATE company_board_locations SET company_id = ? WHERE company_id = ?`).run(intoId, fromId);
+      db.prepare(`DELETE FROM companies WHERE id = ?`).run(fromId);
+    });
+
+    /**
+     * The company a board belongs to, looked up by the board itself
+     * (company_sources) before falling back to the name's slug. Going by
+     * slug alone meant renaming a company in companies.csv (e.g. fixing a
+     * raw "Duckcreek|wd1|duckcreekcareers" display name) created a brand-new
+     * company and orphaned the old one's roles as active forever, since
+     * nothing ever checked or closed them again. Now a rename updates the
+     * existing row in place, and renaming a board to a company that already
+     * exists under another board merges the two.
+     */
+    function resolveCompanyId(platform: string, board: string, name: string, slug: string): number {
+      const bySource = getCompanyBySource.get(platform, board) as { id: number } | undefined;
+      const bySlug = getCompanyBySlug.get(slug) as { id: number } | undefined;
+      if (bySource) {
+        if (bySlug && bySlug.id !== bySource.id) {
+          mergeCompany(bySource.id, bySlug.id);
+          return bySlug.id;
+        }
+        if (!bySlug) renameCompany.run({ id: bySource.id, name, slug });
+        return bySource.id;
+      }
+      return bySlug ? bySlug.id : (upsertCompany.get({ name, slug }) as { id: number }).id;
+    }
 
     const upsertSource = db.prepare(`
       INSERT INTO company_sources (company_id, platform, token, status, last_checked)
@@ -240,13 +283,11 @@ async function main() {
         const companyName = nameByToken.get(board) ?? board;
         const slug = slugify(companyName);
 
-        const existing = getCompanyBySlug.get(slug) as { id: number } | undefined;
-        const companyId = existing
-          ? existing.id
-          : (upsertCompany.get({ name: companyName, slug }) as { id: number }).id;
+        const companyId = resolveCompanyId(platform, board, companyName, slug);
 
         upsertSource.run({ companyId, platform, token: board });
-        if (!seenCompanySlugs.has(slug)) {
+        const firstBoardForCompany = !seenCompanySlugs.has(slug);
+        if (firstBoardForCompany) {
           seenCompanySlugs.add(slug);
           companiesSynced += 1;
         }
@@ -254,7 +295,10 @@ async function main() {
         // Tally raw location strings across the company's FULL board (all
         // departments, from allJobsByBoard) -- not just its PM postings --
         // and replace this company's company_board_locations rows with the
-        // fresh count. See schema.sql for why geocode.ts wants this.
+        // fresh count. See schema.sql for why geocode.ts wants this. Only
+        // cleared on the company's FIRST board this run -- a company with
+        // several boards (Peak6, Duck Creek) would otherwise have each
+        // board wipe the locations the previous one just wrote.
         const boardAllJobs = allJobsByBoard.get(board) ?? [];
         const locationTally = new Map<string, number>();
         for (const job of boardAllJobs) {
@@ -262,7 +306,7 @@ async function main() {
           if (!loc) continue;
           locationTally.set(loc, (locationTally.get(loc) ?? 0) + 1);
         }
-        deleteBoardLocations.run(companyId);
+        if (firstBoardForCompany) deleteBoardLocations.run(companyId);
         for (const [rawLocation, count] of locationTally) {
           insertBoardLocation.run(companyId, rawLocation, count);
         }
