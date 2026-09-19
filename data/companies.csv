@@ -1154,3 +1154,5 @@ Kavak,kavak,lever,verified,2026-09-19T06:24:43.675Z,a16z portfolio (jobs.a16z.co
 Nexthop,nexthopai,bamboohr,verified,2026-09-19T06:24:43.675Z,a16z portfolio (jobs.a16z.com)
 TikTok,tiktok,tiktok,verified,2026-09-19T08:06:38.000Z,Added manually (lifeattiktok.com public job API)
 Apple,apple,apple,verified,2026-09-19T08:26:33.000Z,Added manually (jobs.apple.com search page scrape -- see sources/apple.ts)
+NVIDIA,nvidia|wd5|NVIDIAExternalCareerSite|product,workday,verified,2026-09-19T08:45:23.000Z,Added manually (Workday; searched board -- see workday.ts on 4-part tokens)
+Meta,meta,meta,verified,2026-09-19T08:49:08.000Z,Added manually (metacareers.com job search GraphQL scrape -- see sources/meta.ts)
