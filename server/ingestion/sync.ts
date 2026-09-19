@@ -25,6 +25,7 @@ import { searchPaylocity } from "./sources/paylocity.js";
 import { searchIcims } from "./sources/icims.js";
 import { searchTikTok } from "./sources/tiktok.js";
 import { searchApple } from "./sources/apple.js";
+import { searchMeta } from "./sources/meta.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
@@ -75,8 +76,19 @@ function parseSalary(salary: string): { min: number | null; max: number | null; 
  * afterward via matchesProductManagerFilter, so tuning that function
  * changes what the next sync stores without touching these adapters.
  */
-type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple";
-const ALL_PLATFORMS: Platform[] = ["greenhouse", "ashby", "lever", "bamboohr", "workday", "paylocity", "icims", "tiktok", "apple"];
+type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta";
+const ALL_PLATFORMS: Platform[] = [
+  "greenhouse",
+  "ashby",
+  "lever",
+  "bamboohr",
+  "workday",
+  "paylocity",
+  "icims",
+  "tiktok",
+  "apple",
+  "meta",
+];
 
 // Boards big enough that PER_BOARD_LIMIT would cut off real PM roles. TikTok
 // is one company with ~4,300 postings worldwide, and the cap is applied
@@ -104,6 +116,8 @@ async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jo
       return searchTikTok("", options);
     case "apple":
       return searchApple("", options);
+    case "meta":
+      return searchMeta("", options);
   }
 }
 
