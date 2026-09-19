@@ -141,10 +141,22 @@ const NON_US_PATTERN = new RegExp(
   "i",
 );
 
-/** True when a raw location string explicitly names a non-US place — see NON_US_PATTERN's comment. */
+// An explicit US signal anywhere in the string. A posting open in several
+// countries ("Remote, Canada; Remote, US" -- all of GitLab's PM roles) names
+// a non-US place but is still a US role; before this check it was dropped
+// from the map as non-US instead of going through the remote fallback like
+// any other US posting with no city.
+const US_SIGNAL = /\b(?:united states(?: of america)?|usa|u\.s\.a?\.?|us)\b/i;
+
+/**
+ * True when a raw location string explicitly names a non-US place AND
+ * doesn't also name the US -- see NON_US_PATTERN's comment. Only consulted
+ * for roles with no resolvable US city, so "Toronto, ON; New York, NY"
+ * never gets here: it already pins at New York.
+ */
 export function isExplicitlyNonUS(raw: string | null | undefined): boolean {
   if (!raw) return false;
-  return NON_US_PATTERN.test(raw);
+  return NON_US_PATTERN.test(raw) && !US_SIGNAL.test(raw);
 }
 
 function isPlausibleCity(city: string): boolean {
