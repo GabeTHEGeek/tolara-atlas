@@ -66,6 +66,8 @@ const COMPANY_SOURCES_PLATFORMS = [
   "workday",
   "paylocity",
   "icims",
+  "tiktok",
+  "apple",
   "gem",
 ] as const;
 
