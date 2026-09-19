@@ -92,8 +92,9 @@ function roleSignals(role: CompanyDetailsRole, intel: CompanyIntelligenceData | 
   const posted = role.postedAt && !Number.isNaN(Date.parse(role.postedAt)) ? role.postedAt : null;
   const since = posted ?? role.firstSeenAt;
   const days = Math.floor((Date.now() - Date.parse(since)) / 86_400_000);
+  const age = days <= 0 ? "today" : days === 1 ? "1 day ago" : `${days} days ago`;
   signals.push({
-    text: posted ? `This role was posted ${days <= 0 ? "today" : `${days} days ago`}` : `Tolara first saw this role ${days <= 0 ? "today" : `${days} days ago`}`,
+    text: posted ? `This role was posted ${age}` : `Tolara first saw this role ${age}`,
     tone: days <= 14 ? "positive" : days > 45 ? "caution" : "neutral",
     detail: posted ? "from posting" : "our sync",
   });
@@ -130,6 +131,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
   const [focus, setFocus] = useState<RoleFocus | null>(null);
   const [focusChecked, setFocusChecked] = useState(false);
   const [intelState, setIntelState] = useState<"idle" | "loading" | "error">("idle");
+  const [unavailable, setUnavailable] = useState<string[]>([]);
   const [saved, setSaved] = useState<number[]>(readSaved);
 
   useEffect(() => {
@@ -206,6 +208,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = (await res.json()) as IntelligenceResponse;
       setIntel({ profile: data.profile, leaders: data.leaders, news: data.news, fetchedAt: data.fetchedAt });
+      setUnavailable(data.unavailable ?? []);
       setFocus(data.focus);
       setFocusChecked(true);
       setIntelState("idle");
@@ -293,39 +296,6 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
 
         <div className="card-grid">
           <section className="card">
-            <h2 className="card-label">Company snapshot</h2>
-            {!intelLoaded ? (
-              <p className="card-empty">Not loaded yet.</p>
-            ) : profile ? (
-              <>
-                <ul className="snapshot-lines">
-                  {(profile.founded || profile.headquarters) && (
-                    <li>{[profile.founded && `Founded ${profile.founded}`, profile.headquarters].filter(Boolean).join(" · ")}</li>
-                  )}
-                  {(profile.industries.length > 0 || profile.employees) && (
-                    <li>
-                      {[
-                        profile.industries.map((i) => i.charAt(0).toUpperCase() + i.slice(1)).join(" / ") || null,
-                        profile.employees
-                          ? `${profile.employees.toLocaleString("en-US")} employees${profile.employeesAsOf ? ` (${profile.employeesAsOf})` : ""}`
-                          : null,
-                      ]
-                        .filter(Boolean)
-                        .join(" · ")}
-                    </li>
-                  )}
-                  {profile.description && <li>{profile.description.charAt(0).toUpperCase() + profile.description.slice(1)}</li>}
-                </ul>
-                <a className="source-link" href={profile.wikidataUrl} target="_blank" rel="noreferrer">
-                  via Wikidata
-                </a>
-              </>
-            ) : (
-              <p className="card-empty">No public profile found for {details.company.name} yet.</p>
-            )}
-          </section>
-
-          <section className="card">
             <h2 className="card-label">Leadership</h2>
             {!intelLoaded ? (
               <p className="card-empty">Not loaded yet.</p>
@@ -354,8 +324,45 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
                   </li>
                 ))}
               </ul>
+            ) : unavailable.includes("profile") ? (
+              <RetryNote source="Wikidata" onRetry={loadIntelligence} busy={intelState === "loading"} />
             ) : (
               <p className="card-empty">No leadership listed publicly for {details.company.name} yet.</p>
+            )}
+          </section>
+
+          <section className="card">
+            <h2 className="card-label">Company snapshot</h2>
+            {!intelLoaded ? (
+              <p className="card-empty">Not loaded yet.</p>
+            ) : profile ? (
+              <>
+                <ul className="snapshot-lines">
+                  {(profile.founded || profile.headquarters) && (
+                    <li>{[profile.founded && `Founded ${profile.founded}`, profile.headquarters].filter(Boolean).join(" · ")}</li>
+                  )}
+                  {(profile.industries.length > 0 || profile.employees) && (
+                    <li>
+                      {[
+                        profile.industries.map((i) => i.charAt(0).toUpperCase() + i.slice(1)).join(" / ") || null,
+                        profile.employees
+                          ? `${profile.employees.toLocaleString("en-US")} employees${profile.employeesAsOf ? ` (${profile.employeesAsOf})` : ""}`
+                          : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </li>
+                  )}
+                  {profile.description && <li>{profile.description.charAt(0).toUpperCase() + profile.description.slice(1)}</li>}
+                </ul>
+                <a className="source-link" href={profile.wikidataUrl} target="_blank" rel="noreferrer">
+                  via Wikidata
+                </a>
+              </>
+            ) : unavailable.includes("profile") ? (
+              <RetryNote source="Wikidata" onRetry={loadIntelligence} busy={intelState === "loading"} />
+            ) : (
+              <p className="card-empty">No public profile found for {details.company.name} yet.</p>
             )}
           </section>
 
@@ -389,6 +396,8 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
                   </li>
                 ))}
               </ul>
+            ) : unavailable.includes("news") ? (
+              <RetryNote source="Google News" onRetry={loadIntelligence} busy={intelState === "loading"} />
             ) : (
               <p className="card-empty">No news about {details.company.name} in the last 30 days.</p>
             )}
@@ -419,6 +428,17 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
       </div>
     </>,
     `${role.title} at ${details.company.name}`,
+  );
+}
+
+function RetryNote({ source, onRetry, busy }: { source: string; onRetry: () => void; busy: boolean }) {
+  return (
+    <p className="card-empty">
+      {source} didn't respond just now.{" "}
+      <button className="link-button" onClick={onRetry} disabled={busy}>
+        {busy ? "Trying…" : "Try again"}
+      </button>
+    </p>
   );
 }
 

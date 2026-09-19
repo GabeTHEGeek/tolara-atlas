@@ -15,9 +15,11 @@
  * 20-50 seconds per lookup.
  *
  * Name and type still aren't enough ("Mercury" the fintech matched Ford's
- * Mercury car brand), so (c) the item's headquarters city has to be one of
- * the cities the company actually has offices in on our map (or its
- * hand-set HQ). An item with no headquarters stated fails too. Up to 3
+ * Mercury car brand), so (c) the item has to corroborate itself: its
+ * headquarters is a city where the company actually has offices on our map
+ * (or its hand-set HQ), or -- for companies headquartered somewhere we
+ * don't list, like TikTok -- it states BOTH a CEO and an employee count,
+ * which a brand or product entry like Mercury's does not. Up to 3
  * company-shaped candidates are tried in search order. Anything else returns null and the
  * page shows "not available yet" -- a blank snapshot beats someone else's.
  * Well-known companies resolve; most small startups have no item and stay
@@ -70,7 +72,13 @@ export interface Leader {
   wikidataUrl: string;
 }
 
-async function getJson(url: string, timeoutMs = 20000): Promise<unknown | null> {
+/**
+ * A failed request has to be distinguishable from "no such company":
+ * Wikidata's query service rate-limits with HTTP 429 (Retry-After ~120s),
+ * and treating that as "not found" cached an empty profile for days.
+ * Returns undefined on a transient failure, null on a real empty answer.
+ */
+async function getJson(url: string, timeoutMs = 20000, attempt = 0): Promise<unknown | null | undefined> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -78,22 +86,35 @@ async function getJson(url: string, timeoutMs = 20000): Promise<unknown | null> 
       signal: controller.signal,
       headers: { "User-Agent": USER_AGENT, Accept: "application/sparql-results+json, application/json" },
     });
+    if (resp.status === 429 || resp.status >= 500) {
+      const retryAfter = Number(resp.headers.get("retry-after"));
+      // Wait what the service asks for, but only briefly -- someone is
+      // waiting on a button click; a longer wait is left for next time.
+      const waitMs = Math.min(Number.isFinite(retryAfter) ? retryAfter * 1000 : 2000, 4000);
+      if (attempt === 0) {
+        clearTimeout(timer);
+        await new Promise((r) => setTimeout(r, waitMs));
+        return getJson(url, timeoutMs, 1);
+      }
+      return undefined;
+    }
     if (!resp.ok) return null;
     return await resp.json();
   } catch {
-    return null;
+    return undefined; // timeout or network error -- transient, don't cache as "not found"
   } finally {
     clearTimeout(timer);
   }
 }
 
-const CORPORATE_SUFFIX = /\b(inc|incorporated|corp|corporation|co|company|llc|ltd|limited|plc|holdings?|group|international|technologies)\b\.?/g;
+const CORPORATE_SUFFIX =
+  /\b(inc|incorporated|corp|corporation|co|company|llc|ltd|limited|plc|holdings?|group|international|technologies|technology|platforms?|labs?|software|systems|solutions|industries|networks|ventures)\b\.?/g;
 
 function normalizeName(s: string): string {
   return s.toLowerCase().replace(CORPORATE_SUFFIX, "").replace(/[^a-z0-9]/g, "");
 }
 
-async function candidateIds(name: string): Promise<string[]> {
+async function candidateIds(name: string): Promise<string[] | undefined> {
   const url = new URL(SEARCH_URL);
   url.search = new URLSearchParams({
     action: "wbsearchentities",
@@ -103,9 +124,11 @@ async function candidateIds(name: string): Promise<string[]> {
     limit: "10",
     format: "json",
   }).toString();
-  const data = (await getJson(url.toString())) as {
-    search?: Array<{ id: string; label?: string; aliases?: string[]; match?: { text?: string } }>;
-  } | null;
+  const data = (await getJson(url.toString())) as
+    | { search?: Array<{ id: string; label?: string; aliases?: string[]; match?: { text?: string } }> }
+    | null
+    | undefined;
+  if (data === undefined) return undefined;
   const want = normalizeName(name);
   if (!want) return [];
   return (data?.search ?? [])
@@ -115,10 +138,13 @@ async function candidateIds(name: string): Promise<string[]> {
 
 type Binding = Record<string, { value: string } | undefined>;
 
-async function sparql(query: string): Promise<Binding[] | null> {
+async function sparql(query: string): Promise<Binding[] | undefined> {
   const url = `${SPARQL_URL}?format=json&query=${encodeURIComponent(query)}`;
-  const data = (await getJson(url, SPARQL_TIMEOUT_MS)) as { results?: { bindings?: Binding[] } } | null;
-  return data?.results?.bindings ?? null;
+  const data = (await getJson(url, SPARQL_TIMEOUT_MS)) as
+    | { results?: { bindings?: Binding[] } }
+    | null
+    | undefined;
+  return data === undefined ? undefined : (data?.results?.bindings ?? []);
 }
 
 const entityId = (uri: string | undefined) => uri?.split("/").pop() ?? "";
@@ -130,10 +156,16 @@ const year = (iso: string | undefined) => {
 };
 
 /**
- * Profile and CEO for `name`, or null when no candidate is confidently the
- * same company. `null` fields inside a found profile just mean Wikidata
- * doesn't state that fact.
+ * Profile and CEO for `name`. `kind: "none"` means no candidate is
+ * confidently the same company (a blank card); `kind: "error"` means the
+ * lookup itself failed (rate limit, timeout) and must NOT be cached as an
+ * answer. `null` fields inside a found profile just mean Wikidata doesn't
+ * state that fact.
  */
+export type WikidataLookup =
+  | { kind: "match"; profile: CompanyProfile; leaders: Leader[] }
+  | { kind: "none" }
+  | { kind: "error" };
 const MAX_CANDIDATES_CHECKED = 3;
 
 function normalizeCity(s: string): string {
@@ -143,11 +175,12 @@ function normalizeCity(s: string): string {
 export async function fetchWikidataCompany(
   name: string,
   officeCities: string[],
-): Promise<{ profile: CompanyProfile; leaders: Leader[] } | null> {
+): Promise<WikidataLookup> {
   const ids = await candidateIds(name);
-  if (ids.length === 0) return null;
+  if (ids === undefined) return { kind: "error" };
+  if (ids.length === 0) return { kind: "none" };
   const knownCities = new Set(officeCities.map(normalizeCity));
-  if (knownCities.size === 0) return null;
+  if (knownCities.size === 0) return { kind: "none" };
 
   // Which candidates are businesses, in search-rank order.
   const values = ids.map((id) => `wd:${id}`).join(" ");
@@ -156,16 +189,37 @@ export async function fetchWikidataCompany(
        { ?item wdt:P31 ?cls . VALUES ?cls { ${COMPANY_CLASSES.map((c) => `wd:${c}`).join(" ")} } }
        UNION { ?item wdt:P169 [] } UNION { ?item wdt:P1128 [] } UNION { ?item wdt:P452 [] } }`,
   );
-  if (!businessRows) return null;
+  if (businessRows === undefined) return { kind: "error" };
   const businesses = new Set(businessRows.map((r) => entityId(r.item?.value)));
+  let failed = false;
+  // Candidates are scored so a company entry wins over a product entry of
+  // the same name: Figma has both, and only one of them carries a CEO.
+  let best: { profile: CompanyProfile; leaders: Leader[]; score: number } | null = null;
   for (const id of ids.filter((c) => businesses.has(c)).slice(0, MAX_CANDIDATES_CHECKED)) {
     const result = await companyDetails(id);
-    if (result?.profile.headquarters && knownCities.has(normalizeCity(result.profile.headquarters))) return result;
+    if (result === undefined) {
+      failed = true;
+      continue;
+    }
+    if (!result) continue;
+    const hqMatches = Boolean(result.profile.headquarters && knownCities.has(normalizeCity(result.profile.headquarters)));
+    const strongCompanyEvidence = result.leaders.length > 0 && result.profile.employees !== null;
+    if (!hqMatches && !strongCompanyEvidence) continue;
+    const score =
+      (result.leaders.length > 0 ? 4 : 0) +
+      (result.profile.employees ? 2 : 0) +
+      (result.profile.industries.length > 0 ? 1 : 0) +
+      (result.profile.founded ? 1 : 0) +
+      (result.profile.description ? 1 : 0);
+    if (!best || score > best.score) best = { ...result, score };
   }
-  return null;
+  if (best) return { kind: "match", profile: best.profile, leaders: best.leaders };
+  return failed ? { kind: "error" } : { kind: "none" };
 }
 
-async function companyDetails(id: string): Promise<{ profile: CompanyProfile; leaders: Leader[] } | null> {
+async function companyDetails(
+  id: string,
+): Promise<{ profile: CompanyProfile; leaders: Leader[] } | null | undefined> {
   const rows = await sparql(`
     SELECT ?desc ?inception ?hqLabel ?industryLabel ?employees ?employeesAt ?website ?linkedin
            ?ceo ?ceoLabel ?ceoLinkedin ?ceoEnd WHERE {
@@ -181,7 +235,8 @@ async function companyDetails(id: string): Promise<{ profile: CompanyProfile; le
                  OPTIONAL { ?ceo wdt:P6634 ?ceoLinkedin } }
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     } LIMIT 500`);
-  if (!rows) return null;
+  if (rows === undefined) return undefined;
+  if (rows.length === 0) return null;
 
   const first = (key: string) => rows.map((r) => r[key]?.value).find(Boolean);
   const industries = [...new Set(rows.map((r) => r.industryLabel?.value).filter((v): v is string => Boolean(v)))]

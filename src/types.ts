@@ -131,4 +131,7 @@ export interface CompanyDetails {
 
 export interface IntelligenceResponse extends CompanyIntelligenceData {
   focus: RoleFocus | null;
+  // Sources that didn't respond this time (rate limit, timeout) -- shown as
+  // "try again", never as "nothing found".
+  unavailable: Array<"profile" | "news">;
 }

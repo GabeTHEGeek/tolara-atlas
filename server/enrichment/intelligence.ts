@@ -34,6 +34,10 @@ export interface CompanyIntelligence {
   news: NewsItem[];
   focus: RoleFocus | null;
   fetchedAt: string; // oldest of the pieces returned
+  // Sources that couldn't be reached on this attempt (rate limit, timeout).
+  // Distinct from a source that answered "nothing here": the page says
+  // "try again" rather than "no profile", and nothing is cached.
+  unavailable: Array<"profile" | "news">;
 }
 
 interface CachedRow {
@@ -74,7 +78,7 @@ export function readCachedIntelligence(
   db: Database.Database,
   companyId: number,
   roleId: number | null,
-): Omit<CompanyIntelligence, "fetchedAt"> & { fetchedAt: string | null } | null {
+): Omit<CompanyIntelligence, "fetchedAt" | "unavailable"> & { fetchedAt: string | null } | null {
   const profile = readCompanyCache(db, companyId, "profile");
   const leadership = readCompanyCache(db, companyId, "leadership");
   const news = readCompanyCache(db, companyId, "news");
@@ -125,6 +129,7 @@ export async function loadIntelligence(
     | undefined;
   if (!company) return null;
 
+  const unavailable: CompanyIntelligence["unavailable"] = [];
   let profileEntry = readCompanyCache(db, company.id, "profile");
   if (!profileEntry?.fresh) {
     // Cities the company has offices in on our map, plus any hand-set HQ --
@@ -139,25 +144,33 @@ export async function loadIntelligence(
         .all(company.id, company.id) as Array<{ city: string }>
     ).map((r) => r.city);
     const result = await fetchWikidataCompany(company.name, officeCities);
-    writeCompanyCache(
-      db,
-      company.id,
-      "profile",
-      result ? { found: true, profile: result.profile } : { found: false },
-      result?.profile.wikidataUrl ?? null,
-      // A miss is re-checked sooner, in case the name gets fixed or Wikidata adds the company.
-      result ? PROFILE_TTL_DAYS : 7,
-    );
-    writeCompanyCache(db, company.id, "leadership", result?.leaders ?? [], result?.profile.wikidataUrl ?? null, result ? PROFILE_TTL_DAYS : 7);
-    profileEntry = readCompanyCache(db, company.id, "profile");
+    // A failed lookup (Wikidata rate limit or timeout) is never written:
+    // caching it would show a blank snapshot for days for a company that
+    // does have one. Only a real answer -- match or genuinely no match --
+    // is stored, with a miss re-checked sooner in case the name gets fixed
+    // or Wikidata adds the company later.
+    if (result.kind === "error") unavailable.push("profile");
+    else {
+      const matched = result.kind === "match" ? result : null;
+      const sourceUrl = matched?.profile.wikidataUrl ?? null;
+      const ttl = matched ? PROFILE_TTL_DAYS : 7;
+      writeCompanyCache(db, company.id, "profile", matched ? { found: true, profile: matched.profile } : { found: false }, sourceUrl, ttl);
+      writeCompanyCache(db, company.id, "leadership", matched?.leaders ?? [], sourceUrl, ttl);
+      profileEntry = readCompanyCache(db, company.id, "profile");
+    }
   }
   const leaders = (readCompanyCache(db, company.id, "leadership")?.value as Leader[] | undefined) ?? [];
 
   let newsEntry = readCompanyCache(db, company.id, "news");
   if (!newsEntry?.fresh) {
     const items = await fetchCompanyNews(company.name, leaders.map((l) => l.name));
-    writeCompanyCache(db, company.id, "news", items, null, NEWS_TTL_DAYS);
-    newsEntry = readCompanyCache(db, company.id, "news");
+    // Same rule as the profile above: undefined means the fetch failed, so
+    // leave the cache alone rather than remembering "no news" for days.
+    if (items === undefined) unavailable.push("news");
+    else {
+      writeCompanyCache(db, company.id, "news", items, null, NEWS_TTL_DAYS);
+      newsEntry = readCompanyCache(db, company.id, "news");
+    }
   }
 
   let focus: RoleFocus | null = null;
@@ -194,5 +207,6 @@ export async function loadIntelligence(
     news: (newsEntry?.value as NewsItem[] | undefined) ?? [],
     focus,
     fetchedAt: times[0] ? sqliteToIso(times[0]) : new Date().toISOString(),
+    unavailable,
   };
 }

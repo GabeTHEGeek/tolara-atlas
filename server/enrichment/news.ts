@@ -88,8 +88,8 @@ function mentionsCompany(headline: string, name: string, ceoNames: string[]): bo
   return caseExact.test(headline) && (possessive.test(headline) || verb.test(headline));
 }
 
-/** Up to 3 recent headlines (last 30 days) that name the company; [] when none or on failure. */
-export async function fetchCompanyNews(name: string, ceoNames: string[] = []): Promise<NewsItem[]> {
+/** Up to 3 recent headlines (last 30 days) that name the company; [] when there are none, undefined when the fetch failed. */
+export async function fetchCompanyNews(name: string, ceoNames: string[] = []): Promise<NewsItem[] | undefined> {
   const url = new URL("https://news.google.com/rss/search");
   // Exact phrase AND at least one business-news word. Without the second
   // half, "Box" returned box-office stories, "Notion" returned "the notion
@@ -103,10 +103,10 @@ export async function fetchCompanyNews(name: string, ceoNames: string[] = []): P
   let xml: string;
   try {
     const resp = await fetch(url, { signal: controller.signal, headers: { "User-Agent": USER_AGENT } });
-    if (!resp.ok) return [];
+    if (!resp.ok) return undefined;
     xml = await resp.text();
   } catch {
-    return [];
+    return undefined;
   } finally {
     clearTimeout(timer);
   }
