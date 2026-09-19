@@ -32,6 +32,18 @@
  * would mean up to 25 sequential requests for every large Workday board on
  * every sync, most of it work nothing downstream needs.
  *
+ * A token can carry an optional FOURTH part, a search term
+ * ("nvidia|wd5|NVIDIAExternalCareerSite|product"), for boards too big to
+ * fetch whole. NVIDIA reports 2,000+ postings (more than the per-board cap,
+ * and Workday won't page past 2,000 anyway) with no Product Management job
+ * category to filter on. Workday's search is fuzzy -- "product" matches
+ * the whole board -- but ranks title matches first, so the adapter pages
+ * through the search results and stops after SEARCH_STOP_AFTER_MISSES
+ * pages in a row with no title containing the term. Every PM title the
+ * filter accepts contains "product" except the rare "outcomes manager" /
+ * "cpo", so "product" is the term to use. Confirmed on NVIDIA: title
+ * matches run out after page 10, and nothing past that is a real PM role.
+ *
  * `locationsText` is frequently a bare placeholder ("3 Locations") instead
  * of naming any office at all, for any posting open in more than one --
  * confirmed on Capital One's board, where every such posting was landing
@@ -61,6 +73,10 @@ const INTER_PAGE_DELAY_MS = 250;
 // JSON. fetch follows the redirect, so it shows up as the response's final
 // URL.
 const MAINTENANCE_URL_MARKER = "community.workday.com/maintenance";
+
+// For searched boards (4-part tokens, see header): stop paging after this
+// many consecutive pages with no title containing the search term.
+const SEARCH_STOP_AFTER_MISSES = 2;
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -119,14 +135,16 @@ interface ParsedWorkdayToken {
   tenant: string;
   dataCenter: string;
   site: string;
+  search: string; // "" for the usual whole-board fetch; see the header on 4-part tokens
 }
 
 function parseToken(token: string): ParsedWorkdayToken | null {
   const parts = token.split("|");
-  if (parts.length !== 3) return null;
-  const [tenant, dataCenter, site] = parts.map((p) => p.trim());
+  if (parts.length !== 3 && parts.length !== 4) return null;
+  const [tenant, dataCenter, site, search = ""] = parts.map((p) => p.trim());
   if (!tenant || !dataCenter || !site) return null;
-  return { tenant, dataCenter, site };
+  if (parts.length === 4 && !search) return null;
+  return { tenant, dataCenter, site, search };
 }
 
 /**
@@ -149,8 +167,10 @@ async function fetchBoard(
 ): Promise<{ jobs: WorkdayJobPosting[]; failed: boolean; maintenance?: boolean }> {
   const parsed = parseToken(token);
   if (!parsed) return { jobs: [], failed: true };
-  const { tenant, dataCenter, site } = parsed;
+  const { tenant, dataCenter, site, search } = parsed;
   const url = `https://${tenant}.${dataCenter}.myworkdayjobs.com/wday/cxs/${tenant}/${site}/jobs`;
+  const searchLower = search.toLowerCase();
+  let pagesWithoutTitleMatch = 0;
 
   const jobs: WorkdayJobPosting[] = [];
   let offset = 0;
@@ -176,7 +196,7 @@ async function fetchBoard(
           method: "POST",
           signal: controller.signal,
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ appliedFacets: {}, limit: pageLimit, offset, searchText: "" }),
+          body: JSON.stringify({ appliedFacets: {}, limit: pageLimit, offset, searchText: search }),
         });
         clearTimeout(timer);
         // No point retrying -- the window lasts hours, not seconds.
@@ -208,11 +228,20 @@ async function fetchBoard(
       break;
     }
 
+    // Workday reports the real total only on the FIRST page; every later
+    // page says `total: 0`. Overwriting it each time ended paging after
+    // page 2, silently capping every Workday board at 40 postings.
+    if (firstPage) total = page.total;
     firstPage = false;
-    total = page.total;
     jobs.push(...page.jobPostings);
     if (page.jobPostings.length === 0) break; // defensive -- avoid an infinite loop on an unexpected shape
     offset += page.jobPostings.length;
+
+    if (searchLower) {
+      const anyTitleMatch = page.jobPostings.some((j) => (j.title ?? "").toLowerCase().includes(searchLower));
+      pagesWithoutTitleMatch = anyTitleMatch ? 0 : pagesWithoutTitleMatch + 1;
+      if (pagesWithoutTitleMatch >= SEARCH_STOP_AFTER_MISSES) break;
+    }
   }
 
   return { jobs, failed: false };
