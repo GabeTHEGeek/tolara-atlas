@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-19T19:25:18.666Z",
+  "generatedAt": "2026-09-19T19:57:48.078Z",
   "companyCount": 587,
   "pinCount": 640,
-  "roleCount": 1818,
+  "roleCount": 1825,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -3186,6 +3186,173 @@
       ]
     },
     {
+      "id": "249-san-francisco-ca",
+      "companyId": 249,
+      "companyName": "Airbnb",
+      "companySlug": "airbnb",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.799528817357434,
+      "longitude": -122.41488951765336,
+      "roleCount": 14,
+      "roles": [
+        {
+          "id": 2690,
+          "title": "Staff Platform Manager, Conversational Products",
+          "location": "United States ",
+          "salaryMin": 200000,
+          "salaryMax": 200000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8136554?gh_jid=8136554",
+          "postedAt": "2026-09-18T17:55:48-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 2689,
+          "title": " Staff Platform Manager, AI Personalization",
+          "location": "United States",
+          "salaryMin": 200000,
+          "salaryMax": 200000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/7834495?gh_jid=7834495",
+          "postedAt": "2026-09-18T17:54:37-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 2688,
+          "title": "Senior Platform Manager, Trust and Safety",
+          "location": "United States ",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8029984?gh_jid=8029984",
+          "postedAt": "2026-09-18T17:53:32-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 2687,
+          "title": "Senior Platform Manager, Payment Platform Accounts",
+          "location": "United States ",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8082863?gh_jid=8082863",
+          "postedAt": "2026-09-18T17:52:56-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 2686,
+          "title": "Senior Platform Manager, Data Products, Finance Accounting",
+          "location": "United States",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8070705?gh_jid=8070705",
+          "postedAt": "2026-09-18T17:52:17-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 2685,
+          "title": "Senior Manager, Platform Management (Payments)",
+          "location": "United States ",
+          "salaryMin": 232000,
+          "salaryMax": 232000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8175521?gh_jid=8175521",
+          "postedAt": "2026-09-18T17:50:51-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 2684,
+          "title": "Lead Platform Manager, Tech Foundations",
+          "location": "United States",
+          "salaryMin": 232000,
+          "salaryMax": 232000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8211765?gh_jid=8211765",
+          "postedAt": "2026-09-18T17:42:56-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 1709,
+          "title": "Senior Product Manager, Community Support Experience ",
+          "location": "Remote USA ",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8186787?gh_jid=8186787",
+          "postedAt": "2026-09-17T15:44:13-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 1029,
+          "title": "Product Manager, Services",
+          "location": "San Francisco, CA, Seattle WA, New York, NY",
+          "salaryMin": 232000,
+          "salaryMax": 232000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8081925?gh_jid=8081925",
+          "postedAt": "2026-09-16T19:57:56-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1024,
+          "title": "Product Manager, Community Support",
+          "location": "San Francisco, CA",
+          "salaryMin": 200000,
+          "salaryMax": 200000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8189782?gh_jid=8189782",
+          "postedAt": "2026-09-14T17:44:40-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1026,
+          "title": "Product Manager, Pricing",
+          "location": "United States",
+          "salaryMin": 200000,
+          "salaryMax": 200000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8096359?gh_jid=8096359",
+          "postedAt": "2026-08-27T18:14:36-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 1028,
+          "title": "Product Manager, Search",
+          "location": "San Francisco, United States",
+          "salaryMin": 232000,
+          "salaryMax": 232000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8104444?gh_jid=8104444",
+          "postedAt": "2026-08-05T13:39:47-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1027,
+          "title": "Product Manager, Relevance and Personalization",
+          "location": "San Francisco, United States",
+          "salaryMin": 232000,
+          "salaryMax": 232000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/7905365?gh_jid=7905365",
+          "postedAt": "2026-08-04T17:17:04-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1025,
+          "title": "Product Manager, Identity",
+          "location": "United States",
+          "salaryMin": 200000,
+          "salaryMax": 200000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.airbnb.com/positions/8055637?gh_jid=8055637",
+          "postedAt": "2026-07-31T15:26:30-04:00",
+          "isRemote": true
+        }
+      ]
+    },
+    {
       "id": "1096-costa-mesa-ca",
       "companyId": 1096,
       "companyName": "Anduril",
@@ -6258,96 +6425,6 @@
           "url": "https://job-boards.greenhouse.io/vercel/jobs/6147956004",
           "postedAt": "2026-09-17T16:40:14-04:00",
           "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "249-san-francisco-ca",
-      "companyId": 249,
-      "companyName": "Airbnb",
-      "companySlug": "airbnb",
-      "city": "San Francisco",
-      "state": "CA",
-      "latitude": 37.799528817357434,
-      "longitude": -122.41488951765336,
-      "roleCount": 7,
-      "roles": [
-        {
-          "id": 1709,
-          "title": "Senior Product Manager, Community Support Experience ",
-          "location": "Remote USA ",
-          "salaryMin": 179000,
-          "salaryMax": 179000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.airbnb.com/positions/8186787?gh_jid=8186787",
-          "postedAt": "2026-09-17T15:44:13-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 1029,
-          "title": "Product Manager, Services",
-          "location": "San Francisco, CA, Seattle WA, New York, NY",
-          "salaryMin": 232000,
-          "salaryMax": 232000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.airbnb.com/positions/8081925?gh_jid=8081925",
-          "postedAt": "2026-09-16T19:57:56-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1024,
-          "title": "Product Manager, Community Support",
-          "location": "San Francisco, CA",
-          "salaryMin": 200000,
-          "salaryMax": 200000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.airbnb.com/positions/8189782?gh_jid=8189782",
-          "postedAt": "2026-09-14T17:44:40-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1026,
-          "title": "Product Manager, Pricing",
-          "location": "United States",
-          "salaryMin": 200000,
-          "salaryMax": 200000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.airbnb.com/positions/8096359?gh_jid=8096359",
-          "postedAt": "2026-08-27T18:14:36-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 1028,
-          "title": "Product Manager, Search",
-          "location": "San Francisco, United States",
-          "salaryMin": 232000,
-          "salaryMax": 232000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.airbnb.com/positions/8104444?gh_jid=8104444",
-          "postedAt": "2026-08-05T13:39:47-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1027,
-          "title": "Product Manager, Relevance and Personalization",
-          "location": "San Francisco, United States",
-          "salaryMin": 232000,
-          "salaryMax": 232000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.airbnb.com/positions/7905365?gh_jid=7905365",
-          "postedAt": "2026-08-04T17:17:04-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1025,
-          "title": "Product Manager, Identity",
-          "location": "United States",
-          "salaryMin": 200000,
-          "salaryMax": 200000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.airbnb.com/positions/8055637?gh_jid=8055637",
-          "postedAt": "2026-07-31T15:26:30-04:00",
-          "isRemote": true
         }
       ]
     },
