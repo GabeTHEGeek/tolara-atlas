@@ -1045,3 +1045,28 @@ h1.role-page-title {
 .snapshot-thin {
   margin-top: 10px;
 }
+
+/* "Company intelligence · updated 2h ago · Refresh" above the cards, once
+   the cards have data and the load banner is gone. */
+.intel-status {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.intel-status + .card-grid {
+  margin-top: 12px;
+}
+
+.intel-status-error {
+  margin: 8px 0 0;
+  font-size: 13px;
+}

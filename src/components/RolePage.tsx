@@ -294,6 +294,27 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
           </div>
         )}
 
+        {/* Once it's loaded (or was baked into the export from an earlier
+            look-up) the banner goes away, so keep a way to re-run it -- the
+            sources change, and a card can be empty because a source was
+            briefly unreachable. */}
+        {intelLoaded && (
+          <div className="intel-status">
+            <span>
+              Company intelligence
+              {intel.fetchedAt && <span className="muted"> · updated {relativeTime(intel.fetchedAt)}</span>}
+            </span>
+            <button className="link-button" onClick={loadIntelligence} disabled={intelState === "loading"}>
+              {intelState === "loading" ? "Refreshing…" : "Refresh"}
+            </button>
+          </div>
+        )}
+        {intelLoaded && intelState === "error" && (
+          <p className="intel-error intel-status-error">
+            Couldn't refresh it. It's only available while the Tolara server is running (npm run dev).
+          </p>
+        )}
+
         <div className="card-grid">
           <section className="card">
             <h2 className="card-label">Leadership</h2>
