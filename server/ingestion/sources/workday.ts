@@ -310,18 +310,28 @@ export async function searchWorkday(
   return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty, boardsInMaintenance } };
 }
 
-// Legal-entity and regional-subsidiary tails stripped from
-// hiringOrganization names, so "PUMA North America, Inc." reads as "PUMA"
-// and "Bose Electronics Co., Ltd. Shenzhen Branch" as "Bose Electronics".
-const LEGAL_SUFFIX = /\s+(inc|llc|l\.l\.c|ltd|limited|corp|corporation|co|company|plc|gmbh|ag|sa|s\.a|bv|b\.v|lp|l\.p|pty|pte|holdings?)\.?$/i;
-const REGION_SUFFIX = /\s+(north america|americas|usa|us|u\.s\.|united states|international|global)$/i;
+// Legal-entity and regional-subsidiary noise stripped from
+// hiringOrganization names, which are often the specific legal entity
+// behind a posting rather than the brand: "PUMA North America, Inc." ->
+// "PUMA", "LE008 Duck Creek Technologies India LLP" -> "Duck Creek
+// Technologies", "DE05 CGM SE & Co. KGaA" -> "CGM".
+//
+// Leading internal entity codes: an all-caps/digit token containing a digit
+// ("LE008", "1000", "PII01") or a country-pair code ("CO_US"). Requires 3+
+// characters so a real short name like "3M Company" survives.
+const ENTITY_CODE_PREFIX = /^(?:(?=[A-Z0-9_]*\d)[A-Z0-9_]{3,}|[A-Z]{2,}_[A-Z]{2,})\s+/;
+const LEGAL_SUFFIX =
+  /\s+(inc|llc|l\.l\.c|llp|ltd|limited|corp|corporation|co|company|plc|gmbh|ag|kgaa|se|sa|s\.a|sas|s\.a\.s|bv|b\.v|nv|n\.v|n\.a|lp|l\.p|pty|pte|public|sp\. z o\.o|holdings?|&)\.?$/i;
+const REGION_SUFFIX =
+  /\s+(north america|americas|usa|us|u\.s\.|united states|international|global|india|asia|canada|poland|europe|emea|uk)$/i;
 
 function cleanLegalName(name: string): string {
   // Everything after the first comma is legal/branch detail ("..., Inc.",
   // "..., Ltd. Shenzhen Branch"); parentheticals are too ("(US)").
   let cleaned = name.split(",")[0].replace(/\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
-  // Repeat for stacked tails like "Acme Holdings Pty Ltd" or "PUMA North America Inc".
-  for (let i = 0; i < 4; i++) {
+  cleaned = cleaned.replace(ENTITY_CODE_PREFIX, "").trim();
+  // Repeat for stacked tails like "CGM SE & Co. KGaA" or "PUMA North America Inc".
+  for (let i = 0; i < 6; i++) {
     const next = cleaned.replace(LEGAL_SUFFIX, "").replace(REGION_SUFFIX, "").trim();
     if (next === cleaned || next === "") break;
     cleaned = next;
@@ -339,6 +349,8 @@ function cleanLegalName(name: string): string {
  * can't be read -- including during Workday's maintenance window -- or has
  * no postings, so callers can keep whatever name they already have.
  */
+export { cleanLegalName };
+
 export async function fetchWorkdayCompanyName(token: string, timeoutMs = 15000): Promise<string | null> {
   const parsed = parseToken(token);
   if (!parsed) return null;
