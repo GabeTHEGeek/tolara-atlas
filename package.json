@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "geocode": "tsx server/ingestion/geocode.ts",
     "export": "tsx server/export/exportMapData.ts",
-    "discover": "tsx server/ingestion/discoverCompanies.ts"
+    "discover": "tsx server/ingestion/discoverCompanies.ts",
+    "discover:a16z": "tsx server/ingestion/discoverA16z.ts"
   },
   "dependencies": {
     "better-sqlite3": "^11.3.0",
