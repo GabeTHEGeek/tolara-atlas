@@ -6,5 +6,5 @@ dist/
 *.db-shm
 *.db-wal
 
-# Personal Claude Code settings for this checkout
+# Personal editor settings for this checkout
 .claude/settings.local.json
