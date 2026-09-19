@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-19T11:38:20.058Z",
+  "generatedAt": "2026-09-19T19:25:18.666Z",
   "companyCount": 587,
-  "pinCount": 639,
-  "roleCount": 1817,
+  "pinCount": 640,
+  "roleCount": 1818,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -2109,6 +2109,557 @@
       ]
     },
     {
+      "id": "263-denver-co",
+      "companyId": 263,
+      "companyName": "Gusto",
+      "companySlug": "gusto",
+      "city": "Denver",
+      "state": "CO",
+      "latitude": 39.74519340771123,
+      "longitude": -104.98844718108953,
+      "roleCount": 3,
+      "roles": [
+        {
+          "id": 1139,
+          "title": "Senior Product Manager, Symmetry New Tax Products",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, AZ- Hybrid",
+          "salaryMin": 152420,
+          "salaryMax": 190252,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
+          "postedAt": "2026-09-19T12:30:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1137,
+          "title": "Principal Product Manager, AI Assistant",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/8189537",
+          "postedAt": "2026-09-15T11:08:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1138,
+          "title": "Principal Product Manager, Unified Service Platform ",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7868243",
+          "postedAt": "2026-09-15T11:08:35-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "263-new-york-ny",
+      "companyId": 263,
+      "companyName": "Gusto",
+      "companySlug": "gusto",
+      "city": "New York",
+      "state": "NY",
+      "latitude": 40.70729393479868,
+      "longitude": -73.99964054112016,
+      "roleCount": 4,
+      "roles": [
+        {
+          "id": 1139,
+          "title": "Senior Product Manager, Symmetry New Tax Products",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, AZ- Hybrid",
+          "salaryMin": 152420,
+          "salaryMax": 190252,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
+          "postedAt": "2026-09-19T12:30:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1137,
+          "title": "Principal Product Manager, AI Assistant",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/8189537",
+          "postedAt": "2026-09-15T11:08:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1138,
+          "title": "Principal Product Manager, Unified Service Platform ",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7868243",
+          "postedAt": "2026-09-15T11:08:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1140,
+          "title": "Senior Product Manager, Tax Payments and Filing ",
+          "location": "New York, NY - Hybrid; San Francisco, CA - Hybrid",
+          "salaryMin": 152000,
+          "salaryMax": 152000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7674093",
+          "postedAt": "2026-09-15T11:08:35-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "263-san-francisco-ca",
+      "companyId": 263,
+      "companyName": "Gusto",
+      "companySlug": "gusto",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.77871548969971,
+      "longitude": -122.39662224359222,
+      "roleCount": 5,
+      "roles": [
+        {
+          "id": 1139,
+          "title": "Senior Product Manager, Symmetry New Tax Products",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, AZ- Hybrid",
+          "salaryMin": 152420,
+          "salaryMax": 190252,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
+          "postedAt": "2026-09-19T12:30:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2149,
+          "title": "Head of Product, New Customer Experience",
+          "location": "San Francisco, CA - Hybrid",
+          "salaryMin": 248000,
+          "salaryMax": 248000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/8144242",
+          "postedAt": "2026-09-18T11:50:07-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1137,
+          "title": "Principal Product Manager, AI Assistant",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/8189537",
+          "postedAt": "2026-09-15T11:08:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1138,
+          "title": "Principal Product Manager, Unified Service Platform ",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
+          "salaryMin": 179000,
+          "salaryMax": 179000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7868243",
+          "postedAt": "2026-09-15T11:08:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1140,
+          "title": "Senior Product Manager, Tax Payments and Filing ",
+          "location": "New York, NY - Hybrid; San Francisco, CA - Hybrid",
+          "salaryMin": 152000,
+          "salaryMax": 152000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7674093",
+          "postedAt": "2026-09-15T11:08:35-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "263-scottsdale-az",
+      "companyId": 263,
+      "companyName": "Gusto",
+      "companySlug": "gusto",
+      "city": "Scottsdale",
+      "state": "AZ",
+      "latitude": 33.4942189,
+      "longitude": -111.926018,
+      "roleCount": 1,
+      "roles": [
+        {
+          "id": 1139,
+          "title": "Senior Product Manager, Symmetry New Tax Products",
+          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, AZ- Hybrid",
+          "salaryMin": 152420,
+          "salaryMax": 190252,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
+          "postedAt": "2026-09-19T12:30:00-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1-san-francisco-ca",
+      "companyId": 1,
+      "companyName": "Anthropic",
+      "companySlug": "anthropic",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.77498675048651,
+      "longitude": -122.41036227856897,
+      "roleCount": 17,
+      "roles": [
+        {
+          "id": 2683,
+          "title": "Product Manager, Safeguards (Account Integrity & Abuse) ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5413576008",
+          "postedAt": "2026-09-19T10:48:48-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2136,
+          "title": "Product Manager, Safe Access",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
+          "postedAt": "2026-09-18T16:38:54-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 4,
+          "title": "Product Manager, Business Technology",
+          "location": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5397737008",
+          "postedAt": "2026-09-02T15:05:31-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 5,
+          "title": "Product Manager, Claude Science",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5394887008",
+          "postedAt": "2026-08-31T10:50:59-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 8,
+          "title": "Product Manager, Growth",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5406106008",
+          "postedAt": "2026-08-29T10:05:44-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 10,
+          "title": "Product Manager, Multi-Cloud Trust & Safety",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409934008",
+          "postedAt": "2026-08-28T18:04:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 3,
+          "title": "Product Manager, Beneficial Deployments (Labs)",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5407337008",
+          "postedAt": "2026-08-27T15:48:13-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 14,
+          "title": "Product Manager, Safeguards (Cyber)",
+          "location": "San Francisco, CA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5097490008",
+          "postedAt": "2026-08-27T02:08:29-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 7,
+          "title": "Product Manager, Cybersecurity ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393526008",
+          "postedAt": "2026-08-21T15:47:04-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 11,
+          "title": "Product Manager, New Markets and Monetization",
+          "location": "San Francisco, CA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5386182008",
+          "postedAt": "2026-08-21T12:50:51-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 13,
+          "title": "Product Manager, Research (Code) ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5324349008",
+          "postedAt": "2026-08-21T12:50:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 6,
+          "title": "Product Manager, Claude Tag",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5251866008",
+          "postedAt": "2026-08-21T12:50:24-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1,
+          "title": "Product Management, Human Data Platform",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5195866008",
+          "postedAt": "2026-08-21T12:50:08-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 9,
+          "title": "Product Manager, Multi-Cloud Growth - Google",
+          "location": "San Francisco, CA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5153924008",
+          "postedAt": "2026-08-21T12:50:01-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 15,
+          "title": " Product Manager, Safeguards Rare Harms",
+          "location": "San Francisco, CA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5139628008",
+          "postedAt": "2026-08-21T12:50:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2,
+          "title": "Product Management, Research",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5123082008",
+          "postedAt": "2026-08-21T12:49:57-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 16,
+          "title": "Research Product Manager, Labs",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5096878008",
+          "postedAt": "2026-08-21T12:49:52-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1-new-york-city-ny",
+      "companyId": 1,
+      "companyName": "Anthropic",
+      "companySlug": "anthropic",
+      "city": "New York City",
+      "state": "NY",
+      "latitude": 40.7156423336681,
+      "longitude": -74.02200054302727,
+      "roleCount": 13,
+      "roles": [
+        {
+          "id": 2683,
+          "title": "Product Manager, Safeguards (Account Integrity & Abuse) ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5413576008",
+          "postedAt": "2026-09-19T10:48:48-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2136,
+          "title": "Product Manager, Safe Access",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
+          "postedAt": "2026-09-18T16:38:54-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 4,
+          "title": "Product Manager, Business Technology",
+          "location": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5397737008",
+          "postedAt": "2026-09-02T15:05:31-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 5,
+          "title": "Product Manager, Claude Science",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5394887008",
+          "postedAt": "2026-08-31T10:50:59-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 8,
+          "title": "Product Manager, Growth",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5406106008",
+          "postedAt": "2026-08-29T10:05:44-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 10,
+          "title": "Product Manager, Multi-Cloud Trust & Safety",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409934008",
+          "postedAt": "2026-08-28T18:04:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 3,
+          "title": "Product Manager, Beneficial Deployments (Labs)",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5407337008",
+          "postedAt": "2026-08-27T15:48:13-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 7,
+          "title": "Product Manager, Cybersecurity ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393526008",
+          "postedAt": "2026-08-21T15:47:04-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 13,
+          "title": "Product Manager, Research (Code) ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5324349008",
+          "postedAt": "2026-08-21T12:50:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 6,
+          "title": "Product Manager, Claude Tag",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5251866008",
+          "postedAt": "2026-08-21T12:50:24-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1,
+          "title": "Product Management, Human Data Platform",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5195866008",
+          "postedAt": "2026-08-21T12:50:08-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2,
+          "title": "Product Management, Research",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5123082008",
+          "postedAt": "2026-08-21T12:49:57-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 16,
+          "title": "Research Product Manager, Labs",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5096878008",
+          "postedAt": "2026-08-21T12:49:52-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "1170-new-york-ny",
       "companyId": 1170,
       "companyName": "Weight Watchers",
@@ -2711,340 +3262,6 @@
           "salaryCurrency": "USD",
           "url": "https://job-boards.greenhouse.io/natera/jobs/6123519004",
           "postedAt": "2026-08-18T17:16:21-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1-san-francisco-ca",
-      "companyId": 1,
-      "companyName": "Anthropic",
-      "companySlug": "anthropic",
-      "city": "San Francisco",
-      "state": "CA",
-      "latitude": 37.77498675048651,
-      "longitude": -122.41036227856897,
-      "roleCount": 16,
-      "roles": [
-        {
-          "id": 2136,
-          "title": "Product Manager, Safe Access",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
-          "postedAt": "2026-09-18T16:38:54-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 4,
-          "title": "Product Manager, Business Technology",
-          "location": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5397737008",
-          "postedAt": "2026-09-02T15:05:31-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 5,
-          "title": "Product Manager, Claude Science",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5394887008",
-          "postedAt": "2026-08-31T10:50:59-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 8,
-          "title": "Product Manager, Growth",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5406106008",
-          "postedAt": "2026-08-29T10:05:44-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 10,
-          "title": "Product Manager, Multi-Cloud Trust & Safety",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409934008",
-          "postedAt": "2026-08-28T18:04:00-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 3,
-          "title": "Product Manager, Beneficial Deployments (Labs)",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5407337008",
-          "postedAt": "2026-08-27T15:48:13-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 14,
-          "title": "Product Manager, Safeguards (Cyber)",
-          "location": "San Francisco, CA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5097490008",
-          "postedAt": "2026-08-27T02:08:29-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 7,
-          "title": "Product Manager, Cybersecurity ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393526008",
-          "postedAt": "2026-08-21T15:47:04-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 11,
-          "title": "Product Manager, New Markets and Monetization",
-          "location": "San Francisco, CA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5386182008",
-          "postedAt": "2026-08-21T12:50:51-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 13,
-          "title": "Product Manager, Research (Code) ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5324349008",
-          "postedAt": "2026-08-21T12:50:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 6,
-          "title": "Product Manager, Claude Tag",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5251866008",
-          "postedAt": "2026-08-21T12:50:24-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1,
-          "title": "Product Management, Human Data Platform",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5195866008",
-          "postedAt": "2026-08-21T12:50:08-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 9,
-          "title": "Product Manager, Multi-Cloud Growth - Google",
-          "location": "San Francisco, CA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5153924008",
-          "postedAt": "2026-08-21T12:50:01-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 15,
-          "title": " Product Manager, Safeguards Rare Harms",
-          "location": "San Francisco, CA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5139628008",
-          "postedAt": "2026-08-21T12:50:00-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 2,
-          "title": "Product Management, Research",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5123082008",
-          "postedAt": "2026-08-21T12:49:57-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 16,
-          "title": "Research Product Manager, Labs",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5096878008",
-          "postedAt": "2026-08-21T12:49:52-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1-new-york-city-ny",
-      "companyId": 1,
-      "companyName": "Anthropic",
-      "companySlug": "anthropic",
-      "city": "New York City",
-      "state": "NY",
-      "latitude": 40.7156423336681,
-      "longitude": -74.02200054302727,
-      "roleCount": 12,
-      "roles": [
-        {
-          "id": 2136,
-          "title": "Product Manager, Safe Access",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
-          "postedAt": "2026-09-18T16:38:54-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 4,
-          "title": "Product Manager, Business Technology",
-          "location": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5397737008",
-          "postedAt": "2026-09-02T15:05:31-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 5,
-          "title": "Product Manager, Claude Science",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5394887008",
-          "postedAt": "2026-08-31T10:50:59-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 8,
-          "title": "Product Manager, Growth",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5406106008",
-          "postedAt": "2026-08-29T10:05:44-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 10,
-          "title": "Product Manager, Multi-Cloud Trust & Safety",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409934008",
-          "postedAt": "2026-08-28T18:04:00-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 3,
-          "title": "Product Manager, Beneficial Deployments (Labs)",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5407337008",
-          "postedAt": "2026-08-27T15:48:13-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 7,
-          "title": "Product Manager, Cybersecurity ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393526008",
-          "postedAt": "2026-08-21T15:47:04-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 13,
-          "title": "Product Manager, Research (Code) ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5324349008",
-          "postedAt": "2026-08-21T12:50:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 6,
-          "title": "Product Manager, Claude Tag",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5251866008",
-          "postedAt": "2026-08-21T12:50:24-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1,
-          "title": "Product Management, Human Data Platform",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5195866008",
-          "postedAt": "2026-08-21T12:50:08-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 2,
-          "title": "Product Management, Research",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5123082008",
-          "postedAt": "2026-08-21T12:49:57-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 16,
-          "title": "Research Product Manager, Labs",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5096878008",
-          "postedAt": "2026-08-21T12:49:52-04:00",
           "isRemote": false
         }
       ]
@@ -4063,74 +4280,6 @@
           "salaryCurrency": "USD",
           "url": "https://app.careerpuck.com/job-board/lyft/job/8594167002?gh_jid=8594167002",
           "postedAt": "2026-09-04T14:04:34-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "263-san-francisco-ca",
-      "companyId": 263,
-      "companyName": "Gusto",
-      "companySlug": "gusto",
-      "city": "San Francisco",
-      "state": "CA",
-      "latitude": 37.77871548969971,
-      "longitude": -122.39662224359222,
-      "roleCount": 5,
-      "roles": [
-        {
-          "id": 2149,
-          "title": "Head of Product, New Customer Experience",
-          "location": "San Francisco, CA - Hybrid",
-          "salaryMin": 248000,
-          "salaryMax": 248000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/8144242",
-          "postedAt": "2026-09-18T11:50:07-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1139,
-          "title": "Senior Product Manager, Symmetry New Tax Products",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, Arizona, United States",
-          "salaryMin": 152420,
-          "salaryMax": 190252,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
-          "postedAt": "2026-09-16T16:03:11-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1137,
-          "title": "Principal Product Manager, AI Assistant",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 179000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/8189537",
-          "postedAt": "2026-09-15T11:08:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1138,
-          "title": "Principal Product Manager, Unified Service Platform ",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 179000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7868243",
-          "postedAt": "2026-09-15T11:08:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1140,
-          "title": "Senior Product Manager, Tax Payments and Filing ",
-          "location": "New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 152000,
-          "salaryMax": 152000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7674093",
-          "postedAt": "2026-09-15T11:08:35-04:00",
           "isRemote": false
         }
       ]
@@ -8201,133 +8350,6 @@
       ]
     },
     {
-      "id": "263-denver-co",
-      "companyId": 263,
-      "companyName": "Gusto",
-      "companySlug": "gusto",
-      "city": "Denver",
-      "state": "CO",
-      "latitude": 39.74519340771123,
-      "longitude": -104.98844718108953,
-      "roleCount": 3,
-      "roles": [
-        {
-          "id": 1139,
-          "title": "Senior Product Manager, Symmetry New Tax Products",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, Arizona, United States",
-          "salaryMin": 152420,
-          "salaryMax": 190252,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
-          "postedAt": "2026-09-16T16:03:11-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1137,
-          "title": "Principal Product Manager, AI Assistant",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 179000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/8189537",
-          "postedAt": "2026-09-15T11:08:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1138,
-          "title": "Principal Product Manager, Unified Service Platform ",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 179000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7868243",
-          "postedAt": "2026-09-15T11:08:35-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "263-new-york-ny",
-      "companyId": 263,
-      "companyName": "Gusto",
-      "companySlug": "gusto",
-      "city": "New York",
-      "state": "NY",
-      "latitude": 40.70729393479868,
-      "longitude": -73.99964054112016,
-      "roleCount": 4,
-      "roles": [
-        {
-          "id": 1139,
-          "title": "Senior Product Manager, Symmetry New Tax Products",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, Arizona, United States",
-          "salaryMin": 152420,
-          "salaryMax": 190252,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
-          "postedAt": "2026-09-16T16:03:11-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1137,
-          "title": "Principal Product Manager, AI Assistant",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 179000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/8189537",
-          "postedAt": "2026-09-15T11:08:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1138,
-          "title": "Principal Product Manager, Unified Service Platform ",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 179000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7868243",
-          "postedAt": "2026-09-15T11:08:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1140,
-          "title": "Senior Product Manager, Tax Payments and Filing ",
-          "location": "New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 152000,
-          "salaryMax": 152000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7674093",
-          "postedAt": "2026-09-15T11:08:35-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "263-scottsdale-az",
-      "companyId": 263,
-      "companyName": "Gusto",
-      "companySlug": "gusto",
-      "city": "Scottsdale",
-      "state": "AZ",
-      "latitude": 33.4942189,
-      "longitude": -111.926018,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1139,
-          "title": "Senior Product Manager, Symmetry New Tax Products",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, Arizona, United States",
-          "salaryMin": 152420,
-          "salaryMax": 190252,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
-          "postedAt": "2026-09-16T16:03:11-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "24-new-york-city-ny",
       "companyId": 24,
       "companyName": "Faire",
@@ -11770,6 +11792,107 @@
           "url": "https://jobs.ashbyhq.com/Jerry.ai/6a7fefed-aada-4b57-8f25-a687408508b9",
           "postedAt": "2026-09-14T16:36:47.063+00:00",
           "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "61-san-francisco-ca",
+      "companyId": 61,
+      "companyName": "GitLab",
+      "companySlug": "gitlab",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.79178531569769,
+      "longitude": -122.3993678541209,
+      "roleCount": 8,
+      "roles": [
+        {
+          "id": 256,
+          "title": "Director of Product Management, Agentic Software Delivery",
+          "location": "Remote, United States",
+          "salaryMin": 203200,
+          "salaryMax": 203200,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8806017002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 257,
+          "title": "Principal Product Manager, AI Custom Models",
+          "location": "Remote, Canada; Remote, US",
+          "salaryMin": 203200,
+          "salaryMax": 203200,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8564957002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 258,
+          "title": "Principal Product Manager, AI Software Factory",
+          "location": "Remote, Canada; Remote, United States",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8658878002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 259,
+          "title": "Senior Product Manager, Growth",
+          "location": "Remote, Canada; Remote, United States",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8684348002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 260,
+          "title": "Senior Product Manager, Secret Detection and Vulnerability Research",
+          "location": "Remote, United States",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8697043002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 261,
+          "title": "Senior Product Manager, Source Code",
+          "location": "Remote, Canada; Remote, US",
+          "salaryMin": 139200,
+          "salaryMax": 139200,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8597805002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 262,
+          "title": "Senior Product Manager, Tenant Scale",
+          "location": "Remote, Canada; Remote, US",
+          "salaryMin": 139200,
+          "salaryMax": 139200,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8512220002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 263,
+          "title": "Staff Product Manager,  RevOps & Finance Systems",
+          "location": "Remote, US",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8612937002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
         }
       ]
     },
@@ -30381,102 +30504,6 @@
         }
       ],
       "roleCount": 3
-    },
-    {
-      "companyId": 61,
-      "companyName": "Gitlab",
-      "companySlug": "gitlab",
-      "roles": [
-        {
-          "id": 256,
-          "title": "Director of Product Management, Agentic Software Delivery",
-          "location": "Remote, United States",
-          "salaryMin": 203200,
-          "salaryMax": 203200,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8806017002",
-          "postedAt": "2026-09-14T16:01:39-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 257,
-          "title": "Principal Product Manager, AI Custom Models",
-          "location": "Remote, Canada; Remote, US",
-          "salaryMin": 203200,
-          "salaryMax": 203200,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8564957002",
-          "postedAt": "2026-09-14T16:01:39-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 258,
-          "title": "Principal Product Manager, AI Software Factory",
-          "location": "Remote, Canada; Remote, United States",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8658878002",
-          "postedAt": "2026-09-14T16:01:39-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 259,
-          "title": "Senior Product Manager, Growth",
-          "location": "Remote, Canada; Remote, United States",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8684348002",
-          "postedAt": "2026-09-14T16:01:39-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 260,
-          "title": "Senior Product Manager, Secret Detection and Vulnerability Research",
-          "location": "Remote, United States",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8697043002",
-          "postedAt": "2026-09-14T16:01:39-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 261,
-          "title": "Senior Product Manager, Source Code",
-          "location": "Remote, Canada; Remote, US",
-          "salaryMin": 139200,
-          "salaryMax": 139200,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8597805002",
-          "postedAt": "2026-09-14T16:01:39-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 262,
-          "title": "Senior Product Manager, Tenant Scale",
-          "location": "Remote, Canada; Remote, US",
-          "salaryMin": 139200,
-          "salaryMax": 139200,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8512220002",
-          "postedAt": "2026-09-14T16:01:39-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 263,
-          "title": "Staff Product Manager,  RevOps & Finance Systems",
-          "location": "Remote, US",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8612937002",
-          "postedAt": "2026-09-14T16:01:39-04:00",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 8
     },
     {
       "companyId": 934,
