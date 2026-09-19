@@ -40,6 +40,6 @@ jobs:
         run: |
           git config user.name "tolara-atlas-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/tolara.db public/data/map-data.json
+          git add data/tolara.db public/data/map-data.json public/data/companies
           git diff --cached --quiet || git commit -m "chore: daily jobs sync"
           git push
