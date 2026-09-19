@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-19T06:37:23.890Z",
-  "companyCount": 610,
-  "pinCount": 652,
-  "roleCount": 1653,
+  "generatedAt": "2026-09-19T07:01:14.427Z",
+  "companyCount": 594,
+  "pinCount": 638,
+  "roleCount": 1633,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -226,8 +226,8 @@
     {
       "id": "1079-austin-tx",
       "companyId": 1079,
-      "companyName": "Texascapitalbank|wd12|careers",
-      "companySlug": "texascapitalbank-wd12-careers",
+      "companyName": "Texas Capital Bank",
+      "companySlug": "texas-capital-bank",
       "city": "Austin",
       "state": "TX",
       "latitude": 30.259680646169663,
@@ -1276,8 +1276,8 @@
     {
       "id": "1079-richardson-tx",
       "companyId": 1079,
-      "companyName": "Texascapitalbank|wd12|careers",
-      "companySlug": "texascapitalbank-wd12-careers",
+      "companyName": "Texas Capital Bank",
+      "companySlug": "texas-capital-bank",
       "city": "Richardson",
       "state": "TX",
       "latitude": 32.9481789,
@@ -8461,30 +8461,6 @@
       ]
     },
     {
-      "id": "905-los-angeles-ca",
-      "companyId": 905,
-      "companyName": "That's No Moon Entertainment",
-      "companySlug": "thatsnomoonentertainment",
-      "city": "Los Angeles",
-      "state": "CA",
-      "latitude": 34.05256244393214,
-      "longitude": -118.25299106981946,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1780,
-          "title": "Head of Production",
-          "location": "Los Angeles, CA or Remote US",
-          "salaryMin": 236000,
-          "salaryMax": 312000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/thatsnomoonentertainment/jobs/6130064004",
-          "postedAt": "2026-09-16T14:35:18-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "993-los-angeles-ca",
       "companyId": 993,
       "companyName": "That's No Moon Entertainment",
@@ -13749,41 +13725,6 @@
       ]
     },
     {
-      "id": "892-santa-clara-ca",
-      "companyId": 892,
-      "companyName": "Picarro Inc",
-      "companySlug": "picarroinc",
-      "city": "Santa Clara",
-      "state": "CA",
-      "latitude": 37.23872318698257,
-      "longitude": -121.69090027852187,
-      "roleCount": 2,
-      "roles": [
-        {
-          "id": 1765,
-          "title": "Associate Product Manager",
-          "location": "US Remote",
-          "salaryMin": 110,
-          "salaryMax": 125,
-          "salaryCurrency": "USD",
-          "url": "https://www.picarro.com/company/careers/job-openings/apply?gh_jid=5421494008",
-          "postedAt": "2026-09-10T20:30:26-04:00",
-          "isRemote": true
-        },
-        {
-          "id": 1766,
-          "title": "Product Manager, Natural Gas",
-          "location": "Santa Clara, CA",
-          "salaryMin": 125,
-          "salaryMax": 140,
-          "salaryCurrency": "USD",
-          "url": "https://www.picarro.com/company/careers/job-openings/apply?gh_jid=5234150008",
-          "postedAt": "2026-09-02T16:58:28-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "988-santa-clara-ca",
       "companyId": 988,
       "companyName": "Picarro Inc",
@@ -14037,30 +13978,6 @@
           "salaryCurrency": "USD",
           "url": "https://job-boards.greenhouse.io/otter/jobs/8543629002",
           "postedAt": "2026-09-10T18:33:28-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "896-chicago-il",
-      "companyId": 896,
-      "companyName": "Rewards Network",
-      "companySlug": "rewardsnetwork",
-      "city": "Chicago",
-      "state": "IL",
-      "latitude": 41.86826142067407,
-      "longitude": -87.63020529083558,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1770,
-          "title": "B2C Product Manager (Hybrid)",
-          "location": "Chicago, IL ",
-          "salaryMin": 120000,
-          "salaryMax": 140000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/rewardsnetwork/jobs/5134238007",
-          "postedAt": "2026-09-10T16:31:45-04:00",
           "isRemote": false
         }
       ]
@@ -15111,30 +15028,6 @@
       ]
     },
     {
-      "id": "880-mountain-view-ca",
-      "companyId": 880,
-      "companyName": "ID.me University Recruiting",
-      "companySlug": "idmeuniversityrecruiting",
-      "city": "Mountain View",
-      "state": "CA",
-      "latitude": 37.401377124476156,
-      "longitude": -122.07522817488004,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1745,
-          "title": "Summer 2027 - Associate Product Manager (New Grad)",
-          "location": "Mountain View, CA ",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003",
-          "postedAt": "2026-09-09T10:35:25-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "985-mountain-view-ca",
       "companyId": 985,
       "companyName": "ID.me University Recruiting",
@@ -15680,41 +15573,6 @@
       ]
     },
     {
-      "id": "876-denver-co",
-      "companyId": 876,
-      "companyName": "EMS LINQ",
-      "companySlug": "emslinqinc",
-      "city": "Denver",
-      "state": "CO",
-      "latitude": 39.728556814100756,
-      "longitude": -104.97824416272243,
-      "roleCount": 2,
-      "roles": [
-        {
-          "id": 1741,
-          "title": "Senior Product Manager, LINQ Connect",
-          "location": "Denver, Colorado",
-          "salaryMin": 120000,
-          "salaryMax": 150000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/emslinqinc/jobs/5414654008",
-          "postedAt": "2026-09-04T17:36:23-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1740,
-          "title": "Director of Product",
-          "location": "Denver, Colorado",
-          "salaryMin": 180000,
-          "salaryMax": 200000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/emslinqinc/jobs/5290800008",
-          "postedAt": "2026-08-10T13:39:28-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "143-cambridge-ma",
       "companyId": 143,
       "companyName": "Kayak",
@@ -16004,30 +15862,6 @@
           "url": "https://job-boards.greenhouse.io/gomotive/jobs/8693964002",
           "postedAt": "2026-09-04T13:19:28-04:00",
           "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "908-atlanta-ga",
-      "companyId": 908,
-      "companyName": "Trella Health",
-      "companySlug": "trellahealth",
-      "city": "Atlanta",
-      "state": "GA",
-      "latitude": 33.75125484968625,
-      "longitude": -84.40130720729016,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1783,
-          "title": "Clinical Data Product Manager",
-          "location": "Remote",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://job-boards.greenhouse.io/trellahealth/jobs/6104638004",
-          "postedAt": "2026-09-04T09:53:08-04:00",
-          "isRemote": true
         }
       ]
     },
@@ -17385,60 +17219,14 @@
       ]
     },
     {
-      "id": "911-boulder-co",
-      "companyId": 911,
-      "companyName": "Watchmaker Genomics",
-      "companySlug": "watchmakergenomics",
-      "city": "Boulder",
-      "state": "CO",
-      "latitude": 40.02277267486804,
-      "longitude": -105.26414571557955,
-      "roleCount": 3,
-      "roles": [
-        {
-          "id": 1788,
-          "title": "Associate Director, Product Management Operations",
-          "location": "Boulder, CO",
-          "salaryMin": 140000,
-          "salaryMax": 160000,
-          "salaryCurrency": "USD",
-          "url": "https://www.watchmakergenomics.com/company/careers/?gh_jid=5412359008",
-          "postedAt": "2026-09-02T09:46:06-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1789,
-          "title": " Product Manager, Precision Enzymes",
-          "location": "Boulder, CO",
-          "salaryMin": 110000,
-          "salaryMax": 135000,
-          "salaryCurrency": "USD",
-          "url": "https://www.watchmakergenomics.com/company/careers/?gh_jid=5364191008",
-          "postedAt": "2026-07-21T12:48:27-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1787,
-          "title": "Associate Director, Product Management (MDx & Enzymes)",
-          "location": "Boulder, CO ",
-          "salaryMin": 150000,
-          "salaryMax": 170000,
-          "salaryCurrency": "USD",
-          "url": "https://www.watchmakergenomics.com/company/careers/?gh_jid=4947363008",
-          "postedAt": "2025-10-07T16:46:49-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "995-boulder-co",
       "companyId": 995,
       "companyName": "Watchmaker Genomics",
       "companySlug": "watchmaker-genomics",
       "city": "Boulder",
       "state": "CO",
-      "latitude": 40.017357845173436,
-      "longitude": -105.25271062647623,
+      "latitude": 40.0149856,
+      "longitude": -105.270545,
       "roleCount": 3,
       "roles": [
         {
@@ -18692,8 +18480,8 @@
     {
       "id": "212-san-francisco-ca",
       "companyId": 212,
-      "companyName": "P-1%20AI",
-      "companySlug": "p-1-20ai",
+      "companyName": "P-1 AI",
+      "companySlug": "p-1-ai",
       "city": "San Francisco",
       "state": "CA",
       "latitude": 37.78814493711015,
@@ -21701,38 +21489,14 @@
       ]
     },
     {
-      "id": "875-edison-nj",
-      "companyId": 875,
-      "companyName": "Elligint Health",
-      "companySlug": "elliginthealth",
-      "city": "Edison",
-      "state": "NJ",
-      "latitude": 40.506570111397444,
-      "longitude": -74.38985579475188,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1739,
-          "title": "Product Manager",
-          "location": "Edison, NJ",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://job-boards.greenhouse.io/elliginthealth/jobs/8707696002",
-          "postedAt": "2026-08-13T14:53:01-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "983-edison-nj",
       "companyId": 983,
       "companyName": "Elligint Health",
       "companySlug": "elligint-health",
       "city": "Edison",
       "state": "NJ",
-      "latitude": 40.4980315290875,
-      "longitude": -74.38521909544039,
+      "latitude": 40.5005351,
+      "longitude": -74.3983939,
       "roleCount": 1,
       "roles": [
         {
@@ -22079,30 +21843,6 @@
       ]
     },
     {
-      "id": "950-atlanta-ga",
-      "companyId": 950,
-      "companyName": "Pearly Plan",
-      "companySlug": "pearlyplan",
-      "city": "Atlanta",
-      "state": "GA",
-      "latitude": 33.74499038946935,
-      "longitude": -84.37953099732218,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1848,
-          "title": "Staff Product Manager - AI (Data & Analytics)",
-          "location": "Atlanta, GA",
-          "salaryMin": 180,
-          "salaryMax": 210,
-          "salaryCurrency": "USD",
-          "url": "https://jobs.ashbyhq.com/pearlyplan/40df5264-603d-42ef-9326-7e7bfbbfab38",
-          "postedAt": "2026-08-10T16:32:13.644+00:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "999-atlanta-ga",
       "companyId": 999,
       "companyName": "Pearly Plan",
@@ -22249,30 +21989,6 @@
           "salaryCurrency": "USD",
           "url": "https://jobs.ashbyhq.com/decagon/d790a2a2-958d-4f49-96ed-adbd68d2e6ce",
           "postedAt": "2026-01-24T00:06:02.143+00:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "874-san-diego-ca",
-      "companyId": 874,
-      "companyName": "Element Biosciences",
-      "companySlug": "elementbiosciences",
-      "city": "San Diego",
-      "state": "CA",
-      "latitude": 32.71882311197886,
-      "longitude": -117.15711382113362,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1738,
-          "title": "Associate Director, Product Management – Software, Multiomics Data Partnerships",
-          "location": "San Diego - Headquarters",
-          "salaryMin": 180000,
-          "salaryMax": 226000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/elementbiosciences/jobs/6135375004",
-          "postedAt": "2026-08-07T13:16:32-04:00",
           "isRemote": false
         }
       ]
@@ -23687,38 +23403,14 @@
       ]
     },
     {
-      "id": "873-watertown-ma",
-      "companyId": 873,
-      "companyName": "Dyno Therapeutics",
-      "companySlug": "dynotherapeutics",
-      "city": "Watertown",
-      "state": "MA",
-      "latitude": 42.35751838806132,
-      "longitude": -71.17748312513432,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1737,
-          "title": "AI Product Manager",
-          "location": "Watertown, Massachusetts, United States",
-          "salaryMin": 154084,
-          "salaryMax": 154084,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/dynotherapeutics/jobs/7813878003",
-          "postedAt": "2026-07-23T11:29:29-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "981-watertown-ma",
       "companyId": 981,
       "companyName": "Dyno Therapeutics",
       "companySlug": "dyno-therapeutics",
       "city": "Watertown",
       "state": "MA",
-      "latitude": 42.373554375588405,
-      "longitude": -71.1756850809122,
+      "latitude": 42.3652576,
+      "longitude": -71.1843234,
       "roleCount": 1,
       "roles": [
         {
@@ -24399,30 +24091,6 @@
           "salaryCurrency": "USD",
           "url": "https://jobs.ashbyhq.com/baseten/3027e0bc-731f-4fef-b081-2031590766fd",
           "postedAt": "2026-04-02T18:57:48.605+00:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "893-new-york-ny",
-      "companyId": 893,
-      "companyName": "Practising Law Institute",
-      "companySlug": "practisinglawinstitute",
-      "city": "New York",
-      "state": "NY",
-      "latitude": 40.71767300207313,
-      "longitude": -73.99038466550662,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1767,
-          "title": "Product Manager, Legal Information Services  ",
-          "location": "New York, New York, United States",
-          "salaryMin": 125000,
-          "salaryMax": 132000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/practisinglawinstitute/jobs/4695149006",
-          "postedAt": "2026-07-07T14:25:30-04:00",
           "isRemote": false
         }
       ]
@@ -26077,30 +25745,6 @@
       ]
     },
     {
-      "id": "972-chicago-il",
-      "companyId": 972,
-      "companyName": "Nomi Health",
-      "companySlug": "nomihealth",
-      "city": "Chicago",
-      "state": "IL",
-      "latitude": 41.87027927678793,
-      "longitude": -87.61780818849326,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1885,
-          "title": "Director of Product - Network",
-          "location": "Remote",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://jobs.lever.co/nomihealth/918f7621-1e76-4056-9db3-dc0de9688e76",
-          "postedAt": "1788370247798",
-          "isRemote": true
-        }
-      ]
-    },
-    {
       "id": "1003-chicago-il",
       "companyId": 1003,
       "companyName": "Nomi Health",
@@ -26940,30 +26584,6 @@
       ]
     },
     {
-      "id": "977-minneapolis-mn",
-      "companyId": 977,
-      "companyName": "Solution Design",
-      "companySlug": "solutiondesign",
-      "city": "Minneapolis",
-      "state": "MN",
-      "latitude": 44.98567759504643,
-      "longitude": -93.27203225010705,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1891,
-          "title": "Business Systems Analyst/Product Owner",
-          "location": "Minneapolis, Minnesota",
-          "salaryMin": 95000,
-          "salaryMax": 115000,
-          "salaryCurrency": "USD",
-          "url": "https://jobs.lever.co/solutiondesign/4dc02918-ce90-472b-8b09-f3bebd443a5d",
-          "postedAt": "1658774596294",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "1004-minneapolis-mn",
       "companyId": 1004,
       "companyName": "Solution Design",
@@ -27718,25 +27338,6 @@
       "roleCount": 2
     },
     {
-      "companyId": 924,
-      "companyName": "Bigger Games",
-      "companySlug": "biggergames",
-      "roles": [
-        {
-          "id": 1810,
-          "title": "Product Manager",
-          "location": "Istanbul",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://jobs.ashbyhq.com/biggergames/70478eff-1c45-437b-a000-15a2e3a37d1e",
-          "postedAt": "2026-06-23T17:46:28.250+00:00",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 1
-    },
-    {
       "companyId": 997,
       "companyName": "Bigger Games",
       "companySlug": "bigger-games",
@@ -27757,8 +27358,8 @@
     },
     {
       "companyId": 1044,
-      "companyName": "Boseallaboutme|wd503|bose Careers",
-      "companySlug": "boseallaboutme-wd503-bose-careers",
+      "companyName": "Bose Electronics",
+      "companySlug": "bose-electronics",
       "roles": [
         {
           "id": 1972,
@@ -28466,25 +28067,6 @@
       "roleCount": 2
     },
     {
-      "companyId": 935,
-      "companyName": "Grid",
-      "companySlug": "gridverify",
-      "roles": [
-        {
-          "id": 1822,
-          "title": "Senior Product Manager",
-          "location": "Remote",
-          "salaryMin": 145,
-          "salaryMax": 175,
-          "salaryCurrency": "USD",
-          "url": "https://jobs.ashbyhq.com/gridverify/82d03097-50fa-4695-a02a-eff7e09c26d9",
-          "postedAt": "2024-12-04T18:12:27.273+00:00",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 1
-    },
-    {
       "companyId": 998,
       "companyName": "Grid",
       "companySlug": "grid",
@@ -28760,36 +28342,6 @@
       "roleCount": 1
     },
     {
-      "companyId": 1056,
-      "companyName": "Jm|wd103|external",
-      "companySlug": "jm-wd103-external",
-      "roles": [
-        {
-          "id": 1992,
-          "title": "Sr. Product Manager",
-          "location": "Waterville Plt 7, OH",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://jm.wd103.myworkdayjobs.com/external/job/Waterville-Plt-7-OH/Sr-Product-Manager_R26_0921",
-          "postedAt": null,
-          "isRemote": true
-        },
-        {
-          "id": 2300,
-          "title": "Product Manager",
-          "location": "Denver CO WHQ",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://jm.wd103.myworkdayjobs.com/external/job/Denver-CO-WHQ/PVC-Product-Manager_R26_1352",
-          "postedAt": null,
-          "isRemote": true
-        }
-      ],
-      "roleCount": 2
-    },
-    {
       "companyId": 217,
       "companyName": "Jobgether",
       "companySlug": "jobgether",
@@ -28814,6 +28366,36 @@
           "salaryCurrency": "USD",
           "url": "https://jobs.lever.co/jobgether/07a3c52c-6082-4c42-b58b-35ffe16a8df0",
           "postedAt": "1789090701964",
+          "isRemote": true
+        }
+      ],
+      "roleCount": 2
+    },
+    {
+      "companyId": 1056,
+      "companyName": "Johns Manville",
+      "companySlug": "johns-manville",
+      "roles": [
+        {
+          "id": 1992,
+          "title": "Sr. Product Manager",
+          "location": "Waterville Plt 7, OH",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jm.wd103.myworkdayjobs.com/external/job/Waterville-Plt-7-OH/Sr-Product-Manager_R26_0921",
+          "postedAt": null,
+          "isRemote": true
+        },
+        {
+          "id": 2300,
+          "title": "Product Manager",
+          "location": "Denver CO WHQ",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jm.wd103.myworkdayjobs.com/external/job/Denver-CO-WHQ/PVC-Product-Manager_R26_1352",
+          "postedAt": null,
           "isRemote": true
         }
       ],
@@ -29663,8 +29245,8 @@
     },
     {
       "companyId": 1071,
-      "companyName": "Puma|wd502|jobs At Puma",
-      "companySlug": "puma-wd502-jobs-at-puma",
+      "companyName": "PUMA",
+      "companySlug": "puma",
       "roles": [
         {
           "id": 2020,
@@ -30640,8 +30222,8 @@
     },
     {
       "companyId": 1080,
-      "companyName": "Woodbineentertainment|wd10|ext",
-      "companySlug": "woodbineentertainment-wd10-ext",
+      "companyName": "Woodbine Entertainment Group",
+      "companySlug": "woodbine-entertainment-group",
       "roles": [
         {
           "id": 2041,
