@@ -25,6 +25,13 @@
  *      adapters discoverCompanies.ts uses and keep only boards with at
  *      least one PM-classified posting right now -- same bar as the bulk
  *      discovery, so companies.csv stays a currently-relevant list.
+ *   5. Hold back, rather than add, any board whose token doesn't resemble
+ *      the a16z company name (nameResemblesToken). a16z's own data isn't
+ *      always right -- its "Loop" (Loop Crypto) page listed 13 postings
+ *      that all applied through Lead Bank's board, which put Lead Bank's
+ *      roles on the map under Loop's name. Held-back boards are printed
+ *      for a manual look; a legitimate one (e.g. Worldcoin -> "Tools for
+ *      Humanity") can be added to companies.csv by hand.
  *
  * Also writes data/discovery/a16z_portfolio.json: every portfolio company
  * and what it resolved to (platform/token, or the unsupported apply host),
@@ -74,6 +81,7 @@ interface PortfolioEntry {
   postingsSeen: number;
   board: Board | null;
   unsupportedHost: string | null; // most common apply host when no supported board was found
+  nameMismatch: boolean; // board token doesn't resemble the company name -- held back for review, see step 5
 }
 
 function sleep(ms: number): Promise<void> {
@@ -195,6 +203,39 @@ function boardFromApplyUrl(applyUrl: string): Board | null {
   return null;
 }
 
+function normalizeForMatch(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+// Filler that shows up in board tokens but not company names (or vice
+// versa): "boxinc", "tryjeeves", "stuut-ai", "keycard-labs", "careers".
+const TOKEN_FILLER = /^(try|join|get|work(at|with)?)|(inc|hq|ai|labs?|careers?|jobs|app|io|co)$/g;
+
+/**
+ * True when a board token plausibly belongs to the named company -- a
+ * cheap guard against a16z mislabeling another company's postings, not a
+ * real identity check. Matches if the whole normalized name appears in the
+ * token (or vice versa), or any 3+ character word of the name appears in
+ * the token. Workday tokens compare on tenant and site, not the data center
+ * in the middle; Paylocity tokens are GUIDs with nothing to compare, so
+ * they always pass.
+ */
+function nameResemblesToken(name: string, board: Board): boolean {
+  if (board.platform === "paylocity") return true;
+  const rawToken =
+    board.platform === "workday" ? board.token.split("|").filter((_, i) => i !== 1).join(" ") : board.token;
+  const token = normalizeForMatch(rawToken);
+  const strippedToken = token.replace(TOKEN_FILLER, "");
+  const fullName = normalizeForMatch(name);
+  if (!token || !fullName) return false;
+  if (token.includes(fullName) || fullName.includes(token)) return true;
+  if (strippedToken.length >= 3 && fullName.includes(strippedToken)) return true;
+  return name
+    .split(/[^A-Za-z0-9]+/)
+    .map(normalizeForMatch)
+    .some((word) => word.length >= 3 && token.includes(word));
+}
+
 function mostCommon<T>(items: T[], keyOf: (item: T) => string): T | null {
   const counts = new Map<string, { item: T; count: number }>();
   for (const item of items) {
@@ -232,7 +273,9 @@ async function resolveCompany(slug: string): Promise<PortfolioEntry | null> {
     unsupportedHost = mostCommon(hosts, (h) => h);
   }
 
-  return { slug, name: name.trim(), postingsSeen: applyUrls.length, board, unsupportedHost };
+  const trimmedName = name.trim();
+  const nameMismatch = board !== null && !nameResemblesToken(trimmedName, board);
+  return { slug, name: trimmedName, postingsSeen: applyUrls.length, board, unsupportedHost, nameMismatch };
 }
 
 async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
@@ -289,10 +332,15 @@ async function main() {
 
   const byPlatform = new Map<Platform, Map<string, string>>(); // platform -> token -> display name
   let alreadyKnown = 0;
+  const heldBack: PortfolioEntry[] = [];
   for (const entry of resolved) {
     const { platform, token } = entry.board!;
     if (existingKeys.has(`${platform}:${token.toLowerCase()}`)) {
       alreadyKnown += 1;
+      continue;
+    }
+    if (entry.nameMismatch) {
+      heldBack.push(entry);
       continue;
     }
     const tokens = byPlatform.get(platform) ?? new Map<string, string>();
@@ -318,6 +366,13 @@ async function main() {
   const topHosts = [...hostCounts].sort((a, b) => b[1] - a[1]).slice(0, 10);
   if (topHosts.length > 0) {
     console.log(`[a16z] top unsupported apply hosts: ${topHosts.map(([h, n]) => `${h} (${n})`).join(", ")}`);
+  }
+
+  if (heldBack.length > 0) {
+    console.log(`\n[a16z] held back ${heldBack.length} boards whose token doesn't resemble the a16z company name -- check by hand:`);
+    for (const entry of heldBack) {
+      console.log(`  ${entry.name} -> ${entry.board!.platform}:${entry.board!.token}  (${A16Z_ORIGIN}/jobs/${entry.slug})`);
+    }
   }
 
   const nowIso = new Date().toISOString();
@@ -354,7 +409,7 @@ async function main() {
 
   console.log(
     `\na16z discovery complete: ${newLines.length} new companies added, ${noPmRole} new boards have no PM role right now, ` +
-      `${verifyFailed} didn't resolve. Portfolio snapshot written to data/discovery/a16z_portfolio.json.`,
+      `${verifyFailed} didn't resolve, ${heldBack.length} held back for a name check. Portfolio snapshot written to data/discovery/a16z_portfolio.json.`,
   );
   if (newLines.length > 0) {
     console.log(`companies.csv grew by ${newLines.length} rows. Run npm run sync next to pull in their postings.`);
