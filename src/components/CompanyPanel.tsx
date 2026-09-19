@@ -1,4 +1,5 @@
 import type { LocationPinData } from "../types.js";
+import { roleHref } from "../router.js";
 
 interface CompanyPanelProps {
   pin: LocationPinData | null;
@@ -44,9 +45,23 @@ export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
           const salary = formatSalary(role.salaryMin, role.salaryMax, role.salaryCurrency);
           return (
             <li key={role.id} className="role-item">
-              <a href={role.url ?? "#"} target="_blank" rel="noreferrer" className="role-title">
-                {role.title}
-              </a>
+              <div className="role-title-row">
+                <a href={roleHref(pin.companySlug, role.id)} className="role-title">
+                  {role.title}
+                </a>
+                {role.url && (
+                  <a
+                    href={role.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="role-external"
+                    aria-label={`Open the original posting for ${role.title}`}
+                    title="Original posting"
+                  >
+                    ↗
+                  </a>
+                )}
+              </div>
               <div className="role-meta">
                 {role.isRemote && (
                   <span

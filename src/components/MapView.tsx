@@ -2,12 +2,9 @@ import { useEffect, useRef } from "react";
 import maplibregl, { type GeoJSONSource } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { LocationPinData } from "../types.js";
+import { BASEMAP_STYLE, CLUSTER_TEXT, LABEL_HALO, LABEL_TEXT, PIN_COLOR, PIN_STROKE } from "../theme.js";
 
-// CARTO's free, no-API-key-required basemap tiles (Positron: clean, light,
-// good contrast for data points on top of it). Fine for this traffic level
-// under CARTO's free-tier terms; swap for a paid provider if this ever
-// becomes a real production SaaS with heavy traffic.
-const BASEMAP_STYLE = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+// Basemap and colors are shared with the role page's mini map -- see theme.ts.
 
 // Fallback view (whole contiguous US) used only until real pin data loads
 // and the map can fit itself to where the data actually is.
@@ -76,6 +73,15 @@ const DASH_SEQUENCE: number[][] = [
   [0, 3.9, 3, 0.1],
 ];
 const DASH_STEP_MS = 40; // ~25fps -- smooth enough for a slow "marching" read, cheap enough to run indefinitely
+
+// Radar pulse on the focused pin (clicked, picked in search, or open in the
+// role drawer): two rings expand from the pin and fade, half a period apart,
+// so there's always one on its way out -- reads as a continuous ping.
+const RADAR_PERIOD_MS = 1800;
+const RADAR_MIN_RADIUS = 8;
+const RADAR_MAX_RADIUS = 34;
+const RADAR_STEP_MS = 33; // ~30fps
+const RADAR_LAYERS = ["pins-radar-a", "pins-radar-b"] as const;
 
 // A request to fly the camera to a pin. `nonce` makes picking the same
 // location twice fly again rather than being a no-op state update.
@@ -213,6 +219,7 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
   // mouseenter, cancelled in mouseleave below) rather than continuously --
   // no point animating an invisible, empty-data layer.
   const dashAnimFrameRef = useRef<number | null>(null);
+  const radarFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     pinsByIdRef.current = new Map(pins.map((p) => [p.id, p]));
@@ -280,15 +287,30 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
         source: "office-links",
         layout: { "line-cap": "round" },
         paint: {
-          "line-color": "#E8543E",
+          "line-color": PIN_COLOR,
           "line-width": 2,
           "line-opacity": 0.75,
           "line-dasharray": DASH_SEQUENCE[0],
         },
       });
 
-      // Highlight ring around the selected pin (from a click or the company
-      // search), drawn under the pins so the pin itself stays on top.
+      // Radar pulse rings (animated in the selectedPinId effect below), then
+      // a steady highlight ring, all under the pins so the pin stays on top.
+      for (const id of RADAR_LAYERS) {
+        map.addLayer({
+          id,
+          type: "circle",
+          source: "pins",
+          filter: ["==", ["get", "id"], selectedPinIdRef.current ?? ""],
+          paint: {
+            "circle-radius": RADAR_MIN_RADIUS,
+            "circle-opacity": 0,
+            "circle-stroke-width": 2,
+            "circle-stroke-color": PIN_COLOR,
+            "circle-stroke-opacity": 0,
+          },
+        });
+      }
       map.addLayer({
         id: "pins-selected",
         type: "circle",
@@ -296,10 +318,10 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
         filter: ["==", ["get", "id"], selectedPinIdRef.current ?? ""],
         paint: {
           "circle-radius": 14,
-          "circle-color": "#E8543E",
+          "circle-color": PIN_COLOR,
           "circle-opacity": 0.2,
           "circle-stroke-width": 2,
-          "circle-stroke-color": "#E8543E",
+          "circle-stroke-color": PIN_COLOR,
         },
       });
 
@@ -309,10 +331,10 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
         source: "pins",
         filter: PIN_VISIBILITY_FILTER,
         paint: {
-          "circle-color": "#E8543E",
+          "circle-color": PIN_COLOR,
           "circle-radius": 7,
           "circle-stroke-width": 2,
-          "circle-stroke-color": "#ffffff",
+          "circle-stroke-color": PIN_STROKE,
         },
       });
 
@@ -339,8 +361,8 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
           "text-optional": true,
         },
         paint: {
-          "text-color": "#1A2233",
-          "text-halo-color": "#ffffff",
+          "text-color": LABEL_TEXT,
+          "text-halo-color": LABEL_HALO,
           "text-halo-width": 1.4,
         },
       });
@@ -355,11 +377,11 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
         maxzoom: CITY_CLUSTER_MAX_ZOOM,
         layout: { "circle-sort-key": ["get", "roleCount"] },
         paint: {
-          "circle-color": "#E8543E",
+          "circle-color": PIN_COLOR,
           "circle-opacity": 0.9,
           "circle-radius": ["step", ["get", "roleCount"], 13, 10, 16, 40, 20, 150, 25],
           "circle-stroke-width": 2,
-          "circle-stroke-color": "#ffffff",
+          "circle-stroke-color": PIN_STROKE,
         },
       });
       map.addLayer({
@@ -377,7 +399,7 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
           // sort keys are placed first, so negate roleCount.
           "symbol-sort-key": ["-", 0, ["get", "roleCount"]],
         },
-        paint: { "text-color": "#ffffff" },
+        paint: { "text-color": CLUSTER_TEXT },
       });
       // City names under the bubbles; collision detection drops the ones
       // that would overlap at the national view, same as the pin labels.
@@ -396,8 +418,8 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
           "symbol-sort-key": ["-", 0, ["get", "roleCount"]],
         },
         paint: {
-          "text-color": "#1A2233",
-          "text-halo-color": "#ffffff",
+          "text-color": LABEL_TEXT,
+          "text-halo-color": LABEL_HALO,
           "text-halo-width": 1.4,
         },
       });
@@ -520,6 +542,10 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
         cancelAnimationFrame(dashAnimFrameRef.current);
         dashAnimFrameRef.current = null;
       }
+      if (radarFrameRef.current != null) {
+        cancelAnimationFrame(radarFrameRef.current);
+        radarFrameRef.current = null;
+      }
       hoverPopupRef.current?.remove();
       map.remove();
       mapRef.current = null;
@@ -555,9 +581,33 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    const apply = () => map.setFilter("pins-selected", ["==", ["get", "id"], selectedPinId ?? ""]);
+    const stopRadar = () => {
+      if (radarFrameRef.current != null) cancelAnimationFrame(radarFrameRef.current);
+      radarFrameRef.current = null;
+    };
+    const apply = () => {
+      const filter: maplibregl.FilterSpecification = ["==", ["get", "id"], selectedPinId ?? ""];
+      map.setFilter("pins-selected", filter);
+      for (const id of RADAR_LAYERS) map.setFilter(id, filter);
+      stopRadar();
+      if (!selectedPinId) return;
+      let last = 0;
+      const tick = (now: number) => {
+        if (now - last >= RADAR_STEP_MS) {
+          last = now;
+          RADAR_LAYERS.forEach((id, i) => {
+            const phase = ((now / RADAR_PERIOD_MS) + i / RADAR_LAYERS.length) % 1;
+            map.setPaintProperty(id, "circle-radius", RADAR_MIN_RADIUS + phase * (RADAR_MAX_RADIUS - RADAR_MIN_RADIUS));
+            map.setPaintProperty(id, "circle-stroke-opacity", 0.85 * (1 - phase));
+          });
+        }
+        radarFrameRef.current = requestAnimationFrame(tick);
+      };
+      radarFrameRef.current = requestAnimationFrame(tick);
+    };
     if (mapLoadedRef.current) apply();
     else map.once("load", apply);
+    return stopRadar;
   }, [selectedPinId]);
 
   useEffect(() => {

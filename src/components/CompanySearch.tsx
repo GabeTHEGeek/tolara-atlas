@@ -9,12 +9,16 @@ interface CompanySearchProps {
 interface CompanyEntry {
   companyId: number;
   name: string;
+  // Distinct open roles. A role posted in several cities appears on each
+  // city's pin, so summing pin.roleCount would count it once per office.
   roleCount: number;
   // One per city the company has a pin in, busiest first.
   locations: LocationPinData[];
 }
 
 const MAX_RESULTS = 8;
+// Shown as soon as the box is focused, before anything is typed.
+const TOP_COMPANIES = 5;
 
 function locationLabel(pin: LocationPinData): string {
   return [pin.city, pin.state].filter(Boolean).join(", ") || "Location unknown";
@@ -34,6 +38,7 @@ export default function CompanySearch({ pins, onSelectLocation }: CompanySearchP
 
   const companies = useMemo(() => {
     const byId = new Map<number, CompanyEntry>();
+    const roleIds = new Map<number, Set<number>>();
     for (const pin of pins) {
       const entry = byId.get(pin.companyId) ?? {
         companyId: pin.companyId,
@@ -41,11 +46,16 @@ export default function CompanySearch({ pins, onSelectLocation }: CompanySearchP
         roleCount: 0,
         locations: [],
       };
-      entry.roleCount += pin.roleCount;
       entry.locations.push(pin);
       byId.set(pin.companyId, entry);
+      const ids = roleIds.get(pin.companyId) ?? new Set<number>();
+      for (const role of pin.roles) ids.add(role.id);
+      roleIds.set(pin.companyId, ids);
     }
-    for (const entry of byId.values()) entry.locations.sort((a, b) => b.roleCount - a.roleCount);
+    for (const entry of byId.values()) {
+      entry.roleCount = roleIds.get(entry.companyId)?.size ?? 0;
+      entry.locations.sort((a, b) => b.roleCount - a.roleCount);
+    }
     return [...byId.values()];
   }, [pins]);
 
@@ -64,6 +74,18 @@ export default function CompanySearch({ pins, onSelectLocation }: CompanySearchP
       .slice(0, MAX_RESULTS);
   }, [companies, query]);
 
+  const topCompanies = useMemo(
+    () =>
+      [...companies]
+        .sort((a, b) => b.roleCount - a.roleCount || a.name.localeCompare(b.name))
+        .slice(0, TOP_COMPANIES),
+    [companies],
+  );
+
+  // Nothing typed yet: offer the top companies instead of an empty box.
+  const showingTop = query.trim() === "";
+  const listed = showingTop ? topCompanies : results;
+
   const activeCompany = activeCompanyId == null ? null : companies.find((c) => c.companyId === activeCompanyId) ?? null;
 
   // Close the dropdown on a click anywhere outside the search box.
@@ -75,7 +97,7 @@ export default function CompanySearch({ pins, onSelectLocation }: CompanySearchP
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, []);
 
-  const showDropdown = open && (activeCompany !== null || query.trim() !== "");
+  const showDropdown = open && (activeCompany !== null || !showingTop || topCompanies.length > 0);
 
   return (
     <div
@@ -141,19 +163,23 @@ export default function CompanySearch({ pins, onSelectLocation }: CompanySearchP
                 ))}
               </ul>
             </>
-          ) : results.length > 0 ? (
-            <ul className="company-search-list">
-              {results.map((c) => (
-                <li key={c.companyId}>
-                  <button className="company-search-item" onClick={() => setActiveCompanyId(c.companyId)}>
-                    <span>{c.name}</span>
-                    <span className="company-search-count">
-                      {c.locations.length} {c.locations.length === 1 ? "location" : "locations"}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
+          ) : listed.length > 0 ? (
+            <>
+              {showingTop && <p className="company-search-label">Top companies</p>}
+              <ul className="company-search-list">
+                {listed.map((c) => (
+                  <li key={c.companyId}>
+                    <button className="company-search-item" onClick={() => setActiveCompanyId(c.companyId)}>
+                      <span>{c.name}</span>
+                      <span className="company-search-count">
+                        {c.roleCount} {c.roleCount === 1 ? "role" : "roles"} · {c.locations.length}{" "}
+                        {c.locations.length === 1 ? "location" : "locations"}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
           ) : (
             <p className="company-search-empty">No companies on the map match “{query.trim()}”.</p>
           )}
