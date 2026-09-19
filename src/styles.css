@@ -1016,3 +1016,32 @@ h1.role-page-title {
   color: var(--text-muted);
   cursor: progress;
 }
+
+/* Company logo (Clearbit) at the top of the snapshot card. */
+.company-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: var(--surface-hover);
+  padding: 4px;
+  margin-bottom: 14px;
+}
+
+.snapshot-website {
+  margin: 10px 0 0;
+  font-size: 14px;
+}
+
+.snapshot-website a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.snapshot-website a:hover {
+  text-decoration: underline;
+}
+
+.snapshot-thin {
+  margin-top: 10px;
+}

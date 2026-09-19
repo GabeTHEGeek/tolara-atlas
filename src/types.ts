@@ -61,8 +61,10 @@ export interface MapData {
 // /api/intelligence response (server/enrichment/intelligence.ts).
 
 export interface CompanyProfile {
-  wikidataId: string;
-  wikidataUrl: string;
+  wikidataId: string | null;
+  wikidataUrl: string | null;
+  logoUrl: string | null;
+  sources: Array<{ label: string; url: string | null }>;
   description: string | null;
   founded: number | null;
   headquarters: string | null;

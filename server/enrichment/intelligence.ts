@@ -18,6 +18,7 @@
 import type Database from "better-sqlite3";
 import { fetchWikidataCompany, type CompanyProfile, type Leader } from "./wikidata.js";
 import { fetchCompanyNews, type NewsItem } from "./news.js";
+import { fetchCompanyWeb, fetchEdgarCompany, type CompanyWeb, type EdgarCompany } from "./companyWeb.js";
 import { fetchRoleFocus, type RoleFocus } from "./roleFocus.js";
 
 const PROFILE_TTL_DAYS = 30;
@@ -46,7 +47,11 @@ interface CachedRow {
   fresh: number;
 }
 
-function readCompanyCache(db: Database.Database, companyId: number, kind: string): (CachedRow & { value: unknown }) | null {
+function readCompanyCache(
+  db: Database.Database,
+  companyId: number,
+  kind: string,
+): (CachedRow & { value: unknown }) | null {
   const row = db
     .prepare(
       `SELECT data, fetched_at, (refresh_after IS NULL OR refresh_after > datetime('now')) AS fresh
@@ -78,7 +83,11 @@ export function readCachedIntelligence(
   db: Database.Database,
   companyId: number,
   roleId: number | null,
-): Omit<CompanyIntelligence, "fetchedAt" | "unavailable"> & { fetchedAt: string | null } | null {
+):
+  | (Omit<CompanyIntelligence, "fetchedAt" | "unavailable"> & {
+      fetchedAt: string | null;
+    })
+  | null {
   const profile = readCompanyCache(db, companyId, "profile");
   const leadership = readCompanyCache(db, companyId, "leadership");
   const news = readCompanyCache(db, companyId, "news");
@@ -87,7 +96,7 @@ export function readCachedIntelligence(
   const profileValue = profile?.value as { found: boolean; profile?: CompanyProfile } | undefined;
   const times = [profile?.fetched_at, news?.fetched_at].filter((t): t is string => Boolean(t)).sort();
   return {
-    profile: profileValue?.found ? profileValue.profile ?? null : null,
+    profile: profileValue?.found ? (profileValue.profile ?? null) : null,
     leaders: (leadership?.value as Leader[] | undefined) ?? [],
     news: (news?.value as NewsItem[] | undefined) ?? [],
     focus: focus?.focus ?? null,
@@ -103,7 +112,10 @@ function readRoleFocusCache(
     .prepare(`SELECT data FROM role_enrichments WHERE role_id = ? AND kind = 'focus_summary'`)
     .get(roleId) as { data: string } | undefined;
   if (!row) return null;
-  const parsed = JSON.parse(row.data) as { focus: RoleFocus | null; contentHash: string };
+  const parsed = JSON.parse(row.data) as {
+    focus: RoleFocus | null;
+    contentHash: string;
+  };
   return parsed;
 }
 
@@ -112,6 +124,68 @@ function writeRoleFocusCache(db: Database.Database, roleId: number, focus: RoleF
     `INSERT INTO role_enrichments (role_id, kind, data, fetched_at) VALUES (?, 'focus_summary', ?, datetime('now'))
      ON CONFLICT (role_id, kind) DO UPDATE SET data = excluded.data, fetched_at = excluded.fetched_at`,
   ).run(roleId, JSON.stringify({ focus, contentHash }));
+}
+
+function preferPlainUrl(wikidataUrl: string | null, domain: string | null): string | null {
+  const plain = domain ? `https://${domain}` : null;
+  if (!wikidataUrl) return plain;
+  try {
+    const parsed = new URL(wikidataUrl);
+    const messy = parsed.search !== "" || parsed.pathname.replace(/\/$/, "") !== "";
+    return messy && plain ? plain : wikidataUrl;
+  } catch {
+    return plain ?? wikidataUrl;
+  }
+}
+
+function normalizeCity(s: string): string {
+  return s.toLowerCase().replace(/[^a-z]/g, "");
+}
+
+/**
+ * Builds the snapshot from whichever sources answered. Wikidata leads when
+ * it matched; SEC EDGAR fills headquarters and industry for public
+ * companies, and Clearbit supplies the website and logo -- which is often
+ * all there is for a startup.
+ *
+ * EDGAR is only trusted when its headquarters is a city the company
+ * actually has offices in: "Mercury" the fintech matches Mercury Systems
+ * of Andover, MA in the SEC's index, the same collision Wikidata had.
+ */
+function mergeProfile(
+  wikidata: CompanyProfile | null,
+  web: CompanyWeb | null | undefined,
+  edgar: EdgarCompany | null | undefined,
+  officeCities: Set<string>,
+): CompanyProfile | null {
+  const edgarTrusted = edgar && edgar.city && officeCities.has(normalizeCity(edgar.city)) ? edgar : null;
+  if (!wikidata && !web && !edgarTrusted) return null;
+
+  const sources = [...(wikidata?.sources ?? [])];
+  if (edgarTrusted) sources.push({ label: "SEC EDGAR", url: edgarTrusted.filingsUrl });
+  if (web) sources.push({ label: "Clearbit", url: null });
+
+  const edgarHq = edgarTrusted ? [edgarTrusted.city, edgarTrusted.state].filter(Boolean).join(", ") : null;
+  return {
+    wikidataId: wikidata?.wikidataId ?? null,
+    wikidataUrl: wikidata?.wikidataUrl ?? null,
+    logoUrl: web?.logoUrl ?? null,
+    sources,
+    description: wikidata?.description ?? null,
+    founded: wikidata?.founded ?? null,
+    headquarters: wikidata?.headquarters ?? edgarHq,
+    industries: wikidata?.industries.length
+      ? wikidata.industries
+      : edgarTrusted?.industry
+        ? [edgarTrusted.industry]
+        : [],
+    employees: wikidata?.employees ?? null,
+    employeesAsOf: wikidata?.employeesAsOf ?? null,
+    // Wikidata's website is sometimes a localized redirect
+    // ("okta.com/uk/?ir=1"); prefer the plain domain when there is one.
+    website: preferPlainUrl(wikidata?.website ?? null, web?.domain ?? null),
+    linkedinCompanyUrl: wikidata?.linkedinCompanyUrl ?? null,
+  };
 }
 
 /**
@@ -125,11 +199,11 @@ export async function loadIntelligence(
   roleId: number | null,
 ): Promise<CompanyIntelligence | null> {
   const company = db.prepare(`SELECT id, name FROM companies WHERE slug = ?`).get(companySlug) as
-    | { id: number; name: string }
-    | undefined;
+    { id: number; name: string } | undefined;
   if (!company) return null;
 
   const unavailable: CompanyIntelligence["unavailable"] = [];
+  let transientProfile: CompanyProfile | null = null;
   let profileEntry = readCompanyCache(db, company.id, "profile");
   if (!profileEntry?.fresh) {
     // Cities the company has offices in on our map, plus any hand-set HQ --
@@ -143,27 +217,62 @@ export async function loadIntelligence(
         )
         .all(company.id, company.id) as Array<{ city: string }>
     ).map((r) => r.city);
-    const result = await fetchWikidataCompany(company.name, officeCities);
+    const [result, web, edgar] = await Promise.all([
+      fetchWikidataCompany(company.name, officeCities),
+      // Free fallbacks: Clearbit has far wider coverage than Wikidata (a
+      // domain and logo even for startups with no entry), and EDGAR has
+      // real HQ/industry for US public companies.
+      fetchCompanyWeb(company.name),
+      fetchEdgarCompany(company.name),
+    ]);
+    const knownCities = new Set(officeCities.map(normalizeCity));
     // A failed lookup (Wikidata rate limit or timeout) is never written:
     // caching it would show a blank snapshot for days for a company that
     // does have one. Only a real answer -- match or genuinely no match --
     // is stored, with a miss re-checked sooner in case the name gets fixed
     // or Wikidata adds the company later.
-    if (result.kind === "error") unavailable.push("profile");
-    else {
+    // Wikidata failing shouldn't throw away what Clearbit found: show a
+    // website-only card this time, but don't cache it, so a later working
+    // lookup can still fill in the rest.
+    // "Nothing found" is only trustworthy when every source actually
+    // answered. If any of them failed (rate limit, timeout) and we ended up
+    // with nothing, say so and cache nothing -- otherwise a bad minute gets
+    // remembered as "this company has no profile".
+    const anySourceFailed = result.kind === "error" || web === undefined || edgar === undefined;
+    if (result.kind === "error") {
+      unavailable.push("profile");
+      transientProfile = mergeProfile(null, web, edgar, knownCities);
+    } else {
       const matched = result.kind === "match" ? result : null;
-      const sourceUrl = matched?.profile.wikidataUrl ?? null;
-      const ttl = matched ? PROFILE_TTL_DAYS : 7;
-      writeCompanyCache(db, company.id, "profile", matched ? { found: true, profile: matched.profile } : { found: false }, sourceUrl, ttl);
-      writeCompanyCache(db, company.id, "leadership", matched?.leaders ?? [], sourceUrl, ttl);
-      profileEntry = readCompanyCache(db, company.id, "profile");
+      // A company with no Wikidata entry still gets a card if Clearbit knows
+      // its site; a matched one gets its website/logo filled in.
+      const profile = mergeProfile(matched?.profile ?? null, web, edgar, knownCities);
+      if (!profile && anySourceFailed) {
+        unavailable.push("profile");
+      } else {
+        const sourceUrl = matched?.profile.wikidataUrl ?? null;
+        const ttl = matched ? PROFILE_TTL_DAYS : 7;
+        writeCompanyCache(
+          db,
+          company.id,
+          "profile",
+          profile ? { found: true, profile } : { found: false },
+          sourceUrl,
+          ttl,
+        );
+        writeCompanyCache(db, company.id, "leadership", matched?.leaders ?? [], sourceUrl, ttl);
+        profileEntry = readCompanyCache(db, company.id, "profile");
+      }
     }
   }
   const leaders = (readCompanyCache(db, company.id, "leadership")?.value as Leader[] | undefined) ?? [];
 
   let newsEntry = readCompanyCache(db, company.id, "news");
   if (!newsEntry?.fresh) {
-    const items = await fetchCompanyNews(company.name, leaders.map((l) => l.name));
+    const items = await fetchCompanyNews(
+      company.name,
+      leaders.map((l) => l.name),
+    );
     // Same rule as the profile above: undefined means the fetch failed, so
     // leave the cache alone rather than remembering "no news" for days.
     if (items === undefined) unavailable.push("news");
@@ -182,7 +291,13 @@ export async function loadIntelligence(
          FROM roles r WHERE r.id = ? AND r.company_id = ?`,
       )
       .get(roleId, company.id) as
-      | { id: number; platform: string; source_job_id: string; content_hash: string; token: string | null }
+      | {
+          id: number;
+          platform: string;
+          source_job_id: string;
+          content_hash: string;
+          token: string | null;
+        }
       | undefined;
     if (role) {
       const cached = readRoleFocusCache(db, role.id);
@@ -202,7 +317,7 @@ export async function loadIntelligence(
   const profileValue = profileEntry?.value as { found: boolean; profile?: CompanyProfile } | undefined;
   const times = [profileEntry?.fetched_at, newsEntry?.fetched_at].filter((t): t is string => Boolean(t)).sort();
   return {
-    profile: profileValue?.found ? profileValue.profile ?? null : null,
+    profile: (profileValue?.found ? (profileValue.profile ?? null) : null) ?? transientProfile,
     leaders,
     news: (newsEntry?.value as NewsItem[] | undefined) ?? [],
     focus,

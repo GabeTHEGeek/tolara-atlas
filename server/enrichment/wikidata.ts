@@ -53,8 +53,12 @@ const SEARCH_URL = "https://www.wikidata.org/w/api.php";
 const SPARQL_URL = "https://query.wikidata.org/sparql";
 
 export interface CompanyProfile {
-  wikidataId: string;
-  wikidataUrl: string;
+  wikidataId: string | null;
+  wikidataUrl: string | null;
+  // Filled from Clearbit when Wikidata has no website/logo (see companyWeb.ts).
+  logoUrl: string | null;
+  // Where each part came from, for the "via ..." line under the card.
+  sources: Array<{ label: string; url: string | null }>;
   description: string | null; // Wikidata's one-line description
   founded: number | null; // year
   headquarters: string | null;
@@ -262,6 +266,8 @@ async function companyDetails(
   const profile: CompanyProfile = {
     wikidataId: id,
     wikidataUrl: `https://www.wikidata.org/wiki/${id}`,
+    logoUrl: null,
+    sources: [{ label: "Wikidata", url: `https://www.wikidata.org/wiki/${id}` }],
     description: first("desc") ?? null,
     founded: year(first("inception")),
     headquarters: first("hqLabel") && !/^Q\d+$/.test(first("hqLabel")!) ? first("hqLabel")! : null,

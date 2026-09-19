@@ -337,6 +337,18 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
               <p className="card-empty">Not loaded yet.</p>
             ) : profile ? (
               <>
+                {profile.logoUrl && (
+                  <img
+                    className="company-logo"
+                    src={profile.logoUrl}
+                    alt=""
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    // Clearbit serves a 404 for companies it has no logo for.
+                    onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")}
+                  />
+                )}
                 <ul className="snapshot-lines">
                   {(profile.founded || profile.headquarters) && (
                     <li>{[profile.founded && `Founded ${profile.founded}`, profile.headquarters].filter(Boolean).join(" · ")}</li>
@@ -355,14 +367,43 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
                   )}
                   {profile.description && <li>{profile.description.charAt(0).toUpperCase() + profile.description.slice(1)}</li>}
                 </ul>
-                <a className="source-link" href={profile.wikidataUrl} target="_blank" rel="noreferrer">
-                  via Wikidata
-                </a>
+                {profile.website && (
+                  <p className="snapshot-website">
+                    <a href={profile.website} target="_blank" rel="noreferrer">
+                      {profile.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                    </a>
+                  </p>
+                )}
+                <span className="source-link">
+                  via{" "}
+                  {profile.sources.map((s, i) => (
+                    <span key={s.label}>
+                      {i > 0 && " · "}
+                      {s.url ? (
+                        <a href={s.url} target="_blank" rel="noreferrer">
+                          {s.label}
+                        </a>
+                      ) : (
+                        s.label
+                      )}
+                    </span>
+                  ))}
+                </span>
               </>
             ) : unavailable.includes("profile") ? (
               <RetryNote source="Wikidata" onRetry={loadIntelligence} busy={intelState === "loading"} />
             ) : (
-              <p className="card-empty">No public profile found for {details.company.name} yet.</p>
+              <p className="card-empty">
+                No public profile found for {details.company.name} yet.{" "}
+                <button className="link-button" onClick={loadIntelligence} disabled={intelState === "loading"}>
+                  {intelState === "loading" ? "Checking…" : "Check again"}
+                </button>
+              </p>
+            )}
+            {profile && !profile.description && !profile.founded && !profile.headquarters && (
+              <p className="card-empty snapshot-thin">
+                Wikidata has no entry for {details.company.name}, so only its website is known.
+              </p>
             )}
           </section>
 
@@ -399,7 +440,12 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
             ) : unavailable.includes("news") ? (
               <RetryNote source="Google News" onRetry={loadIntelligence} busy={intelState === "loading"} />
             ) : (
-              <p className="card-empty">No news about {details.company.name} in the last 30 days.</p>
+              <p className="card-empty">
+                No news about {details.company.name} in the last 30 days.{" "}
+                <button className="link-button" onClick={loadIntelligence} disabled={intelState === "loading"}>
+                  {intelState === "loading" ? "Checking…" : "Check again"}
+                </button>
+              </p>
             )}
           </section>
 
