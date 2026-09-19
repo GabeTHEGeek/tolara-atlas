@@ -27,6 +27,11 @@ export interface SearchMeta {
   // separately from boardsFailed so a dead token/timeout isn't confused
   // with a real company that simply has nothing open right now.
   boardsEmpty: string[];
+  // Subset of boardsFailed whose failure was the vendor's own scheduled
+  // maintenance (only workday.ts detects this so far) -- still counted as
+  // failed, but logged separately so a weekend maintenance window isn't
+  // mistaken for a batch of dead tokens.
+  boardsInMaintenance?: string[];
 }
 
 export interface SearchOptions {

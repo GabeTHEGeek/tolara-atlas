@@ -200,8 +200,19 @@ async function main() {
       console.log(
         `[${platform}] checked ${meta.boardsChecked.length} boards (${meta.boardsEmpty.length} empty), ${meta.boardsFailed.length} failed, ${allJobs.length} total postings, ${jobs.length} classified as PM`,
       );
-      if (meta.boardsFailed.length > 0) {
-        console.log(`[${platform}] failed boards: ${meta.boardsFailed.join(", ")}`);
+      // Boards down for the vendor's scheduled maintenance are still in
+      // boardsFailed (so their roles are left untouched, same as any other
+      // failure), but get their own line so a weekend maintenance window
+      // doesn't read as a pile of dead tokens.
+      const inMaintenance = new Set(meta.boardsInMaintenance ?? []);
+      const otherFailed = meta.boardsFailed.filter((b) => !inMaintenance.has(b));
+      if (inMaintenance.size > 0) {
+        console.log(
+          `[${platform}] ${inMaintenance.size} boards down for scheduled vendor maintenance (temporary, retry later): ${[...inMaintenance].join(", ")}`,
+        );
+      }
+      if (otherFailed.length > 0) {
+        console.log(`[${platform}] failed boards: ${otherFailed.join(", ")}`);
       }
       if (meta.boardsEmpty.length > 0) {
         console.log(`[${platform}] empty boards (loaded fine, 0 postings): ${meta.boardsEmpty.join(", ")}`);

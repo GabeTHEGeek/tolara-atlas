@@ -55,6 +55,13 @@ const WORKDAY_PAGE_SIZE = 20; // Workday's own hard cap -- confirmed live; limit
 // entire tenant's results without this.
 const INTER_PAGE_DELAY_MS = 250;
 
+// During Workday's weekly maintenance window, every CXS request on an
+// affected data center (confirmed live: all of wd1/wd3/wd5 at once, while
+// wd10/wd12/wd5xx kept serving) 303-redirects here instead of returning
+// JSON. fetch follows the redirect, so it shows up as the response's final
+// URL.
+const MAINTENANCE_URL_MARKER = "community.workday.com/maintenance";
+
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -131,13 +138,15 @@ function parseToken(token: string): ParsedWorkdayToken | null {
  * pagination early and returns whatever was already fetched -- a board
  * that's real and mostly working shouldn't lose its first 40 good results
  * because request #3 timed out. `failed: false` with an empty array is a
- * board that loaded fine with zero current postings.
+ * board that loaded fine with zero current postings. `maintenance: true`
+ * marks a failure caused by Workday's scheduled maintenance redirect (see
+ * MAINTENANCE_URL_MARKER) -- still a failure, just a known, temporary one.
  */
 async function fetchBoard(
   token: string,
   wantCount: number,
   timeoutMs = 15000,
-): Promise<{ jobs: WorkdayJobPosting[]; failed: boolean }> {
+): Promise<{ jobs: WorkdayJobPosting[]; failed: boolean; maintenance?: boolean }> {
   const parsed = parseToken(token);
   if (!parsed) return { jobs: [], failed: true };
   const { tenant, dataCenter, site } = parsed;
@@ -147,6 +156,7 @@ async function fetchBoard(
   let offset = 0;
   let total: number | null = null;
   let firstPage = true;
+  let inMaintenance = false;
 
   while (jobs.length < wantCount && (total === null || offset < total)) {
     if (!firstPage) await sleep(INTER_PAGE_DELAY_MS);
@@ -169,6 +179,11 @@ async function fetchBoard(
           body: JSON.stringify({ appliedFacets: {}, limit: pageLimit, offset, searchText: "" }),
         });
         clearTimeout(timer);
+        // No point retrying -- the window lasts hours, not seconds.
+        if (resp.url.includes(MAINTENANCE_URL_MARKER)) {
+          inMaintenance = true;
+          break;
+        }
         if (resp.status === 429 || resp.status >= 500) {
           if (attempt < 2) {
             await sleep(500 * (attempt + 1));
@@ -189,7 +204,7 @@ async function fetchBoard(
     if (!page) {
       // First page failing means the board itself couldn't be read at all;
       // a later page failing just means stop paging with what we have.
-      if (firstPage) return { jobs: [], failed: true };
+      if (firstPage) return { jobs: [], failed: true, maintenance: inMaintenance };
       break;
     }
 
@@ -225,8 +240,9 @@ export async function searchWorkday(
   const boardsChecked: string[] = [];
   const boardsFailed: string[] = [];
   const boardsEmpty: string[] = [];
+  const boardsInMaintenance: string[] = [];
 
-  const rawByBoard = new Map<string, { jobs: WorkdayJobPosting[]; failed: boolean }>();
+  const rawByBoard = new Map<string, { jobs: WorkdayJobPosting[]; failed: boolean; maintenance?: boolean }>();
   await Promise.all(
     boards.map(async (board) => {
       rawByBoard.set(board, await fetchBoard(board, limit));
@@ -237,6 +253,7 @@ export async function searchWorkday(
     const result = rawByBoard.get(board) ?? { jobs: [], failed: true };
     if (result.failed) {
       boardsFailed.push(board);
+      if (result.maintenance) boardsInMaintenance.push(board);
       continue;
     }
     boardsChecked.push(board);
@@ -290,5 +307,5 @@ export async function searchWorkday(
     }
   }
 
-  return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty } };
+  return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty, boardsInMaintenance } };
 }
