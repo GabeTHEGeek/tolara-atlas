@@ -18,8 +18,8 @@
  * Mercury car brand), so (c) the item has to corroborate itself: its
  * headquarters is a city where the company actually has offices on our map
  * (or its hand-set HQ), or -- for companies headquartered somewhere we
- * don't list, like TikTok -- it states BOTH a CEO and an employee count,
- * which a brand or product entry like Mercury's does not. Up to 3
+ * don't list, like TikTok -- it states a CEO or an employee count, which a
+ * brand or product entry like Mercury's does not. Up to 3
  * company-shaped candidates are tried in search order. Anything else returns null and the
  * page shows "not available yet" -- a blank snapshot beats someone else's.
  * Well-known companies resolve; most small startups have no item and stay
@@ -207,7 +207,10 @@ export async function fetchWikidataCompany(
     }
     if (!result) continue;
     const hqMatches = Boolean(result.profile.headquarters && knownCities.has(normalizeCity(result.profile.headquarters)));
-    const strongCompanyEvidence = result.leaders.length > 0 && result.profile.employees !== null;
+    // A CEO or an employee count is enough: both are things a brand or
+    // product entry (Ford's Mercury marque) doesn't carry, and requiring
+    // both rejected real companies like TikTok.
+    const strongCompanyEvidence = result.leaders.length > 0 || result.profile.employees !== null;
     if (!hqMatches && !strongCompanyEvidence) continue;
     const score =
       (result.leaders.length > 0 ? 4 : 0) +
@@ -237,7 +240,11 @@ async function companyDetails(
       OPTIONAL { ?item wdt:P4264 ?linkedin }
       OPTIONAL { ?item p:P169 ?ceoSt . ?ceoSt ps:P169 ?ceo . OPTIONAL { ?ceoSt pq:P582 ?ceoEnd }
                  OPTIONAL { ?ceo wdt:P6634 ?ceoLinkedin } }
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+      # "en,mul": Wikidata increasingly stores names that are the same in
+      # every language (people, brands) under the "mul" language rather than
+      # "en". Asking for English alone returned a bare Q-id for Apple's
+      # current CEO, which this code then discarded as unlabeled.
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "en,mul". }
     } LIMIT 500`);
   if (rows === undefined) return undefined;
   if (rows.length === 0) return null;
