@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-19T11:07:02.551Z",
-  "companyCount": 577,
-  "pinCount": 633,
-  "roleCount": 1792,
+  "generatedAt": "2026-09-19T11:38:20.058Z",
+  "companyCount": 587,
+  "pinCount": 639,
+  "roleCount": 1817,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -2104,6 +2104,41 @@
           "salaryCurrency": null,
           "url": "https://peak6group.wd1.myworkdayjobs.com/peak6/job/Austin-TX/Head-of-Product_JR105194",
           "postedAt": "Posted 10 Days Ago",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1170-new-york-ny",
+      "companyId": 1170,
+      "companyName": "Weight Watchers",
+      "companySlug": "weight-watchers",
+      "city": "New York",
+      "state": "NY",
+      "latitude": 40.72136163016755,
+      "longitude": -74.00563802476952,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2682,
+          "title": "Product Manager, Growth",
+          "location": "United States - New York",
+          "salaryMin": 90000,
+          "salaryMax": 90000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/ww/jobs/5277407008",
+          "postedAt": "2026-09-19T04:01:49-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2681,
+          "title": "Principal Product Manager- Growth and Monetization",
+          "location": "United States - New York",
+          "salaryMin": 190000,
+          "salaryMax": 190000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/ww/jobs/5275450008",
+          "postedAt": "2026-09-19T04:01:47-04:00",
           "isRemote": false
         }
       ]
@@ -10300,7 +10335,7 @@
       "state": "CA",
       "latitude": 37.77898146026269,
       "longitude": -122.40375323315853,
-      "roleCount": 1,
+      "roleCount": 3,
       "roles": [
         {
           "id": 2680,
@@ -10311,6 +10346,28 @@
           "salaryCurrency": null,
           "url": "https://jobs.ashbyhq.com/owner/f8401e33-2c9f-449e-bd7b-6a44d4c2e6a3",
           "postedAt": "2026-09-15T18:01:17.836+00:00",
+          "isRemote": true
+        },
+        {
+          "id": 600,
+          "title": "Principal Product Manager, AI Restaurant Experience",
+          "location": "Remote - United States or Canada",
+          "salaryMin": 300,
+          "salaryMax": 300,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/owner/d74be412-5b98-48fb-95b0-3f0539cd9fa1",
+          "postedAt": "2026-08-19T16:34:23.909+00:00",
+          "isRemote": true
+        },
+        {
+          "id": 599,
+          "title": "Principal Product Manager, Lighthouse",
+          "location": "Remote - United States or Canada",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.ashbyhq.com/owner/e2e99b83-8820-4946-b169-51c429b1059c",
+          "postedAt": "2026-07-10T00:31:25.274+00:00",
           "isRemote": true
         }
       ]
@@ -10833,6 +10890,41 @@
           "url": "https://jobs.ashbyhq.com/airops/1fb9d97f-def8-49f9-8adb-e9d15382c489",
           "postedAt": "2026-08-21T20:32:29.753+00:00",
           "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "349-waltham-ma",
+      "companyId": 349,
+      "companyName": "Constant Contact",
+      "companySlug": "constant-contact",
+      "city": "Waltham",
+      "state": "MA",
+      "latitude": 42.375517383399355,
+      "longitude": -71.22702057127358,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 1273,
+          "title": "Principal Product Manager",
+          "location": "Remote, US or Remote, Ontario, Canada ",
+          "salaryMin": 148782,
+          "salaryMax": 148782,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/constantcontact/jobs/7826950",
+          "postedAt": "2026-09-15T11:52:19-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 1274,
+          "title": "Principal Product Manager - AI Assistant",
+          "location": "Remote, US or Remote, Ontario, Canada ",
+          "salaryMin": 148782,
+          "salaryMax": 148782,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/constantcontact/jobs/8155350",
+          "postedAt": "2026-09-04T09:42:43-04:00",
+          "isRemote": true
         }
       ]
     },
@@ -15020,8 +15112,8 @@
       "companySlug": "zoominfo",
       "city": "Waltham",
       "state": "MA",
-      "latitude": 42.3762385,
-      "longitude": -71.2355644,
+      "latitude": 42.368645823477394,
+      "longitude": -71.24028766858639,
       "roleCount": 2,
       "roles": [
         {
@@ -16594,7 +16686,7 @@
       "state": "CA",
       "latitude": 34.014516105342395,
       "longitude": -118.39726786405585,
-      "roleCount": 2,
+      "roleCount": 3,
       "roles": [
         {
           "id": 1042,
@@ -16606,6 +16698,17 @@
           "url": "https://job-boards.greenhouse.io/scopely/jobs/5308474008?gh_jid=5308474008",
           "postedAt": "2026-09-03T12:56:54-04:00",
           "isRemote": false
+        },
+        {
+          "id": 1043,
+          "title": "Senior Director of Product, Roadmap",
+          "location": "CA - Canada; US - United States",
+          "salaryMin": 223000,
+          "salaryMax": 223000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/scopely/jobs/5287656008?gh_jid=5287656008",
+          "postedAt": "2026-08-27T12:26:48-04:00",
+          "isRemote": true
         },
         {
           "id": 1040,
@@ -17475,6 +17578,30 @@
           "url": "https://www.watchmakergenomics.com/company/careers/?gh_jid=4947363008",
           "postedAt": "2025-10-07T16:46:49-04:00",
           "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "941-san-francisco-ca",
+      "companyId": 941,
+      "companyName": "Lancedb",
+      "companySlug": "lancedb",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.78939155513926,
+      "longitude": -122.3971958899475,
+      "roleCount": 1,
+      "roles": [
+        {
+          "id": 1834,
+          "title": "Senior Product Manager",
+          "location": "United States | Canada",
+          "salaryMin": 180,
+          "salaryMax": 250,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/lancedb/7fe25cf2-3bb8-4d05-8715-b22d72c22bd7",
+          "postedAt": "2026-09-02T00:06:15.657+00:00",
+          "isRemote": true
         }
       ]
     },
@@ -20130,6 +20257,52 @@
       ]
     },
     {
+      "id": "411-austin-tx",
+      "companyId": 411,
+      "companyName": "1Password",
+      "companySlug": "1password",
+      "city": "Austin",
+      "state": "TX",
+      "latitude": 30.27283560464769,
+      "longitude": -97.7568270615836,
+      "roleCount": 3,
+      "roles": [
+        {
+          "id": 1363,
+          "title": "Staff Product Manager, SaaS Manager",
+          "location": "Remote (United States | Canada)",
+          "salaryMin": 155000,
+          "salaryMax": 155000,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/1password/0b37fa60-5cbc-4b9a-84c9-4afe50634db7",
+          "postedAt": "2026-08-24T23:42:14.575+00:00",
+          "isRemote": true
+        },
+        {
+          "id": 1362,
+          "title": "Senior Staff Product Manager, Device Security",
+          "location": "Remote (United States | Canada)",
+          "salaryMin": 178000,
+          "salaryMax": 178000,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/1password/99eb8a4c-81e1-413b-822f-dd27598207e0",
+          "postedAt": "2026-08-14T16:08:21.100+00:00",
+          "isRemote": true
+        },
+        {
+          "id": 1361,
+          "title": "Senior Product Manager, Machine Identity",
+          "location": "Remote (United States | Canada)",
+          "salaryMin": 118000,
+          "salaryMax": 118000,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/1password/c6fc16b0-bb5b-48f1-994d-d69e07846bc8",
+          "postedAt": "2026-06-29T18:20:37.185+00:00",
+          "isRemote": true
+        }
+      ]
+    },
+    {
       "id": "866-san-francisco-ca",
       "companyId": 866,
       "companyName": "Baton",
@@ -20419,6 +20592,30 @@
           "url": "https://jobs.ashbyhq.com/saronic/b774434d-16d8-4b08-bb61-254b6ee71634",
           "postedAt": "2025-12-01T15:46:34.809+00:00",
           "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "30-cambridge-ma",
+      "companyId": 30,
+      "companyName": "Phaidra",
+      "companySlug": "phaidra",
+      "city": "Cambridge",
+      "state": "MA",
+      "latitude": 42.36936793074144,
+      "longitude": -71.11517476800118,
+      "roleCount": 1,
+      "roles": [
+        {
+          "id": 185,
+          "title": "Staff Product Manager ",
+          "location": "Remote - US/Canada (Eastern or Central Time)",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://job-boards.greenhouse.io/phaidra/jobs/4716415005",
+          "postedAt": "2026-08-20T19:04:31-04:00",
+          "isRemote": true
         }
       ]
     },
@@ -23582,6 +23779,41 @@
           "url": "https://jobs.ashbyhq.com/cardless/0037ae7e-0692-4504-886e-eb4622ceaa9c",
           "postedAt": "2026-07-20T20:37:40.111+00:00",
           "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "667-san-francisco-ca",
+      "companyId": 667,
+      "companyName": "WorkOS",
+      "companySlug": "workos",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.79204877537574,
+      "longitude": -122.40147177259824,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 1635,
+          "title": "Product Manager - Growth",
+          "location": "United States & Canada",
+          "salaryMin": 200,
+          "salaryMax": 250,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/workos/257e30d0-eaa3-4ce1-a47d-2b2c4f65cf1a",
+          "postedAt": "2026-07-17T21:19:07.974+00:00",
+          "isRemote": true
+        },
+        {
+          "id": 1634,
+          "title": "Product Manager",
+          "location": "United States & Canada",
+          "salaryMin": 175,
+          "salaryMax": 250,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/workos/5550ddd5-c3eb-459a-aa4d-8b1216346d88",
+          "postedAt": "2026-04-13T18:16:38.917+00:00",
+          "isRemote": true
         }
       ]
     },
@@ -29792,6 +30024,25 @@
       "roleCount": 1
     },
     {
+      "companyId": 711,
+      "companyName": "Chromatic",
+      "companySlug": "chromatic",
+      "roles": [
+        {
+          "id": 1659,
+          "title": "Senior Product Manager",
+          "location": "Remote | US or Canada",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.ashbyhq.com/chromatic/641777c4-fb67-48ea-acbc-1202c03596fe",
+          "postedAt": "2026-04-06T15:58:27.388+00:00",
+          "isRemote": true
+        }
+      ],
+      "roleCount": 1
+    },
+    {
       "companyId": 176,
       "companyName": "Clasp Group",
       "companySlug": "clasp-group",
@@ -29949,6 +30200,25 @@
           "salaryCurrency": null,
           "url": "https://datastealth.bamboohr.com/careers/117",
           "postedAt": null,
+          "isRemote": true
+        }
+      ],
+      "roleCount": 1
+    },
+    {
+      "companyId": 580,
+      "companyName": "Elation Health",
+      "companySlug": "elation-health",
+      "roles": [
+        {
+          "id": 1557,
+          "title": "Senior Product Manager",
+          "location": "US or Canada - Remote",
+          "salaryMin": 150000,
+          "salaryMax": 180000,
+          "salaryCurrency": "USD",
+          "url": "https://www.elationhealth.com/about-us/careers?gh_jid=8080723",
+          "postedAt": "2026-09-16T01:53:31-04:00",
           "isRemote": true
         }
       ],
@@ -30129,6 +30399,39 @@
           "isRemote": true
         },
         {
+          "id": 257,
+          "title": "Principal Product Manager, AI Custom Models",
+          "location": "Remote, Canada; Remote, US",
+          "salaryMin": 203200,
+          "salaryMax": 203200,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8564957002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 258,
+          "title": "Principal Product Manager, AI Software Factory",
+          "location": "Remote, Canada; Remote, United States",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8658878002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 259,
+          "title": "Senior Product Manager, Growth",
+          "location": "Remote, Canada; Remote, United States",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8684348002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
           "id": 260,
           "title": "Senior Product Manager, Secret Detection and Vulnerability Research",
           "location": "Remote, United States",
@@ -30136,6 +30439,28 @@
           "salaryMax": null,
           "salaryCurrency": null,
           "url": "https://job-boards.greenhouse.io/gitlab/jobs/8697043002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 261,
+          "title": "Senior Product Manager, Source Code",
+          "location": "Remote, Canada; Remote, US",
+          "salaryMin": 139200,
+          "salaryMax": 139200,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8597805002",
+          "postedAt": "2026-09-14T16:01:39-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 262,
+          "title": "Senior Product Manager, Tenant Scale",
+          "location": "Remote, Canada; Remote, US",
+          "salaryMin": 139200,
+          "salaryMax": 139200,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8512220002",
           "postedAt": "2026-09-14T16:01:39-04:00",
           "isRemote": true
         },
@@ -30151,7 +30476,7 @@
           "isRemote": true
         }
       ],
-      "roleCount": 3
+      "roleCount": 8
     },
     {
       "companyId": 934,
@@ -31690,6 +32015,36 @@
       "roleCount": 1
     },
     {
+      "companyId": 26,
+      "companyName": "Stackadapt",
+      "companySlug": "stackadapt",
+      "roles": [
+        {
+          "id": 159,
+          "title": "Senior Product Manager (Creatives)",
+          "location": "Canada; United States",
+          "salaryMin": 168000,
+          "salaryMax": 168000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/stackadapt/jobs/4299186009",
+          "postedAt": "2026-09-14T19:18:23-04:00",
+          "isRemote": true
+        },
+        {
+          "id": 160,
+          "title": "Staff Product Manager (Attribution)",
+          "location": "Canada; United States",
+          "salaryMin": 188000,
+          "salaryMax": 188000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/stackadapt/jobs/4389168009",
+          "postedAt": "2026-09-14T19:18:23-04:00",
+          "isRemote": true
+        }
+      ],
+      "roleCount": 2
+    },
+    {
       "companyId": 41,
       "companyName": "Stackblitz",
       "companySlug": "stackblitz",
@@ -32295,6 +32650,36 @@
         }
       ],
       "roleCount": 1
+    },
+    {
+      "companyId": 1137,
+      "companyName": "Wrapbook",
+      "companySlug": "wrapbook",
+      "roles": [
+        {
+          "id": 2251,
+          "title": "Senior Product Manager II - Vendor Spend ",
+          "location": "Remote - US & Canada",
+          "salaryMin": 156,
+          "salaryMax": 5,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/wrapbook/bdec6f85-c0ee-4251-8afa-a450d539354f",
+          "postedAt": "2026-09-15T16:50:12.441+00:00",
+          "isRemote": true
+        },
+        {
+          "id": 2250,
+          "title": "Senior Product Manager II - Agreement Data Platform",
+          "location": "Remote - US & Canada",
+          "salaryMin": 156,
+          "salaryMax": 5,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/wrapbook/ff23fd02-653b-493b-b97e-f9195bcc32ef",
+          "postedAt": "2026-09-03T17:02:37.461+00:00",
+          "isRemote": true
+        }
+      ],
+      "roleCount": 2
     }
   ]
 }
