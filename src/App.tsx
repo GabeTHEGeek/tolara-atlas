@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import MapView from "./components/MapView.js";
+import MapView, { type FlyToRequest } from "./components/MapView.js";
+import CompanySearch from "./components/CompanySearch.js";
 import CompanyPanel from "./components/CompanyPanel.js";
 import RemotePanel from "./components/RemotePanel.js";
 import type { LocationPinData, MapData } from "./types.js";
@@ -9,6 +10,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [selectedPin, setSelectedPin] = useState<LocationPinData | null>(null);
   const [remotePanelOpen, setRemotePanelOpen] = useState(false);
+  const [flyToRequest, setFlyToRequest] = useState<FlyToRequest | null>(null);
 
   useEffect(() => {
     fetch("/data/map-data.json")
@@ -58,6 +60,21 @@ export default function App() {
             onSelectPin={(pin) => {
               setRemotePanelOpen(false);
               setSelectedPin(pin);
+            }}
+            selectedPinId={selectedPin?.id ?? null}
+            flyToRequest={flyToRequest}
+            // .company-panel is 360px wide; on a narrow screen it covers most
+            // of the map anyway, so there's no visible area to center in.
+            rightInset={selectedPin && window.innerWidth > 720 ? 360 : 0}
+          />
+        )}
+        {mapData && (
+          <CompanySearch
+            pins={mapData.pins}
+            onSelectLocation={(pin) => {
+              setRemotePanelOpen(false);
+              setSelectedPin(pin);
+              setFlyToRequest({ pin, nonce: Date.now() });
             }}
           />
         )}

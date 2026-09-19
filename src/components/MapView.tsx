@@ -32,6 +32,13 @@ const CITY_CLUSTER_MAX_ZOOM = 9;
 // click just teleports -- which reads as the feature being broken.
 const CITY_FLY_DURATION_MS = 2500;
 
+// Picking a location from the company search flies here: slower than the
+// city-bubble zoom since it's often a cross-country trip, and deep enough
+// (the export jitters same-city pins ~1.5km apart) that the chosen pin
+// stands apart from its neighbors.
+const SEARCH_FLY_DURATION_MS = 3000;
+const SEARCH_FLY_ZOOM = 12.5;
+
 // Same-place spellings the geocoder currently emits under different names,
 // folded together so one city doesn't show up as two bubbles on top of
 // each other.
@@ -70,9 +77,22 @@ const DASH_SEQUENCE: number[][] = [
 ];
 const DASH_STEP_MS = 40; // ~25fps -- smooth enough for a slow "marching" read, cheap enough to run indefinitely
 
+// A request to fly the camera to a pin. `nonce` makes picking the same
+// location twice fly again rather than being a no-op state update.
+export interface FlyToRequest {
+  pin: LocationPinData;
+  nonce: number;
+}
+
 interface MapViewProps {
   pins: LocationPinData[];
   onSelectPin: (pin: LocationPinData) => void;
+  selectedPinId: string | null;
+  flyToRequest: FlyToRequest | null;
+  // Pixels on the right covered by a side panel. Both flights center on the
+  // map area still visible beside it. Passed on every flight (never left
+  // implicit) because MapLibre keeps the last flight's padding around.
+  rightInset: number;
 }
 
 function cityKey(pin: LocationPinData): string {
@@ -176,7 +196,7 @@ function officeLinksFromPin(
   };
 }
 
-export default function MapView({ pins, onSelectPin }: MapViewProps) {
+export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest, rightInset }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   // Kept alongside the map instance so click/hover handlers (registered
@@ -197,6 +217,18 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
   useEffect(() => {
     pinsByIdRef.current = new Map(pins.map((p) => [p.id, p]));
   }, [pins]);
+  // Read by the map's "load" handler, in case a pin is already selected
+  // before the style finishes loading.
+  const selectedPinIdRef = useRef<string | null>(selectedPinId);
+  selectedPinIdRef.current = selectedPinId;
+  // Set once the map's "load" event has fired. map.isStyleLoaded() isn't a
+  // substitute: it goes false again whenever tiles are still streaming in
+  // (i.e. most of the time right after any interaction), and falling back
+  // to map.once("load") then waits for an event that already happened.
+  const mapLoadedRef = useRef(false);
+  // Read by the city-bubble click handler, registered once on load.
+  const rightInsetRef = useRef(rightInset);
+  rightInsetRef.current = rightInset;
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -220,6 +252,7 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
     });
 
     map.on("load", () => {
+      mapLoadedRef.current = true;
       // NOTE: this source is deliberately NOT clustered (cluster: true).
       // Enabling clustering here reliably breaks rendering entirely — not
       // just the clustered layer, but the basemap's own vector tiles too
@@ -251,6 +284,22 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
           "line-width": 2,
           "line-opacity": 0.75,
           "line-dasharray": DASH_SEQUENCE[0],
+        },
+      });
+
+      // Highlight ring around the selected pin (from a click or the company
+      // search), drawn under the pins so the pin itself stays on top.
+      map.addLayer({
+        id: "pins-selected",
+        type: "circle",
+        source: "pins",
+        filter: ["==", ["get", "id"], selectedPinIdRef.current ?? ""],
+        paint: {
+          "circle-radius": 14,
+          "circle-color": "#E8543E",
+          "circle-opacity": 0.2,
+          "circle-stroke-width": 2,
+          "circle-stroke-color": "#E8543E",
         },
       });
 
@@ -360,10 +409,15 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
         if (cityPins.length === 0) return;
         const bounds = new maplibregl.LngLatBounds();
         for (const p of cityPins) bounds.extend([p.longitude, p.latitude]);
-        const camera = map.cameraForBounds(bounds, { padding: 80, maxZoom: 13 });
+        const padding = { top: 80, bottom: 80, left: 80, right: 80 + rightInsetRef.current };
+        const camera = map.cameraForBounds(bounds, { padding, maxZoom: 13 });
         hoverPopupRef.current?.remove();
         map.flyTo({
-          center: camera?.center ?? bounds.getCenter(),
+          padding: { top: 0, bottom: 0, left: 0, right: rightInsetRef.current },
+          // The bounds' own center, not camera.center: cameraForBounds
+          // already shifts its center for the asymmetric padding, and
+          // flyTo's padding would shift it a second time.
+          center: bounds.getCenter(),
           // Always land past CITY_CLUSTER_MAX_ZOOM, so the bubble actually
           // opens up into its pins instead of reappearing at the same spot.
           zoom: Math.max(camera?.zoom ?? 0, CITY_CLUSTER_MAX_ZOOM + 1),
@@ -494,9 +548,37 @@ export default function MapView({ pins, onSelectPin }: MapViewProps) {
       }
     };
 
-    if (map.isStyleLoaded()) applyData();
+    if (mapLoadedRef.current) applyData();
     else map.once("load", applyData);
   }, [pins]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => map.setFilter("pins-selected", ["==", ["get", "id"], selectedPinId ?? ""]);
+    if (mapLoadedRef.current) apply();
+    else map.once("load", apply);
+  }, [selectedPinId]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !flyToRequest) return;
+    const { pin } = flyToRequest;
+    const fly = () => {
+      hoverPopupRef.current?.remove();
+      map.flyTo({
+        center: [pin.longitude, pin.latitude],
+        zoom: Math.max(map.getZoom(), SEARCH_FLY_ZOOM),
+        padding: { top: 0, bottom: 0, left: 0, right: rightInset },
+        duration: SEARCH_FLY_DURATION_MS,
+        // Same reasoning as the city-bubble flight: without this, Reduce
+        // Motion turns the requested slow pan into an instant jump.
+        essential: true,
+      });
+    };
+    if (mapLoadedRef.current) fly();
+    else map.once("load", fly);
+  }, [flyToRequest]);
 
   return <div ref={containerRef} className="map-container" />;
 }
