@@ -69,6 +69,7 @@ const COMPANY_SOURCES_PLATFORMS = [
   "tiktok",
   "apple",
   "meta",
+  "eightfold",
   "gem",
 ] as const;
 

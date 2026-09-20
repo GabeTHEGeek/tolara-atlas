@@ -12,7 +12,7 @@ export interface RawJob {
   category: string;
   published: string; // raw ISO string or platform-specific raw value
   description: string; // truncated to 4000 chars
-  source: "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta";
+  source: "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold";
   board: string;
 }
 

@@ -40,7 +40,7 @@ CREATE INDEX IF NOT EXISTS companies_location_idx ON companies(state, city);
 CREATE TABLE IF NOT EXISTS company_sources (
   id            INTEGER PRIMARY KEY,
   company_id    INTEGER NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
-  platform      TEXT NOT NULL CHECK (platform IN ('greenhouse', 'ashby', 'lever', 'bamboohr', 'workday', 'paylocity', 'icims', 'tiktok', 'apple', 'meta', 'gem')),
+  platform      TEXT NOT NULL CHECK (platform IN ('greenhouse', 'ashby', 'lever', 'bamboohr', 'workday', 'paylocity', 'icims', 'tiktok', 'apple', 'meta', 'eightfold', 'gem')),
   token         TEXT NOT NULL,             -- the ATS board token/slug
   status        TEXT NOT NULL DEFAULT 'unverified' CHECK (status IN ('verified', 'unverified', 'failed')),
   last_checked  TEXT,

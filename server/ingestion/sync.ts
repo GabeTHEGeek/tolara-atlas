@@ -26,6 +26,7 @@ import { searchIcims } from "./sources/icims.js";
 import { searchTikTok } from "./sources/tiktok.js";
 import { searchApple } from "./sources/apple.js";
 import { searchMeta } from "./sources/meta.js";
+import { searchEightfold } from "./sources/eightfold.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
@@ -76,7 +77,7 @@ function parseSalary(salary: string): { min: number | null; max: number | null; 
  * afterward via matchesProductManagerFilter, so tuning that function
  * changes what the next sync stores without touching these adapters.
  */
-type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta";
+type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold";
 const ALL_PLATFORMS: Platform[] = [
   "greenhouse",
   "ashby",
@@ -88,12 +89,13 @@ const ALL_PLATFORMS: Platform[] = [
   "tiktok",
   "apple",
   "meta",
+  "eightfold",
 ];
 
 // Boards big enough that PER_BOARD_LIMIT would cut off real PM roles. TikTok
 // is one company with ~4,300 postings worldwide, and the cap is applied
 // before the PM filter, so 500 would keep an arbitrary eighth of them.
-const PER_BOARD_LIMIT_OVERRIDES: Partial<Record<Platform, number>> = { tiktok: 10000 };
+const PER_BOARD_LIMIT_OVERRIDES: Partial<Record<Platform, number>> = { tiktok: 10000, eightfold: 2000 };
 
 async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
   const options = { boards, limit: PER_BOARD_LIMIT_OVERRIDES[platform] ?? PER_BOARD_LIMIT };
@@ -118,6 +120,8 @@ async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jo
       return searchApple("", options);
     case "meta":
       return searchMeta("", options);
+    case "eightfold":
+      return searchEightfold("", options);
   }
 }
 
