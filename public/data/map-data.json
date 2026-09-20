@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-20T04:53:13.745Z",
+  "generatedAt": "2026-09-20T13:30:30.513Z",
   "companyCount": 587,
   "pinCount": 640,
-  "roleCount": 1825,
+  "roleCount": 1826,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -2104,6 +2104,41 @@
           "salaryCurrency": null,
           "url": "https://peak6group.wd1.myworkdayjobs.com/peak6/job/Austin-TX/Head-of-Product_JR105194",
           "postedAt": "Posted 10 Days Ago",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "34-oakland-ca",
+      "companyId": 34,
+      "companyName": "Fictiv",
+      "companySlug": "fictiv",
+      "city": "Oakland",
+      "state": "CA",
+      "latitude": 37.8086322852734,
+      "longitude": -122.2641109774901,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2693,
+          "title": "Product Manager - Manufacturing Business Systems",
+          "location": "Oakland, CA Office",
+          "salaryMin": 150,
+          "salaryMax": 185,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/fictiv/jobs/8825945002",
+          "postedAt": "2026-09-20T02:13:07-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 195,
+          "title": "Senior Product Manager",
+          "location": "Oakland, CA Office",
+          "salaryMin": 180000,
+          "salaryMax": 218000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/fictiv/jobs/8783533002",
+          "postedAt": "2026-09-16T11:12:21-04:00",
           "isRemote": false
         }
       ]
@@ -9819,30 +9854,6 @@
           "salaryMax": 120000,
           "salaryCurrency": "USD",
           "url": "https://job-boards.greenhouse.io/fictiv/jobs/8783517002",
-          "postedAt": "2026-09-16T11:12:21-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "34-oakland-ca",
-      "companyId": 34,
-      "companyName": "Fictiv",
-      "companySlug": "fictiv",
-      "city": "Oakland",
-      "state": "CA",
-      "latitude": 37.8086322852734,
-      "longitude": -122.2641109774901,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 195,
-          "title": "Senior Product Manager",
-          "location": "Oakland, CA Office",
-          "salaryMin": 180000,
-          "salaryMax": 218000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/fictiv/jobs/8783533002",
           "postedAt": "2026-09-16T11:12:21-04:00",
           "isRemote": false
         }
