@@ -27,6 +27,32 @@ interface RolePageProps {
 export const DRAWER_SLIDE_MS = 650;
 
 const SAVED_KEY = "tolara:saved-roles";
+const INTEL_CACHE_KEY = "tolara:intel";
+
+/**
+ * Company snapshot, leadership and news are the same for every role at a
+ * company and don't change hour to hour, so one look-up covers the whole
+ * company for this browser session: opening another of its roles shows
+ * them straight away instead of asking again. Only the role-specific focus
+ * bullets are fetched per role (and that fetch is skipped entirely when the
+ * exported file already carries them).
+ */
+function readIntelCache(): Record<string, CompanyIntelligenceData> {
+  try {
+    return JSON.parse(sessionStorage.getItem(INTEL_CACHE_KEY) ?? "{}");
+  } catch {
+    return {};
+  }
+}
+
+function cacheIntel(slug: string, data: CompanyIntelligenceData) {
+  try {
+    sessionStorage.setItem(INTEL_CACHE_KEY, JSON.stringify({ ...readIntelCache(), [slug]: data }));
+  } catch {
+    // Storage unavailable (private mode): the server-side cache still makes
+    // the repeat look-up fast, it just isn't free.
+  }
+}
 
 function readSaved(): number[] {
   try {
@@ -147,10 +173,15 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
       .then((data) => {
         if (cancelled) return;
         setDetails(data);
-        setIntel(data.intelligence);
+        const cached = readIntelCache()[companySlug] ?? null;
+        setIntel(data.intelligence ?? cached);
         const role = data.roles.find((r) => r.id === roleId);
         setFocus(role?.focus ?? null);
         setFocusChecked(Boolean(role?.focus));
+        // Already looked this company up in this session: don't make them
+        // ask again for a role whose bullets we don't have yet -- the
+        // company half is cached server-side, so it's a quick call.
+        if (!role?.focus && (cached || data.intelligence)) void runLoad(false);
       })
       .catch((err) => !cancelled && setLoadError(err instanceof Error ? err.message : String(err)));
     return () => {
@@ -201,21 +232,30 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
     [details, role, intel],
   );
 
-  const loadIntelligence = async () => {
-    setIntelState("loading");
-    try {
-      const res = await fetch(`/api/intelligence?company=${encodeURIComponent(companySlug)}&role=${roleId}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = (await res.json()) as IntelligenceResponse;
-      setIntel({ profile: data.profile, leaders: data.leaders, news: data.news, fetchedAt: data.fetchedAt });
-      setUnavailable(data.unavailable ?? []);
-      setFocus(data.focus);
-      setFocusChecked(true);
-      setIntelState("idle");
-    } catch {
-      setIntelState("error");
-    }
-  };
+  const runLoad = useCallback(
+    async (showSpinner: boolean) => {
+      if (showSpinner) setIntelState("loading");
+      try {
+        const res = await fetch(`/api/intelligence?company=${encodeURIComponent(companySlug)}&role=${roleId}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = (await res.json()) as IntelligenceResponse;
+        const company = { profile: data.profile, leaders: data.leaders, news: data.news, fetchedAt: data.fetchedAt };
+        setIntel(company);
+        if (data.profile || data.news.length > 0 || data.leaders.length > 0) cacheIntel(companySlug, company);
+        setUnavailable(data.unavailable ?? []);
+        setFocus(data.focus);
+        setFocusChecked(true);
+        setIntelState("idle");
+      } catch {
+        // A background top-up failing shouldn't paint an error over cards
+        // that already have content.
+        setIntelState(showSpinner ? "error" : "idle");
+      }
+    },
+    [companySlug, roleId],
+  );
+
+  const loadIntelligence = useCallback(() => void runLoad(true), [runLoad]);
 
   if (loadError) {
     return shell(<p className="drawer-message">{loadError}</p>, "Role details");

@@ -75,7 +75,16 @@ export async function fetchCompanyWeb(name: string): Promise<CompanyWeb | null |
     | undefined;
   if (data === undefined) return undefined;
   const want = normalizeName(name);
-  const matches = data.filter((c) => c.domain && c.name && normalizeName(c.name) === want);
+  // The suggestion's name has to match AND the domain itself has to look
+  // like the company: Clearbit lists an entry named "Anthropic" whose
+  // domain is jasonkiu.com, and showing that as a company's website and
+  // logo is worse than showing nothing. "datadoghq.com" and "scale.com"
+  // (for "Scale AI") still pass -- one side is a prefix of the other.
+  const matches = data.filter((c) => {
+    if (!c.domain || !c.name || normalizeName(c.name) !== want) return false;
+    const label = normalizeName(c.domain.split(".")[0]);
+    return label.startsWith(want) || want.startsWith(label);
+  });
   const ranked = matches
     .map((c) => ({ domain: c.domain!, rank: PREFERRED_TLDS.indexOf(c.domain!.split(".").pop() ?? "") }))
     .filter((c) => c.rank !== -1)
