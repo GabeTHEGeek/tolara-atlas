@@ -1157,3 +1157,4 @@ Apple,apple,apple,verified,2026-09-19T08:26:33.000Z,Added manually (jobs.apple.c
 NVIDIA,nvidia|wd5|NVIDIAExternalCareerSite|product,workday,verified,2026-09-19T08:45:23.000Z,Added manually (Workday; searched board -- see workday.ts on 4-part tokens)
 Meta,meta,meta,verified,2026-09-19T08:49:08.000Z,Added manually (metacareers.com job search GraphQL scrape -- see sources/meta.ts)
 Weight Watchers,ww,greenhouse,verified,2026-09-19T11:32:33.000Z,Added manually
+Netflix,explore.jobs.netflix.net|netflix.com,eightfold,verified,2026-09-20T20:58:28.000Z,Added manually (Eightfold public jobs API)

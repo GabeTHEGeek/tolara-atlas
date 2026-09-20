@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-20T04:53:13.745Z",
+  "generatedAt": "2026-09-20T21:05:06.756Z",
   "companyCount": 587,
-  "pinCount": 640,
-  "roleCount": 1825,
+  "pinCount": 643,
+  "roleCount": 1843,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -632,7 +632,7 @@
       "state": "VA",
       "latitude": 37.54020821938638,
       "longitude": -77.44194995464683,
-      "roleCount": 5,
+      "roleCount": 4,
       "roles": [
         {
           "id": 2068,
@@ -643,17 +643,6 @@
           "salaryCurrency": null,
           "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Management--Credit-Card-Posted-Transactions-Data-Product_R246373-1",
           "postedAt": "Posted Yesterday",
-          "isRemote": false
-        },
-        {
-          "id": 2123,
-          "title": "Senior Associate, Debit Platform Data Product Manager",
-          "location": "Richmond, VA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Senior-Associate--Debit-Platform-Data-Product-Manager_R246642-1",
-          "postedAt": "Posted 9 Days Ago",
           "isRemote": false
         },
         {
@@ -700,7 +689,7 @@
       "state": "NY",
       "latitude": 40.72306938549252,
       "longitude": -74.01724546786583,
-      "roleCount": 25,
+      "roleCount": 24,
       "roles": [
         {
           "id": 2069,
@@ -820,17 +809,6 @@
           "salaryMax": null,
           "salaryCurrency": null,
           "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Manager---Case-Servicing_R247126-1",
-          "postedAt": "Posted 9 Days Ago",
-          "isRemote": false
-        },
-        {
-          "id": 2124,
-          "title": "Manager, Product Management- Credit Card Data Team",
-          "location": "New York, NY",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management--Credit-Card-Data-Team_R1000257-1",
           "postedAt": "Posted 9 Days Ago",
           "isRemote": false
         },
@@ -2109,6 +2087,41 @@
       ]
     },
     {
+      "id": "34-oakland-ca",
+      "companyId": 34,
+      "companyName": "Fictiv",
+      "companySlug": "fictiv",
+      "city": "Oakland",
+      "state": "CA",
+      "latitude": 37.8086322852734,
+      "longitude": -122.2641109774901,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2693,
+          "title": "Product Manager - Manufacturing Business Systems",
+          "location": "Oakland, CA Office",
+          "salaryMin": 150,
+          "salaryMax": 185,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/fictiv/jobs/8825945002",
+          "postedAt": "2026-09-20T02:13:07-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 195,
+          "title": "Senior Product Manager",
+          "location": "Oakland, CA Office",
+          "salaryMin": 180000,
+          "salaryMax": 218000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/fictiv/jobs/8783533002",
+          "postedAt": "2026-09-16T11:12:21-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "263-denver-co",
       "companyId": 263,
       "companyName": "Gusto",
@@ -2299,362 +2312,6 @@
           "salaryCurrency": "USD",
           "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
           "postedAt": "2026-09-19T12:30:00-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1-san-francisco-ca",
-      "companyId": 1,
-      "companyName": "Anthropic",
-      "companySlug": "anthropic",
-      "city": "San Francisco",
-      "state": "CA",
-      "latitude": 37.77498675048651,
-      "longitude": -122.41036227856897,
-      "roleCount": 17,
-      "roles": [
-        {
-          "id": 2683,
-          "title": "Product Manager, Safeguards (Account Integrity & Abuse) ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5413576008",
-          "postedAt": "2026-09-19T10:48:48-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 2136,
-          "title": "Product Manager, Safe Access",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
-          "postedAt": "2026-09-18T16:38:54-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 4,
-          "title": "Product Manager, Business Technology",
-          "location": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5397737008",
-          "postedAt": "2026-09-02T15:05:31-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 5,
-          "title": "Product Manager, Claude Science",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5394887008",
-          "postedAt": "2026-08-31T10:50:59-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 8,
-          "title": "Product Manager, Growth",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5406106008",
-          "postedAt": "2026-08-29T10:05:44-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 10,
-          "title": "Product Manager, Multi-Cloud Trust & Safety",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409934008",
-          "postedAt": "2026-08-28T18:04:00-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 3,
-          "title": "Product Manager, Beneficial Deployments (Labs)",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5407337008",
-          "postedAt": "2026-08-27T15:48:13-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 14,
-          "title": "Product Manager, Safeguards (Cyber)",
-          "location": "San Francisco, CA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5097490008",
-          "postedAt": "2026-08-27T02:08:29-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 7,
-          "title": "Product Manager, Cybersecurity ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393526008",
-          "postedAt": "2026-08-21T15:47:04-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 11,
-          "title": "Product Manager, New Markets and Monetization",
-          "location": "San Francisco, CA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5386182008",
-          "postedAt": "2026-08-21T12:50:51-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 13,
-          "title": "Product Manager, Research (Code) ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5324349008",
-          "postedAt": "2026-08-21T12:50:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 6,
-          "title": "Product Manager, Claude Tag",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5251866008",
-          "postedAt": "2026-08-21T12:50:24-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1,
-          "title": "Product Management, Human Data Platform",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5195866008",
-          "postedAt": "2026-08-21T12:50:08-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 9,
-          "title": "Product Manager, Multi-Cloud Growth - Google",
-          "location": "San Francisco, CA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5153924008",
-          "postedAt": "2026-08-21T12:50:01-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 15,
-          "title": " Product Manager, Safeguards Rare Harms",
-          "location": "San Francisco, CA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5139628008",
-          "postedAt": "2026-08-21T12:50:00-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 2,
-          "title": "Product Management, Research",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5123082008",
-          "postedAt": "2026-08-21T12:49:57-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 16,
-          "title": "Research Product Manager, Labs",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5096878008",
-          "postedAt": "2026-08-21T12:49:52-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1-new-york-city-ny",
-      "companyId": 1,
-      "companyName": "Anthropic",
-      "companySlug": "anthropic",
-      "city": "New York City",
-      "state": "NY",
-      "latitude": 40.7156423336681,
-      "longitude": -74.02200054302727,
-      "roleCount": 13,
-      "roles": [
-        {
-          "id": 2683,
-          "title": "Product Manager, Safeguards (Account Integrity & Abuse) ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5413576008",
-          "postedAt": "2026-09-19T10:48:48-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 2136,
-          "title": "Product Manager, Safe Access",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
-          "postedAt": "2026-09-18T16:38:54-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 4,
-          "title": "Product Manager, Business Technology",
-          "location": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5397737008",
-          "postedAt": "2026-09-02T15:05:31-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 5,
-          "title": "Product Manager, Claude Science",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5394887008",
-          "postedAt": "2026-08-31T10:50:59-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 8,
-          "title": "Product Manager, Growth",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5406106008",
-          "postedAt": "2026-08-29T10:05:44-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 10,
-          "title": "Product Manager, Multi-Cloud Trust & Safety",
-          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409934008",
-          "postedAt": "2026-08-28T18:04:00-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 3,
-          "title": "Product Manager, Beneficial Deployments (Labs)",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5407337008",
-          "postedAt": "2026-08-27T15:48:13-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 7,
-          "title": "Product Manager, Cybersecurity ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393526008",
-          "postedAt": "2026-08-21T15:47:04-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 13,
-          "title": "Product Manager, Research (Code) ",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5324349008",
-          "postedAt": "2026-08-21T12:50:35-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 6,
-          "title": "Product Manager, Claude Tag",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5251866008",
-          "postedAt": "2026-08-21T12:50:24-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 1,
-          "title": "Product Management, Human Data Platform",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5195866008",
-          "postedAt": "2026-08-21T12:50:08-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 2,
-          "title": "Product Management, Research",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 305000,
-          "salaryMax": 305000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5123082008",
-          "postedAt": "2026-08-21T12:49:57-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 16,
-          "title": "Research Product Manager, Labs",
-          "location": "San Francisco, CA | New York City, NY",
-          "salaryMin": 385000,
-          "salaryMax": 385000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5096878008",
-          "postedAt": "2026-08-21T12:49:52-04:00",
           "isRemote": false
         }
       ]
@@ -3429,6 +3086,340 @@
           "salaryCurrency": "USD",
           "url": "https://job-boards.greenhouse.io/natera/jobs/6123519004",
           "postedAt": "2026-08-18T17:16:21-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1-san-francisco-ca",
+      "companyId": 1,
+      "companyName": "Anthropic",
+      "companySlug": "anthropic",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.77498675048651,
+      "longitude": -122.41036227856897,
+      "roleCount": 16,
+      "roles": [
+        {
+          "id": 2136,
+          "title": "Product Manager, Safe Access",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
+          "postedAt": "2026-09-18T16:38:54-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 4,
+          "title": "Product Manager, Business Technology",
+          "location": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5397737008",
+          "postedAt": "2026-09-02T15:05:31-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 5,
+          "title": "Product Manager, Claude Science",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5394887008",
+          "postedAt": "2026-08-31T10:50:59-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 8,
+          "title": "Product Manager, Growth",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5406106008",
+          "postedAt": "2026-08-29T10:05:44-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 10,
+          "title": "Product Manager, Multi-Cloud Trust & Safety",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409934008",
+          "postedAt": "2026-08-28T18:04:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 3,
+          "title": "Product Manager, Beneficial Deployments (Labs)",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5407337008",
+          "postedAt": "2026-08-27T15:48:13-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 14,
+          "title": "Product Manager, Safeguards (Cyber)",
+          "location": "San Francisco, CA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5097490008",
+          "postedAt": "2026-08-27T02:08:29-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 7,
+          "title": "Product Manager, Cybersecurity ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393526008",
+          "postedAt": "2026-08-21T15:47:04-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 11,
+          "title": "Product Manager, New Markets and Monetization",
+          "location": "San Francisco, CA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5386182008",
+          "postedAt": "2026-08-21T12:50:51-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 13,
+          "title": "Product Manager, Research (Code) ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5324349008",
+          "postedAt": "2026-08-21T12:50:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 6,
+          "title": "Product Manager, Claude Tag",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5251866008",
+          "postedAt": "2026-08-21T12:50:24-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1,
+          "title": "Product Management, Human Data Platform",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5195866008",
+          "postedAt": "2026-08-21T12:50:08-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 9,
+          "title": "Product Manager, Multi-Cloud Growth - Google",
+          "location": "San Francisco, CA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5153924008",
+          "postedAt": "2026-08-21T12:50:01-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 15,
+          "title": " Product Manager, Safeguards Rare Harms",
+          "location": "San Francisco, CA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5139628008",
+          "postedAt": "2026-08-21T12:50:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2,
+          "title": "Product Management, Research",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5123082008",
+          "postedAt": "2026-08-21T12:49:57-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 16,
+          "title": "Research Product Manager, Labs",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5096878008",
+          "postedAt": "2026-08-21T12:49:52-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1-new-york-city-ny",
+      "companyId": 1,
+      "companyName": "Anthropic",
+      "companySlug": "anthropic",
+      "city": "New York City",
+      "state": "NY",
+      "latitude": 40.7156423336681,
+      "longitude": -74.02200054302727,
+      "roleCount": 12,
+      "roles": [
+        {
+          "id": 2136,
+          "title": "Product Manager, Safe Access",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
+          "postedAt": "2026-09-18T16:38:54-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 4,
+          "title": "Product Manager, Business Technology",
+          "location": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5397737008",
+          "postedAt": "2026-09-02T15:05:31-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 5,
+          "title": "Product Manager, Claude Science",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5394887008",
+          "postedAt": "2026-08-31T10:50:59-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 8,
+          "title": "Product Manager, Growth",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5406106008",
+          "postedAt": "2026-08-29T10:05:44-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 10,
+          "title": "Product Manager, Multi-Cloud Trust & Safety",
+          "location": "San Francisco, CA | New York City, NY | Seattle, WA",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409934008",
+          "postedAt": "2026-08-28T18:04:00-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 3,
+          "title": "Product Manager, Beneficial Deployments (Labs)",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5407337008",
+          "postedAt": "2026-08-27T15:48:13-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 7,
+          "title": "Product Manager, Cybersecurity ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393526008",
+          "postedAt": "2026-08-21T15:47:04-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 13,
+          "title": "Product Manager, Research (Code) ",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5324349008",
+          "postedAt": "2026-08-21T12:50:35-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 6,
+          "title": "Product Manager, Claude Tag",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5251866008",
+          "postedAt": "2026-08-21T12:50:24-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 1,
+          "title": "Product Management, Human Data Platform",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5195866008",
+          "postedAt": "2026-08-21T12:50:08-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2,
+          "title": "Product Management, Research",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 305000,
+          "salaryMax": 305000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5123082008",
+          "postedAt": "2026-08-21T12:49:57-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 16,
+          "title": "Research Product Manager, Labs",
+          "location": "San Francisco, CA | New York City, NY",
+          "salaryMin": 385000,
+          "salaryMax": 385000,
+          "salaryCurrency": "USD",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5096878008",
+          "postedAt": "2026-08-21T12:49:52-04:00",
           "isRemote": false
         }
       ]
@@ -9825,30 +9816,6 @@
       ]
     },
     {
-      "id": "34-oakland-ca",
-      "companyId": 34,
-      "companyName": "Fictiv",
-      "companySlug": "fictiv",
-      "city": "Oakland",
-      "state": "CA",
-      "latitude": 37.8086322852734,
-      "longitude": -122.2641109774901,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 195,
-          "title": "Senior Product Manager",
-          "location": "Oakland, CA Office",
-          "salaryMin": 180000,
-          "salaryMax": 218000,
-          "salaryCurrency": "USD",
-          "url": "https://job-boards.greenhouse.io/fictiv/jobs/8783533002",
-          "postedAt": "2026-09-16T11:12:21-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "22-new-york-ny",
       "companyId": 22,
       "companyName": "Redventures",
@@ -14126,6 +14093,228 @@
       ]
     },
     {
+      "id": "1171-los-gatos-ca",
+      "companyId": 1171,
+      "companyName": "Netflix",
+      "companySlug": "netflix",
+      "city": "Los Gatos",
+      "state": "CA",
+      "latitude": 37.226611,
+      "longitude": -121.9746797,
+      "roleCount": 19,
+      "roles": [
+        {
+          "id": 2695,
+          "title": "Group Product Manager, Title Launch Management",
+          "location": "California - Remote, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790318448253?domain=netflix.com",
+          "postedAt": "2026-09-11T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2696,
+          "title": "Product Manager, Ads Platform - Experimentation & Incrementality Measurement",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790318344742?domain=netflix.com",
+          "postedAt": "2026-09-03T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2707,
+          "title": "Product Manager - Enterprise Support",
+          "location": "USA - Remote",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790318333203?domain=netflix.com",
+          "postedAt": "2026-09-02T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2708,
+          "title": "Product Manager - Localization Innovation",
+          "location": "USA - Remote",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790318185566?domain=netflix.com",
+          "postedAt": "2026-08-27T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2697,
+          "title": "Technology Product Manager 6 - TV Platform and Device Technologies",
+          "location": "Los Gatos, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317756596?domain=netflix.com",
+          "postedAt": "2026-08-11T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2712,
+          "title": "Product Manager L6, Data Platform - Analytics Experience",
+          "location": "USA - Remote",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790315763934?domain=netflix.com",
+          "postedAt": "2026-08-10T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2698,
+          "title": "Sr. Manager, Product Management (Ad Sales Products)",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317595774?domain=netflix.com",
+          "postedAt": "2026-07-30T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2709,
+          "title": "Product Manager - Games, Social Platform (L5)",
+          "location": "USA - Remote",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317534842?domain=netflix.com",
+          "postedAt": "2026-07-27T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2710,
+          "title": "Product Manager - Games, Cloud Infrastructure (L5)",
+          "location": "USA - Remote",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317534955?domain=netflix.com",
+          "postedAt": "2026-07-27T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2711,
+          "title": "Product Manager - Games, Kids (L5)",
+          "location": "USA - Remote",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317535096?domain=netflix.com",
+          "postedAt": "2026-07-27T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2699,
+          "title": "Product Manager - Content Finance",
+          "location": "Los Angeles, California, United States of America; Los Gatos, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317257508?domain=netflix.com",
+          "postedAt": "2026-07-20T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2700,
+          "title": "Product Manager, Personalization",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317110119?domain=netflix.com",
+          "postedAt": "2026-07-13T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2714,
+          "title": "Product Manager (L5), Privacy & Data Protection Engineering",
+          "location": "USA - Remote",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790316792684?domain=netflix.com",
+          "postedAt": "2026-06-29T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2701,
+          "title": "Product Manager, Plans Innovation",
+          "location": "Los Gatos, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790316232735?domain=netflix.com",
+          "postedAt": "2026-06-04T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2702,
+          "title": "Product Manager, Ads Signal Modeling and Targeting",
+          "location": "Los Gatos, California, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790315927614?domain=netflix.com",
+          "postedAt": "2026-05-15T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2715,
+          "title": "Product Manager - Games, TV as a Platform (L5)",
+          "location": "USA - Remote",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790315424138?domain=netflix.com",
+          "postedAt": "2026-04-29T00:00:00.000Z",
+          "isRemote": true
+        },
+        {
+          "id": 2703,
+          "title": "Product Manager, Content Aggregation Experiences",
+          "location": "Los Gatos, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790315649094?domain=netflix.com",
+          "postedAt": "2026-04-22T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2704,
+          "title": "Product Manager, Partner Commerce",
+          "location": "Los Gatos, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790315558738?domain=netflix.com",
+          "postedAt": "2026-04-21T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2705,
+          "title": "Product Manager, Ads (Live Ad Serving)",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790314437389?domain=netflix.com",
+          "postedAt": "2026-04-16T00:00:00.000Z",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "1156-boston-ma",
       "companyId": 1156,
       "companyName": "Kodex",
@@ -17085,6 +17274,210 @@
           "salaryCurrency": "USD",
           "url": "https://jobs.ashbyhq.com/notable/3a7e2f4e-6570-4101-92a3-9731eadc23ad",
           "postedAt": "2026-09-03T00:05:09.479+00:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1171-seattle-wa",
+      "companyId": 1171,
+      "companyName": "Netflix",
+      "companySlug": "netflix",
+      "city": "Seattle",
+      "state": "WA",
+      "latitude": 47.59610137242419,
+      "longitude": -122.33837207362268,
+      "roleCount": 4,
+      "roles": [
+        {
+          "id": 2696,
+          "title": "Product Manager, Ads Platform - Experimentation & Incrementality Measurement",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790318344742?domain=netflix.com",
+          "postedAt": "2026-09-03T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2698,
+          "title": "Sr. Manager, Product Management (Ad Sales Products)",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317595774?domain=netflix.com",
+          "postedAt": "2026-07-30T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2700,
+          "title": "Product Manager, Personalization",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317110119?domain=netflix.com",
+          "postedAt": "2026-07-13T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2705,
+          "title": "Product Manager, Ads (Live Ad Serving)",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790314437389?domain=netflix.com",
+          "postedAt": "2026-04-16T00:00:00.000Z",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1171-new-york-ny",
+      "companyId": 1171,
+      "companyName": "Netflix",
+      "companySlug": "netflix",
+      "city": "New York",
+      "state": "NY",
+      "latitude": 40.69940146333949,
+      "longitude": -74.00549110754126,
+      "roleCount": 4,
+      "roles": [
+        {
+          "id": 2696,
+          "title": "Product Manager, Ads Platform - Experimentation & Incrementality Measurement",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790318344742?domain=netflix.com",
+          "postedAt": "2026-09-03T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2698,
+          "title": "Sr. Manager, Product Management (Ad Sales Products)",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317595774?domain=netflix.com",
+          "postedAt": "2026-07-30T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2702,
+          "title": "Product Manager, Ads Signal Modeling and Targeting",
+          "location": "Los Gatos, California, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790315927614?domain=netflix.com",
+          "postedAt": "2026-05-15T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2705,
+          "title": "Product Manager, Ads (Live Ad Serving)",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790314437389?domain=netflix.com",
+          "postedAt": "2026-04-16T00:00:00.000Z",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1171-los-angeles-ca",
+      "companyId": 1171,
+      "companyName": "Netflix",
+      "companySlug": "netflix",
+      "city": "Los Angeles",
+      "state": "CA",
+      "latitude": 34.05039529995054,
+      "longitude": -118.23477906559445,
+      "roleCount": 7,
+      "roles": [
+        {
+          "id": 2696,
+          "title": "Product Manager, Ads Platform - Experimentation & Incrementality Measurement",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790318344742?domain=netflix.com",
+          "postedAt": "2026-09-03T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2698,
+          "title": "Sr. Manager, Product Management (Ad Sales Products)",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317595774?domain=netflix.com",
+          "postedAt": "2026-07-30T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2699,
+          "title": "Product Manager - Content Finance",
+          "location": "Los Angeles, California, United States of America; Los Gatos, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317257508?domain=netflix.com",
+          "postedAt": "2026-07-20T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2700,
+          "title": "Product Manager, Personalization",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790317110119?domain=netflix.com",
+          "postedAt": "2026-07-13T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2702,
+          "title": "Product Manager, Ads Signal Modeling and Targeting",
+          "location": "Los Gatos, California, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790315927614?domain=netflix.com",
+          "postedAt": "2026-05-15T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2705,
+          "title": "Product Manager, Ads (Live Ad Serving)",
+          "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790314437389?domain=netflix.com",
+          "postedAt": "2026-04-16T00:00:00.000Z",
+          "isRemote": false
+        },
+        {
+          "id": 2706,
+          "title": "Lead Games Title Product Manager, Portfolio",
+          "location": "California - Remote, United States of America; Los Angeles, California, United States of America",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://explore.jobs.netflix.net/careers/job/790313721899?domain=netflix.com",
+          "postedAt": "2026-01-26T00:00:00.000Z",
           "isRemote": false
         }
       ]
@@ -26657,30 +27050,6 @@
       ]
     },
     {
-      "id": "508-seattle-wa",
-      "companyId": 508,
-      "companyName": "Outreach",
-      "companySlug": "outreach",
-      "city": "Seattle",
-      "state": "WA",
-      "latitude": 47.60771447783087,
-      "longitude": -122.3434391532699,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1453,
-          "title": "Director, Product Management – Conversational Intelligence",
-          "location": "Seattle, WA",
-          "salaryMin": 210000,
-          "salaryMax": 260004,
-          "salaryCurrency": "USD",
-          "url": "https://jobs.lever.co/outreach/3c27d8b2-bdef-4a0c-8507-092ef90fab33",
-          "postedAt": "1783617017083",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "522-chicago-il",
       "companyId": 522,
       "companyName": "ActiveCampaign",
@@ -30928,6 +31297,17 @@
       "companySlug": "jobgether",
       "roles": [
         {
+          "id": 2694,
+          "title": "Contract Modeling Product Manager",
+          "location": "US",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://jobs.lever.co/jobgether/277fa1c1-3384-4210-bfff-739917e90240",
+          "postedAt": "1789706315086",
+          "isRemote": true
+        },
+        {
           "id": 699,
           "title": "AVP, Product Manager - Deposit Solutions",
           "location": "US",
@@ -30939,7 +31319,7 @@
           "isRemote": true
         }
       ],
-      "roleCount": 1
+      "roleCount": 2
     },
     {
       "companyId": 970,
