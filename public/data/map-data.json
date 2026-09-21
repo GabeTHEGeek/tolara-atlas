@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-20T21:05:06.756Z",
+  "generatedAt": "2026-09-21T15:44:23.543Z",
   "companyCount": 587,
   "pinCount": 643,
-  "roleCount": 1843,
+  "roleCount": 1852,
   "pins": [
     {
       "id": "1042-charlotte-nc",
@@ -289,7 +289,7 @@
       "state": "VA",
       "latitude": 38.9366852,
       "longitude": -77.185843,
-      "roleCount": 30,
+      "roleCount": 32,
       "roles": [
         {
           "id": 2066,
@@ -387,6 +387,28 @@
           "salaryMax": null,
           "salaryCurrency": null,
           "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Director--Product-Management--Customer-Management-Platform-Lead_R1000951-1",
+          "postedAt": "Posted Today",
+          "isRemote": false
+        },
+        {
+          "id": 2704,
+          "title": "Senior Associate, Product Management - Recoveries Agent Experiences",
+          "location": "McLean, VA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Management---Recoveries-Agent-Experiences_R1001294-2",
+          "postedAt": "Posted Today",
+          "isRemote": false
+        },
+        {
+          "id": 2705,
+          "title": "Senior Director, Product Management, Decisioning Platforms",
+          "location": "McLean, VA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Director--Product-Management--Decisioning-Platforms_R1001288-1",
           "postedAt": "Posted Today",
           "isRemote": false
         },
@@ -2087,6 +2109,201 @@
       ]
     },
     {
+      "id": "119-san-francisco-ca",
+      "companyId": 119,
+      "companyName": "Creatoriq",
+      "companySlug": "creatoriq",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.78175007207943,
+      "longitude": -122.39873339476488,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2700,
+          "title": "Senior Product Manager, Metrics & Measurement",
+          "location": "California",
+          "salaryMin": 121,
+          "salaryMax": 145,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/creatoriq/af7ce639-26aa-429d-a811-6b0470ed890f",
+          "postedAt": "2026-09-21T15:12:03.431+00:00",
+          "isRemote": true
+        },
+        {
+          "id": 475,
+          "title": "Technical Product Manager, Integrations",
+          "location": "San Francisco",
+          "salaryMin": 139,
+          "salaryMax": 157,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/creatoriq/3b975180-88d9-4b4c-b51c-2dccd4441862",
+          "postedAt": "2026-08-12T16:18:09.925+00:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "35-new-york-ny",
+      "companyId": 35,
+      "companyName": "Gemini",
+      "companySlug": "gemini",
+      "city": "New York",
+      "state": "NY",
+      "latitude": 40.70432794626139,
+      "longitude": -73.99369250156839,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2697,
+          "title": "Product Manager, Invest / Trade",
+          "location": "New York, New York",
+          "salaryMin": 120500,
+          "salaryMax": 165000,
+          "salaryCurrency": "USD",
+          "url": "https://boards.greenhouse.io/embed/job_app?for=gemini&token=8128687&gh_jid=8128687",
+          "postedAt": "2026-09-21T09:45:08-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2139,
+          "title": "Product Management Intern (Winter 2027)",
+          "location": "New York, New York",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://boards.greenhouse.io/embed/job_app?for=gemini&token=8214332&gh_jid=8214332",
+          "postedAt": "2026-09-18T16:13:13-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "408-san-francisco-ca",
+      "companyId": 408,
+      "companyName": "Hinge Health",
+      "companySlug": "hinge-health",
+      "city": "San Francisco",
+      "state": "CA",
+      "latitude": 37.79001858813148,
+      "longitude": -122.41525845322926,
+      "roleCount": 3,
+      "roles": [
+        {
+          "id": 2701,
+          "title": "Sr. Product Manager, R&D Enablement ",
+          "location": "San Francisco-HQ",
+          "salaryMin": 163,
+          "salaryMax": 224,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/hinge-health/efa6b737-c6f6-4069-b542-3e13ff2272bf",
+          "postedAt": "2026-09-21T03:10:17.401+00:00",
+          "isRemote": false
+        },
+        {
+          "id": 1358,
+          "title": "Director, Product Management",
+          "location": "San Francisco-HQ",
+          "salaryMin": 280,
+          "salaryMax": 380,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/hinge-health/da88f56f-43b1-493c-b582-5903ec5a8510",
+          "postedAt": "2026-07-30T22:54:32.882+00:00",
+          "isRemote": false
+        },
+        {
+          "id": 1359,
+          "title": "Senior Product Manager, Consumer Products",
+          "location": "San Francisco-HQ",
+          "salaryMin": 163,
+          "salaryMax": 240,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.ashbyhq.com/hinge-health/4ab249ef-1559-4de9-a4c2-a2e4a8aa8d1e",
+          "postedAt": "2026-06-24T15:40:39.546+00:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "244-somerville-ma",
+      "companyId": 244,
+      "companyName": "Formlabs",
+      "companySlug": "formlabs",
+      "city": "Somerville",
+      "state": "MA",
+      "latitude": 42.3875968,
+      "longitude": -71.0994968,
+      "roleCount": 6,
+      "roles": [
+        {
+          "id": 2699,
+          "title": "Head of Software Product Management ",
+          "location": "Somerville, MA",
+          "salaryMin": 150000,
+          "salaryMax": 150000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.formlabs.com/job/8219648/apply/?gh_jid=8219648",
+          "postedAt": "2026-09-20T21:03:22-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 2698,
+          "title": "Director of Product Management, Software",
+          "location": "Somerville, MA",
+          "salaryMin": 150000,
+          "salaryMax": 150000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.formlabs.com/job/8219647/apply/?gh_jid=8219647",
+          "postedAt": "2026-09-20T21:02:40-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 974,
+          "title": "Director of Product Management, Software",
+          "location": "Somerville, MA",
+          "salaryMin": 150000,
+          "salaryMax": 150000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.formlabs.com/job/8166172/apply/?gh_jid=8166172",
+          "postedAt": "2026-08-30T17:19:43-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 975,
+          "title": "Head of Software Product Management ",
+          "location": "Somerville, MA",
+          "salaryMin": 150000,
+          "salaryMax": 150000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.formlabs.com/job/8166173/apply/?gh_jid=8166173",
+          "postedAt": "2026-08-30T17:19:17-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 977,
+          "title": "Senior Product Manager, Hardware",
+          "location": "Somerville, MA",
+          "salaryMin": 140000,
+          "salaryMax": 140000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.formlabs.com/job/8122198/apply/?gh_jid=8122198",
+          "postedAt": "2026-08-11T13:43:31-04:00",
+          "isRemote": false
+        },
+        {
+          "id": 976,
+          "title": "Product Manager, Hardware",
+          "location": "Somerville, MA",
+          "salaryMin": 125000,
+          "salaryMax": 125000,
+          "salaryCurrency": "USD",
+          "url": "https://careers.formlabs.com/job/8041515/apply/?gh_jid=8041515",
+          "postedAt": "2026-07-20T10:58:46-04:00",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "34-oakland-ca",
       "companyId": 34,
       "companyName": "Fictiv",
@@ -3649,30 +3866,6 @@
       ]
     },
     {
-      "id": "35-new-york-ny",
-      "companyId": 35,
-      "companyName": "Gemini",
-      "companySlug": "gemini",
-      "city": "New York",
-      "state": "NY",
-      "latitude": 40.70432794626139,
-      "longitude": -73.99369250156839,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 2139,
-          "title": "Product Management Intern (Winter 2027)",
-          "location": "New York, New York",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "url": "https://boards.greenhouse.io/embed/job_app?for=gemini&token=8214332&gh_jid=8214332",
-          "postedAt": "2026-09-18T16:13:13-04:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "315-durham-nc",
       "companyId": 315,
       "companyName": "Flatiron Health",
@@ -4214,8 +4407,8 @@
           "id": 868,
           "title": "Senior Product Manager (XDR) - Security Solutions",
           "location": "United States",
-          "salaryMin": 155700,
-          "salaryMax": 155700,
+          "salaryMin": 133100,
+          "salaryMax": 133100,
           "salaryCurrency": "USD",
           "url": "https://jobs.elastic.co/jobs?gh_jid=8167771&gh_jid=8167771",
           "postedAt": "2026-09-10T20:07:01-04:00",
@@ -14126,7 +14319,7 @@
           "isRemote": false
         },
         {
-          "id": 2707,
+          "id": 2716,
           "title": "Product Manager - Enterprise Support",
           "location": "USA - Remote",
           "salaryMin": null,
@@ -14137,7 +14330,7 @@
           "isRemote": true
         },
         {
-          "id": 2708,
+          "id": 2717,
           "title": "Product Manager - Localization Innovation",
           "location": "USA - Remote",
           "salaryMin": null,
@@ -14148,7 +14341,7 @@
           "isRemote": true
         },
         {
-          "id": 2697,
+          "id": 2706,
           "title": "Technology Product Manager 6 - TV Platform and Device Technologies",
           "location": "Los Gatos, California, United States of America",
           "salaryMin": null,
@@ -14159,7 +14352,7 @@
           "isRemote": false
         },
         {
-          "id": 2712,
+          "id": 2721,
           "title": "Product Manager L6, Data Platform - Analytics Experience",
           "location": "USA - Remote",
           "salaryMin": null,
@@ -14170,7 +14363,7 @@
           "isRemote": true
         },
         {
-          "id": 2698,
+          "id": 2707,
           "title": "Sr. Manager, Product Management (Ad Sales Products)",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -14181,7 +14374,7 @@
           "isRemote": false
         },
         {
-          "id": 2709,
+          "id": 2718,
           "title": "Product Manager - Games, Social Platform (L5)",
           "location": "USA - Remote",
           "salaryMin": null,
@@ -14192,7 +14385,7 @@
           "isRemote": true
         },
         {
-          "id": 2710,
+          "id": 2719,
           "title": "Product Manager - Games, Cloud Infrastructure (L5)",
           "location": "USA - Remote",
           "salaryMin": null,
@@ -14203,7 +14396,7 @@
           "isRemote": true
         },
         {
-          "id": 2711,
+          "id": 2720,
           "title": "Product Manager - Games, Kids (L5)",
           "location": "USA - Remote",
           "salaryMin": null,
@@ -14214,7 +14407,7 @@
           "isRemote": true
         },
         {
-          "id": 2699,
+          "id": 2708,
           "title": "Product Manager - Content Finance",
           "location": "Los Angeles, California, United States of America; Los Gatos, California, United States of America",
           "salaryMin": null,
@@ -14225,7 +14418,7 @@
           "isRemote": false
         },
         {
-          "id": 2700,
+          "id": 2709,
           "title": "Product Manager, Personalization",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -14236,7 +14429,7 @@
           "isRemote": false
         },
         {
-          "id": 2714,
+          "id": 2723,
           "title": "Product Manager (L5), Privacy & Data Protection Engineering",
           "location": "USA - Remote",
           "salaryMin": null,
@@ -14247,7 +14440,7 @@
           "isRemote": true
         },
         {
-          "id": 2701,
+          "id": 2710,
           "title": "Product Manager, Plans Innovation",
           "location": "Los Gatos, California, United States of America",
           "salaryMin": null,
@@ -14258,7 +14451,7 @@
           "isRemote": false
         },
         {
-          "id": 2702,
+          "id": 2711,
           "title": "Product Manager, Ads Signal Modeling and Targeting",
           "location": "Los Gatos, California, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -14269,7 +14462,7 @@
           "isRemote": false
         },
         {
-          "id": 2715,
+          "id": 2724,
           "title": "Product Manager - Games, TV as a Platform (L5)",
           "location": "USA - Remote",
           "salaryMin": null,
@@ -14280,7 +14473,7 @@
           "isRemote": true
         },
         {
-          "id": 2703,
+          "id": 2712,
           "title": "Product Manager, Content Aggregation Experiences",
           "location": "Los Gatos, California, United States of America",
           "salaryMin": null,
@@ -14291,7 +14484,7 @@
           "isRemote": false
         },
         {
-          "id": 2704,
+          "id": 2713,
           "title": "Product Manager, Partner Commerce",
           "location": "Los Gatos, California, United States of America",
           "salaryMin": null,
@@ -14302,7 +14495,7 @@
           "isRemote": false
         },
         {
-          "id": 2705,
+          "id": 2714,
           "title": "Product Manager, Ads (Live Ad Serving)",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -16545,7 +16738,7 @@
         },
         {
           "id": 1323,
-          "title": "Sr Product Manager",
+          "title": "Senior Product Manager",
           "location": "US Remote",
           "salaryMin": 180,
           "salaryMax": 210,
@@ -17301,7 +17494,7 @@
           "isRemote": false
         },
         {
-          "id": 2698,
+          "id": 2707,
           "title": "Sr. Manager, Product Management (Ad Sales Products)",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17312,7 +17505,7 @@
           "isRemote": false
         },
         {
-          "id": 2700,
+          "id": 2709,
           "title": "Product Manager, Personalization",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17323,7 +17516,7 @@
           "isRemote": false
         },
         {
-          "id": 2705,
+          "id": 2714,
           "title": "Product Manager, Ads (Live Ad Serving)",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17358,7 +17551,7 @@
           "isRemote": false
         },
         {
-          "id": 2698,
+          "id": 2707,
           "title": "Sr. Manager, Product Management (Ad Sales Products)",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17369,7 +17562,7 @@
           "isRemote": false
         },
         {
-          "id": 2702,
+          "id": 2711,
           "title": "Product Manager, Ads Signal Modeling and Targeting",
           "location": "Los Gatos, California, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17380,7 +17573,7 @@
           "isRemote": false
         },
         {
-          "id": 2705,
+          "id": 2714,
           "title": "Product Manager, Ads (Live Ad Serving)",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17415,7 +17608,7 @@
           "isRemote": false
         },
         {
-          "id": 2698,
+          "id": 2707,
           "title": "Sr. Manager, Product Management (Ad Sales Products)",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17426,7 +17619,7 @@
           "isRemote": false
         },
         {
-          "id": 2699,
+          "id": 2708,
           "title": "Product Manager - Content Finance",
           "location": "Los Angeles, California, United States of America; Los Gatos, California, United States of America",
           "salaryMin": null,
@@ -17437,7 +17630,7 @@
           "isRemote": false
         },
         {
-          "id": 2700,
+          "id": 2709,
           "title": "Product Manager, Personalization",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17448,7 +17641,7 @@
           "isRemote": false
         },
         {
-          "id": 2702,
+          "id": 2711,
           "title": "Product Manager, Ads Signal Modeling and Targeting",
           "location": "Los Gatos, California, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17459,7 +17652,7 @@
           "isRemote": false
         },
         {
-          "id": 2705,
+          "id": 2714,
           "title": "Product Manager, Ads (Live Ad Serving)",
           "location": "Los Gatos, California, United States of America; Seattle, Washington, United States of America; New York, New York, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -17470,7 +17663,7 @@
           "isRemote": false
         },
         {
-          "id": 2706,
+          "id": 2715,
           "title": "Lead Games Title Product Manager, Portfolio",
           "location": "California - Remote, United States of America; Los Angeles, California, United States of America",
           "salaryMin": null,
@@ -19099,63 +19292,6 @@
           "url": "https://job-boards.greenhouse.io/sezzle/jobs/7861209003",
           "postedAt": "2026-08-31T10:56:59-04:00",
           "isRemote": true
-        }
-      ]
-    },
-    {
-      "id": "244-somerville-ma",
-      "companyId": 244,
-      "companyName": "Formlabs",
-      "companySlug": "formlabs",
-      "city": "Somerville",
-      "state": "MA",
-      "latitude": 42.3875968,
-      "longitude": -71.0994968,
-      "roleCount": 4,
-      "roles": [
-        {
-          "id": 974,
-          "title": "Director of Product Management, Software",
-          "location": "Somerville, MA",
-          "salaryMin": 150000,
-          "salaryMax": 150000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.formlabs.com/job/8166172/apply/?gh_jid=8166172",
-          "postedAt": "2026-08-30T17:19:43-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 975,
-          "title": "Head of Software Product Management ",
-          "location": "Somerville, MA",
-          "salaryMin": 150000,
-          "salaryMax": 150000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.formlabs.com/job/8166173/apply/?gh_jid=8166173",
-          "postedAt": "2026-08-30T17:19:17-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 977,
-          "title": "Senior Product Manager, Hardware",
-          "location": "Somerville, MA",
-          "salaryMin": 140000,
-          "salaryMax": 140000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.formlabs.com/job/8122198/apply/?gh_jid=8122198",
-          "postedAt": "2026-08-11T13:43:31-04:00",
-          "isRemote": false
-        },
-        {
-          "id": 976,
-          "title": "Product Manager, Hardware",
-          "location": "Somerville, MA",
-          "salaryMin": 125000,
-          "salaryMax": 125000,
-          "salaryCurrency": "USD",
-          "url": "https://careers.formlabs.com/job/8041515/apply/?gh_jid=8041515",
-          "postedAt": "2026-07-20T10:58:46-04:00",
-          "isRemote": false
         }
       ]
     },
@@ -22357,30 +22493,6 @@
       ]
     },
     {
-      "id": "119-san-francisco-ca",
-      "companyId": 119,
-      "companyName": "Creatoriq",
-      "companySlug": "creatoriq",
-      "city": "San Francisco",
-      "state": "CA",
-      "latitude": 37.78175007207943,
-      "longitude": -122.39873339476488,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 475,
-          "title": "Technical Product Manager, Integrations",
-          "location": "San Francisco",
-          "salaryMin": 139,
-          "salaryMax": 157,
-          "salaryCurrency": "USD",
-          "url": "https://jobs.ashbyhq.com/creatoriq/3b975180-88d9-4b4c-b51c-2dccd4441862",
-          "postedAt": "2026-08-12T16:18:09.925+00:00",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "556-new-york-ny",
       "companyId": 556,
       "companyName": "Moloco",
@@ -23370,41 +23482,6 @@
           "url": "https://job-boards.greenhouse.io/tailscale/jobs/4720112005",
           "postedAt": "2026-07-31T13:51:20-04:00",
           "isRemote": true
-        }
-      ]
-    },
-    {
-      "id": "408-san-francisco-ca",
-      "companyId": 408,
-      "companyName": "Hinge Health",
-      "companySlug": "hinge-health",
-      "city": "San Francisco",
-      "state": "CA",
-      "latitude": 37.79001858813148,
-      "longitude": -122.41525845322926,
-      "roleCount": 2,
-      "roles": [
-        {
-          "id": 1358,
-          "title": "Director, Product Management",
-          "location": "San Francisco-HQ",
-          "salaryMin": 280,
-          "salaryMax": 380,
-          "salaryCurrency": "USD",
-          "url": "https://jobs.ashbyhq.com/hinge-health/da88f56f-43b1-493c-b582-5903ec5a8510",
-          "postedAt": "2026-07-30T22:54:32.882+00:00",
-          "isRemote": false
-        },
-        {
-          "id": 1359,
-          "title": "Senior Product Manager, Consumer Products",
-          "location": "San Francisco-HQ",
-          "salaryMin": 163,
-          "salaryMax": 240,
-          "salaryCurrency": "USD",
-          "url": "https://jobs.ashbyhq.com/hinge-health/4ab249ef-1559-4de9-a4c2-a2e4a8aa8d1e",
-          "postedAt": "2026-06-24T15:40:39.546+00:00",
-          "isRemote": false
         }
       ]
     },
@@ -29032,7 +29109,7 @@
         },
         {
           "id": 2575,
-          "title": "Product Manager (m/w/d)",
+          "title": "Product Manager mit fachlicher Führungsoption (m/w/d)",
           "location": "Köln",
           "salaryMin": null,
           "salaryMax": null,
@@ -29211,7 +29288,7 @@
         {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": null,
           "salaryMax": null,
           "salaryCurrency": null,
@@ -29433,7 +29510,7 @@
         {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": null,
           "salaryMax": null,
           "salaryCurrency": null,
@@ -29556,7 +29633,7 @@
         {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": null,
           "salaryMax": null,
           "salaryCurrency": null,
@@ -29749,7 +29826,7 @@
         {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": null,
           "salaryMax": null,
           "salaryCurrency": null,
@@ -29920,7 +29997,7 @@
         {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Menlo Park, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": null,
           "salaryMax": null,
           "salaryCurrency": null,
@@ -31297,6 +31374,17 @@
       "companySlug": "jobgether",
       "roles": [
         {
+          "id": 2702,
+          "title": "AI Principal Product Manager",
+          "location": "US",
+          "salaryMin": 159141,
+          "salaryMax": 272813,
+          "salaryCurrency": "USD",
+          "url": "https://jobs.lever.co/jobgether/ac1192f6-56b2-42aa-8b75-08dbe3ba3456",
+          "postedAt": "1789981035642",
+          "isRemote": true
+        },
+        {
           "id": 2694,
           "title": "Contract Modeling Product Manager",
           "location": "US",
@@ -31319,7 +31407,7 @@
           "isRemote": true
         }
       ],
-      "roleCount": 2
+      "roleCount": 3
     },
     {
       "companyId": 970,
@@ -32123,6 +32211,17 @@
           "isRemote": true
         },
         {
+          "id": 2703,
+          "title": "Internship Product Management Innovation Footwear",
+          "location": "PUMA Way Headquarters",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "url": "https://puma.wd502.myworkdayjobs.com/jobs_at_puma/job/PUMA-Way-Headquarters/Internship-Product-Management-Innovation-Footwear_R43433",
+          "postedAt": "Posted Today",
+          "isRemote": true
+        },
+        {
           "id": 2590,
           "title": "Senior Product Owner – Commerce Platform",
           "location": "PUMA Way Headquarters",
@@ -32156,7 +32255,7 @@
           "isRemote": true
         }
       ],
-      "roleCount": 4
+      "roleCount": 5
     },
     {
       "companyId": 953,
