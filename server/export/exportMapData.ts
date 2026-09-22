@@ -69,6 +69,7 @@ import path from "node:path";
 import { getDb } from "../db/client.js";
 import { isExplicitlyNonUS } from "../ingestion/locationParser.js";
 import { writeCompanyDetails } from "./companyDetails.js";
+import { NEW_ROLE_DAYS, isNewRole, seniorityOf, sqliteToIso, type Seniority } from "./roleFacets.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUTPUT_PATH = path.join(__dirname, "..", "..", "public", "data", "map-data.json");
@@ -84,14 +85,57 @@ interface RoleExport {
   salaryMin: number | null;
   salaryMax: number | null;
   salaryCurrency: string | null;
+  // 'year' | 'hour' | 'month' -- what the figures are per. Never converted;
+  // see server/ingestion/salary.ts.
+  salaryPeriod: string | null;
   url: string | null;
   postedAt: string | null;
+  // When our sync first saw this posting. Distinct from postedAt, which is
+  // the board's own date and is missing on plenty of postings -- firstSeenAt
+  // is always present, so it's what the "posted within" filter falls back to.
+  firstSeenAt: string;
+  isNew: boolean;
+  // Derived from the title (see roleFacets.ts) -- the only seniority signal
+  // an ATS gives us for free.
+  seniority: Seniority;
   // true when this role has no resolvable office of its own (its posting's
   // location was something like "Remote - USA") and is pinned here only
   // because it's the company's dominant office -- see geocode.ts. false
   // for a role genuinely posted at this pin's city.
   isRemote: boolean;
 }
+
+/**
+ * What moved since the last sync window, so the map can say "9 added, 3
+ * closed" instead of silently changing under you. Everything here comes
+ * from columns the sync already maintains: first_seen_at, and the
+ * last_seen_at stamp left behind when a posting stops appearing on its
+ * board and sync.ts flips it to status='closed'.
+ *
+ * `closed` is the true count in the window; `closedRoles` is capped, since
+ * this file loads on every visit and a big purge shouldn't bloat it.
+ */
+interface ClosedRoleExport {
+  id: number;
+  title: string;
+  companyName: string;
+  companySlug: string;
+  city: string | null;
+  state: string | null;
+  url: string | null;
+  closedAt: string;
+}
+
+interface ChangeFeedExport {
+  windowDays: number;
+  since: string;
+  added: number;
+  closed: number;
+  closedRoles: ClosedRoleExport[];
+  lastSync: { finishedAt: string | null; status: string } | null;
+}
+
+const CLOSED_ROLE_LIMIT = 200;
 
 interface PinExport {
   id: string;
@@ -127,8 +171,10 @@ interface RoleRow {
   salary_min: number | null;
   salary_max: number | null;
   salary_currency: string | null;
+  salary_period: string | null;
   url: string | null;
   posted_at: string | null;
+  first_seen_at: string;
   resolved_city: string | null;
   resolved_state: string | null;
   latitude: number;
@@ -212,8 +258,128 @@ function jitterSharedCoordinates(
   return jittered;
 }
 
+/**
+ * The shared columns every exported role needs. RoleRow (mapped pins) and
+ * the unplaced-role query (the unmapped list) both satisfy this, so both
+ * paths produce identically-shaped roles.
+ */
+interface RoleExportSource {
+  id: number;
+  title: string;
+  location: string | null;
+  salary_min: number | null;
+  salary_max: number | null;
+  salary_currency: string | null;
+  salary_period: string | null;
+  url: string | null;
+  posted_at: string | null;
+  first_seen_at: string;
+}
+
+function toRoleExport(row: RoleExportSource, trackedSince: string, now: number, isRemote: boolean): RoleExport {
+  return {
+    id: row.id,
+    title: row.title,
+    location: row.location,
+    salaryMin: row.salary_min,
+    salaryMax: row.salary_max,
+    salaryCurrency: row.salary_currency,
+    salaryPeriod: row.salary_period,
+    url: row.url,
+    postedAt: row.posted_at,
+    firstSeenAt: sqliteToIso(row.first_seen_at),
+    isNew: isNewRole(row, trackedSince, now),
+    seniority: seniorityOf(row.title),
+    isRemote,
+  };
+}
+
+/**
+ * Roles that stopped appearing on their board and were closed inside the
+ * window, newest first. sync.ts sets status='closed' a day after a posting
+ * last showed up, so last_seen_at is the closest thing we have to "when it
+ * came down" -- it's the last time we saw it alive, not a board-supplied
+ * close date, and the UI says "last seen" rather than "closed on" for that
+ * reason.
+ */
+function buildChangeFeed(db: ReturnType<typeof getDb>, now: number): ChangeFeedExport {
+  const since = new Date(now - NEW_ROLE_DAYS * 86_400_000).toISOString();
+  const window = `-${NEW_ROLE_DAYS} days`;
+
+  const closedCount = (
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n FROM roles
+         WHERE status = 'closed' AND last_seen_at >= datetime('now', ?)`,
+      )
+      .get(window) as { n: number }
+  ).n;
+
+  const closedRows = db
+    .prepare(
+      `SELECT roles.id, roles.title, roles.url, roles.last_seen_at,
+              roles.resolved_city, roles.resolved_state,
+              companies.name AS company_name, companies.slug AS company_slug
+       FROM roles JOIN companies ON companies.id = roles.company_id
+       WHERE roles.status = 'closed' AND roles.last_seen_at >= datetime('now', ?)
+       ORDER BY roles.last_seen_at DESC
+       LIMIT ?`,
+    )
+    .all(window, CLOSED_ROLE_LIMIT) as Array<{
+    id: number;
+    title: string;
+    url: string | null;
+    last_seen_at: string;
+    resolved_city: string | null;
+    resolved_state: string | null;
+    company_name: string;
+    company_slug: string;
+  }>;
+
+  const lastSyncRow = db
+    .prepare(
+      `SELECT status, finished_at FROM sync_runs
+       WHERE status != 'running' ORDER BY id DESC LIMIT 1`,
+    )
+    .get() as { status: string; finished_at: string | null } | undefined;
+
+  return {
+    windowDays: NEW_ROLE_DAYS,
+    since,
+    // Filled in by main() once the visible roles are known -- "added" has to
+    // mean "new AND actually on the map", not "new in the database".
+    added: 0,
+    closed: closedCount,
+    closedRoles: closedRows.map((r) => ({
+      id: r.id,
+      title: r.title.trim(),
+      companyName: r.company_name,
+      companySlug: r.company_slug,
+      city: r.resolved_city,
+      state: r.resolved_state,
+      url: r.url,
+      closedAt: sqliteToIso(r.last_seen_at),
+    })),
+    lastSync: lastSyncRow ? { finishedAt: lastSyncRow.finished_at ? sqliteToIso(lastSyncRow.finished_at) : null, status: lastSyncRow.status } : null,
+  };
+}
+
 function main() {
   const db = getDb();
+  const now = Date.now();
+
+  // When we first saw ANY role at each company -- the baseline isNewRole
+  // needs so a company added yesterday doesn't report its whole board as
+  // new (see roleFacets.ts).
+  const trackedSinceByCompany = new Map<number, string>(
+    (
+      db.prepare(`SELECT company_id, MIN(first_seen_at) AS t FROM roles GROUP BY company_id`).all() as Array<{
+        company_id: number;
+        t: string;
+      }>
+    ).map((r) => [r.company_id, sqliteToIso(r.t)]),
+  );
+  const trackedSince = (companyId: number) => trackedSinceByCompany.get(companyId) ?? new Date(now).toISOString();
 
   // Reads from role_locations (one row per office a role is actually open
   // in), not roles.latitude/longitude directly -- a role listed as open in
@@ -225,8 +391,8 @@ function main() {
       `SELECT
          role_locations.id AS location_id,
          roles.id, roles.company_id, companies.name AS company_name, companies.slug AS company_slug,
-         roles.title, roles.location, roles.salary_min, roles.salary_max, roles.salary_currency,
-         roles.url, roles.posted_at,
+         roles.title, roles.location, roles.salary_min, roles.salary_max, roles.salary_currency, roles.salary_period,
+         roles.url, roles.posted_at, roles.first_seen_at,
          role_locations.resolved_city, role_locations.resolved_state,
          role_locations.latitude, role_locations.longitude, role_locations.is_remote
        FROM role_locations
@@ -283,17 +449,7 @@ function main() {
       latitude: coord.lat,
       longitude: coord.lng,
       roleCount: p.roles.length,
-      roles: p.roles.map((r) => ({
-        id: r.id,
-        title: r.title,
-        location: r.location,
-        salaryMin: r.salary_min,
-        salaryMax: r.salary_max,
-        salaryCurrency: r.salary_currency,
-        url: r.url,
-        postedAt: r.posted_at,
-        isRemote: Boolean(r.is_remote),
-      })),
+      roles: p.roles.map((r) => toRoleExport(r, trackedSince(p.companyId), now, Boolean(r.is_remote))),
     };
   });
 
@@ -305,8 +461,8 @@ function main() {
     .prepare(
       `SELECT
          roles.id, roles.company_id, companies.name AS company_name, companies.slug AS company_slug,
-         roles.title, roles.location, roles.salary_min, roles.salary_max, roles.salary_currency,
-         roles.url, roles.posted_at
+         roles.title, roles.location, roles.salary_min, roles.salary_max, roles.salary_currency, roles.salary_period,
+         roles.url, roles.posted_at, roles.first_seen_at
        FROM roles
        JOIN companies ON companies.id = roles.company_id
        LEFT JOIN role_locations ON role_locations.role_id = roles.id
@@ -325,6 +481,8 @@ function main() {
     salary_currency: string | null;
     url: string | null;
     posted_at: string | null;
+    first_seen_at: string;
+    salary_period: string | null;
   }>;
 
   // geocode.ts's fallback tiers already exclude a role whose own location
@@ -344,17 +502,7 @@ function main() {
   >();
   for (const row of usUnplacedRows) {
     const existing = remoteCompaniesByCompany.get(row.company_id);
-    const roleExport: RoleExport = {
-      id: row.id,
-      title: row.title,
-      location: row.location,
-      salaryMin: row.salary_min,
-      salaryMax: row.salary_max,
-      salaryCurrency: row.salary_currency,
-      url: row.url,
-      postedAt: row.posted_at,
-      isRemote: true,
-    };
+    const roleExport: RoleExport = toRoleExport(row, trackedSince(row.company_id), now, true);
     if (existing) {
       existing.roles.push(roleExport);
     } else {
@@ -382,15 +530,25 @@ function main() {
   // role.id can repeat; dedupe by id for the headline total.
   const roleCount = new Set(rows.map((r) => r.id)).size + usUnplacedRows.length;
 
+  const changes = buildChangeFeed(db, now);
+  // Distinct role ids, for the same reason roleCount dedupes: a new role
+  // open in 3 offices is one new role, not three.
+  changes.added = new Set(
+    [...pins.flatMap((p) => p.roles), ...remoteCompanies.flatMap((c) => c.roles)]
+      .filter((r) => r.isNew)
+      .map((r) => r.id),
+  ).size;
+
   mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   writeFileSync(
     OUTPUT_PATH,
     JSON.stringify(
       {
-        generatedAt: new Date().toISOString(),
+        generatedAt: new Date(now).toISOString(),
         companyCount,
         pinCount: pins.length,
         roleCount,
+        changes,
         pins,
         remoteCompanies,
       },
@@ -404,6 +562,10 @@ function main() {
   const visibleRoleIds = new Set([...rows.map((r) => r.id), ...usUnplacedRows.map((r) => r.id)]);
   const detailFiles = writeCompanyDetails(db, path.join(path.dirname(OUTPUT_PATH), "companies"), visibleRoleIds);
   console.log(`Wrote ${detailFiles} company detail files to ${path.join(path.dirname(OUTPUT_PATH), "companies")}`);
+
+  console.log(
+    `Change feed: ${changes.added} added, ${changes.closed} closed in the last ${changes.windowDays} days`,
+  );
 
   const nonUsFiltered = unplacedRows.length - usUnplacedRows.length;
   console.log(

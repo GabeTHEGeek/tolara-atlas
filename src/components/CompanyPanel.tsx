@@ -1,17 +1,10 @@
 import type { LocationPinData } from "../types.js";
 import { roleHref } from "../router.js";
+import { formatSalary } from "../format.js";
 
 interface CompanyPanelProps {
   pin: LocationPinData | null;
   onClose: () => void;
-}
-
-function formatSalary(min: number | null, max: number | null, currency: string | null): string | null {
-  if (min == null && max == null) return null;
-  const cur = currency ?? "USD";
-  const fmt = (n: number) => `${cur} ${n.toLocaleString("en-US")}`;
-  if (min != null && max != null && min !== max) return `${fmt(min)} – ${fmt(max)}`;
-  return fmt(min ?? max!);
 }
 
 export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
@@ -42,7 +35,7 @@ export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
 
       <ul className="role-list">
         {pin.roles.map((role) => {
-          const salary = formatSalary(role.salaryMin, role.salaryMax, role.salaryCurrency);
+          const salary = formatSalary(role.salaryMin, role.salaryMax, role.salaryCurrency, role.salaryPeriod);
           return (
             <li key={role.id} className="role-item">
               <div className="role-title-row">

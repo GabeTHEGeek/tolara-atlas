@@ -241,7 +241,8 @@ a {
 /* ---------- Side panels (company pin + unmapped list) ---------- */
 
 .company-panel,
-.remote-panel {
+.remote-panel,
+.changes-panel {
   position: absolute;
   top: 0;
   right: 0;
@@ -1069,4 +1070,500 @@ h1.role-page-title {
 .intel-status-error {
   margin: 8px 0 0;
   font-size: 13px;
+}
+
+/* ---- Filter bar -------------------------------------------------------
+   Sits under the company search at the map's top-left. Deliberately not a
+   full-width toolbar: the map is the point, and a bar across the top eats
+   the northern third of the US at the default zoom. */
+.filter-bar {
+  position: absolute;
+  top: 60px;
+  left: 12px;
+  z-index: 3;
+  width: 320px;
+  max-width: calc(100% - 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  font-size: 13px;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.filter-chip {
+  padding: 5px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--bg-raised);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.filter-chip:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.filter-chip.is-on {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.filter-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-select-label {
+  color: var(--text-faint);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.filter-select select {
+  padding: 4px 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--bg-raised);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.filter-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.filter-count {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.filter-count.is-on {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.filter-clear {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.filter-clear:hover {
+  color: var(--text);
+}
+
+.filter-empty {
+  margin: 0;
+  color: var(--caution);
+  font-size: 12px;
+}
+
+.stats-filtered {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---- Change feed ------------------------------------------------------ */
+.changes-summary {
+  display: flex;
+  gap: 16px;
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.changes-stat.is-added {
+  color: var(--positive);
+}
+
+.changes-stat.is-closed {
+  color: var(--text-muted);
+}
+
+.changes-heading {
+  margin: 24px 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.changes-company {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* A closed role is history, not an opening -- muted, and its title isn't
+   styled as a live link into the site (it only ever points outward). */
+.role-item.is-closed .role-title {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--text-faint);
+}
+
+.role-item.is-closed .changes-company {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ---- Voice copilot ----------------------------------------------------
+   Floats at the bottom centre: the company panel and role drawer own the
+   right edge, and centring keeps the map readable behind it while the
+   agent moves it around. Deliberately NOT a blocking modal -- watching the
+   map fly is the point of talking to it. */
+.voice-fab {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 28px;
+  z-index: 6;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: transform 0.12s, background 0.12s;
+}
+
+.voice-fab:hover {
+  transform: translateX(-50%) translateY(-2px);
+  background: rgba(111, 224, 196, 0.2);
+}
+
+.voice-panel {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  z-index: 7;
+  width: 480px;
+  max-width: calc(100vw - 32px);
+  max-height: min(560px, calc(100% - 40px));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
+}
+
+.voice-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.voice-header h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.voice-sub {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.voice-log {
+  flex: 1;
+  min-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.voice-note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.voice-note-warn {
+  color: var(--caution);
+}
+
+.voice-note code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text);
+}
+
+.voice-turn {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.voice-turn.is-user .voice-text {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.voice-turn.is-user .voice-text::before {
+  content: "“";
+}
+
+.voice-turn.is-user .voice-text::after {
+  content: "”";
+}
+
+.voice-text {
+  margin: 0;
+}
+
+/* What the agent actually did to the app, listed under its reply. */
+.voice-did {
+  margin: 6px 0 0;
+  padding-left: 14px;
+  list-style: none;
+  font-size: 11px;
+  color: var(--accent);
+}
+
+.voice-did li::before {
+  content: "→ ";
+}
+
+.voice-partial {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.voice-mic {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.voice-mic:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.voice-mic.is-live {
+  background: var(--accent);
+  color: var(--accent-ink);
+  animation: voice-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes voice-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(111, 224, 196, 0.45); }
+  50% { box-shadow: 0 0 0 7px rgba(111, 224, 196, 0); }
+}
+
+.voice-status {
+  font-size: 11px;
+  color: var(--text-faint);
+  min-width: 78px;
+}
+
+.voice-toggle {
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 8px 9px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.voice-type {
+  display: flex;
+  gap: 6px;
+}
+
+.voice-type input {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+}
+
+.voice-type button {
+  padding: 7px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.voice-type button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.voice-clear {
+  align-self: flex-start;
+}
+
+/* The waveform: real mic amplitude while you speak, a word-boundary
+   envelope while it replies (speechSynthesis output can't be metered --
+   see src/voice/transport.ts). */
+.voice-waveform {
+  width: 100%;
+  height: 56px;
+  display: block;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* On a phone the dock spans the full width and the log gives up height so
+   the waveform and controls stay on screen with the keyboard open. */
+@media (max-width: 560px) {
+  .voice-panel {
+    width: auto;
+    left: 12px;
+    right: 12px;
+    transform: none;
+    bottom: 12px;
+  }
+
+  .voice-fab {
+    bottom: 20px;
+  }
+
+  .voice-log {
+    min-height: 80px;
+    max-height: 180px;
+  }
+}
+
+/* Hands-free: a steady ring rather than the one-shot pulse, so "the mic is
+   open" reads differently from "capturing right now". */
+.voice-mic.is-handsfree {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.voice-mic.is-handsfree.is-live {
+  animation: voice-pulse 1.4s ease-in-out infinite;
+}
+
+.voice-hint {
+  font-size: 11px;
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+.voice-once {
+  align-self: flex-start;
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.voice-once:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.voice-once:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Collapsed dock: waveform and controls only. Keeps the conversation live
+   while giving the map back the ~300px the transcript was covering. */
+.voice-panel.is-collapsed {
+  gap: 8px;
+  padding: 10px 14px 12px;
+}
+
+.voice-panel.is-collapsed .voice-header h2 {
+  font-size: 13px;
+}
+
+.voice-panel.is-collapsed .voice-waveform {
+  height: 34px;
+}
+
+.voice-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.voice-collapse {
+  border: none;
+  background: none;
+  color: var(--text-faint);
+  font-size: 11px;
+  line-height: 1;
+  padding: 6px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.voice-collapse:hover {
+  color: var(--text);
+  background: var(--surface-hover);
 }

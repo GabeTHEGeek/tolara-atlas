@@ -62,6 +62,10 @@ CREATE TABLE IF NOT EXISTS roles (
   salary_min      INTEGER,
   salary_max      INTEGER,
   salary_currency TEXT,
+  -- 'year' | 'hour' | 'month'. Stored rather than annualized: a posting
+  -- that says "$70 per hour" never said how many hours, so converting it
+  -- to a yearly figure would be our assumption presented as the board's.
+  salary_period   TEXT,
   remote_type     TEXT,
   category        TEXT,                    -- e.g. "Product", from the title filter that matched it
   url             TEXT,

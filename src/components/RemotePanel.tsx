@@ -1,20 +1,12 @@
 import type { RemoteCompanyData } from "../types.js";
 import { roleHref } from "../router.js";
+import { formatSalary } from "../format.js";
 
 interface RemotePanelProps {
   companies: RemoteCompanyData[];
   open: boolean;
   onClose: () => void;
 }
-
-function formatSalary(min: number | null, max: number | null, currency: string | null): string | null {
-  if (min == null && max == null) return null;
-  const cur = currency ?? "USD";
-  const fmt = (n: number) => `${cur} ${n.toLocaleString("en-US")}`;
-  if (min != null && max != null && min !== max) return `${fmt(min)} – ${fmt(max)}`;
-  return fmt(min ?? max!);
-}
-
 // Companies whose active roles have no resolvable location anywhere (see
 // RemoteCompanyData) -- not placeable on the map, so they're listed here
 // instead of silently dropped. Distinct from CompanyPanel, which shows the
@@ -54,7 +46,7 @@ export default function RemotePanel({ companies, open, onClose }: RemotePanelPro
             </h3>
             <ul className="role-list">
               {company.roles.map((role) => {
-                const salary = formatSalary(role.salaryMin, role.salaryMax, role.salaryCurrency);
+                const salary = formatSalary(role.salaryMin, role.salaryMax, role.salaryCurrency, role.salaryPeriod);
                 return (
                   <li key={role.id} className="role-item">
                     <div className="role-title-row">

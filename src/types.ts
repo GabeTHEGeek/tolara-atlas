@@ -7,6 +7,21 @@
  * per city, each carrying only the roles actually posted there.
  */
 
+/** Mirrors SENIORITY_TIERS in server/export/roleFacets.ts, same order. */
+export const SENIORITY_TIERS = ["associate", "mid", "senior", "principal", "director"] as const;
+export type Seniority = (typeof SENIORITY_TIERS)[number];
+
+export const SENIORITY_LABELS: Record<Seniority, string> = {
+  associate: "Associate",
+  mid: "Mid",
+  senior: "Senior",
+  principal: "Principal / GPM",
+  director: "Director+",
+};
+
+export type { SalaryPeriod } from "./format.js";
+import type { SalaryPeriod } from "./format.js";
+
 export interface RoleData {
   id: number;
   title: string;
@@ -14,12 +29,45 @@ export interface RoleData {
   salaryMin: number | null;
   salaryMax: number | null;
   salaryCurrency: string | null;
+  // What the figures are per; null is treated as yearly. Hourly bands are
+  // shown as-is rather than annualized -- see server/ingestion/salary.ts.
+  salaryPeriod: SalaryPeriod | null;
   url: string | null;
   postedAt: string | null;
+  // When our sync first saw the posting. Always present, unlike postedAt
+  // (which is the board's own field, often missing or a relative string
+  // like "Posted Yesterday"), so it's what the date filter falls back to.
+  firstSeenAt: string;
+  isNew: boolean;
+  seniority: Seniority;
   // true when this role has no office of its own (e.g. posted as "Remote -
   // USA") and is shown at this pin only because it's the company's
   // dominant office, not because the role is actually based here.
   isRemote: boolean;
+}
+
+export interface ClosedRoleData {
+  id: number;
+  title: string;
+  companyName: string;
+  companySlug: string;
+  city: string | null;
+  state: string | null;
+  url: string | null;
+  // When we last saw the posting alive, not a board-supplied close date --
+  // sync.ts closes a role a day after it stops appearing on its board.
+  closedAt: string;
+}
+
+/** What moved in the last `windowDays` days. See exportMapData.ts. */
+export interface ChangeFeedData {
+  windowDays: number;
+  since: string;
+  added: number;
+  closed: number;
+  // Capped (200) -- `closed` is the real count.
+  closedRoles: ClosedRoleData[];
+  lastSync: { finishedAt: string | null; status: string } | null;
 }
 
 export interface LocationPinData {
@@ -53,6 +101,7 @@ export interface MapData {
   companyCount: number;
   pinCount: number;
   roleCount: number;
+  changes: ChangeFeedData;
   pins: LocationPinData[];
   remoteCompanies: RemoteCompanyData[];
 }
@@ -115,10 +164,12 @@ export interface CompanyDetailsRole {
   salaryMin: number | null;
   salaryMax: number | null;
   salaryCurrency: string | null;
+  salaryPeriod: SalaryPeriod | null;
   url: string | null;
   postedAt: string | null;
   firstSeenAt: string;
   isNew: boolean;
+  seniority: Seniority;
   offices: Array<{ city: string; state: string; latitude: number; longitude: number; isRemote: boolean }>;
   focus: RoleFocus | null;
 }

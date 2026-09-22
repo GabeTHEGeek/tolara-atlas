@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { roleHref } from "../router.js";
+import { formatSalary, relativeTime } from "../format.js";
 import type {
   CompanyDetails,
   CompanyDetailsRole,
@@ -21,6 +22,9 @@ interface RolePageProps {
   onLoaded: (info: RoleLoadedInfo | null) => void;
   // Called once the slide-out has finished, so the parent can change the route.
   onClose: () => void;
+  // Set when the voice agent has just warmed this company's profile; the
+  // nonce makes a repeat refresh for the same company fire again.
+  intelRefresh?: { slug: string; nonce: number } | null;
 }
 
 // Keep in step with the .role-drawer transition in styles.css.
@@ -69,29 +73,6 @@ function writeSaved(ids: number[]) {
   } catch {
     // Private mode or blocked storage: saving just doesn't persist.
   }
-}
-
-function relativeTime(iso: string | null): string | null {
-  if (!iso) return null;
-  const ms = Date.now() - Date.parse(iso);
-  if (Number.isNaN(ms)) return null;
-  const days = Math.floor(ms / 86_400_000);
-  if (days <= 0) return "today";
-  if (days < 7) return `${days}d ago`;
-  if (days < 60) return `${Math.floor(days / 7)}w ago`;
-  return `${Math.floor(days / 30)}mo ago`;
-}
-
-function formatMoney(n: number, currency: string | null): string {
-  const k = n >= 1000 ? `${Math.round(n / 1000)}K` : String(n);
-  return !currency || currency === "USD" ? `$${k}` : `${currency} ${k}`;
-}
-
-function salaryLabel(role: CompanyDetailsRole): string | null {
-  const { salaryMin: min, salaryMax: max, salaryCurrency: cur } = role;
-  if (min == null && max == null) return null;
-  if (min != null && max != null && min !== max) return `${formatMoney(min, cur)} – ${formatMoney(max, cur)}`;
-  return formatMoney((min ?? max)!, cur);
 }
 
 function locationLabel(role: CompanyDetailsRole): string {
@@ -149,7 +130,7 @@ function initials(name: string): string {
  * office). Stays mounted while moving between roles, so only the first
  * open and the final close animate.
  */
-export default function RolePage({ companySlug, roleId, onLoaded, onClose }: RolePageProps) {
+export default function RolePage({ companySlug, roleId, onLoaded, onClose, intelRefresh }: RolePageProps) {
   const [open, setOpen] = useState(false);
   const [details, setDetails] = useState<CompanyDetails | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -257,6 +238,15 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
 
   const loadIntelligence = useCallback(() => void runLoad(true), [runLoad]);
 
+  // Asking the voice agent about this company is the same request as
+  // pressing "Load company intelligence", so it presses it -- with the
+  // spinner, so the page visibly does what was asked rather than filling in
+  // silently some seconds later.
+  useEffect(() => {
+    if (!intelRefresh || intelRefresh.slug !== companySlug) return;
+    void runLoad(true);
+  }, [intelRefresh, companySlug, runLoad]);
+
   if (loadError) {
     return shell(<p className="drawer-message">{loadError}</p>, "Role details");
   }
@@ -283,7 +273,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose }: Rol
     setSaved(next);
     writeSaved(next);
   };
-  const salary = salaryLabel(role);
+  const salary = formatSalary(role.salaryMin, role.salaryMax, role.salaryCurrency, role.salaryPeriod);
   const intelLoaded = intel !== null;
   const profile = intel?.profile ?? null;
 

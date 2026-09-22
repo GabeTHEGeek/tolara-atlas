@@ -90,15 +90,29 @@ export interface FlyToRequest {
   nonce: number;
 }
 
+/** A zoom step. `nonce` makes "zoom in" twice actually zoom twice. */
+export interface ZoomRequest {
+  direction: "in" | "out" | "reset";
+  steps: number;
+  nonce: number;
+}
+
 interface MapViewProps {
   pins: LocationPinData[];
   onSelectPin: (pin: LocationPinData) => void;
   selectedPinId: string | null;
   flyToRequest: FlyToRequest | null;
+  zoomRequest: ZoomRequest | null;
   // Pixels on the right covered by a side panel. Both flights center on the
   // map area still visible beside it. Passed on every flight (never left
   // implicit) because MapLibre keeps the last flight's padding around.
   rightInset: number;
+  /**
+   * Pixels along the bottom covered by the voice dock. Zoomed into a city,
+   * the dock sits right over the pins it was asked to show, so flights
+   * centre on the strip still visible above it rather than behind it.
+   */
+  bottomInset: number;
 }
 
 function cityKey(pin: LocationPinData): string {
@@ -202,7 +216,15 @@ function officeLinksFromPin(
   };
 }
 
-export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest, rightInset }: MapViewProps) {
+export default function MapView({
+  pins,
+  onSelectPin,
+  selectedPinId,
+  flyToRequest,
+  zoomRequest,
+  rightInset,
+  bottomInset,
+}: MapViewProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   // Kept alongside the map instance so click/hover handlers (registered
@@ -236,6 +258,8 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
   // Read by the city-bubble click handler, registered once on load.
   const rightInsetRef = useRef(rightInset);
   rightInsetRef.current = rightInset;
+  const bottomInsetRef = useRef(bottomInset);
+  bottomInsetRef.current = bottomInset;
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -250,6 +274,9 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
     });
     mapRef.current = map;
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    map.on("moveend", () => {
+      targetZoomRef.current = null;
+    });
 
     hoverPopupRef.current = new maplibregl.Popup({
       closeButton: false,
@@ -431,18 +458,18 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
         if (cityPins.length === 0) return;
         const bounds = new maplibregl.LngLatBounds();
         for (const p of cityPins) bounds.extend([p.longitude, p.latitude]);
-        const padding = { top: 80, bottom: 80, left: 80, right: 80 + rightInsetRef.current };
+        const padding = { top: 80, bottom: 80 + bottomInsetRef.current, left: 80, right: 80 + rightInsetRef.current };
         const camera = map.cameraForBounds(bounds, { padding, maxZoom: 13 });
         hoverPopupRef.current?.remove();
         map.flyTo({
-          padding: { top: 0, bottom: 0, left: 0, right: rightInsetRef.current },
+          padding: { top: 0, bottom: bottomInsetRef.current, left: 0, right: rightInsetRef.current },
           // The bounds' own center, not camera.center: cameraForBounds
           // already shifts its center for the asymmetric padding, and
           // flyTo's padding would shift it a second time.
           center: bounds.getCenter(),
           // Always land past CITY_CLUSTER_MAX_ZOOM, so the bubble actually
           // opens up into its pins instead of reappearing at the same spot.
-          zoom: Math.max(camera?.zoom ?? 0, CITY_CLUSTER_MAX_ZOOM + 1),
+          zoom: (targetZoomRef.current = Math.max(camera?.zoom ?? 0, CITY_CLUSTER_MAX_ZOOM + 1)),
           duration: CITY_FLY_DURATION_MS,
           essential: true,
         });
@@ -570,13 +597,77 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
         hasFitBoundsRef.current = true;
         const bounds = new maplibregl.LngLatBounds();
         for (const p of pins) bounds.extend([p.longitude, p.latitude]);
-        map.fitBounds(bounds, { padding: 60, maxZoom: 6, duration: 0 });
+        map.fitBounds(bounds, {
+          padding: { top: 60, bottom: 60 + bottomInsetRef.current, left: 60, right: 60 + rightInsetRef.current },
+          maxZoom: 6,
+          duration: 0,
+        });
       }
     };
 
     if (mapLoadedRef.current) applyData();
     else map.once("load", applyData);
   }, [pins]);
+
+  // Zooming keeps the current centre -- "zoom in" means closer to what I'm
+  // looking at, not somewhere else. Clamped to the map's own min/max so a
+  // request for four steps at the limit isn't silently ignored.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !zoomRequest || !mapLoadedRef.current) return;
+    // "All the way out" is about nine levels from a city, well past the
+    // step cap, so it's its own move: frame every pin rather than counting
+    // levels down.
+    if (zoomRequest.direction === "reset") {
+      const bounds = new maplibregl.LngLatBounds();
+      for (const p of pinsByIdRef.current.values()) bounds.extend([p.longitude, p.latitude]);
+      targetZoomRef.current = null;
+      if (pinsByIdRef.current.size > 0) {
+        map.fitBounds(bounds, {
+          padding: { top: 60, bottom: 60 + bottomInsetRef.current, left: 60, right: 60 + rightInsetRef.current },
+          maxZoom: 6,
+          duration: 900,
+          essential: true,
+        });
+      } else {
+        map.easeTo({ center: FALLBACK_VIEW.center, zoom: FALLBACK_VIEW.zoom, duration: 900, essential: true });
+      }
+      return;
+    }
+
+    const delta = zoomRequest.direction === "out" ? -zoomRequest.steps : zoomRequest.steps;
+    // Base the step on the flight's destination when one is in progress.
+    const from = targetZoomRef.current ?? map.getZoom();
+    const target = Math.min(map.getMaxZoom(), Math.max(map.getMinZoom(), from + delta));
+    targetZoomRef.current = target;
+    map.easeTo({
+      zoom: target,
+      duration: 600,
+      essential: true,
+      padding: { top: 0, bottom: bottomInsetRef.current, left: 0, right: rightInsetRef.current },
+    });
+  }, [zoomRequest]);
+
+  // Opening or closing the dock changes how much map is visible; nudge the
+  // camera by the difference so whatever was centred stays centred.
+  /**
+   * Where the camera is HEADING, not where it is.
+   *
+   * Flights take three seconds. A "zoom in on New York" that flies and then
+   * zooms would read map.getZoom() mid-animation and add its step to a
+   * half-finished number, landing short -- which is exactly what "it only
+   * went halfway" was. Tracking the destination makes the two compose.
+   */
+  const targetZoomRef = useRef<number | null>(null);
+
+  const previousBottomInset = useRef(bottomInset);
+  useEffect(() => {
+    const map = mapRef.current;
+    const delta = bottomInset - previousBottomInset.current;
+    previousBottomInset.current = bottomInset;
+    if (!map || !mapLoadedRef.current || delta === 0) return;
+    map.panBy([0, delta / 2], { duration: 220, essential: true });
+  }, [bottomInset]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -616,10 +707,12 @@ export default function MapView({ pins, onSelectPin, selectedPinId, flyToRequest
     const { pin } = flyToRequest;
     const fly = () => {
       hoverPopupRef.current?.remove();
+      const flightZoom = Math.max(targetZoomRef.current ?? map.getZoom(), SEARCH_FLY_ZOOM);
+      targetZoomRef.current = flightZoom;
       map.flyTo({
         center: [pin.longitude, pin.latitude],
-        zoom: Math.max(map.getZoom(), SEARCH_FLY_ZOOM),
-        padding: { top: 0, bottom: 0, left: 0, right: rightInset },
+        zoom: flightZoom,
+        padding: { top: 0, bottom: bottomInset, left: 0, right: rightInset },
         duration: SEARCH_FLY_DURATION_MS,
         // Same reasoning as the city-bubble flight: without this, Reduce
         // Motion turns the requested slow pan into an instant jump.

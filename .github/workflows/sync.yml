@@ -33,6 +33,13 @@ jobs:
       - name: Geocode newly-synced roles
         run: npm run geocode
 
+      # Fills the company intelligence cache so the export below can bake
+      # real dossiers into the per-company files. Time-budgeted: it works
+      # through the stalest companies first and leaves the rest for
+      # tomorrow, so the daily run stays bounded.
+      - name: Pre-warm company dossiers
+        run: npm run prewarm -- --minutes=25
+
       - name: Export map data for the frontend
         run: npm run export
 

@@ -1,10 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
-import MapView, { type FlyToRequest } from "./components/MapView.js";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import MapView, { type FlyToRequest, type ZoomRequest } from "./components/MapView.js";
 import CompanySearch from "./components/CompanySearch.js";
 import CompanyPanel from "./components/CompanyPanel.js";
 import RemotePanel from "./components/RemotePanel.js";
+import ChangesPanel from "./components/ChangesPanel.js";
+import FilterBar from "./components/FilterBar.js";
+import VoicePanel from "./components/VoicePanel.js";
+import { useVoiceAgent } from "./voice/useVoiceAgent.js";
 import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
 import { useRoute } from "./router.js";
+import { EMPTY_FILTERS, countRoles, filterPins, filterRemoteCompanies, isFiltering, type RoleFilters } from "./filters.js";
 import type { LocationPinData, MapData } from "./types.js";
 
 export default function App() {
@@ -13,10 +18,20 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [selectedPin, setSelectedPin] = useState<LocationPinData | null>(null);
   const [remotePanelOpen, setRemotePanelOpen] = useState(false);
+  const [changesPanelOpen, setChangesPanelOpen] = useState(false);
+  // A fresh Set per mount: EMPTY_FILTERS.seniority is shared, and state
+  // that aliases it would be a mutation bug waiting to happen.
+  const [filters, setFilters] = useState<RoleFilters>(() => ({ ...EMPTY_FILTERS, seniority: new Set() }));
   const [flyToRequest, setFlyToRequest] = useState<FlyToRequest | null>(null);
   const [crumbs, setCrumbs] = useState<{ company: string; role: string } | null>(null);
   // The pin of the role open in the drawer: the map flies to it and rings it.
   const [rolePinId, setRolePinId] = useState<string | null>(null);
+  // Bumped when the agent warms a company's profile, so an open role page
+  // re-reads it instead of still offering "Load company intelligence".
+  const [intelRefresh, setIntelRefresh] = useState<{ slug: string; nonce: number } | null>(null);
+  // How much of the map the voice dock is covering, measured by the panel.
+  const [voiceInset, setVoiceInset] = useState(0);
+  const [zoomRequest, setZoomRequest] = useState<ZoomRequest | null>(null);
 
   useEffect(() => {
     fetch("/data/map-data.json")
@@ -26,6 +41,55 @@ export default function App() {
       })
       .then((data: MapData) => setMapData(data))
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
+  }, []);
+
+  // Pinned at mount rather than read per render: the date filters only care
+  // about day granularity, and a moving `now` would invalidate the memos below
+  // on every render.
+  const [now] = useState(() => Date.now());
+
+  const filteredPins = useMemo(
+    () => (mapData ? filterPins(mapData.pins, filters, now) : []),
+    [mapData, filters, now],
+  );
+  const filteredRemoteCompanies = useMemo(
+    () => (mapData ? filterRemoteCompanies(mapData.remoteCompanies, filters, now) : []),
+    [mapData, filters, now],
+  );
+  const matchedRoles = useMemo(
+    () => countRoles(filteredPins, filteredRemoteCompanies),
+    [filteredPins, filteredRemoteCompanies],
+  );
+  // The open panel has to show the pin as filtered, not as clicked -- and
+  // close itself if the filters removed every role it was listing.
+  const visiblePin = useMemo(
+    () => (selectedPin ? (filteredPins.find((p) => p.id === selectedPin.id) ?? null) : null),
+    [filteredPins, selectedPin],
+  );
+
+  const closeRole = useCallback(() => {
+    setRolePinId(null);
+    setCrumbs(null);
+    window.location.hash = "#/";
+  }, []);
+
+  /**
+   * Opening a company panel closes whatever else was open, the role drawer
+   * included. The drawer is 780px and the panel 360px on the same right
+   * edge, so leaving both up stacks them -- and asking for one thing plainly
+   * means you're done with the other.
+   */
+  const selectPin = useCallback(
+    (pin: LocationPinData) => {
+      setRemotePanelOpen(false);
+      setChangesPanelOpen(false);
+      if (window.location.hash.startsWith("#/company/")) closeRole();
+      setSelectedPin(pin);
+    },
+    [closeRole],
+  );
+  const flyToPin = useCallback((pin: LocationPinData) => {
+    setFlyToRequest({ pin, nonce: Date.now() });
   }, []);
 
   const onRolePage = route.name === "role";
@@ -46,12 +110,6 @@ export default function App() {
     [mapData, routeCompany],
   );
 
-  const closeRole = useCallback(() => {
-    setRolePinId(null);
-    setCrumbs(null);
-    window.location.hash = "#/";
-  }, []);
-
   // The drawer is min(780px, viewport - 32px) wide plus its 16px margin; the
   // map centers flights in whatever is left visible beside it.
   const drawerInset = Math.min(780, window.innerWidth - 32) + 16;
@@ -59,9 +117,42 @@ export default function App() {
     ? window.innerWidth > 720
       ? drawerInset
       : 0
-    : selectedPin && window.innerWidth > 720
+    : visiblePin && window.innerWidth > 720
       ? 360
       : 0;
+
+  const voice = useVoiceAgent({
+    mapData,
+    // The office of the role in the drawer, so the agent opens THAT panel
+    // rather than the company's biggest office.
+    currentPinId: onRolePage ? rolePinId : (visiblePin?.id ?? null),
+    loadIntelligence: useCallback((slug: string) => setIntelRefresh({ slug, nonce: Date.now() }), []),
+    filters,
+    setFilters,
+    selectPin,
+    flyToPin,
+    zoomMap: useCallback(
+      (direction: "in" | "out" | "reset", steps: number) => setZoomRequest({ direction, steps, nonce: Date.now() }),
+      [],
+    ),
+    // One teardown for "we're going somewhere else now", so a panel never
+    // describes a place the map has already left.
+    clearPanels: useCallback(() => {
+      setSelectedPin(null);
+      setRemotePanelOpen(false);
+      setChangesPanelOpen(false);
+      if (window.location.hash.startsWith("#/company/")) closeRole();
+    }, [closeRole]),
+    screen: {
+      view: onRolePage ? "role" : "map",
+      selectedCompany: visiblePin ? { name: visiblePin.companyName, slug: visiblePin.companySlug } : null,
+      openRole:
+        route.name === "role" && crumbs
+          ? { id: route.roleId, title: crumbs.role, companySlug: route.companySlug }
+          : null,
+      visibleRoleCount: matchedRoles,
+    },
+  });
 
   return (
     <div className="app">
@@ -92,7 +183,15 @@ export default function App() {
         ) : (
           mapData && (
             <span className="app-stats">
-              {mapData.companyCount} companies · {mapData.roleCount} open Product Manager roles
+              {mapData.companyCount} companies ·{" "}
+              {isFiltering(filters) ? (
+                <strong className="stats-filtered">
+                  {matchedRoles.toLocaleString()} of {mapData.roleCount.toLocaleString()}
+                </strong>
+              ) : (
+                mapData.roleCount.toLocaleString()
+              )}{" "}
+              open Product Manager roles
               {mapData.remoteCompanies.length > 0 && (
                 <>
                   {" · "}
@@ -100,10 +199,27 @@ export default function App() {
                     className="remote-panel-toggle"
                     onClick={() => {
                       setSelectedPin(null);
+                      setChangesPanelOpen(false);
                       setRemotePanelOpen(true);
                     }}
                   >
-                    {mapData.remoteCompanies.reduce((sum, c) => sum + c.roleCount, 0)} more, unmapped
+                    {filteredRemoteCompanies.reduce((sum, c) => sum + c.roleCount, 0)} more, unmapped
+                  </button>
+                </>
+              )}
+              {(mapData.changes.added > 0 || mapData.changes.closed > 0) && (
+                <>
+                  {" · "}
+                  <button
+                    className="remote-panel-toggle"
+                    onClick={() => {
+                      setSelectedPin(null);
+                      setRemotePanelOpen(false);
+                      setChangesPanelOpen(true);
+                    }}
+                    title={`What changed in the last ${mapData.changes.windowDays} days`}
+                  >
+                    +{mapData.changes.added} new · −{mapData.changes.closed} closed
                   </button>
                 </>
               )}
@@ -122,43 +238,57 @@ export default function App() {
         {/* The role drawer floats over the map, which stays live underneath. */}
         {mapData && (
           <MapView
-            pins={mapData.pins}
+            pins={filteredPins}
             onSelectPin={(pin) => {
               setRemotePanelOpen(false);
+              setChangesPanelOpen(false);
               setSelectedPin(pin);
             }}
             selectedPinId={onRolePage ? rolePinId : (selectedPin?.id ?? null)}
             flyToRequest={flyToRequest}
+            zoomRequest={zoomRequest}
             // Side panels cover the right of the map (.company-panel is 360px,
             // the role drawer wider); on a narrow screen they cover most of
             // it anyway, so there's no visible area to center in.
             rightInset={rightInset}
+            bottomInset={voiceInset}
           />
         )}
         {mapData && (
           <CompanySearch
-            pins={mapData.pins}
+            pins={filteredPins}
             onSelectLocation={(pin) => {
               setRemotePanelOpen(false);
+              setChangesPanelOpen(false);
               setSelectedPin(pin);
               setFlyToRequest({ pin, nonce: Date.now() });
             }}
           />
         )}
-        <CompanyPanel pin={selectedPin} onClose={() => setSelectedPin(null)} />
+        {mapData && !onRolePage && (
+          <FilterBar filters={filters} onChange={setFilters} matched={matchedRoles} total={mapData.roleCount} />
+        )}
+        {/* Never both at once: the drawer wins while it's open, and the
+            panel comes back when it closes. */}
+        <CompanyPanel pin={onRolePage ? null : visiblePin} onClose={() => setSelectedPin(null)} />
         {mapData && (
           <RemotePanel
-            companies={mapData.remoteCompanies}
+            companies={filteredRemoteCompanies}
             open={remotePanelOpen}
             onClose={() => setRemotePanelOpen(false)}
           />
         )}
+        {mapData && (
+          <ChangesPanel data={mapData} open={changesPanelOpen} onClose={() => setChangesPanelOpen(false)} />
+        )}
+        <VoicePanel {...voice} onHeightChange={setVoiceInset} />
         {route.name === "role" && (
           <RolePage
             companySlug={route.companySlug}
             roleId={route.roleId}
             onLoaded={onRoleLoaded}
             onClose={closeRole}
+            intelRefresh={intelRefresh}
           />
         )}
       </main>

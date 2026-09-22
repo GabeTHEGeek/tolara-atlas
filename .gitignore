@@ -9,6 +9,8 @@ dist/
 # Personal editor settings for this checkout
 .claude/settings.local.json
 
-# Local secrets (e.g. ANTHROPIC_API_KEY)
+# Local secrets (e.g. provider API keys)
 .env
 .env.*
+# ...but the template carries no values and documents the variables.
+!.env.example

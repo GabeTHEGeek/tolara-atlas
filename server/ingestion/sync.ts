@@ -13,6 +13,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { parseSalary, type ParsedSalary } from "./salary.js";
 
 import { getDb } from "../db/client.js";
 import { parseCompaniesCsv, type CompanyRow } from "./csv.js";
@@ -56,19 +57,20 @@ function slugify(name: string): string {
 // other half of this: a changed hash also needs to clear geocoded_at so
 // geocode.ts actually re-resolves it rather than skipping an already-
 // geocoded role.
-function contentHash(job: RawJob): string {
-  return createHash("sha256").update(`${job.title}\n${job.description}\n${job.salary}\n${job.location}`).digest("hex");
+function salariesDiffer(
+  stored: { salary_min: number | null; salary_max: number | null; salary_currency: string | null; salary_period: string | null },
+  parsed: ParsedSalary,
+): boolean {
+  return (
+    stored.salary_min !== parsed.min ||
+    stored.salary_max !== parsed.max ||
+    stored.salary_currency !== parsed.currency ||
+    stored.salary_period !== parsed.period
+  );
 }
 
-function parseSalary(salary: string): { min: number | null; max: number | null; currency: string | null } {
-  // salary strings look like "USD 120,000 - 150,000" or "USD 150,000" or "".
-  if (!salary) return { min: null, max: null, currency: null };
-  const currencyMatch = salary.match(/^([A-Z]{3}|US\$|\$)/);
-  const currency = currencyMatch ? currencyMatch[0].replace("US$", "USD").replace("$", "USD") : null;
-  const numbers = salary.match(/\d[\d,]*/g)?.map((n) => Number(n.replace(/,/g, ""))) ?? [];
-  if (numbers.length >= 2) return { min: numbers[0], max: numbers[1], currency };
-  if (numbers.length === 1) return { min: numbers[0], max: numbers[0], currency };
-  return { min: null, max: null, currency };
+function contentHash(job: RawJob): string {
+  return createHash("sha256").update(`${job.title}\n${job.description}\n${job.salary}\n${job.location}`).digest("hex");
 }
 
 /**
@@ -149,6 +151,7 @@ async function main() {
   let rolesInserted = 0;
   let rolesUpdated = 0;
   let rolesClosed = 0;
+  let salariesRepaired = 0;
   let runError: string | null = null;
 
   try {
@@ -214,16 +217,17 @@ async function main() {
     `);
 
     const getRole = db.prepare(`
-      SELECT id, content_hash, status FROM roles WHERE company_id = ? AND source_job_id = ?
+      SELECT id, content_hash, status, salary_min, salary_max, salary_currency, salary_period
+      FROM roles WHERE company_id = ? AND source_job_id = ?
     `);
     const insertRole = db.prepare(`
       INSERT INTO roles (
         company_id, source_job_id, platform, title, description, location,
-        salary_min, salary_max, salary_currency, category, url, posted_at,
+        salary_min, salary_max, salary_currency, salary_period, category, url, posted_at,
         content_hash, status
       ) VALUES (
         @companyId, @sourceJobId, @platform, @title, @description, @location,
-        @salaryMin, @salaryMax, @salaryCurrency, @category, @url, @postedAt,
+        @salaryMin, @salaryMax, @salaryCurrency, @salaryPeriod, @category, @url, @postedAt,
         @contentHash, 'active'
       )
     `);
@@ -241,11 +245,25 @@ async function main() {
       UPDATE roles SET
         title = @title, description = @description, location = @location,
         salary_min = @salaryMin, salary_max = @salaryMax, salary_currency = @salaryCurrency,
-        category = @category, url = @url, posted_at = @postedAt,
+        salary_period = @salaryPeriod, category = @category, url = @url, posted_at = @postedAt,
         content_hash = @contentHash, last_seen_at = datetime('now'), status = 'active',
         geocoded_at = NULL, resolved_city = NULL, resolved_state = NULL, latitude = NULL, longitude = NULL
       WHERE id = @id
     `);
+    // Salary repair for a posting whose text is byte-identical to last time
+    // (so content_hash matches and updateRole never runs) but whose stored
+    // numbers were produced by an older, worse parser. Without this, every
+    // role mis-parsed before the K-suffix fix would keep its wrong band
+    // until the board happened to re-word the posting. Deliberately narrow:
+    // it touches only the salary columns, never content_hash or the
+    // geocoding fields.
+    const repairSalary = db.prepare(`
+      UPDATE roles SET
+        salary_min = @salaryMin, salary_max = @salaryMax,
+        salary_currency = @salaryCurrency, salary_period = @salaryPeriod
+      WHERE id = @id
+    `);
+
     const closeStaleRoles = db.prepare(`
       UPDATE roles SET status = 'closed'
       WHERE company_id = ? AND status = 'active' AND last_seen_at < datetime('now', '-1 day')
@@ -347,9 +365,18 @@ async function main() {
         const boardJobs = jobsByBoard.get(board) ?? [];
         for (const job of boardJobs) {
           const hash = contentHash(job);
-          const { min, max, currency } = parseSalary(job.salary);
+          const salary = parseSalary(job.salary);
+          const { min, max, currency } = salary;
           const existingRole = getRole.get(companyId, job.id) as
-            | { id: number; content_hash: string; status: string }
+            | {
+                id: number;
+                content_hash: string;
+                status: string;
+                salary_min: number | null;
+                salary_max: number | null;
+                salary_currency: string | null;
+                salary_period: string | null;
+              }
             | undefined;
 
           if (!existingRole) {
@@ -363,6 +390,7 @@ async function main() {
               salaryMin: min,
               salaryMax: max,
               salaryCurrency: currency,
+              salaryPeriod: salary.period,
               category: job.category,
               url: job.url,
               postedAt: job.published || null,
@@ -378,6 +406,7 @@ async function main() {
               salaryMin: min,
               salaryMax: max,
               salaryCurrency: currency,
+              salaryPeriod: salary.period,
               category: job.category,
               url: job.url,
               postedAt: job.published || null,
@@ -386,6 +415,16 @@ async function main() {
             rolesUpdated += 1;
           } else {
             touchRole.run(existingRole.id);
+            if (salariesDiffer(existingRole, salary)) {
+              repairSalary.run({
+                id: existingRole.id,
+                salaryMin: min,
+                salaryMax: max,
+                salaryCurrency: currency,
+                salaryPeriod: salary.period,
+              });
+              salariesRepaired += 1;
+            }
           }
         }
 
@@ -408,7 +447,8 @@ async function main() {
   }
 
   console.log(
-    `Sync run #${runId} complete: ${companiesSynced} companies, ${rolesInserted} inserted, ${rolesUpdated} updated, ${rolesClosed} closed`,
+    `Sync run #${runId} complete: ${companiesSynced} companies, ${rolesInserted} inserted, ${rolesUpdated} updated, ` +
+      `${rolesClosed} closed` + (salariesRepaired > 0 ? `, ${salariesRepaired} salary bands re-parsed` : ""),
   );
 }
 

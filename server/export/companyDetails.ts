@@ -15,8 +15,14 @@ import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import type Database from "better-sqlite3";
 import { readCachedIntelligence } from "../enrichment/intelligence.js";
-
-const NEW_ROLE_DAYS = 7;
+import {
+  NEW_ROLE_DAYS,
+  daysSince,
+  isNewRole,
+  seniorityOf,
+  sqliteToIso,
+  type Seniority,
+} from "./roleFacets.js";
 
 export interface CompanyDetailsOffice {
   city: string;
@@ -34,10 +40,12 @@ export interface CompanyDetailsRole {
   salaryMin: number | null;
   salaryMax: number | null;
   salaryCurrency: string | null;
+  salaryPeriod: string | null;
   url: string | null;
   postedAt: string | null;
   firstSeenAt: string; // ISO; when our sync first saw it
   isNew: boolean;
+  seniority: Seniority;
   offices: CompanyDetailsOffice[];
   focus: { bullets: string[]; method: "posting" } | null;
 }
@@ -56,31 +64,10 @@ interface RoleRow {
   salary_min: number | null;
   salary_max: number | null;
   salary_currency: string | null;
+  salary_period: string | null;
   url: string | null;
   posted_at: string | null;
   first_seen_at: string;
-}
-
-function sqliteToIso(ts: string): string {
-  return new Date(`${ts.replace(" ", "T")}Z`).toISOString();
-}
-
-function daysSince(iso: string, now: number): number {
-  return Math.floor((now - Date.parse(iso)) / 86_400_000);
-}
-
-/**
- * A role is "new" if its own posting date is within the last week. Without
- * a posting date, our first-seen date stands in -- but only for companies
- * we'd already been tracking for over a week, or every role at a company
- * added yesterday would be flagged new.
- */
-function isNewRole(role: RoleRow, companyTrackedSince: string, now: number): boolean {
-  if (role.posted_at && !Number.isNaN(Date.parse(role.posted_at))) {
-    return daysSince(role.posted_at, now) <= NEW_ROLE_DAYS;
-  }
-  const firstSeen = sqliteToIso(role.first_seen_at);
-  return daysSince(companyTrackedSince, now) > NEW_ROLE_DAYS && daysSince(firstSeen, now) <= NEW_ROLE_DAYS;
 }
 
 function companySignals(roles: CompanyDetailsRole[], trackedSince: string, now: number): HiringSignal[] {
@@ -117,7 +104,7 @@ export function writeCompanyDetails(db: Database.Database, outputDir: string, vi
     .all() as Array<{ id: number; name: string; slug: string; created_at: string }>;
 
   const rolesFor = db.prepare(
-    `SELECT id, title, category, location, salary_min, salary_max, salary_currency, url, posted_at, first_seen_at
+    `SELECT id, title, category, location, salary_min, salary_max, salary_currency, salary_period, url, posted_at, first_seen_at
      FROM roles WHERE company_id = ? AND status = 'active'
      ORDER BY COALESCE(posted_at, first_seen_at) DESC`,
   );
@@ -149,10 +136,12 @@ export function writeCompanyDetails(db: Database.Database, outputDir: string, vi
         salaryMin: r.salary_min,
         salaryMax: r.salary_max,
         salaryCurrency: r.salary_currency,
+        salaryPeriod: r.salary_period,
         url: r.url,
         postedAt: r.posted_at,
         firstSeenAt: sqliteToIso(r.first_seen_at),
         isNew: isNewRole(r, trackedSince, now),
+        seniority: seniorityOf(r.title),
         offices: (
           officesFor.all(r.id) as Array<{
             resolved_city: string;
