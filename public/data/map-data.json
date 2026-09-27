@@ -1,14 +1,364 @@
 {
-  "generatedAt": "2026-09-26T13:42:13.060Z",
-  "companyCount": 587,
-  "pinCount": 642,
-  "roleCount": 1816,
+  "generatedAt": "2026-09-27T14:46:27.816Z",
+  "companyCount": 585,
+  "pinCount": 638,
+  "roleCount": 1787,
   "changes": {
     "windowDays": 7,
-    "since": "2026-09-19T13:42:13.060Z",
-    "added": 276,
-    "closed": 255,
+    "since": "2026-09-20T14:46:27.816Z",
+    "added": 220,
+    "closed": 285,
     "closedRoles": [
+      {
+        "id": 2917,
+        "title": "Director, Product Management",
+        "companyName": "Meta",
+        "companySlug": "meta",
+        "city": null,
+        "state": null,
+        "url": "https://www.metacareers.com/jobs/1083544224293566/",
+        "closedAt": "2026-09-26T13:40:02.000Z"
+      },
+      {
+        "id": 1995,
+        "title": "Lab Product Owner - Relationship Management",
+        "companyName": "Lloyds Banking Group",
+        "companySlug": "lloyds-banking-group",
+        "city": null,
+        "state": null,
+        "url": "https://lbg.wd3.myworkdayjobs.com/broadbean_external/job/London/Lab-Product-Owner---Relationship-Management_163378-2",
+        "closedAt": "2026-09-26T13:38:45.000Z"
+      },
+      {
+        "id": 2003,
+        "title": "AI Product Manager",
+        "companyName": "Nine Entertainment",
+        "companySlug": "nine-entertainment",
+        "city": null,
+        "state": null,
+        "url": "https://nine.wd105.myworkdayjobs.com/nine_external_career_site/job/North-Sydney-New-South-Wales/AI-Product-Manager_JR001181",
+        "closedAt": "2026-09-26T13:38:45.000Z"
+      },
+      {
+        "id": 2583,
+        "title": "Lab Product Owner - Relationship Management",
+        "companyName": "Lloyds Banking Group",
+        "companySlug": "lloyds-banking-group",
+        "city": null,
+        "state": null,
+        "url": "https://lbg.wd3.myworkdayjobs.com/lbg_careers/job/London/Lab-Product-Owner---Relationship-Management_163378-1",
+        "closedAt": "2026-09-26T13:38:45.000Z"
+      },
+      {
+        "id": 2318,
+        "title": "Product Manager",
+        "companyName": "Navapbc",
+        "companySlug": "navapbc",
+        "city": null,
+        "state": null,
+        "url": "https://job-boards.greenhouse.io/navapbc/jobs/4361894009",
+        "closedAt": "2026-09-26T13:38:09.000Z"
+      },
+      {
+        "id": 2523,
+        "title": "Product Manager, Apple Learning Platform",
+        "companyName": "Apple",
+        "companySlug": "apple",
+        "city": "Cupertino",
+        "state": "CA",
+        "url": "https://jobs.apple.com/en-us/details/200680966-0836",
+        "closedAt": "2026-09-25T14:28:30.000Z"
+      },
+      {
+        "id": 2535,
+        "title": "Product Manager, Apple Learning Platform",
+        "companyName": "Apple",
+        "companySlug": "apple",
+        "city": "Austin",
+        "state": "TX",
+        "url": "https://jobs.apple.com/en-us/details/200680966-0157",
+        "closedAt": "2026-09-25T14:28:30.000Z"
+      },
+      {
+        "id": 2547,
+        "title": "Senior Engineering Product Manager, Enterprise Technology Services",
+        "companyName": "Apple",
+        "companySlug": "apple",
+        "city": "Sunnyvale",
+        "state": "CA",
+        "url": "https://jobs.apple.com/en-us/details/200653536-3956",
+        "closedAt": "2026-09-25T14:28:30.000Z"
+      },
+      {
+        "id": 2556,
+        "title": "Product Manager, Manufacturing Data & Analytics, Enterprise Technology Services",
+        "companyName": "Apple",
+        "companySlug": "apple",
+        "city": "Austin",
+        "state": "TX",
+        "url": "https://jobs.apple.com/en-us/details/200659503-0157",
+        "closedAt": "2026-09-25T14:28:30.000Z"
+      },
+      {
+        "id": 2399,
+        "title": "Product Manager Project Intern (TikTok Ads Agent-Scaled Growth) - 2026 Start (BS/MS)",
+        "companyName": "TikTok",
+        "companySlug": "tiktok",
+        "city": "San Jose",
+        "state": "CA",
+        "url": "https://lifeattiktok.com/search/7657728959042046213",
+        "closedAt": "2026-09-25T14:28:00.000Z"
+      },
+      {
+        "id": 1989,
+        "title": "Head of Product- CareScout Insurance",
+        "companyName": "Genworth",
+        "companySlug": "genworth",
+        "city": null,
+        "state": null,
+        "url": "https://gnw.wd1.myworkdayjobs.com/carescout/job/New-York-New-York/Head-of-Product--CareScout-Insurance_REQ-260247-1",
+        "closedAt": "2026-09-25T14:27:05.000Z"
+      },
+      {
+        "id": 2773,
+        "title": "Senior Manager - Product Management - Shadow Validation & Tooling",
+        "companyName": "Capital One",
+        "companySlug": "capital-one",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Manager---Product-Management_R249181-1",
+        "closedAt": "2026-09-25T14:27:05.000Z"
+      },
+      {
+        "id": 2774,
+        "title": "Senior Product Manager - Card Partnerships",
+        "companyName": "Capital One",
+        "companySlug": "capital-one",
+        "city": "Chicago",
+        "state": "IL",
+        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Product-Manager---Card-Partnerships_R249751-1",
+        "closedAt": "2026-09-25T14:27:05.000Z"
+      },
+      {
+        "id": 2775,
+        "title": "Manager, Product Management,Card Intelligence Acquisitions Models",
+        "companyName": "Capital One",
+        "companySlug": "capital-one",
+        "city": "McLean",
+        "state": "VA",
+        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management-Card-Intelligence-Acquisitions-Models_R1001110-1",
+        "closedAt": "2026-09-25T14:27:05.000Z"
+      },
+      {
+        "id": 2776,
+        "title": "Manager, Product Management, Rules Lab",
+        "companyName": "Capital One",
+        "companySlug": "capital-one",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management--Rules-Lab_R1001101-1",
+        "closedAt": "2026-09-25T14:27:05.000Z"
+      },
+      {
+        "id": 2777,
+        "title": "Manager, Product Management",
+        "companyName": "Capital One",
+        "companySlug": "capital-one",
+        "city": null,
+        "state": null,
+        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Mexico-City-Mexico/Manager--Product-Management_R1000685",
+        "closedAt": "2026-09-25T14:27:05.000Z"
+      },
+      {
+        "id": 1943,
+        "title": "VP of Product",
+        "companyName": "Helloclue",
+        "companySlug": "helloclue",
+        "city": null,
+        "state": null,
+        "url": "https://helloclue.bamboohr.com/careers/41",
+        "closedAt": "2026-09-25T14:26:43.000Z"
+      },
+      {
+        "id": 1888,
+        "title": "Product Manager II",
+        "companyName": "Recast Software",
+        "companySlug": "recast-software",
+        "city": null,
+        "state": null,
+        "url": "https://jobs.lever.co/recast-software/240cb893-7a42-44b7-a55b-537536a0e2da",
+        "closedAt": "2026-09-25T14:26:42.000Z"
+      },
+      {
+        "id": 1894,
+        "title": "Associate Product Manager, Merchandising and Management",
+        "companyName": "Waterworks",
+        "companySlug": "waterworks",
+        "city": "Danbury",
+        "state": "CT",
+        "url": "https://jobs.lever.co/waterworks/9434d980-dbe3-4d53-bcca-829dde375576",
+        "closedAt": "2026-09-25T14:26:42.000Z"
+      },
+      {
+        "id": 494,
+        "title": "Product Manager - Traffic & Networking",
+        "companyName": "Snowflake",
+        "companySlug": "snowflake",
+        "city": "Bellevue",
+        "state": "WA",
+        "url": "https://jobs.ashbyhq.com/snowflake/e39a441a-07e4-4ea3-a687-b483007deb94",
+        "closedAt": "2026-09-25T14:26:35.000Z"
+      },
+      {
+        "id": 1351,
+        "title": "Senior Product Manager - Document Verification",
+        "companyName": "Socure",
+        "companySlug": "socure",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://jobs.ashbyhq.com/socure/aaad1c05-d298-40b4-a628-96bd1105fc9d",
+        "closedAt": "2026-09-25T14:26:35.000Z"
+      },
+      {
+        "id": 1857,
+        "title": "Sr. Director of Product Management, Core Platform",
+        "companyName": "Sandboxaq",
+        "companySlug": "sandboxaq",
+        "city": null,
+        "state": null,
+        "url": "https://jobs.ashbyhq.com/sandboxaq/f6ca21d4-2dde-49c3-a6ac-f24906bb0e47",
+        "closedAt": "2026-09-25T14:26:35.000Z"
+      },
+      {
+        "id": 2221,
+        "title": "Product Manager, Payments",
+        "companyName": "Kalshi",
+        "companySlug": "kalshi",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://jobs.ashbyhq.com/kalshi/2f326e58-b739-477f-b959-206db1ea7fa9",
+        "closedAt": "2026-09-25T14:26:35.000Z"
+      },
+      {
+        "id": 2248,
+        "title": "Associate Technical Product Manager",
+        "companyName": "Turquoise Health",
+        "companySlug": "turquoise-health",
+        "city": null,
+        "state": null,
+        "url": "https://jobs.ashbyhq.com/turquoise-health/23b08f33-2ac0-4d41-be6b-5b36972a9837",
+        "closedAt": "2026-09-25T14:26:35.000Z"
+      },
+      {
+        "id": 134,
+        "title": "Principal Product Builder, Deliverability & Connectivity",
+        "companyName": "Apolloio",
+        "companySlug": "apolloio",
+        "city": null,
+        "state": null,
+        "url": "https://job-boards.greenhouse.io/apolloio/jobs/6002001004",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 206,
+        "title": "Sr. Product Manager, Core Saving Experience",
+        "companyName": "Pinterest",
+        "companySlug": "pinterest",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://www.pinterestcareers.com/jobs/?gh_jid=8046820",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 211,
+        "title": "Staff Product Manager, Billing",
+        "companyName": "Pinterest",
+        "companySlug": "pinterest",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7955593",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 212,
+        "title": "Staff Product Manager, Connections",
+        "companyName": "Pinterest",
+        "companySlug": "pinterest",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7525112",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 1028,
+        "title": "Product Manager, Search",
+        "companyName": "Airbnb",
+        "companySlug": "airbnb",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://careers.airbnb.com/positions/8104444?gh_jid=8104444",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 1063,
+        "title": "Staff Product Manager-  Integrations & Advisor Platform",
+        "companyName": "Robinhood",
+        "companySlug": "robinhood",
+        "city": "Clearwater",
+        "state": "FL",
+        "url": "https://boards.greenhouse.io/robinhood/jobs/8131181?t=gh_src=&gh_jid=8131181",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 1134,
+        "title": "Senior Product Manager, Enterprise Data Governance",
+        "companyName": "Asana",
+        "companySlug": "asana",
+        "city": null,
+        "state": null,
+        "url": "https://www.asana.com/jobs/apply/8072508?gh_jid=8072508",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 1139,
+        "title": "Senior Product Manager, Symmetry New Tax Products",
+        "companyName": "Gusto",
+        "companySlug": "gusto",
+        "city": "Denver",
+        "state": "CO",
+        "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 1727,
+        "title": "Senior Product Manager",
+        "companyName": "Baton",
+        "companySlug": "baton",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://job-boards.greenhouse.io/baton/jobs/5210863007",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 2176,
+        "title": "Senior Product Manager",
+        "companyName": "Everlaw",
+        "companySlug": "everlaw",
+        "city": "Oakland",
+        "state": "CA",
+        "url": "https://job-boards.greenhouse.io/everlaw/jobs/4701031006",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
+      {
+        "id": 2182,
+        "title": "Product Manager - Orders",
+        "companyName": "Otter",
+        "companySlug": "otter",
+        "city": "Seattle",
+        "state": "WA",
+        "url": "https://job-boards.greenhouse.io/otter/jobs/8543629002",
+        "closedAt": "2026-09-25T14:26:30.000Z"
+      },
       {
         "id": 2490,
         "title": "Senior Product Manager (Multiple Positions)",
@@ -1520,16 +1870,6 @@
         "closedAt": "2026-09-22T16:29:30.000Z"
       },
       {
-        "id": 1736,
-        "title": "Growth Product Manager",
-        "companyName": "Distrokid",
-        "companySlug": "distrokid",
-        "city": null,
-        "state": null,
-        "url": "https://job-boards.greenhouse.io/distrokid/jobs/4323002009",
-        "closedAt": "2026-09-22T16:29:30.000Z"
-      },
-      {
         "id": 1795,
         "title": "AI Product Manager",
         "companyName": "Workwize",
@@ -1668,350 +2008,10 @@
         "state": "VA",
         "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management---Data_R1000452-1",
         "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2101,
-        "title": "Senior Manager, Product Management - Enterprise Services Risk",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "McLean",
-        "state": "VA",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Management---Enterprise-Services-Risk_R1000450-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2102,
-        "title": "Senior Associate, Product Management - Partnerships Customer Experience",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "Chicago",
-        "state": "IL",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management---Partnerships-Customer-Experience_R249003-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2103,
-        "title": "Senior Associate, Product Management - Card Offer Experiences",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "Chicago",
-        "state": "IL",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management---Card-Offer-Experiences_R249849-2",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2104,
-        "title": "Manager, Product Management - Office of Corporate Integrity",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "Richmond",
-        "state": "VA",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Management---Office-of-Corporate-Integrity_R1000434-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2105,
-        "title": "Senior Associate, Product Manager - Conversions",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "Chicago",
-        "state": "IL",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management---Partnerships-Conversions_R248361-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2106,
-        "title": "Senior Director, Product Management- Global Payment Network",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "McLean",
-        "state": "VA",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Director--Product-Management--Global-Payment-Network_R1000410-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2107,
-        "title": "Manager, Product Management - CreditWise",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "McLean",
-        "state": "VA",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management---CreditWise_R1000243",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2108,
-        "title": "Senior Associate, Product Manager - CreditWise",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "McLean",
-        "state": "VA",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Associate--Product-Manager---CreditWise_R1000403-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2109,
-        "title": "Senior Associate, Product Management | Capital One Travel - Agent Tooling",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "New York",
-        "state": "NY",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate--Product-Management---Capital-One-Travel---Agent-Tooling_R1000265",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2110,
-        "title": "Manager, Product Management",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": null,
-        "state": null,
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Mexico-City-Mexico/Manager--Product-Management_R210103",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2112,
-        "title": "Senior Manager, Product Manager, Customer Data",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "McLean",
-        "state": "VA",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Manager--Customer-Data_R1000372-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2113,
-        "title": "Manager, Product Management, Credit Card Offers",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "New York",
-        "state": "NY",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management--Credit-Card-Offers_R1000146-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2114,
-        "title": "Senior Associate, Product Management, Card Acquisitions Decisioning",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "Chicago",
-        "state": "IL",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Associate--Product-Management--Card-Acquisitions-Decisioning_R999726-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2115,
-        "title": "Director of Product Management, Capital One Travel",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "McLean",
-        "state": "VA",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Director-of-Product-Management--Capital-One-Travel_R1000366-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2116,
-        "title": "Manager, Product Management- Bedrock Payments Team",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "New York",
-        "state": "NY",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management--Bedrock-Payments-Team_R999632-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2117,
-        "title": "Senior Digital Product Manager",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": null,
-        "state": null,
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Nottingham--Eng/Senior-Digital-Product-Manager_R231301-2",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2584,
-        "title": "Product Owner",
-        "companyName": "Lloyds Banking Group",
-        "companySlug": "lloyds-banking-group",
-        "city": null,
-        "state": null,
-        "url": "https://lbg.wd3.myworkdayjobs.com/lbg_careers/job/Bristol/Product-Owner_161200-2",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2585,
-        "title": "Senior Product Manager (Margin)",
-        "companyName": "Apex Fintech Solutions",
-        "companySlug": "apex-fintech-solutions",
-        "city": "Austin",
-        "state": "TX",
-        "url": "https://peak6group.wd1.myworkdayjobs.com/apexfintechsolutions/job/NYC-441/Senior-Product-Manager--Margin-_JR103974",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 2634,
-        "title": "Product Management MBA Intern, Data Center GPU - Summer 2027",
-        "companyName": "NVIDIA",
-        "companySlug": "nvidia",
-        "city": "Santa Clara",
-        "state": "CA",
-        "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1",
-        "closedAt": "2026-09-21T15:42:07.000Z"
-      },
-      {
-        "id": 1931,
-        "title": "Head of Product",
-        "companyName": "Anixe",
-        "companySlug": "anixe",
-        "city": null,
-        "state": null,
-        "url": "https://anixe.bamboohr.com/careers/260",
-        "closedAt": "2026-09-21T15:41:46.000Z"
-      },
-      {
-        "id": 1947,
-        "title": "Product Manager",
-        "companyName": "Manageamerica",
-        "companySlug": "manageamerica",
-        "city": null,
-        "state": null,
-        "url": "https://manageamerica.bamboohr.com/careers/67",
-        "closedAt": "2026-09-21T15:41:46.000Z"
-      },
-      {
-        "id": 497,
-        "title": "Principal Product Manager - Snowpark",
-        "companyName": "Snowflake",
-        "companySlug": "snowflake",
-        "city": "Bellevue",
-        "state": "WA",
-        "url": "https://jobs.ashbyhq.com/snowflake/7d097f9f-e107-4435-b4f0-c1235e2c3a65",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 498,
-        "title": "Principal Product Manager - Zero-Copy Integrations",
-        "companyName": "Snowflake",
-        "companySlug": "snowflake",
-        "city": "Bellevue",
-        "state": "WA",
-        "url": "https://jobs.ashbyhq.com/snowflake/0131b6dc-50b8-48bc-856a-b797554b484d",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 504,
-        "title": "Enterprise Product Manager",
-        "companyName": "Snowflake",
-        "companySlug": "snowflake",
-        "city": null,
-        "state": null,
-        "url": "https://jobs.ashbyhq.com/snowflake/15d2f360-2670-4ea2-bfc3-b26407bd6eea",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 579,
-        "title": "Senior Product Manager (AI Agents)",
-        "companyName": "Traba",
-        "companySlug": "traba",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/traba/fa871ae4-3144-425a-9701-c45585e73cb0",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 580,
-        "title": "Staff Product Manager (AI Agents)",
-        "companyName": "Traba",
-        "companySlug": "traba",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/traba/0bd4f37d-52e3-4614-b5ba-0b9bed8ee155",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 581,
-        "title": "Product Manager (Marketplace)",
-        "companyName": "Traba",
-        "companySlug": "traba",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/traba/c7c603d8-3029-4660-9a18-2e8a37b8ff3c",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 582,
-        "title": "Product Manager (AI Agents)",
-        "companyName": "Traba",
-        "companySlug": "traba",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/traba/d4dba63f-7e72-46ed-9dff-2f076ab4b7bb",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 583,
-        "title": "Staff Product Manager (Marketplace)",
-        "companyName": "Traba",
-        "companySlug": "traba",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/traba/91196525-78c7-4f71-a8d4-855b003565b1",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 584,
-        "title": "Senior Product Manager (Marketplace)",
-        "companyName": "Traba",
-        "companySlug": "traba",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/traba/4e4b0206-b730-492a-ab86-8c92122fc509",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 614,
-        "title": "Product Manager",
-        "companyName": "Bastion",
-        "companySlug": "bastion",
-        "city": null,
-        "state": null,
-        "url": "https://jobs.ashbyhq.com/bastion/04a403af-fcae-4e10-9960-b9970243a4aa",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 636,
-        "title": "Growth Product Manager, Consumer Subscription",
-        "companyName": "Suno",
-        "companySlug": "suno",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/suno/dbc8011c-67d0-4ca5-9204-ec6a6b465462",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 637,
-        "title": "Product Manager, Teams & Business Products",
-        "companyName": "Suno",
-        "companySlug": "suno",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/suno/b8230947-2109-4672-821f-368539c678a7",
-        "closedAt": "2026-09-21T15:41:26.000Z"
-      },
-      {
-        "id": 1348,
-        "title": "Staff Product Manager, Billing Infrastructure",
-        "companyName": "Headway",
-        "companySlug": "headway",
-        "city": null,
-        "state": null,
-        "url": "https://jobs.ashbyhq.com/headway/aa44e046-04fe-473b-a336-6ff83a1dd091",
-        "closedAt": "2026-09-21T15:41:26.000Z"
       }
     ],
     "lastSync": {
-      "finishedAt": "2026-09-26T13:40:29.000Z",
+      "finishedAt": "2026-09-27T14:37:16.000Z",
       "status": "success"
     }
   },
@@ -2167,7 +2167,7 @@
           "url": "https://polaris.wd5.myworkdayjobs.com/polarisjobs/job/Medina-MN-USA/AI-Product-Manager--Knowledge-and-Retrieval-Systems-_R30149",
           "postedAt": "Posted 30+ Days Ago",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         },
@@ -2182,7 +2182,7 @@
           "url": "https://polaris.wd5.myworkdayjobs.com/polarisjobs/job/Wyoming-MN-USA/Digital-Product-Manager--Engineering-Platforms-_R29299",
           "postedAt": "Posted 30+ Days Ago",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -2197,7 +2197,7 @@
           "url": "https://polaris.wd5.myworkdayjobs.com/polarisjobs/job/Wyoming-MN-USA/Sr-Director--Product-Planning_R30949",
           "postedAt": "Posted 30+ Days Ago",
           "firstSeenAt": "2026-09-19T10:56:57.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "director",
           "isRemote": true
         }
@@ -2388,7 +2388,7 @@
       "state": "NY",
       "latitude": 40.72306938549252,
       "longitude": -74.01724546786583,
-      "roleCount": 7,
+      "roleCount": 5,
       "roles": [
         {
           "id": 2070,
@@ -2403,36 +2403,6 @@
           "firstSeenAt": "2026-09-18T08:00:14.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 2773,
-          "title": "Senior Manager - Product Management - Shadow Validation & Tooling",
-          "location": "New York, NY",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Manager---Product-Management_R249181-1",
-          "postedAt": "Posted Yesterday",
-          "firstSeenAt": "2026-09-22T16:34:51.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 2776,
-          "title": "Manager, Product Management, Rules Lab",
-          "location": "New York, NY",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Management--Rules-Lab_R1001101-1",
-          "postedAt": "Posted Yesterday",
-          "firstSeenAt": "2026-09-22T16:34:51.000Z",
-          "isNew": true,
-          "seniority": "mid",
           "isRemote": false
         },
         {
@@ -2534,7 +2504,7 @@
           "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Product-Manager---Open-Models_JR2026207",
           "postedAt": "Posted Yesterday",
           "firstSeenAt": "2026-09-22T16:34:51.000Z",
-          "isNew": false,
+          "isNew": true,
           "seniority": "mid",
           "isRemote": false
         },
@@ -2549,7 +2519,7 @@
           "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Technical-Product-Manager--Healthcare-Physical-AI-Simulation_JR2025876",
           "postedAt": "Posted Yesterday",
           "firstSeenAt": "2026-09-23T14:06:17.000Z",
-          "isNew": false,
+          "isNew": true,
           "seniority": "mid",
           "isRemote": false
         },
@@ -2564,7 +2534,7 @@
           "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Senior-Product-Manager---Embedded-AI-and-Next-Gen-Computing_JR2026204-1",
           "postedAt": "Posted Today",
           "firstSeenAt": "2026-09-23T14:06:17.000Z",
-          "isNew": false,
+          "isNew": true,
           "seniority": "senior",
           "isRemote": false
         },
@@ -3014,7 +2984,7 @@
       "state": "VA",
       "latitude": 38.9366852,
       "longitude": -77.185843,
-      "roleCount": 22,
+      "roleCount": 21,
       "roles": [
         {
           "id": 2770,
@@ -3025,21 +2995,6 @@
           "salaryCurrency": null,
           "salaryPeriod": "year",
           "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Digital-Product-Management---Commercial-Sales---Servicing_R999657-1",
-          "postedAt": "Posted Yesterday",
-          "firstSeenAt": "2026-09-22T16:34:51.000Z",
-          "isNew": true,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2775,
-          "title": "Manager, Product Management,Card Intelligence Acquisitions Models",
-          "location": "McLean, VA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Product-Management-Card-Intelligence-Acquisitions-Models_R1001110-1",
           "postedAt": "Posted Yesterday",
           "firstSeenAt": "2026-09-22T16:34:51.000Z",
           "isNew": true,
@@ -3349,6 +3304,49 @@
       ]
     },
     {
+      "id": "1094-richmond-va",
+      "companyId": 1094,
+      "companyName": "Capital One",
+      "companySlug": "capital-one",
+      "city": "Richmond",
+      "state": "VA",
+      "latitude": 37.54020821938638,
+      "longitude": -77.44194995464683,
+      "roleCount": 2,
+      "roles": [
+        {
+          "id": 2822,
+          "title": "Director, Product Management (Individual Contributor) - Anti Money Laundering",
+          "location": "Richmond, VA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Director--Product-Management---Anti-Money-Laundering_R249752-1",
+          "postedAt": "Posted Yesterday",
+          "firstSeenAt": "2026-09-23T14:06:17.000Z",
+          "isNew": true,
+          "seniority": "director",
+          "isRemote": false
+        },
+        {
+          "id": 2093,
+          "title": "Manager, Product Manager-Small Business Bank",
+          "location": "Richmond, VA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Manager-Small-Business-Bank_R1000555-1",
+          "postedAt": "Posted 4 Days Ago",
+          "firstSeenAt": "2026-09-18T08:00:14.000Z",
+          "isNew": false,
+          "seniority": "mid",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "1094-chicago-il",
       "companyId": 1094,
       "companyName": "Capital One",
@@ -3357,23 +3355,8 @@
       "state": "IL",
       "latitude": 41.877062768165096,
       "longitude": -87.63476496834406,
-      "roleCount": 4,
+      "roleCount": 3,
       "roles": [
-        {
-          "id": 2774,
-          "title": "Senior Product Manager - Card Partnerships",
-          "location": "Chicago, IL",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Chicago-IL/Senior-Product-Manager---Card-Partnerships_R249751-1",
-          "postedAt": "Posted Yesterday",
-          "firstSeenAt": "2026-09-22T16:34:51.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        },
         {
           "id": 2823,
           "title": "Manager, Product Management - Card Site Team",
@@ -3416,49 +3399,6 @@
           "postedAt": "Posted Today",
           "firstSeenAt": "2026-09-25T14:27:05.000Z",
           "isNew": true,
-          "seniority": "mid",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1094-richmond-va",
-      "companyId": 1094,
-      "companyName": "Capital One",
-      "companySlug": "capital-one",
-      "city": "Richmond",
-      "state": "VA",
-      "latitude": 37.54020821938638,
-      "longitude": -77.44194995464683,
-      "roleCount": 2,
-      "roles": [
-        {
-          "id": 2822,
-          "title": "Director, Product Management (Individual Contributor) - Anti Money Laundering",
-          "location": "Richmond, VA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Director--Product-Management---Anti-Money-Laundering_R249752-1",
-          "postedAt": "Posted Yesterday",
-          "firstSeenAt": "2026-09-23T14:06:17.000Z",
-          "isNew": true,
-          "seniority": "director",
-          "isRemote": false
-        },
-        {
-          "id": 2093,
-          "title": "Manager, Product Manager-Small Business Bank",
-          "location": "Richmond, VA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Manager-Small-Business-Bank_R1000555-1",
-          "postedAt": "Posted 4 Days Ago",
-          "firstSeenAt": "2026-09-18T08:00:14.000Z",
-          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         }
@@ -3516,7 +3456,7 @@
           "url": "https://resmed.wd3.myworkdayjobs.com/resmed_external_careers/job/San-Diego-CA-United-States/Senior-Product-Manager_JR_053344",
           "postedAt": "Posted 22 Days Ago",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -3559,7 +3499,7 @@
           "url": "https://turo.wd12.myworkdayjobs.com/turo_careers/job/San-Francisco/Lead-Product-Manager--Host-Pricing_R-102720",
           "postedAt": "Posted Today",
           "firstSeenAt": "2026-09-19T06:26:52.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -3898,7 +3838,7 @@
           "url": "https://texascapitalbank.wd12.myworkdayjobs.com/careers/job/Richardson-TX/Consumer-Banking-Product-Owner_JR105644",
           "postedAt": "Posted 30+ Days Ago",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         },
@@ -3913,7 +3853,7 @@
           "url": "https://texascapitalbank.wd12.myworkdayjobs.com/careers/job/Richardson-TX/Product-Owner--SFMC---Data-Cloud_JR105676-1",
           "postedAt": "Posted 30+ Days Ago",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         }
@@ -3928,7 +3868,7 @@
       "state": "VA",
       "latitude": 37.52679929055237,
       "longitude": -77.42939420702291,
-      "roleCount": 3,
+      "roleCount": 2,
       "roles": [
         {
           "id": 1988,
@@ -3958,21 +3898,6 @@
           "firstSeenAt": "2026-09-18T07:17:17.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": true
-        },
-        {
-          "id": 1989,
-          "title": "Head of Product- CareScout Insurance",
-          "location": "New York New, York",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://gnw.wd1.myworkdayjobs.com/carescout/job/New-York-New-York/Head-of-Product--CareScout-Insurance_REQ-260247-1",
-          "postedAt": "Posted 18 Days Ago",
-          "firstSeenAt": "2026-09-18T07:17:17.000Z",
-          "isNew": false,
-          "seniority": "director",
           "isRemote": true
         }
       ]
@@ -4072,7 +3997,7 @@
           "url": "https://texascapitalbank.wd12.myworkdayjobs.com/careers/job/Dallas-TX/Head-of-Product---Consumer---Private-Bank_JR105555",
           "postedAt": "Posted 30+ Days Ago",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "director",
           "isRemote": false
         }
@@ -4171,7 +4096,7 @@
           "url": "https://polaris.wd5.myworkdayjobs.com/polarisjobs/job/Plymouth-MN-USA/Product-Leader_R30225-1",
           "postedAt": "Posted 24 Days Ago",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         }
@@ -4359,6 +4284,139 @@
           "isNew": false,
           "seniority": "director",
           "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "240-new-york-ny",
+      "companyId": 240,
+      "companyName": "Coinbase",
+      "companySlug": "coinbase",
+      "city": "New York",
+      "state": "NY",
+      "latitude": 40.705959594379095,
+      "longitude": -74.01559543352151,
+      "roleCount": 8,
+      "roles": [
+        {
+          "id": 2926,
+          "title": "Group Product Manager, Money Movement",
+          "location": "Remote - USA",
+          "salaryMin": 243865,
+          "salaryMax": 243865,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://www.coinbase.com/careers/positions/8234060?gh_jid=8234060",
+          "postedAt": "2026-09-26T13:37:56-04:00",
+          "firstSeenAt": "2026-09-26T13:38:09.000Z",
+          "isNew": true,
+          "seniority": "principal",
+          "isRemote": true
+        },
+        {
+          "id": 950,
+          "title": "Group Product Manager, Developer Infrastructure",
+          "location": "Remote - USA",
+          "salaryMin": 243865,
+          "salaryMax": 243865,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://www.coinbase.com/careers/positions/8017607?gh_jid=8017607",
+          "postedAt": "2026-09-18T03:04:01-04:00",
+          "firstSeenAt": "2026-09-17T18:22:01.000Z",
+          "isNew": false,
+          "seniority": "principal",
+          "isRemote": true
+        },
+        {
+          "id": 949,
+          "title": "Group Product Manager, Core Infrastructure & Reliability",
+          "location": "Remote - USA",
+          "salaryMin": 243865,
+          "salaryMax": 243865,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://www.coinbase.com/careers/positions/7997785?gh_jid=7997785",
+          "postedAt": "2026-09-18T03:03:35-04:00",
+          "firstSeenAt": "2026-09-17T18:22:01.000Z",
+          "isNew": false,
+          "seniority": "principal",
+          "isRemote": true
+        },
+        {
+          "id": 953,
+          "title": "Product Manager II, Growth - Notifications ",
+          "location": "Remote - USA",
+          "salaryMin": 180370,
+          "salaryMax": 180370,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://www.coinbase.com/careers/positions/8204571?gh_jid=8204571",
+          "postedAt": "2026-09-15T13:09:55-04:00",
+          "firstSeenAt": "2026-09-17T18:22:01.000Z",
+          "isNew": false,
+          "seniority": "mid",
+          "isRemote": true
+        },
+        {
+          "id": 947,
+          "title": "Group Product Manager, Compliance Agent Experience",
+          "location": "Remote - USA",
+          "salaryMin": 243865,
+          "salaryMax": 243865,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://www.coinbase.com/careers/positions/8060662?gh_jid=8060662",
+          "postedAt": "2026-09-14T16:39:39-04:00",
+          "firstSeenAt": "2026-09-17T18:22:01.000Z",
+          "isNew": false,
+          "seniority": "principal",
+          "isRemote": true
+        },
+        {
+          "id": 952,
+          "title": "Product Manager (HR Technology) Intern",
+          "location": "Hybrid - New York, NY",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.coinbase.com/careers/positions/8175504?gh_jid=8175504",
+          "postedAt": "2026-09-08T18:19:39-04:00",
+          "firstSeenAt": "2026-09-17T18:22:01.000Z",
+          "isNew": false,
+          "seniority": "associate",
+          "isRemote": false
+        },
+        {
+          "id": 954,
+          "title": "Product Manager II, Workspace and Multi-User",
+          "location": "Remote - USA",
+          "salaryMin": 180370,
+          "salaryMax": 180370,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://www.coinbase.com/careers/positions/8148171?gh_jid=8148171",
+          "postedAt": "2026-08-21T18:04:19-04:00",
+          "firstSeenAt": "2026-09-17T18:22:01.000Z",
+          "isNew": false,
+          "seniority": "mid",
+          "isRemote": true
+        },
+        {
+          "id": 948,
+          "title": "Group Product Manager, Compliance Automation",
+          "location": "Remote - USA",
+          "salaryMin": 243865,
+          "salaryMax": 243865,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://www.coinbase.com/careers/positions/7701642?gh_jid=7701642",
+          "postedAt": "2026-06-26T07:32:59-04:00",
+          "firstSeenAt": "2026-09-17T18:22:01.000Z",
+          "isNew": false,
+          "seniority": "principal",
+          "isRemote": true
         }
       ]
     },
@@ -4787,7 +4845,7 @@
       "state": "NY",
       "latitude": 40.70776998940992,
       "longitude": -74.01218533802384,
-      "roleCount": 3,
+      "roleCount": 2,
       "roles": [
         {
           "id": 2937,
@@ -4805,21 +4863,6 @@
           "isRemote": false
         },
         {
-          "id": 2221,
-          "title": "Product Manager, Payments",
-          "location": "New York Office",
-          "salaryMin": 170000,
-          "salaryMax": 270000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/kalshi/2f326e58-b739-477f-b959-206db1ea7fa9",
-          "postedAt": "2026-06-24T14:57:30.183+00:00",
-          "firstSeenAt": "2026-09-19T06:25:57.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
           "id": 2220,
           "title": "Product Manager, Growth",
           "location": "New York Office",
@@ -4833,139 +4876,6 @@
           "isNew": false,
           "seniority": "mid",
           "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "240-new-york-ny",
-      "companyId": 240,
-      "companyName": "Coinbase",
-      "companySlug": "coinbase",
-      "city": "New York",
-      "state": "NY",
-      "latitude": 40.705959594379095,
-      "longitude": -74.01559543352151,
-      "roleCount": 8,
-      "roles": [
-        {
-          "id": 2926,
-          "title": "Group Product Manager, FinHub",
-          "location": "Remote - USA",
-          "salaryMin": 243865,
-          "salaryMax": 243865,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.coinbase.com/careers/positions/8234060?gh_jid=8234060",
-          "postedAt": "2026-09-25T18:33:57-04:00",
-          "firstSeenAt": "2026-09-26T13:38:09.000Z",
-          "isNew": true,
-          "seniority": "principal",
-          "isRemote": true
-        },
-        {
-          "id": 950,
-          "title": "Group Product Manager, Developer Infrastructure",
-          "location": "Remote - USA",
-          "salaryMin": 243865,
-          "salaryMax": 243865,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.coinbase.com/careers/positions/8017607?gh_jid=8017607",
-          "postedAt": "2026-09-18T03:04:01-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": true
-        },
-        {
-          "id": 949,
-          "title": "Group Product Manager, Core Infrastructure & Reliability",
-          "location": "Remote - USA",
-          "salaryMin": 243865,
-          "salaryMax": 243865,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.coinbase.com/careers/positions/7997785?gh_jid=7997785",
-          "postedAt": "2026-09-18T03:03:35-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": true
-        },
-        {
-          "id": 953,
-          "title": "Product Manager II, Growth - Notifications ",
-          "location": "Remote - USA",
-          "salaryMin": 180370,
-          "salaryMax": 180370,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.coinbase.com/careers/positions/8204571?gh_jid=8204571",
-          "postedAt": "2026-09-15T13:09:55-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": true
-        },
-        {
-          "id": 947,
-          "title": "Group Product Manager, Compliance Agent Experience",
-          "location": "Remote - USA",
-          "salaryMin": 243865,
-          "salaryMax": 243865,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.coinbase.com/careers/positions/8060662?gh_jid=8060662",
-          "postedAt": "2026-09-14T16:39:39-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": true
-        },
-        {
-          "id": 952,
-          "title": "Product Manager (HR Technology) Intern",
-          "location": "Hybrid - New York, NY",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.coinbase.com/careers/positions/8175504?gh_jid=8175504",
-          "postedAt": "2026-09-08T18:19:39-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "associate",
-          "isRemote": false
-        },
-        {
-          "id": 954,
-          "title": "Product Manager II, Workspace and Multi-User",
-          "location": "Remote - USA",
-          "salaryMin": 180370,
-          "salaryMax": 180370,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.coinbase.com/careers/positions/8148171?gh_jid=8148171",
-          "postedAt": "2026-08-21T18:04:19-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": true
-        },
-        {
-          "id": 948,
-          "title": "Group Product Manager, Compliance Automation",
-          "location": "Remote - USA",
-          "salaryMin": 243865,
-          "salaryMax": 243865,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.coinbase.com/careers/positions/7701642?gh_jid=7701642",
-          "postedAt": "2026-06-26T07:32:59-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": true
         }
       ]
     },
@@ -7084,7 +6994,7 @@
       "state": "NY",
       "latitude": 40.71368646915419,
       "longitude": -73.99383164192156,
-      "roleCount": 8,
+      "roleCount": 7,
       "roles": [
         {
           "id": 1058,
@@ -7112,7 +7022,7 @@
           "url": "https://boards.greenhouse.io/robinhood/jobs/8164459?t=gh_src=&gh_jid=8164459",
           "postedAt": "2026-09-18T16:28:43-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -7155,21 +7065,6 @@
           "salaryCurrency": "USD",
           "salaryPeriod": "year",
           "url": "https://boards.greenhouse.io/robinhood/jobs/8044746?t=gh_src=&gh_jid=8044746",
-          "postedAt": "2026-08-25T14:36:41-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 1063,
-          "title": "Staff Product Manager-  Integrations & Advisor Platform",
-          "location": "Clearwater, FL; Menlo Park, CA; New York, NY",
-          "salaryMin": 191000,
-          "salaryMax": 191000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://boards.greenhouse.io/robinhood/jobs/8131181?t=gh_src=&gh_jid=8131181",
           "postedAt": "2026-08-25T14:36:41-04:00",
           "firstSeenAt": "2026-09-17T18:22:01.000Z",
           "isNew": false,
@@ -7741,7 +7636,7 @@
       "state": "CA",
       "latitude": 37.799528817357434,
       "longitude": -122.41488951765336,
-      "roleCount": 13,
+      "roleCount": 12,
       "roles": [
         {
           "id": 2840,
@@ -7784,7 +7679,7 @@
           "url": "https://careers.airbnb.com/positions/8136554?gh_jid=8136554",
           "postedAt": "2026-09-18T17:55:48-04:00",
           "firstSeenAt": "2026-09-19T19:53:16.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -7799,7 +7694,7 @@
           "url": "https://careers.airbnb.com/positions/7834495?gh_jid=7834495",
           "postedAt": "2026-09-18T17:54:37-04:00",
           "firstSeenAt": "2026-09-19T19:53:16.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -7814,7 +7709,7 @@
           "url": "https://careers.airbnb.com/positions/8029984?gh_jid=8029984",
           "postedAt": "2026-09-18T17:53:32-04:00",
           "firstSeenAt": "2026-09-19T19:53:16.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -7829,7 +7724,7 @@
           "url": "https://careers.airbnb.com/positions/8082863?gh_jid=8082863",
           "postedAt": "2026-09-18T17:52:56-04:00",
           "firstSeenAt": "2026-09-19T19:53:16.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -7844,7 +7739,7 @@
           "url": "https://careers.airbnb.com/positions/8070705?gh_jid=8070705",
           "postedAt": "2026-09-18T17:52:17-04:00",
           "firstSeenAt": "2026-09-19T19:53:16.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -7859,7 +7754,7 @@
           "url": "https://careers.airbnb.com/positions/8175521?gh_jid=8175521",
           "postedAt": "2026-09-18T17:50:51-04:00",
           "firstSeenAt": "2026-09-19T19:53:16.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -7922,21 +7817,6 @@
           "isNew": false,
           "seniority": "mid",
           "isRemote": true
-        },
-        {
-          "id": 1028,
-          "title": "Product Manager, Search",
-          "location": "San Francisco, United States",
-          "salaryMin": 232000,
-          "salaryMax": 232000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://careers.airbnb.com/positions/8104444?gh_jid=8104444",
-          "postedAt": "2026-08-05T13:39:47-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
         }
       ]
     },
@@ -8756,7 +8636,7 @@
           "url": "https://careers.datadoghq.com/detail/8023763/?gh_jid=8023763",
           "postedAt": "2026-09-18T14:57:30-04:00",
           "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -9653,7 +9533,7 @@
       "state": "CO",
       "latitude": 39.74519340771123,
       "longitude": -104.98844718108953,
-      "roleCount": 3,
+      "roleCount": 2,
       "roles": [
         {
           "id": 2842,
@@ -9668,21 +9548,6 @@
           "firstSeenAt": "2026-09-24T14:03:00.000Z",
           "isNew": true,
           "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 1139,
-          "title": "Senior Product Manager, Symmetry New Tax Products",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, AZ - Hybrid",
-          "salaryMin": 152420,
-          "salaryMax": 190252,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
-          "postedAt": "2026-09-22T15:34:17-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": true,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -9711,7 +9576,7 @@
       "state": "NY",
       "latitude": 40.70729393479868,
       "longitude": -73.99964054112016,
-      "roleCount": 4,
+      "roleCount": 3,
       "roles": [
         {
           "id": 2842,
@@ -9726,21 +9591,6 @@
           "firstSeenAt": "2026-09-24T14:03:00.000Z",
           "isNew": true,
           "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 1139,
-          "title": "Senior Product Manager, Symmetry New Tax Products",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, AZ - Hybrid",
-          "salaryMin": 152420,
-          "salaryMax": 190252,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
-          "postedAt": "2026-09-22T15:34:17-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": true,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -9784,7 +9634,7 @@
       "state": "CA",
       "latitude": 37.77871548969971,
       "longitude": -122.39662224359222,
-      "roleCount": 5,
+      "roleCount": 4,
       "roles": [
         {
           "id": 2842,
@@ -9799,21 +9649,6 @@
           "firstSeenAt": "2026-09-24T14:03:00.000Z",
           "isNew": true,
           "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 1139,
-          "title": "Senior Product Manager, Symmetry New Tax Products",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, AZ - Hybrid",
-          "salaryMin": 152420,
-          "salaryMax": 190252,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
-          "postedAt": "2026-09-22T15:34:17-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": true,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -11032,34 +10867,6 @@
       ]
     },
     {
-      "id": "263-scottsdale-az",
-      "companyId": 263,
-      "companyName": "Gusto",
-      "companySlug": "gusto",
-      "city": "Scottsdale",
-      "state": "AZ",
-      "latitude": 33.4942189,
-      "longitude": -111.926018,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1139,
-          "title": "Senior Product Manager, Symmetry New Tax Products",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid; Scottsdale, AZ - Hybrid",
-          "salaryMin": 152420,
-          "salaryMax": 190252,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/7532277",
-          "postedAt": "2026-09-22T15:34:17-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "228-phoenix-az",
       "companyId": 228,
       "companyName": "Lucid Motors",
@@ -11403,7 +11210,7 @@
           "url": "https://flatiron.com/careers/open-positions/job?gh_jid=8092475",
           "postedAt": "2026-09-18T15:55:47-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         }
@@ -11706,7 +11513,7 @@
       "state": "CA",
       "latitude": 37.3228934,
       "longitude": -122.0322895,
-      "roleCount": 44,
+      "roleCount": 43,
       "roles": [
         {
           "id": 2826,
@@ -11838,21 +11645,6 @@
           "salaryPeriod": "year",
           "url": "https://jobs.apple.com/en-us/details/200679672-0836",
           "postedAt": "2026-09-08T00:00:00.000Z",
-          "firstSeenAt": "2026-09-19T08:30:18.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2523,
-          "title": "Product Manager, Apple Learning Platform",
-          "location": "Cupertino",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://jobs.apple.com/en-us/details/200680966-0836",
-          "postedAt": "2026-09-04T00:00:00.000Z",
           "firstSeenAt": "2026-09-19T08:30:18.000Z",
           "isNew": false,
           "seniority": "mid",
@@ -12551,7 +12343,7 @@
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
           "postedAt": "2026-09-18T16:38:54-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         },
@@ -12804,7 +12596,7 @@
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5428898008",
           "postedAt": "2026-09-18T16:38:54-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         },
@@ -13169,7 +12961,7 @@
           "url": "https://jobs.elastic.co/jobs?gh_jid=8214106&gh_jid=8214106",
           "postedAt": "2026-09-18T14:21:56-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "director",
           "isRemote": true
         },
@@ -13463,23 +13255,8 @@
       "state": "CA",
       "latitude": 37.79714727140549,
       "longitude": -122.28273641555481,
-      "roleCount": 2,
+      "roleCount": 1,
       "roles": [
-        {
-          "id": 2176,
-          "title": "Senior Product Manager",
-          "location": "Oakland, California, United States",
-          "salaryMin": 179000,
-          "salaryMax": 242000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/everlaw/jobs/4701031006",
-          "postedAt": "2026-09-21T14:24:25-04:00",
-          "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        },
         {
           "id": 2175,
           "title": "Group Product Manager",
@@ -14270,7 +14047,7 @@
           "url": "https://boards.greenhouse.io/embed/job_app?for=gemini&token=8214332&gh_jid=8214332",
           "postedAt": "2026-09-18T16:13:13-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "associate",
           "isRemote": false
         }
@@ -14457,7 +14234,7 @@
           "url": "https://job-boards.greenhouse.io/ww/jobs/5277407008",
           "postedAt": "2026-09-19T04:01:49-04:00",
           "firstSeenAt": "2026-09-19T11:32:52.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         },
@@ -14472,7 +14249,7 @@
           "url": "https://job-boards.greenhouse.io/ww/jobs/5275450008",
           "postedAt": "2026-09-19T04:01:47-04:00",
           "firstSeenAt": "2026-09-19T11:32:52.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         }
@@ -14500,7 +14277,7 @@
           "url": "https://jobs.ashbyhq.com/envoy/f456eb52-6acd-4f1c-9b6f-fa263a04341d",
           "postedAt": "2026-09-18T23:42:07.781+00:00",
           "firstSeenAt": "2026-09-19T06:25:57.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -14543,7 +14320,7 @@
           "url": "https://jobs.ashbyhq.com/benchling/358ff26c-7b23-4645-b906-2244c76e2cb2",
           "postedAt": "2026-09-18T22:47:18.029+00:00",
           "firstSeenAt": "2026-09-19T06:25:57.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         },
@@ -14558,7 +14335,7 @@
           "url": "https://jobs.ashbyhq.com/benchling/345fa9cf-c753-4fe0-91a4-1e37e0cde651",
           "postedAt": "2026-09-18T21:14:08.011+00:00",
           "firstSeenAt": "2026-09-19T06:25:57.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         },
@@ -14646,7 +14423,7 @@
           "url": "https://job-boards.greenhouse.io/reddit/jobs/8212175",
           "postedAt": "2026-09-18T20:21:00-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         }
@@ -14674,7 +14451,7 @@
           "url": "https://job-boards.greenhouse.io/reddit/jobs/8212175",
           "postedAt": "2026-09-18T20:21:00-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         }
@@ -14702,7 +14479,7 @@
           "url": "https://job-boards.greenhouse.io/reddit/jobs/8212175",
           "postedAt": "2026-09-18T20:21:00-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -14850,7 +14627,7 @@
           "url": "https://job-boards.greenhouse.io/reddit/jobs/8212175",
           "postedAt": "2026-09-18T20:21:00-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         }
@@ -14878,7 +14655,7 @@
           "url": "https://jobs.ashbyhq.com/ambiencehealthcare/557575a5-6c50-412a-b687-0238d2638536",
           "postedAt": "2026-09-18T18:07:35.622+00:00",
           "firstSeenAt": "2026-09-17T18:22:03.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         }
@@ -14906,7 +14683,7 @@
           "url": "https://boards.greenhouse.io/andurilindustries/jobs/5176938007?gh_jid=5176938007",
           "postedAt": "2026-09-18T17:55:09-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         }
@@ -14921,7 +14698,7 @@
       "state": "CA",
       "latitude": 37.46058531579106,
       "longitude": -122.18614251496433,
-      "roleCount": 8,
+      "roleCount": 7,
       "roles": [
         {
           "id": 2146,
@@ -14934,7 +14711,7 @@
           "url": "https://boards.greenhouse.io/robinhood/jobs/8164459?t=gh_src=&gh_jid=8164459",
           "postedAt": "2026-09-18T16:28:43-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -14999,21 +14776,6 @@
           "isRemote": false
         },
         {
-          "id": 1063,
-          "title": "Staff Product Manager-  Integrations & Advisor Platform",
-          "location": "Clearwater, FL; Menlo Park, CA; New York, NY",
-          "salaryMin": 191000,
-          "salaryMax": 191000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://boards.greenhouse.io/robinhood/jobs/8131181?t=gh_src=&gh_jid=8131181",
-          "postedAt": "2026-08-25T14:36:41-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
           "id": 2678,
           "title": "Senior PM, International Trading",
           "location": "Menlo Park, CA; New York, NY",
@@ -15067,7 +14829,7 @@
           "url": "https://abnormal.ai/careers/jobs/7974524003?gh_jid=7974524003",
           "postedAt": "2026-09-18T15:18:32-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -15110,7 +14872,7 @@
           "url": "https://www.brex.com/careers/8780828002?gh_jid=8780828002",
           "postedAt": "2026-09-18T14:59:28-04:00",
           "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -15258,7 +15020,7 @@
           "url": "https://careers.datadoghq.com/detail/8023763/?gh_jid=8023763",
           "postedAt": "2026-09-18T14:57:30-04:00",
           "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -15316,7 +15078,7 @@
           "url": "https://job-boards.greenhouse.io/coursera/...?gh_jid=6122497004",
           "postedAt": "2026-09-18T14:13:28-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -15359,7 +15121,7 @@
           "url": "https://jobs.ashbyhq.com/legora/ff561bd0-36a7-4471-8c79-3e2dc830854f",
           "postedAt": "2026-09-18T13:54:14.094+00:00",
           "firstSeenAt": "2026-09-19T06:25:57.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -15402,7 +15164,7 @@
           "url": "https://job-boards.greenhouse.io/ethoslife/jobs/8618599002",
           "postedAt": "2026-09-18T13:10:31-04:00",
           "firstSeenAt": "2026-09-19T10:54:07.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "director",
           "isRemote": true
         },
@@ -15460,7 +15222,7 @@
           "url": "https://www.asana.com/jobs/apply/8204614?gh_jid=8204614",
           "postedAt": "2026-09-18T12:35:44-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -15518,7 +15280,7 @@
           "url": "https://app.careerpuck.com/job-board/lyft/job/8821337002?gh_jid=8821337002",
           "postedAt": "2026-09-18T12:27:19-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -18335,7 +18097,7 @@
       "state": "CA",
       "latitude": 37.79787976097902,
       "longitude": -122.40309124450452,
-      "roleCount": 9,
+      "roleCount": 6,
       "roles": [
         {
           "id": 204,
@@ -18365,21 +18127,6 @@
           "firstSeenAt": "2026-09-17T10:32:26.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 206,
-          "title": "Sr. Product Manager, Core Saving Experience",
-          "location": "San Francisco, CA, US; Remote, US",
-          "salaryMin": 139764,
-          "salaryMax": 139764,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.pinterestcareers.com/jobs/?gh_jid=8046820",
-          "postedAt": "2026-09-16T14:51:43-04:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -18421,36 +18168,6 @@
           "salaryCurrency": "USD",
           "salaryPeriod": "year",
           "url": "https://www.pinterestcareers.com/jobs/?gh_jid=8082033",
-          "postedAt": "2026-09-16T14:51:43-04:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 211,
-          "title": "Staff Product Manager, Billing",
-          "location": "San Francisco, CA, US; Remote, CA, US",
-          "salaryMin": 164695,
-          "salaryMax": 164695,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7955593",
-          "postedAt": "2026-09-16T14:51:43-04:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 212,
-          "title": "Staff Product Manager, Connections",
-          "location": "San Francisco, CA, US; Remote, US",
-          "salaryMin": 164695,
-          "salaryMax": 164695,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7525112",
           "postedAt": "2026-09-16T14:51:43-04:00",
           "firstSeenAt": "2026-09-17T10:32:26.000Z",
           "isNew": false,
@@ -23242,7 +22959,7 @@
       "state": "CA",
       "latitude": 37.44532497348378,
       "longitude": -122.14955503561303,
-      "roleCount": 3,
+      "roleCount": 2,
       "roles": [
         {
           "id": 1856,
@@ -23269,21 +22986,6 @@
           "salaryPeriod": "year",
           "url": "https://jobs.ashbyhq.com/sandboxaq/35fd6553-0dde-4e68-a757-20f7de5a1567",
           "postedAt": "2026-08-18T18:11:41.127+00:00",
-          "firstSeenAt": "2026-09-18T00:58:44.000Z",
-          "isNew": false,
-          "seniority": "director",
-          "isRemote": true
-        },
-        {
-          "id": 1857,
-          "title": "Sr. Director of Product Management, Core Platform",
-          "location": "United States",
-          "salaryMin": 188800,
-          "salaryMax": 354000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/sandboxaq/f6ca21d4-2dde-49c3-a6ac-f24906bb0e47",
-          "postedAt": "2026-07-09T20:37:50.038+00:00",
           "firstSeenAt": "2026-09-18T00:58:44.000Z",
           "isNew": false,
           "seniority": "director",
@@ -23339,34 +23041,6 @@
           "salaryCurrency": "USD",
           "salaryPeriod": "year",
           "url": "https://job-boards.greenhouse.io/otter/jobs/8231028002",
-          "postedAt": "2026-09-10T18:33:28-04:00",
-          "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1104-seattle-wa",
-      "companyId": 1104,
-      "companyName": "Otter",
-      "companySlug": "otter",
-      "city": "Seattle",
-      "state": "WA",
-      "latitude": 47.60758536800559,
-      "longitude": -122.348810633378,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 2182,
-          "title": "Product Manager - Orders",
-          "location": "Seattle, WA",
-          "salaryMin": 176000,
-          "salaryMax": 242000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/otter/jobs/8543629002",
           "postedAt": "2026-09-10T18:33:28-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
           "isNew": false,
@@ -24306,7 +23980,7 @@
       "state": "TX",
       "latitude": 30.264711815409786,
       "longitude": -97.7422964120953,
-      "roleCount": 5,
+      "roleCount": 3,
       "roles": [
         {
           "id": 2570,
@@ -24318,21 +23992,6 @@
           "salaryPeriod": "year",
           "url": "https://jobs.apple.com/en-us/details/200682779-0157",
           "postedAt": "2026-09-09T00:00:00.000Z",
-          "firstSeenAt": "2026-09-19T08:30:18.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2535,
-          "title": "Product Manager, Apple Learning Platform",
-          "location": "Austin",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://jobs.apple.com/en-us/details/200680966-0157",
-          "postedAt": "2026-09-04T00:00:00.000Z",
           "firstSeenAt": "2026-09-19T08:30:18.000Z",
           "isNew": false,
           "seniority": "mid",
@@ -24363,21 +24022,6 @@
           "salaryPeriod": "year",
           "url": "https://jobs.apple.com/en-us/details/200671933-0157",
           "postedAt": "2026-07-10T00:00:00.000Z",
-          "firstSeenAt": "2026-09-19T08:30:18.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2556,
-          "title": "Product Manager, Manufacturing Data & Analytics, Enterprise Technology Services",
-          "location": "Austin",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://jobs.apple.com/en-us/details/200659503-0157",
-          "postedAt": "2026-05-04T00:00:00.000Z",
           "firstSeenAt": "2026-09-19T08:30:18.000Z",
           "isNew": false,
           "seniority": "mid",
@@ -24549,7 +24193,7 @@
       "state": "WA",
       "latitude": 47.61708967851456,
       "longitude": -122.18342836037507,
-      "roleCount": 2,
+      "roleCount": 1,
       "roles": [
         {
           "id": 506,
@@ -24564,21 +24208,6 @@
           "firstSeenAt": "2026-09-17T10:32:26.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 494,
-          "title": "Product Manager - Traffic & Networking",
-          "location": "US-WA-Bellevue",
-          "salaryMin": 160000,
-          "salaryMax": 230000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/e39a441a-07e4-4ea3-a687-b483007deb94",
-          "postedAt": "2026-07-30T21:18:27.338+00:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "mid",
           "isRemote": false
         }
       ]
@@ -28812,34 +28441,6 @@
       ]
     },
     {
-      "id": "252-clearwater-fl",
-      "companyId": 252,
-      "companyName": "Robinhood",
-      "companySlug": "robinhood",
-      "city": "Clearwater",
-      "state": "FL",
-      "latitude": 27.9658533,
-      "longitude": -82.8001026,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1063,
-          "title": "Staff Product Manager-  Integrations & Advisor Platform",
-          "location": "Clearwater, FL; Menlo Park, CA; New York, NY",
-          "salaryMin": 191000,
-          "salaryMax": 191000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://boards.greenhouse.io/robinhood/jobs/8131181?t=gh_src=&gh_jid=8131181",
-          "postedAt": "2026-08-25T14:36:41-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "303-palo-alto-ca",
       "companyId": 303,
       "companyName": "BitGo",
@@ -28919,7 +28520,7 @@
       "state": "CA",
       "latitude": 37.372747455996446,
       "longitude": -122.02522876814174,
-      "roleCount": 6,
+      "roleCount": 5,
       "roles": [
         {
           "id": 2537,
@@ -28995,21 +28596,6 @@
           "isNew": false,
           "seniority": "senior",
           "isRemote": false
-        },
-        {
-          "id": 2547,
-          "title": "Senior Engineering Product Manager, Enterprise Technology Services ",
-          "location": "Sunnyvale",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://jobs.apple.com/en-us/details/200653536-3956",
-          "postedAt": "2026-04-10T00:00:00.000Z",
-          "firstSeenAt": "2026-09-19T08:30:18.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
         }
       ]
     },
@@ -29065,7 +28651,7 @@
       "state": "CA",
       "latitude": 37.78696526697007,
       "longitude": -122.41815418221826,
-      "roleCount": 2,
+      "roleCount": 1,
       "roles": [
         {
           "id": 1728,
@@ -29077,21 +28663,6 @@
           "salaryPeriod": "year",
           "url": "https://job-boards.greenhouse.io/baton/jobs/5215515007",
           "postedAt": "2026-08-24T21:36:00-04:00",
-          "firstSeenAt": "2026-09-18T00:58:41.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 1727,
-          "title": "Senior Product Manager",
-          "location": "San Francisco, California, United States",
-          "salaryMin": 190000,
-          "salaryMax": 240000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/baton/jobs/5210863007",
-          "postedAt": "2026-08-12T16:56:23-04:00",
           "firstSeenAt": "2026-09-18T00:58:41.000Z",
           "isNew": false,
           "seniority": "senior",
@@ -29844,23 +29415,8 @@
       "state": "TX",
       "latitude": 30.27148388871866,
       "longitude": -97.73025581927538,
-      "roleCount": 2,
+      "roleCount": 1,
       "roles": [
-        {
-          "id": 134,
-          "title": "Principal Product Builder, Deliverability & Connectivity",
-          "location": "Remote, United States",
-          "salaryMin": 236000,
-          "salaryMax": 236000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/apolloio/jobs/6002001004",
-          "postedAt": "2026-08-14T18:57:22-04:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": true
-        },
         {
           "id": 135,
           "title": "Senior Product Manager, Expansion",
@@ -30730,49 +30286,6 @@
       ]
     },
     {
-      "id": "406-new-york-ny",
-      "companyId": 406,
-      "companyName": "Socure",
-      "companySlug": "socure",
-      "city": "New York",
-      "state": "NY",
-      "latitude": 40.71840710436717,
-      "longitude": -74.02202156536389,
-      "roleCount": 2,
-      "roles": [
-        {
-          "id": 1351,
-          "title": "Senior Product Manager - Document Verification",
-          "location": "New York - Remote",
-          "salaryMin": 170000,
-          "salaryMax": 205000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/socure/aaad1c05-d298-40b4-a628-96bd1105fc9d",
-          "postedAt": "2026-08-11T17:58:49.533+00:00",
-          "firstSeenAt": "2026-09-17T18:22:03.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 1353,
-          "title": "Principal Product Manager",
-          "location": "New York - Remote",
-          "salaryMin": 237000,
-          "salaryMax": 285000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/socure/fa5d826d-18e1-4ce1-b103-204a5701a701",
-          "postedAt": "2026-07-31T19:58:58.440+00:00",
-          "firstSeenAt": "2026-09-17T18:22:03.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "1146-san-francisco-ca",
       "companyId": 1146,
       "companyName": "FurtherAI",
@@ -31512,6 +31025,34 @@
           "firstSeenAt": "2026-09-17T10:32:26.000Z",
           "isNew": false,
           "seniority": "senior",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "406-new-york-ny",
+      "companyId": 406,
+      "companyName": "Socure",
+      "companySlug": "socure",
+      "city": "New York",
+      "state": "NY",
+      "latitude": 40.71840710436717,
+      "longitude": -74.02202156536389,
+      "roleCount": 1,
+      "roles": [
+        {
+          "id": 1353,
+          "title": "Principal Product Manager",
+          "location": "New York - Remote",
+          "salaryMin": 237000,
+          "salaryMax": 285000,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/socure/fa5d826d-18e1-4ce1-b103-204a5701a701",
+          "postedAt": "2026-07-31T19:58:58.440+00:00",
+          "firstSeenAt": "2026-09-17T18:22:03.000Z",
+          "isNew": false,
+          "seniority": "principal",
           "isRemote": false
         }
       ]
@@ -35202,34 +34743,6 @@
       ]
     },
     {
-      "id": "980-danbury-ct",
-      "companyId": 980,
-      "companyName": "Waterworks",
-      "companySlug": "waterworks",
-      "city": "Danbury",
-      "state": "CT",
-      "latitude": 41.394817,
-      "longitude": -73.4540111,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 1894,
-          "title": "Associate Product Manager, Merchandising and Management",
-          "location": "Danbury, CT",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://jobs.lever.co/waterworks/9434d980-dbe3-4d53-bcca-829dde375576",
-          "postedAt": "1788456135659",
-          "firstSeenAt": "2026-09-18T01:01:55.000Z",
-          "isNew": false,
-          "seniority": "associate",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "1003-chicago-il",
       "companyId": 1003,
       "companyName": "Nomi Health",
@@ -35733,7 +35246,7 @@
           "url": "https://jobs.lever.co/shieldai/df29f189-21de-40b9-a485-4aef884df365",
           "postedAt": "1781908328852",
           "firstSeenAt": "2026-09-19T06:26:36.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": true
         }
@@ -36297,7 +35810,7 @@
           "url": "https://jm.wd103.myworkdayjobs.com/external/job/Denver-CO-WHQ/PVC-Product-Manager_R26_1352",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T06:26:52.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -36312,7 +35825,7 @@
           "url": "https://jm.wd103.myworkdayjobs.com/external/job/Denver-CO-WHQ/Product-Management-Intern--Summer-2027_R26_1432",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "associate",
           "isRemote": true
         }
@@ -36411,7 +35924,7 @@
       "state": "CA",
       "latitude": 37.344058046102255,
       "longitude": -121.87864808179842,
-      "roleCount": 89,
+      "roleCount": 88,
       "roles": [
         {
           "id": 2320,
@@ -36966,21 +36479,6 @@
           "firstSeenAt": "2026-09-19T08:10:15.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2399,
-          "title": "Product Manager Project Intern (TikTok Ads Agent-Scaled Growth) - 2026 Start (BS/MS)",
-          "location": "San Jose, California, United States of America",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://lifeattiktok.com/search/7657728959042046213",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:10:15.000Z",
-          "isNew": false,
-          "seniority": "associate",
           "isRemote": false
         },
         {
@@ -37729,7 +37227,7 @@
           "url": "https://lifeattiktok.com/search/7688558723866151221",
           "postedAt": null,
           "firstSeenAt": "2026-09-24T14:04:33.000Z",
-          "isNew": false,
+          "isNew": true,
           "seniority": "mid",
           "isRemote": false
         },
@@ -37744,7 +37242,7 @@
           "url": "https://lifeattiktok.com/search/7689177795897805109",
           "postedAt": null,
           "firstSeenAt": "2026-09-25T14:28:00.000Z",
-          "isNew": false,
+          "isNew": true,
           "seniority": "senior",
           "isRemote": false
         }
@@ -38042,7 +37540,7 @@
           "url": "https://lifeattiktok.com/search/7689175288505665797",
           "postedAt": null,
           "firstSeenAt": "2026-09-25T14:28:00.000Z",
-          "isNew": false,
+          "isNew": true,
           "seniority": "senior",
           "isRemote": false
         }
@@ -38171,7 +37669,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/Remote---United-States-of-America/Product-Manager_JR109379-1",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -38186,7 +37684,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/Koblenz/Product-Management-Professional_JR109846",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -38201,7 +37699,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/Koblenz--Maria-Trost-21/Product-Management-Professional--m-w-d-_JR109996",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -38216,7 +37714,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/Kln/Product-Manager--m-w-d-_JR110141",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -38231,7 +37729,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/Bochum/Product-Owner--m-w-d-_JR108829",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -38246,7 +37744,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/St-Wolfgang/Product-Owner-CGM-MEDICO--m-w-d-_JR108959",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -38261,7 +37759,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/St-Wolfgang/Product-Owner-CGM-MEDICO--m-w-d-_JR108960",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -38276,7 +37774,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/Koblenz/Product-Manager-Anforderungsmanagement--m-w-d-_JR109224",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -38291,7 +37789,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/Martinsried/System-Engineer--m-f-d-_JR108581",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -38306,7 +37804,7 @@
           "url": "https://cgm.wd3.myworkdayjobs.com/cgm/job/Hannover/Product-Owner--m-w-d-_JR106746",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -38514,7 +38012,7 @@
       "state": "CA",
       "latitude": 37.45546631408781,
       "longitude": -122.16585750925132,
-      "roleCount": 22,
+      "roleCount": 21,
       "roles": [
         {
           "id": 2639,
@@ -38827,23 +38325,8 @@
           "url": "https://www.metacareers.com/jobs/1090585757172959/",
           "postedAt": null,
           "firstSeenAt": "2026-09-24T14:05:30.000Z",
-          "isNew": false,
+          "isNew": true,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2917,
-          "title": "Director, Product Management",
-          "location": "",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1083544224293566/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-25T14:28:36.000Z",
-          "isNew": false,
-          "seniority": "director",
           "isRemote": false
         }
       ]
@@ -38990,7 +38473,7 @@
       "state": "WA",
       "latitude": 47.6006106010639,
       "longitude": -122.31509115882209,
-      "roleCount": 7,
+      "roleCount": 6,
       "roles": [
         {
           "id": 2640,
@@ -39080,21 +38563,6 @@
           "firstSeenAt": "2026-09-19T08:51:31.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2917,
-          "title": "Director, Product Management",
-          "location": "",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1083544224293566/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-25T14:28:36.000Z",
-          "isNew": false,
-          "seniority": "director",
           "isRemote": false
         }
       ]
@@ -39282,7 +38750,7 @@
       "state": "NY",
       "latitude": 40.71915577976231,
       "longitude": -74.00274700798185,
-      "roleCount": 14,
+      "roleCount": 13,
       "roles": [
         {
           "id": 2640,
@@ -39475,23 +38943,8 @@
           "url": "https://www.metacareers.com/jobs/1090585757172959/",
           "postedAt": null,
           "firstSeenAt": "2026-09-24T14:05:30.000Z",
-          "isNew": false,
+          "isNew": true,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2917,
-          "title": "Director, Product Management",
-          "location": "",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1083544224293566/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-25T14:28:36.000Z",
-          "isNew": false,
-          "seniority": "director",
           "isRemote": false
         }
       ]
@@ -39805,7 +39258,7 @@
           "url": "https://job-boards.greenhouse.io/alpaca/jobs/6198942004",
           "postedAt": "2026-09-18T09:49:18-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -41838,21 +41291,6 @@
           "isRemote": true
         },
         {
-          "id": 2318,
-          "title": "Product Manager",
-          "location": "Remote",
-          "salaryMin": 112000,
-          "salaryMax": 112000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/navapbc/jobs/4361894009",
-          "postedAt": "2026-09-19T03:00:00-04:00",
-          "firstSeenAt": "2026-09-19T08:07:03.000Z",
-          "isNew": true,
-          "seniority": "mid",
-          "isRemote": true
-        },
-        {
           "id": 196,
           "title": "Product Management Resume Drop Off",
           "location": "Remote",
@@ -41868,7 +41306,7 @@
           "isRemote": true
         }
       ],
-      "roleCount": 4
+      "roleCount": 3
     },
     {
       "companyId": 1027,
@@ -42062,7 +41500,7 @@
           "url": "https://job-boards.greenhouse.io/pindropsecurity/jobs/8157227",
           "postedAt": "2026-09-18T12:31:10-04:00",
           "firstSeenAt": "2026-09-19T06:25:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         }
@@ -42085,7 +41523,7 @@
           "url": "https://jobs.lever.co/pointclickcare/3c86ab37-0891-442b-a0fd-e5880f84bf74",
           "postedAt": "1789737910681",
           "firstSeenAt": "2026-09-19T06:26:36.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "director",
           "isRemote": true
         },
@@ -42100,7 +41538,7 @@
           "url": "https://jobs.lever.co/pointclickcare/f7dba209-3583-4887-8257-e53a9704602f",
           "postedAt": "1789737754197",
           "firstSeenAt": "2026-09-19T06:26:36.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "director",
           "isRemote": true
         },
@@ -42426,7 +41864,7 @@
           "url": "https://puma.wd502.myworkdayjobs.com/jobs_at_puma/job/PUMA-Way-Headquarters/Manager-Business-Processes-Master-Data-Governance_R43091",
           "postedAt": "Posted Today",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -42471,7 +41909,7 @@
           "url": "https://puma.wd502.myworkdayjobs.com/jobs_at_puma/job/PUMA-Way-Headquarters/Customer-Data-Platform--CDP--Product-Owner_R40648",
           "postedAt": "Posted 30+ Days Ago",
           "firstSeenAt": "2026-09-19T08:49:58.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         }
@@ -42525,29 +41963,6 @@
       "roleCount": 1
     },
     {
-      "companyId": 974,
-      "companyName": "Recast Software",
-      "companySlug": "recast-software",
-      "roles": [
-        {
-          "id": 1888,
-          "title": "Product Manager II",
-          "location": "Remote, USA",
-          "salaryMin": 115000,
-          "salaryMax": 157000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.lever.co/recast-software/240cb893-7a42-44b7-a55b-537536a0e2da",
-          "postedAt": "1786471133823",
-          "firstSeenAt": "2026-09-18T01:01:55.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 1
-    },
-    {
       "companyId": 1030,
       "companyName": "Reliablecontrols",
       "companySlug": "reliablecontrols",
@@ -42586,7 +42001,7 @@
           "url": "https://jobs.ashbyhq.com/revenuecat/7a64d716-1a66-49d0-910b-a07d36d0b498",
           "postedAt": "2026-09-18T19:24:24.311+00:00",
           "firstSeenAt": "2026-09-19T06:25:57.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -43294,21 +42709,6 @@
           "isRemote": true
         },
         {
-          "id": 2248,
-          "title": "Associate Technical Product Manager",
-          "location": "Remote",
-          "salaryMin": 115000,
-          "salaryMax": 125000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/turquoise-health/23b08f33-2ac0-4d41-be6b-5b36972a9837",
-          "postedAt": "2026-08-06T19:48:12.550+00:00",
-          "firstSeenAt": "2026-09-19T06:25:57.000Z",
-          "isNew": false,
-          "seniority": "associate",
-          "isRemote": true
-        },
-        {
           "id": 2249,
           "title": "Senior/Staff Product Manager, Contracts",
           "location": "Remote",
@@ -43354,7 +42754,7 @@
           "isRemote": true
         }
       ],
-      "roleCount": 5
+      "roleCount": 4
     },
     {
       "companyId": 254,
