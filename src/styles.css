@@ -1573,3 +1573,446 @@ h1.role-page-title {
   color: var(--text);
   background: var(--surface-hover);
 }
+
+/* ---------- Map / Jobs toggle ---------- */
+
+.view-toggle {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  background: var(--bg-raised);
+  flex-shrink: 0;
+}
+
+.view-toggle a {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+}
+
+.view-toggle a:hover {
+  color: var(--text);
+}
+
+.view-toggle a.is-on {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------- Job board ---------- */
+
+/* Covers the map rather than replacing it, so switching back is instant.
+   Under the side panels, voice dock and role drawer, which all float over
+   it the same way they float over the map. */
+.job-board {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow-y: auto;
+  background: var(--bg);
+}
+
+.job-board-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 24px 160px; /* room under the last row for the voice dock */
+}
+
+.job-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--bg-raised);
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.job-search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.job-search-icon {
+  color: var(--text-faint);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.job-search input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+}
+
+.job-search input::placeholder {
+  color: var(--text-faint);
+}
+
+.job-controls,
+.job-more {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.job-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--bg-raised);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.job-pill:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.job-pill.is-on {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* A native select dressed as a pill: the pill is the label, the select
+   inside it is borderless so the browser's own menu still opens. */
+.job-pill-select {
+  padding: 0 4px 0 10px;
+}
+
+.job-pill-select select,
+.job-sort select {
+  padding: 6px 4px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.job-pill-select select option,
+.job-sort select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.job-picker {
+  position: relative;
+}
+
+.job-picker-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.job-picker-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.job-picker-option:hover {
+  background: var(--surface-hover);
+}
+
+.job-picker-option input {
+  accent-color: var(--accent);
+}
+
+.job-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.job-sort {
+  color: var(--text);
+}
+
+.job-note {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.job-clear {
+  margin-top: 12px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.job-clear:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.job-list {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-raised);
+  overflow: hidden;
+}
+
+.job-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+}
+
+.job-row:last-child {
+  border-bottom: none;
+}
+
+.job-row:hover {
+  background: var(--surface);
+}
+
+.job-logo {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: hsl(var(--logo-hue, 165) 45% 22%);
+  color: hsl(var(--logo-hue, 165) 70% 78%);
+  font-weight: 700;
+  font-size: 17px;
+  overflow: hidden;
+}
+
+/* Favicons are small and often square-on-white; a light tile keeps a dark
+   logo visible on the dark theme. */
+.job-logo.has-image {
+  background: #f4f6f8;
+}
+
+.job-logo img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.job-main {
+  min-width: 0;
+}
+
+.job-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.job-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.job-title a:hover {
+  color: var(--accent);
+}
+
+.job-new {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  vertical-align: 2px;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Dot separators drawn between items, so a missing date leaves no
+   stray dot behind. */
+.job-meta span + span::before {
+  content: "·";
+  margin: 0 8px;
+  color: var(--text-faint);
+}
+
+.job-company {
+  color: var(--text);
+}
+
+.job-salary,
+.job-nosalary {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.job-salary {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgba(134, 239, 172, 0.1);
+  color: var(--salary);
+  font-weight: 600;
+}
+
+.job-nosalary {
+  color: var(--text-faint);
+}
+
+.job-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.job-view {
+  padding: 7px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: border-color 0.12s, color 0.12s;
+}
+
+.job-view:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.job-prep {
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.job-prep:hover {
+  text-decoration: underline;
+}
+
+.job-more-button {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  background: none;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.job-more-button:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.job-empty {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.job-empty-title {
+  margin-bottom: 4px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.job-empty .job-pill {
+  margin-top: 14px;
+}
+
+@media (max-width: 640px) {
+  .job-board-inner {
+    padding: 16px 16px 160px;
+  }
+
+  .job-summary {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+
+  /* Phone rows stack: logo and text, then the links underneath. */
+  .job-row {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .job-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .job-actions {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+}

@@ -10,7 +10,7 @@
  * server/export/roleFacets.ts); nothing is inferred in the browser.
  */
 
-import type { LocationPinData, RemoteCompanyData, RoleData, Seniority } from "./types.js";
+import { SENIORITY_TIERS, type LocationPinData, type RemoteCompanyData, type RoleData, type Seniority } from "./types.js";
 
 export type RemoteMode = "all" | "office-only" | "remote-only";
 
@@ -50,7 +50,7 @@ export function isFiltering(f: RoleFilters): boolean {
  * Returns null only if neither parses, in which case date filters skip it
  * rather than guessing.
  */
-function roleDate(role: RoleData): number | null {
+export function roleDate(role: RoleData): number | null {
   if (role.postedAt) {
     const posted = Date.parse(role.postedAt);
     if (!Number.isNaN(posted)) return posted;
@@ -121,4 +121,36 @@ export function countRoles(pins: LocationPinData[], remoteCompanies: RemoteCompa
   for (const pin of pins) for (const role of pin.roles) ids.add(role.id);
   for (const company of remoteCompanies) for (const role of company.roles) ids.add(role.id);
   return ids.size;
+}
+
+/**
+ * The filters as job-board URL params, and back. Only non-default values
+ * are written, so an unfiltered list is a bare #/jobs. Unrecognised values
+ * are dropped on the way in rather than trusted -- the link may have been
+ * hand-edited or come from an older version.
+ */
+export function filtersToParams(f: RoleFilters, params: URLSearchParams): void {
+  for (const key of ["sen", "pay", "posted", "new", "where"]) params.delete(key);
+  if (f.seniority.size > 0) params.set("sen", SENIORITY_TIERS.filter((t) => f.seniority.has(t)).join(","));
+  if (f.minSalary != null) params.set("pay", String(f.minSalary));
+  if (f.postedWithinDays != null) params.set("posted", String(f.postedWithinDays));
+  if (f.newOnly) params.set("new", "1");
+  if (f.remote !== "all") params.set("where", f.remote);
+}
+
+export function filtersFromParams(params: URLSearchParams): RoleFilters {
+  const positive = (v: string | null) => {
+    const n = v ? Number(v) : NaN;
+    return Number.isFinite(n) && n > 0 ? n : null;
+  };
+  const where = params.get("where");
+  return {
+    seniority: new Set(
+      (params.get("sen") ?? "").split(",").filter((t): t is Seniority => (SENIORITY_TIERS as readonly string[]).includes(t)),
+    ),
+    minSalary: positive(params.get("pay")),
+    postedWithinDays: positive(params.get("posted")),
+    newOnly: params.get("new") === "1",
+    remote: where === "office-only" || where === "remote-only" ? where : "all",
+  };
 }

@@ -8,8 +8,18 @@ import FilterBar from "./components/FilterBar.js";
 import VoicePanel from "./components/VoicePanel.js";
 import { useVoiceAgent } from "./voice/useVoiceAgent.js";
 import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
-import { useRoute } from "./router.js";
-import { EMPTY_FILTERS, countRoles, filterPins, filterRemoteCompanies, isFiltering, type RoleFilters } from "./filters.js";
+import JobBoard, { type JobSort } from "./components/JobBoard.js";
+import { replaceJobsQuery, useRoute } from "./router.js";
+import {
+  EMPTY_FILTERS,
+  countRoles,
+  filterPins,
+  filterRemoteCompanies,
+  filtersFromParams,
+  filtersToParams,
+  isFiltering,
+  type RoleFilters,
+} from "./filters.js";
 import type { LocationPinData, MapData } from "./types.js";
 
 export default function App() {
@@ -21,7 +31,19 @@ export default function App() {
   const [changesPanelOpen, setChangesPanelOpen] = useState(false);
   // A fresh Set per mount: EMPTY_FILTERS.seniority is shared, and state
   // that aliases it would be a mutation bug waiting to happen.
-  const [filters, setFilters] = useState<RoleFilters>(() => ({ ...EMPTY_FILTERS, seniority: new Set() }));
+  // Opening a shared #/jobs?... link starts with the filters it carries.
+  const [filters, setFilters] = useState<RoleFilters>(() =>
+    route.name === "jobs" ? filtersFromParams(route.params) : { ...EMPTY_FILTERS, seniority: new Set() },
+  );
+  // Which view sits under the role drawer: the one you opened it from.
+  // The map stays mounted either way (MapLibre is slow to rebuild); the job
+  // board just covers it.
+  const [baseView, setBaseView] = useState<"map" | "jobs">(route.name === "jobs" ? "jobs" : "map");
+  const [jobQuery, setJobQuery] = useState(() => (route.name === "jobs" ? (route.params.get("q") ?? "") : ""));
+  const [jobSort, setJobSort] = useState<JobSort>(() => {
+    const s = route.name === "jobs" ? route.params.get("sort") : null;
+    return s === "salary" || s === "company" ? s : "newest";
+  });
   const [flyToRequest, setFlyToRequest] = useState<FlyToRequest | null>(null);
   const [crumbs, setCrumbs] = useState<{ company: string; role: string } | null>(null);
   // The pin of the role open in the drawer: the map flies to it and rings it.
@@ -67,11 +89,37 @@ export default function App() {
     [filteredPins, selectedPin],
   );
 
+  useEffect(() => {
+    if (route.name === "map") setBaseView("map");
+    else if (route.name === "jobs") setBaseView("jobs");
+  }, [route.name]);
+
+  // Keep the job board's link current, so it can be bookmarked or shared
+  // exactly as filtered.
+  useEffect(() => {
+    if (route.name !== "jobs") return;
+    const params = new URLSearchParams();
+    if (jobQuery.trim()) params.set("q", jobQuery.trim());
+    filtersToParams(filters, params);
+    if (jobSort !== "newest") params.set("sort", jobSort);
+    replaceJobsQuery(params);
+  }, [route.name, jobQuery, jobSort, filters]);
+
+  const jobsHash = useCallback(() => {
+    const params = new URLSearchParams();
+    if (jobQuery.trim()) params.set("q", jobQuery.trim());
+    filtersToParams(filters, params);
+    if (jobSort !== "newest") params.set("sort", jobSort);
+    const query = params.toString();
+    return `#/jobs${query ? `?${query}` : ""}`;
+  }, [jobQuery, jobSort, filters]);
+
+  // Closing a role goes back to wherever it was opened from.
   const closeRole = useCallback(() => {
     setRolePinId(null);
     setCrumbs(null);
-    window.location.hash = "#/";
-  }, []);
+    window.location.hash = baseView === "jobs" ? jobsHash() : "#/";
+  }, [baseView, jobsHash]);
 
   /**
    * Opening a company panel closes whatever else was open, the role drawer
@@ -84,15 +132,21 @@ export default function App() {
       setRemotePanelOpen(false);
       setChangesPanelOpen(false);
       if (window.location.hash.startsWith("#/company/")) closeRole();
+      // A company panel belongs to the map; the job board has none.
+      if (window.location.hash.startsWith("#/jobs")) window.location.hash = "#/";
       setSelectedPin(pin);
     },
     [closeRole],
   );
   const flyToPin = useCallback((pin: LocationPinData) => {
+    // The copilot moving the map from the job board brings the map back,
+    // rather than flying a camera nobody can see.
+    if (window.location.hash.startsWith("#/jobs")) window.location.hash = "#/";
     setFlyToRequest({ pin, nonce: Date.now() });
   }, []);
 
   const onRolePage = route.name === "role";
+  const onJobs = baseView === "jobs";
   const routeCompany = route.name === "role" ? route.companySlug : null;
 
   const onRoleLoaded = useCallback(
@@ -166,9 +220,19 @@ export default function App() {
           </span>
         </a>
         <span className="header-divider" aria-hidden="true" />
+        {!onRolePage && (
+          <nav className="view-toggle" aria-label="View">
+            <a href="#/" className={onJobs ? "" : "is-on"} aria-current={onJobs ? undefined : "page"}>
+              Map
+            </a>
+            <a href={jobsHash()} className={onJobs ? "is-on" : ""} aria-current={onJobs ? "page" : undefined}>
+              Jobs
+            </a>
+          </nav>
+        )}
         {onRolePage ? (
           <nav className="breadcrumbs" aria-label="Breadcrumb">
-            <a href="#/">Map</a>
+            <a href={onJobs ? jobsHash() : "#/"}>{onJobs ? "Jobs" : "Map"}</a>
             {crumbs && (
               <>
                 <span aria-hidden="true">›</span>
@@ -255,7 +319,7 @@ export default function App() {
             bottomInset={voiceInset}
           />
         )}
-        {mapData && (
+        {mapData && !onJobs && (
           <CompanySearch
             pins={filteredPins}
             onSelectLocation={(pin) => {
@@ -266,12 +330,26 @@ export default function App() {
             }}
           />
         )}
-        {mapData && !onRolePage && (
+        {mapData && !onRolePage && !onJobs && (
           <FilterBar filters={filters} onChange={setFilters} matched={matchedRoles} total={mapData.roleCount} />
         )}
         {/* Never both at once: the drawer wins while it's open, and the
             panel comes back when it closes. */}
-        <CompanyPanel pin={onRolePage ? null : visiblePin} onClose={() => setSelectedPin(null)} />
+        <CompanyPanel pin={onRolePage || onJobs ? null : visiblePin} onClose={() => setSelectedPin(null)} />
+        {mapData && onJobs && (
+          <JobBoard
+            pins={filteredPins}
+            remoteCompanies={filteredRemoteCompanies}
+            logos={mapData.logos ?? {}}
+            filters={filters}
+            onFiltersChange={setFilters}
+            query={jobQuery}
+            onQueryChange={setJobQuery}
+            sort={jobSort}
+            onSortChange={setJobSort}
+            total={mapData.roleCount}
+          />
+        )}
         {mapData && (
           <RemotePanel
             companies={filteredRemoteCompanies}

@@ -69,6 +69,7 @@ import path from "node:path";
 import { getDb } from "../db/client.js";
 import { isExplicitlyNonUS } from "../ingestion/locationParser.js";
 import { writeCompanyDetails } from "./companyDetails.js";
+import { readCachedIntelligence } from "../enrichment/intelligence.js";
 import { NEW_ROLE_DAYS, isNewRole, seniorityOf, sqliteToIso, type Seniority } from "./roleFacets.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -539,6 +540,18 @@ function main() {
       .map((r) => r.id),
   ).size;
 
+  // Company slug -> logo, for the job board's list rows. Only what the
+  // intelligence cache already holds (prewarm fills it); a company without
+  // one gets an initial in the browser rather than a guessed URL here.
+  const logos: Record<string, string> = {};
+  const companiesOnMap = new Map<number, string>();
+  for (const p of pins) companiesOnMap.set(p.companyId, p.companySlug);
+  for (const c of remoteCompanies) companiesOnMap.set(c.companyId, c.companySlug);
+  for (const [companyId, slug] of companiesOnMap) {
+    const logo = readCachedIntelligence(db, companyId, null)?.profile?.logoUrl;
+    if (logo) logos[slug] = logo;
+  }
+
   mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   writeFileSync(
     OUTPUT_PATH,
@@ -551,6 +564,7 @@ function main() {
         changes,
         pins,
         remoteCompanies,
+        logos,
       },
       null,
       2,

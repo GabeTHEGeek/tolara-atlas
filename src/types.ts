@@ -104,6 +104,9 @@ export interface MapData {
   changes: ChangeFeedData;
   pins: LocationPinData[];
   remoteCompanies: RemoteCompanyData[];
+  // Company slug -> logo URL, where the intelligence cache has one. Optional
+  // so a map-data.json from before this field was added still loads.
+  logos?: Record<string, string>;
 }
 
 // ---- Role page: mirrors server/export/companyDetails.ts and the
