@@ -7,9 +7,9 @@ because the page exists to prepare for interviews, and a confident invention is
 worse than a blank.
 
 [![Daily jobs sync](https://github.com/GabeTHEGeek/tolara-atlas/actions/workflows/sync.yml/badge.svg)](https://github.com/GabeTHEGeek/tolara-atlas/actions/workflows/sync.yml)
-![Roles](https://img.shields.io/badge/roles-1%2C817-6fe0c4)
-![Companies](https://img.shields.io/badge/companies-588-6fe0c4)
-![Cities](https://img.shields.io/badge/cities-109-6fe0c4)
+![Roles](https://img.shields.io/badge/roles-2%2C210-6fe0c4)
+![Companies](https://img.shields.io/badge/companies-520-6fe0c4)
+![Cities](https://img.shields.io/badge/cities-110-6fe0c4)
 ![React](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6?logo=typescript&logoColor=white)
 ![MapLibre](https://img.shields.io/badge/MapLibre-4-295daa?logo=maplibre&logoColor=white)
