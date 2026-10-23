@@ -127,12 +127,14 @@ function isProductLeadership(title: string): boolean {
 }
 
 // "PM" abbreviations: "Staff PM", "Lead PM", "Senior PM, Ads", "PM - Search",
-// "GPM". Only with a PM-style seniority word in front or leading the title,
+// "GPM", "Forward Deployed PM". Only with a PM-style seniority word (or
+// "forward deployed", which is only ever a product/eng title) in front or
+// leading the title,
 // and never when the title says what else PM stands for there -- "Senior
 // PM" is also common shorthand for a construction/operations PROJECT
 // manager.
 const PM_ABBREVIATION =
-  /(?:^\s*(?:pm|gpm)\b(?!\s*[/&]))|\b(?:senior|sr\.?|staff|lead|principal|group|associate|technical|junior|jr\.?)\s+pm\b/i;
+  /(?:^\s*(?:pm|gpm)\b(?!\s*[/&]))|\b(?:senior|sr\.?|staff|lead|principal|group|associate|technical|junior|jr\.?|forward[\s-]deployed(?:\s+ai)?)\s+pm\b/i;
 const PM_ABBREVIATION_NOT_PRODUCT =
   /\b(?:project|program|programme|construction|property|facilit(?:y|ies)|site|field|superintendent|maintenance|mechanical|electrical|civil|plumbing|hvac|estimat(?:or|ing)|preconstruction|building|capital|shift|evening|night|pm shift)\b|\b\d{1,2}(?::\d{2})?\s*pm\b/i;
 
