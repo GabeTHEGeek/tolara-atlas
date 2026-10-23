@@ -100,7 +100,7 @@ export const TOOL_SCHEMAS: ToolSchema[] = [
   {
     name: "flyToPlace",
     description:
-      "Move the map to a city or metro area, e.g. 'New York', 'Seattle', 'the Bay Area'. Use when the user asks to go somewhere or see a place.",
+      "Move the map to a city or metro area, e.g. 'New York', 'Seattle', 'the Bay Area', and zoom in to street level there. Use whenever the user names a place -- 'go to Austin', 'show me Seattle', AND 'zoom in on Chicago' / 'zoom into Denver' are all this tool, not zoomMap.",
     parameters: {
       type: "object",
       properties: {
@@ -153,7 +153,7 @@ export const TOOL_SCHEMAS: ToolSchema[] = [
   {
     name: "zoomMap",
     description:
-      "Zoom the map without moving it. 'in' and 'out' step by a level or two. Use 'reset' for 'zoom all the way out', 'show me the whole country', 'back to the US' — that frames every role on the map.",
+      "Zoom the map without moving it. 'in' and 'out' step by a level or two around whatever is on screen now. If the user names a place ('zoom in on Boston'), call flyToPlace instead -- this tool cannot go anywhere. Use 'reset' for 'zoom all the way out', 'show me the whole country', 'back to the US' — that frames every role on the map.",
     parameters: {
       type: "object",
       properties: {
@@ -277,7 +277,7 @@ export async function runTool(
     }
     case "flyToPlace": {
       const spoken = String(args.city ?? "");
-      const { matches, sameState } = findCities(db, spoken);
+      const { matches, sameState } = findCities(db, spoken, args.state ? String(args.state) : undefined);
       if (matches.length === 0) {
         // Telling the model "dispatched" here is how it ends up announcing
         // "we're centered on Baltimore" over a map that never moved.

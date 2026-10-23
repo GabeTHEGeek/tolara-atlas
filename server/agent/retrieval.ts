@@ -346,6 +346,7 @@ export function searchRoles(
 export function findCities(
   db: Database.Database,
   spoken: string,
+  stateHint?: string,
 ): { matches: Array<{ city: string; state: string; roleCount: number }>; sameState: Array<{ city: string; state: string; roleCount: number }> } {
   const rows = db
     .prepare(
@@ -356,25 +357,64 @@ export function findCities(
     )
     .all() as Array<{ city: string; state: string; roleCount: number }>;
 
-  const needle = spoken.trim().toLowerCase().replace(/[^a-z ]/g, "");
+  const norm = (v: string) => v.toLowerCase().replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
+  let needle = norm(spoken);
   if (!needle) return { matches: [], sameState: [] };
-  const norm = (v: string) => v.toLowerCase().replace(/[^a-z ]/g, "");
 
-  const matches = rows.filter((r) => {
-    const c = norm(r.city);
-    return c === needle || c.startsWith(needle) || needle.startsWith(c);
-  });
+  // "Austin, Texas" / "Portland OR": a trailing state is a hint, not part
+  // of the city name -- and it's how two Portlands get told apart.
+  let state = stateHint ? (US_STATES[norm(stateHint)] ?? stateHint.trim().toUpperCase()) : null;
+  const words = needle.split(" ");
+  for (const n of [2, 1]) {
+    if (CITY_ALIASES[needle] || words.length <= n) continue;
+    const tail = words.slice(-n).join(" ");
+    const code = US_STATES[tail] ?? (tail.length === 2 && Object.values(US_STATES).includes(tail.toUpperCase()) ? tail.toUpperCase() : null);
+    if (code) {
+      needle = words.slice(0, -n).join(" ");
+      state ??= code;
+      break;
+    }
+  }
+  needle = CITY_ALIASES[needle] ?? needle;
+
+  // Exact names first; a prefix only counts at a word boundary and for
+  // something longer than an abbreviation -- otherwise "LA" is a prefix of
+  // "Lancaster" and the map flies to Texas.
+  const tier = (city: string): number => {
+    const c = norm(city);
+    if (c === needle) return 0;
+    if (needle.length >= 4 && (c.startsWith(`${needle} `) || needle.startsWith(`${c} `))) return 1;
+    if (needle.length >= 4 && c.startsWith(needle)) return 2;
+    return -1;
+  };
+  const matches = rows
+    .map((r) => ({ r, t: tier(r.city), s: state && r.state.toUpperCase() === state ? 0 : 1 }))
+    .filter((m) => m.t >= 0)
+    .sort((a, b) => a.t - b.t || a.s - b.s || b.r.roleCount - a.r.roleCount)
+    .map((m) => m.r);
 
   // Nothing in that city: offer what we do have in the same state, so the
   // answer is "I have Bethesda and Chevy Chase in Maryland" rather than a
   // flat no.
   let sameState: typeof rows = [];
   if (matches.length === 0) {
-    const state = US_STATES[needle];
-    if (state) sameState = rows.filter((r) => r.state.toUpperCase() === state).slice(0, 6);
+    const code = US_STATES[needle] ?? state;
+    if (code) sameState = rows.filter((r) => r.state.toUpperCase() === code).slice(0, 6);
   }
   return { matches, sameState };
 }
+
+// What people actually say, mapped to the city the map files it under.
+// Metro nicknames go to the metro's biggest pin.
+const CITY_ALIASES: Record<string, string> = {
+  nyc: "new york", "new york city": "new york", "ny": "new york", manhattan: "new york", brooklyn: "new york",
+  sf: "san francisco", "san fran": "san francisco", "bay area": "san francisco", "the bay area": "san francisco",
+  "the bay": "san francisco", "silicon valley": "san jose", "the valley": "san jose",
+  la: "los angeles", "l a": "los angeles",
+  dc: "washington", "d c": "washington", "washington dc": "washington", "washington d c": "washington",
+  philly: "philadelphia", vegas: "las vegas", slc: "salt lake city", atl: "atlanta", nola: "new orleans",
+  "twin cities": "minneapolis", "the twin cities": "minneapolis", "research triangle": "raleigh",
+};
 
 // Only needed to answer "what do you have near there?" when a city misses.
 const US_STATES: Record<string, string> = {
