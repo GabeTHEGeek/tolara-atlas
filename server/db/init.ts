@@ -71,6 +71,7 @@ const COMPANY_SOURCES_PLATFORMS = [
   "apple",
   "meta",
   "eightfold",
+  "atlassian",
   "gem",
 ] as const;
 

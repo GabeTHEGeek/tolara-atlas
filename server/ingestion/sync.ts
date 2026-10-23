@@ -28,6 +28,7 @@ import { searchTikTok } from "./sources/tiktok.js";
 import { searchApple } from "./sources/apple.js";
 import { searchMeta } from "./sources/meta.js";
 import { searchEightfold } from "./sources/eightfold.js";
+import { searchAtlassian } from "./sources/atlassian.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
@@ -79,7 +80,7 @@ function contentHash(job: RawJob): string {
  * afterward via matchesProductManagerFilter, so tuning that function
  * changes what the next sync stores without touching these adapters.
  */
-type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold";
+type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold" | "atlassian";
 const ALL_PLATFORMS: Platform[] = [
   "greenhouse",
   "ashby",
@@ -92,6 +93,7 @@ const ALL_PLATFORMS: Platform[] = [
   "apple",
   "meta",
   "eightfold",
+  "atlassian",
 ];
 
 // Boards big enough that PER_BOARD_LIMIT would cut off real PM roles. TikTok
@@ -124,6 +126,8 @@ async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jo
       return searchMeta("", options);
     case "eightfold":
       return searchEightfold("", options);
+    case "atlassian":
+      return searchAtlassian("", options);
   }
 }
 

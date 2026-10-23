@@ -45,7 +45,7 @@ It answers from the posting's own text, never from the model's memory.
 
 ```
 ATS boards ──► sync ──► geocode ──► prewarm ──► export ──► static JSON ──► browser
-(11 adapters)   SQLite   per-role    dossiers    map-data.json
+(12 adapters)   SQLite   per-role    dossiers    map-data.json
                          lat/lng                 companies/*.json
 ```
 
@@ -54,7 +54,7 @@ itself is static files — no server required to browse it.
 
 | Source | Used for |
 |---|---|
-| Greenhouse, Ashby, Lever, Workday, iCIMS, BambooHR, Paylocity, Eightfold, plus Apple / Meta / TikTok adapters | Roles, locations, salary bands |
+| Greenhouse, Ashby, Lever, Workday, iCIMS, BambooHR, Paylocity, Eightfold, plus Apple / Meta / TikTok / Atlassian adapters | Roles, locations, salary bands |
 | Wikidata | Company snapshot, leadership |
 | SEC EDGAR | Headquarters and industry for public companies |
 | Clearbit | Domain and logo where Wikidata has nothing |

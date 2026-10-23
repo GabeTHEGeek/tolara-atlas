@@ -1158,3 +1158,4 @@ NVIDIA,nvidia|wd5|NVIDIAExternalCareerSite|product,workday,verified,2026-09-19T0
 Meta,meta,meta,verified,2026-09-19T08:49:08.000Z,Added manually (metacareers.com job search GraphQL scrape -- see sources/meta.ts)
 Weight Watchers,ww,greenhouse,verified,2026-09-19T11:32:33.000Z,Added manually
 Netflix,explore.jobs.netflix.net|netflix.com,eightfold,verified,2026-09-20T20:58:28.000Z,Added manually (Eightfold public jobs API)
+Atlassian,atlassian,atlassian,verified,2026-10-23T18:34:47.000Z,Added manually (atlassian.com/endpoint/careers/listings JSON feed -- see sources/atlassian.ts)
