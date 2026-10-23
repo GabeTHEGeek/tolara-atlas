@@ -29,6 +29,10 @@ import { searchApple } from "./sources/apple.js";
 import { searchMeta } from "./sources/meta.js";
 import { searchEightfold } from "./sources/eightfold.js";
 import { searchAtlassian } from "./sources/atlassian.js";
+import { searchAmazon } from "./sources/amazon.js";
+import { searchMicrosoft } from "./sources/microsoft.js";
+import { searchBooking } from "./sources/booking.js";
+import { searchSmartRecruiters } from "./sources/smartrecruiters.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
@@ -80,7 +84,7 @@ function contentHash(job: RawJob): string {
  * afterward via matchesProductManagerFilter, so tuning that function
  * changes what the next sync stores without touching these adapters.
  */
-type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold" | "atlassian";
+type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold" | "atlassian" | "amazon" | "microsoft" | "booking" | "smartrecruiters";
 const ALL_PLATFORMS: Platform[] = [
   "greenhouse",
   "ashby",
@@ -94,12 +98,16 @@ const ALL_PLATFORMS: Platform[] = [
   "meta",
   "eightfold",
   "atlassian",
+  "amazon",
+  "microsoft",
+  "booking",
+  "smartrecruiters",
 ];
 
 // Boards big enough that PER_BOARD_LIMIT would cut off real PM roles. TikTok
 // is one company with ~4,300 postings worldwide, and the cap is applied
 // before the PM filter, so 500 would keep an arbitrary eighth of them.
-const PER_BOARD_LIMIT_OVERRIDES: Partial<Record<Platform, number>> = { tiktok: 10000, eightfold: 2000 };
+const PER_BOARD_LIMIT_OVERRIDES: Partial<Record<Platform, number>> = { tiktok: 10000, eightfold: 2000, amazon: 2000, microsoft: 2000 };
 
 async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
   const options = { boards, limit: PER_BOARD_LIMIT_OVERRIDES[platform] ?? PER_BOARD_LIMIT };
@@ -128,6 +136,14 @@ async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jo
       return searchEightfold("", options);
     case "atlassian":
       return searchAtlassian("", options);
+    case "amazon":
+      return searchAmazon("", options);
+    case "microsoft":
+      return searchMicrosoft("", options);
+    case "booking":
+      return searchBooking("", options);
+    case "smartrecruiters":
+      return searchSmartRecruiters("", options);
   }
 }
 

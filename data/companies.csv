@@ -1159,3 +1159,7 @@ Meta,meta,meta,verified,2026-09-19T08:49:08.000Z,Added manually (metacareers.com
 Weight Watchers,ww,greenhouse,verified,2026-09-19T11:32:33.000Z,Added manually
 Netflix,explore.jobs.netflix.net|netflix.com,eightfold,verified,2026-09-20T20:58:28.000Z,Added manually (Eightfold public jobs API)
 Atlassian,atlassian,atlassian,verified,2026-10-23T18:34:47.000Z,Added manually (atlassian.com/endpoint/careers/listings JSON feed -- see sources/atlassian.ts)
+Amazon,amazon,amazon,verified,2026-10-23T19:29:52.000Z,Added manually (amazon.jobs search.json -- see sources/amazon.ts)
+Microsoft,microsoft,microsoft,verified,2026-10-23T19:29:52.000Z,Added manually (apply.careers.microsoft.com /api/pcsx/search -- see sources/microsoft.ts)
+Booking.com,booking,booking,verified,2026-10-23T19:29:52.000Z,Added manually (jobs.booking.com Jibe /api/jobs -- see sources/booking.ts)
+Canva,Canva,smartrecruiters,verified,2026-10-23T19:29:52.000Z,Added manually (SmartRecruiters public Posting API)

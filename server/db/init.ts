@@ -72,6 +72,10 @@ const COMPANY_SOURCES_PLATFORMS = [
   "meta",
   "eightfold",
   "atlassian",
+  "amazon",
+  "microsoft",
+  "booking",
+  "smartrecruiters",
   "gem",
 ] as const;
 
