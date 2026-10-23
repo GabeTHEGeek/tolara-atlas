@@ -12,7 +12,7 @@
  * Docs: https://developers.greenhouse.io/job-board.html
  */
 
-import { normalizeTitle, stripHtml, titleMatchesQueryWord } from "./common.js";
+import { decodeEntities, normalizeTitle, stripHtml, titleMatchesQueryWord } from "./common.js";
 import { extractSalary } from "../extract.js";
 import type { RawJob, SearchMeta, SearchOptions } from "./types.js";
 
@@ -129,7 +129,14 @@ export async function searchGreenhouse(
       }
 
       const location = job.location?.name ?? "";
-      const fullDescription = stripHtml(job.content);
+      // Greenhouse returns `content` HTML-escaped ("&lt;p&gt;Pay: $65,000
+      // &amp;mdash; $80,000"), so the markup has to be decoded before it can
+      // be stripped, and the text inside decoded once more after. Stripping
+      // the escaped form removed nothing: descriptions were stored as
+      // markup (crowding the pay section out of the 4,000-char cut), and
+      // "&mdash;" hid the dash between two figures, so salary extraction
+      // found no range and stored the first number as both ends.
+      const fullDescription = decodeEntities(stripHtml(decodeEntities(job.content ?? ""))).replace(/\s+/g, " ").trim();
 
       // Some Greenhouse boards expose a structured pay range (pay-
       // transparency compliance); most don't. Fall back to scanning the

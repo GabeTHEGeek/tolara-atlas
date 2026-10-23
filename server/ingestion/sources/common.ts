@@ -12,6 +12,23 @@ export function stripHtml(html: string | null | undefined): string {
   return text.replace(/\s+/g, " ").trim();
 }
 
+const NAMED_ENTITIES: Record<string, string> = {
+  lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", amp: "&",
+  mdash: "—", ndash: "–", hellip: "…", bull: "•", middot: "·",
+  rsquo: "’", lsquo: "‘", rdquo: "”", ldquo: "“", trade: "™", reg: "®", copy: "©",
+};
+
+/** One pass of HTML entity decoding: the common named ones plus numeric &#NNN; / &#xHH;. */
+export function decodeEntities(text: string): string {
+  return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (match, body: string) => {
+    if (body[0] === "#") {
+      const code = body[1] === "x" || body[1] === "X" ? parseInt(body.slice(2), 16) : Number(body.slice(1));
+      return Number.isFinite(code) && code > 0 ? String.fromCodePoint(code) : match;
+    }
+    return NAMED_ENTITIES[body.toLowerCase()] ?? match;
+  });
+}
+
 export function normalizeTitle(text: string): string {
   return text.toLowerCase().replace(/[\s-]+/g, "").trim();
 }
