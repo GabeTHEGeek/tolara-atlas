@@ -1461,6 +1461,12 @@ h1.role-page-title {
   align-self: flex-start;
 }
 
+.voice-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 /* The waveform: real mic amplitude while you speak, a word-boundary
    envelope while it replies (speechSynthesis output can't be metered --
    see src/voice/transport.ts). */

@@ -247,6 +247,7 @@ export default function App() {
             selectedPinId={onRolePage ? rolePinId : (selectedPin?.id ?? null)}
             flyToRequest={flyToRequest}
             zoomRequest={zoomRequest}
+            onCameraSettled={voice.logCamera}
             // Side panels cover the right of the map (.company-panel is 360px,
             // the role drawer wider); on a narrow screen they cover most of
             // it anyway, so there's no visible area to center in.

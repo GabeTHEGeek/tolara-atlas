@@ -97,6 +97,11 @@ export interface ZoomRequest {
   nonce: number;
 }
 
+export interface CameraState {
+  zoom: number;
+  center: [number, number]; // [lat, lng]
+}
+
 interface MapViewProps {
   pins: LocationPinData[];
   onSelectPin: (pin: LocationPinData) => void;
@@ -113,6 +118,8 @@ interface MapViewProps {
    * centre on the strip still visible above it rather than behind it.
    */
   bottomInset: number;
+  /** Where the camera came to rest after each move -- read by the copilot's debug log. */
+  onCameraSettled?: (camera: CameraState) => void;
 }
 
 function cityKey(pin: LocationPinData): string {
@@ -224,9 +231,13 @@ export default function MapView({
   zoomRequest,
   rightInset,
   bottomInset,
+  onCameraSettled,
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
+  // The moveend handler is registered once; it reads the latest callback here.
+  const onCameraSettledRef = useRef(onCameraSettled);
+  onCameraSettledRef.current = onCameraSettled;
   // Kept alongside the map instance so click/hover handlers (registered
   // once, when the map loads) can look up the current pin list without
   // re-registering every time `pins` changes identity.
@@ -276,6 +287,8 @@ export default function MapView({
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     map.on("moveend", () => {
       targetZoomRef.current = null;
+      const c = map.getCenter();
+      onCameraSettledRef.current?.({ zoom: +map.getZoom().toFixed(2), center: [+c.lat.toFixed(4), +c.lng.toFixed(4)] });
     });
 
     hoverPopupRef.current = new maplibregl.Popup({
@@ -666,7 +679,13 @@ export default function MapView({
     const delta = bottomInset - previousBottomInset.current;
     previousBottomInset.current = bottomInset;
     if (!map || !mapLoadedRef.current || delta === 0) return;
-    map.panBy([0, delta / 2], { duration: 220, essential: true });
+    // panBy cancels any camera move in progress. The dock grows the moment
+    // the agent's reply lands -- mid-flight, every time -- so panning
+    // straight away stopped "take me to Atlanta" a third of the way there
+    // and swallowed zooms whole. Mid-move, wait for the camera to arrive.
+    const nudge = () => map.panBy([0, delta / 2], { duration: 220, essential: true });
+    if (map.isMoving()) map.once("moveend", nudge);
+    else nudge();
   }, [bottomInset]);
 
   useEffect(() => {

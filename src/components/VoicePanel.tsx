@@ -19,6 +19,9 @@ interface VoicePanelProps {
   stop: () => void;
   ask: (text: string) => void;
   clear: () => void;
+  debugCount: number;
+  debugText: () => string;
+  clearDebug: () => void;
   inputLevel: () => number;
   outputLevel: () => number;
   /** Reports how much of the map the dock is covering, so it can pan clear. */
@@ -41,6 +44,7 @@ export default function VoicePanel(props: VoicePanelProps) {
   // asked to show.
   const [collapsed, setCollapsed] = useState(false);
   const [typed, setTyped] = useState("");
+  const [copied, setCopied] = useState(false);
   const logRef = useRef<HTMLDivElement | null>(null);
   const panelRef = useRef<HTMLElement | null>(null);
 
@@ -203,10 +207,44 @@ export default function VoicePanel(props: VoicePanelProps) {
       </form>
       )}
 
-      {entries.length > 0 && !collapsed && (
-        <button className="filter-clear voice-clear" onClick={props.clear}>
-          Clear conversation
-        </button>
+      {(entries.length > 0 || props.debugCount > 0) && !collapsed && (
+        <div className="voice-footer">
+          {/* Clears the debug log too, so "clear, reproduce, copy" gives a
+              log of just the problem. */}
+          <button
+            className="filter-clear voice-clear"
+            onClick={() => {
+              props.clear();
+              props.clearDebug();
+            }}
+          >
+            Clear conversation
+          </button>
+          {props.debugCount > 0 && (
+            <button
+              className="filter-clear voice-clear"
+              title="Copies every step of the conversation -- what was heard, which tools ran, what they returned, where the map went"
+              onClick={async () => {
+                const text = props.debugText();
+                try {
+                  await navigator.clipboard.writeText(text);
+                } catch {
+                  // Clipboard API refused (focus, permissions): fall back to a selection copy.
+                  const area = document.createElement("textarea");
+                  area.value = text;
+                  document.body.appendChild(area);
+                  area.select();
+                  document.execCommand("copy");
+                  area.remove();
+                }
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1800);
+              }}
+            >
+              {copied ? "Copied ✓" : `Copy debug log (${props.debugCount})`}
+            </button>
+          )}
+        </div>
       )}
     </aside>
   );

@@ -32,6 +32,25 @@ export interface VoiceEntry {
   did?: string[];
 }
 
+/**
+ * One line of the copilot's debug log: everything a turn did, in order --
+ * what was heard, which tools the model called with what, what they
+ * returned, whether the browser applied the action, and where the map
+ * ended up. Copied out as plain text to paste into a bug report.
+ */
+export interface DebugEvent {
+  at: number;
+  kind: "session" | "you" | "agent" | "tool" | "result" | "action" | "map" | "error";
+  text: string;
+}
+
+const DEBUG_LIMIT = 400;
+
+const brief = (v: unknown) => {
+  const json = JSON.stringify(v) ?? String(v);
+  return json.length > 600 ? `${json.slice(0, 600)}…` : json;
+};
+
 export interface VoiceAgentHandlers {
   mapData: MapData | null;
   /** Press the open role page's "Load company intelligence" button. */
@@ -137,11 +156,16 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name, arguments: args, screen: handlersRef.current.screen }),
         });
+        logRef.current("tool", `${name} ${brief(args)}`);
         const data = (await resp.json()) as { result: unknown; action: AgentAction | null };
+        logRef.current("result", `${name} -> ${brief(data.result)}${data.action ? ` | action: ${brief(data.action)}` : " | no action"}`);
         return data;
       },
       screen: () => ({ ...handlersRef.current.screen, mapFocus: mapFocusRef.current }),
-      onReply: (text) => setEntries((prev) => [...prev, { role: "assistant", content: text }]),
+      onReply: (text) => {
+        logRef.current("agent", text);
+        setEntries((prev) => [...prev, { role: "assistant", content: text }]);
+      },
       onAction: (action) => {
         const did = applyActionRef.current?.(action);
         if (did) setEntries((prev) => [...prev, { role: "assistant", content: "", did: [did] }]);
@@ -159,6 +183,18 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
   handlersRef.current = handlers;
   const entriesRef = useRef<VoiceEntry[]>([]);
   entriesRef.current = entries;
+
+  const debugRef = useRef<DebugEvent[]>([]);
+  const [debugCount, setDebugCount] = useState(0);
+  const log = useCallback((kind: DebugEvent["kind"], text: string) => {
+    const events = debugRef.current;
+    events.push({ at: Date.now(), kind, text });
+    if (events.length > DEBUG_LIMIT) events.splice(0, events.length - DEBUG_LIMIT);
+    setDebugCount(events.length);
+  }, []);
+  // The transport memo above is built before `log` exists in render order.
+  const logRef = useRef(log);
+  logRef.current = log;
 
   useEffect(() => {
     fetch("/api/agent/status")
@@ -301,7 +337,18 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
     }
   }, []);
 
-  applyActionRef.current = applyAction;
+  // Every action goes through here, so the log records the ones that
+  // silently did nothing -- the case a "the map didn't move" report is about.
+  const applyAndLog = useCallback(
+    (action: AgentAction): string | null => {
+      const did = applyAction(action);
+      log("action", `${action.name} ${brief(action.args)} -> ${did ?? "NOT APPLIED (no matching pin or unknown action)"}`);
+      return did;
+    },
+    [applyAction, log],
+  );
+
+  applyActionRef.current = applyAndLog;
 
   const ask = useCallback(
     async (utterance: string) => {
@@ -314,6 +361,9 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
       transport.suspend();
 
       setPartial("");
+      // ask() is the text agent (/api/agent): every typed question, and
+      // speech too unless the transport is realtime.
+      log("you", `[text agent] ${utterance}`);
       setEntries((prev) => [...prev, { role: "user", content: utterance }]);
       setStatus("thinking");
       setError(null);
@@ -328,9 +378,21 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
             screen: { ...handlersRef.current.screen, filters: null, mapFocus: mapFocusRef.current },
           }),
         });
-        const data = (await resp.json()) as { reply?: string; actions?: AgentAction[]; error?: string };
+        const data = (await resp.json()) as {
+          reply?: string;
+          actions?: AgentAction[];
+          error?: string;
+          trace?: Array<{ tool: string; args: unknown; result: unknown; action: AgentAction | null }>;
+        };
+        for (const t of data.trace ?? []) {
+          log("tool", `${t.tool} ${brief(t.args)}`);
+          log("result", `${t.tool} -> ${brief(t.result)}${t.action ? ` | action: ${brief(t.action)}` : " | no action"}`);
+        }
+        if (!data.trace?.length) log("tool", "(no tools called)");
+        if (!resp.ok) log("error", `HTTP ${resp.status} ${data.error ?? ""}`);
         const reply = data.reply ?? "Something went wrong.";
-        const did = (data.actions ?? []).map(applyAction).filter((d): d is string => d !== null);
+        log("agent", reply);
+        const did = (data.actions ?? []).map(applyAndLog).filter((d): d is string => d !== null);
 
         setEntries((prev) => [...prev, { role: "assistant", content: reply, did }]);
         if (!resp.ok) setError(data.error === "rate_limited" ? "Rate limited — wait a moment." : (data.error ?? null));
@@ -338,7 +400,8 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
         setStatus("speaking");
         await transport.speak(reply);
         setStatus(handsFreeRef.current ? "listening" : "idle");
-      } catch {
+      } catch (err) {
+        log("error", `Couldn't reach the agent: ${err instanceof Error ? err.message : String(err)}`);
         setError("Couldn't reach the agent.");
         setStatus("error");
       } finally {
@@ -347,7 +410,7 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
         transport.resume();
       }
     },
-    [applyAction, transport],
+    [applyAndLog, log, transport],
   );
 
   // Read inside `ask`, which is memoised and would otherwise capture a
@@ -359,6 +422,7 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
     transport.onTranscript = (text) => {
       if (useRealtime) {
         // Realtime answers for itself; the transcript is only for display.
+        log("you", `[realtime voice] ${text}`);
         setEntries((prev) => [...prev, { role: "user", content: text }]);
         setPartial("");
         return;
@@ -367,6 +431,7 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
     };
     transport.onPartial = (text) => setPartial(text);
     transport.onError = (message) => {
+      log("error", message);
       setError(message);
       setStatus("error");
     };
@@ -379,25 +444,28 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
       transport.onError = null;
       transport.onEnd = null;
     };
-  }, [transport, ask, useRealtime]);
+  }, [transport, ask, useRealtime, log]);
 
   const listen = useCallback(async () => {
+    log("session", `listen once (${transport.name})`);
     setError(null);
     setStatus("listening");
     await transport.start();
-  }, [transport]);
+  }, [transport, log]);
 
   const stop = useCallback(() => {
+    log("session", "stopped");
     setHandsFreeState(false);
     transport.stop();
     transport.cancelSpeech();
     setStatus("idle");
     setPartial("");
-  }, [transport]);
+  }, [transport, log]);
 
   /** Hands-free: keep the mic open across turns instead of a click each time. */
   const setHandsFree = useCallback(
     async (on: boolean) => {
+      log("session", on ? `conversation started (${transport.name})` : "conversation stopped");
       setHandsFreeState(on);
       transport.setContinuous(on);
       if (on) {
@@ -410,8 +478,40 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
         setPartial("");
       }
     },
-    [transport],
+    [transport, log],
   );
+
+  /**
+   * Where the map came to rest. Logged only once the copilot has been used,
+   * so ordinary panning before then doesn't fill the log.
+   */
+  const logCamera = useCallback(
+    (camera: { zoom: number; center: [number, number] }) => {
+      if (debugRef.current.length > 0) log("map", `settled at zoom ${camera.zoom}, center ${camera.center.join(", ")}`);
+    },
+    [log],
+  );
+
+  /** The whole log as plain text, with enough context to read it cold. */
+  const debugText = useCallback(() => {
+    const events = debugRef.current;
+    const start = events[0]?.at ?? Date.now();
+    const h = handlersRef.current;
+    const header = [
+      "Tolara copilot debug log",
+      `copied ${new Date().toISOString()} | transport: ${transport.name}${useRealtime ? " (realtime)" : ""} | provider: ${provider?.detail ?? "unknown"}`,
+      `screen: ${brief({ ...h.screen, mapFocus: mapFocusRef.current })}`,
+      `pins loaded: ${h.mapData?.pins.length ?? 0} | url: ${window.location.href}`,
+      "",
+    ];
+    const lines = events.map((e) => `+${((e.at - start) / 1000).toFixed(1).padStart(6)}s  ${e.kind.padEnd(7)} ${e.text}`);
+    return [...header, ...lines].join("\n");
+  }, [transport, useRealtime, provider]);
+
+  const clearDebug = useCallback(() => {
+    debugRef.current = [];
+    setDebugCount(0);
+  }, []);
 
   // Passed as functions, not state: the waveform polls them per frame.
   const inputLevel = useCallback(() => transport.inputLevel(), [transport]);
@@ -436,5 +536,9 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
     stop,
     ask,
     clear: () => setEntries([]),
+    debugCount,
+    debugText,
+    clearDebug,
+    logCamera,
   };
 }

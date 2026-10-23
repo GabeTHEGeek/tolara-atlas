@@ -79,6 +79,10 @@ export class RealtimeTransport implements VoiceTransport {
   private lastReply = "";
   // Accumulates the assistant's transcript deltas for the current reply.
   private replyText = "";
+  // True between response.created and response.done. The server starts a
+  // response by itself when the user speaks, so one can already be running
+  // by the time our tool outputs are posted.
+  private responseActive = false;
 
   constructor(private hooks: RealtimeHooks) {}
 
@@ -249,9 +253,11 @@ export class RealtimeTransport implements VoiceTransport {
         break;
       }
       case "response.created":
+        this.responseActive = true;
         this.hooks.onSpeakingChange(true);
         break;
       case "response.done": {
+        this.responseActive = false;
         this.hooks.onSpeakingChange(false);
         const output = ((event.response as { output?: unknown[] })?.output ?? []) as Array<{
           type?: string;
@@ -268,8 +274,12 @@ export class RealtimeTransport implements VoiceTransport {
           hadToolCalls = true;
           await this.dispatchToolCall(item.name, item.call_id, item.arguments ?? "{}");
         }
-        // Exactly one continuation per response that used tools.
-        if (hadToolCalls) this.send({ type: "response.create" });
+        // Exactly one continuation per response that used tools -- unless
+        // the user spoke while the tools ran and the server has already
+        // started answering that. Asking for a second one then errors
+        // ("already has an active response") and the reply came out twice;
+        // the running response sees the tool outputs anyway.
+        if (hadToolCalls && !this.responseActive) this.send({ type: "response.create" });
         break;
       }
       case "error":

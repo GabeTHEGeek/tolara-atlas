@@ -38,6 +38,10 @@ export interface AgentResponse {
   reply: string;
   actions: Array<{ name: string; args: Record<string, unknown> }>;
   usedTools: string[];
+  // Every tool call the model made and what came back, for the copilot's
+  // debug log -- the reply alone can't tell "never called the tool" from
+  // "called it and the result went nowhere".
+  trace: Array<{ tool: string; args: Record<string, unknown>; result: unknown; action: { name: string; args: Record<string, unknown> } | null }>;
 }
 
 export function voiceInstructions(screen: ScreenState): string {
@@ -95,12 +99,13 @@ export async function runAgent(
 
   const actions: AgentResponse["actions"] = [];
   const usedTools: string[] = [];
+  const trace: AgentResponse["trace"] = [];
 
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
     const result = await chat(messages, TOOL_SCHEMAS);
 
     if (result.toolCalls.length === 0) {
-      return { reply: result.content?.trim() || "I didn't catch that — could you say it again?", actions, usedTools };
+      return { reply: result.content?.trim() || "I didn't catch that — could you say it again?", actions, usedTools, trace };
     }
 
     messages.push({
@@ -130,6 +135,7 @@ export async function runAgent(
       // (lookupCompany pressing "Load company intelligence"), and matching
       // on call.name silently dropped those.
       if (outcome.action && ACTION_TOOLS.has(outcome.action.name)) actions.push(outcome.action);
+      trace.push({ tool: call.name, args: call.arguments, result: outcome.result, action: outcome.action ?? null });
       messages.push({ role: "tool", tool_call_id: call.id, content: JSON.stringify(outcome.result) });
     }
   }
@@ -141,5 +147,6 @@ export async function runAgent(
     reply: final.content?.trim() || "I looked that up but couldn't put an answer together — try asking a different way?",
     actions,
     usedTools,
+    trace,
   };
 }
