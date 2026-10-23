@@ -99,6 +99,12 @@ async function createSession(res: ServerResponse, screen: Record<string, unknown
                     silence_duration_ms: 500,
                     interrupt_response: true,
                   },
+            // Without this the model hears you but the browser never gets
+            // the text: no "you" lines in the transcript or the debug log,
+            // so a bad answer can't be traced to what was actually asked.
+            // Billed per minute of input audio, a fraction of the realtime
+            // model's own rate.
+            transcription: { model: process.env.TOLARA_TRANSCRIBE_MODEL ?? "gpt-4o-mini-transcribe" },
           },
           output: { voice: "marin" },
         },

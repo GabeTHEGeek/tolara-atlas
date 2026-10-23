@@ -70,7 +70,7 @@ export const TOOL_SCHEMAS: ToolSchema[] = [
   {
     name: "lookupCompany",
     description:
-      "Look up a company on the map: its open roles, offices, profile, leadership and recent news. Use this before answering any question about a company. The name may be misheard, so pass what you heard and check the result.",
+      "Look up a company's details -- open roles, offices, profile, leadership and recent news -- to ANSWER A QUESTION about it ('who runs Stripe?', 'is Ramp growing?'). It shows nothing on screen. To show a company or its roles, call showCompany instead. The name may be misheard, so pass what you heard and check the result.",
     parameters: {
       type: "object",
       properties: { name: { type: "string", description: "Company name as heard, e.g. 'Airbnb'" } },
@@ -113,10 +113,13 @@ export const TOOL_SCHEMAS: ToolSchema[] = [
   {
     name: "showCompany",
     description:
-      "Open a company's side panel on the map. Use for 'open the company panel', 'show me the company', 'open the company menu'. Omit companySlug to use the company whose role page is open.",
+      "Fly the map to a company and open its panel, which lists every open role on screen. Use for 'show me Anthropic', 'open Stripe', 'what roles does Figma have', 'list Anthropic's jobs'. Pass the name as heard -- no lookup needed first. Omit both arguments to use the company whose role page is open.",
     parameters: {
       type: "object",
-      properties: { companySlug: { type: "string", description: "Slug from lookupCompany. Omit to use the open role's company." } },
+      properties: {
+        name: { type: "string", description: "Company name as the user said it, e.g. 'Anthropic'." },
+        companySlug: { type: "string", description: "Slug, if you already have it from an earlier tool result." },
+      },
     },
   },
   {
@@ -349,14 +352,35 @@ export async function runTool(
       return { result: { dispatched: true, direction, steps }, action: { name: "zoomMap", args: { direction, steps } } };
     }
     case "showCompany": {
-      // Falls back to whatever is open, so "open the company panel" works
-      // without the model having to look the slug up first.
-      const slug = String(args.companySlug ?? screen?.openCompanySlug ?? "");
+      // Resolves a spoken name itself: requiring a lookupCompany first made
+      // "show me Anthropic" a two-step chain, and the model would stop after
+      // step one and read the role list aloud instead of opening anything.
+      // Falls back to whatever is open, so "open the company panel" works too.
+      let slug = args.companySlug ? String(args.companySlug) : "";
+      let resolved: { name: string; roleCount: number } | null = null;
+      let otherMatches: Array<{ name: string; slug: string }> = [];
+      if (!slug && args.name) {
+        const matches = findCompanies(db, String(args.name));
+        if (matches.length === 0) {
+          return { result: { dispatched: false, note: `No company matching "${args.name}" has open roles on this map. Say so plainly.` } };
+        }
+        slug = matches[0].slug;
+        resolved = { name: matches[0].name, roleCount: matches[0].roleCount };
+        otherMatches = matches.slice(1, 4).map((m) => ({ name: m.name, slug: m.slug }));
+      }
+      slug ||= String(screen?.openCompanySlug ?? "");
       if (!slug) {
         return { result: { dispatched: false, note: "No company named and none is open. Ask which company they mean." } };
       }
       return {
-        result: { dispatched: true, companySlug: slug },
+        result: {
+          dispatched: true,
+          companySlug: slug,
+          ...(resolved ? { companyName: resolved.name, roleCount: resolved.roleCount } : {}),
+          // So a misheard name can be corrected ("did you mean ...?").
+          ...(otherMatches.length > 0 ? { otherMatches } : {}),
+          note: "The panel now lists the roles on screen -- don't read them out. Say the company and how many roles, then offer to open one.",
+        },
         // preferCurrentOffice tells the browser to open the office already
         // on screen rather than the company's biggest one -- jumping from
         // the role you're reading to headquarters is disorienting.
