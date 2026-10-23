@@ -1166,3 +1166,4 @@ Canva,Canva,smartrecruiters,verified,2026-10-23T19:29:52.000Z,Added manually (Sm
 American Express,egug.fa.us2.oraclecloud.com|CX_1|product,oracle,verified,2026-10-23T21:05:24.000Z,Added manually (Oracle Recruiting Cloud behind careers.americanexpress.com -- see sources/oracle.ts)
 NBA,nba|wd108|nbacareers,workday,verified,2026-10-23T21:05:24.000Z,Added manually (Workday behind careers.nba.com)
 NFL,nflcareers,greenhouse,verified,2026-10-23T21:05:24.000Z,Added manually (Greenhouse board linked from nfl.com/careers)
+Coca-Cola,coke|wd1|coca-cola-careers,workday,verified,2026-10-23T22:37:47.000Z,Added manually (Workday board coke.wd1.myworkdayjobs.com/coca-cola-careers)

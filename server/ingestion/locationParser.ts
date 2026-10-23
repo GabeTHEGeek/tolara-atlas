@@ -205,7 +205,9 @@ function stripLeadingNoiseTokens(text: string): string {
 
 /** "US-CA-Menlo Park" -> { city: "Menlo Park", state: "CA" } */
 function parseUsDashFormat(raw: string): ParsedLocation | null {
-  const match = raw.trim().match(/^US-([A-Z]{2})-(.+)$/);
+  // Spaces around the dashes are optional: Coca-Cola's Workday writes
+  // "US - GA - Atlanta".
+  const match = raw.trim().match(/^US\s*-\s*([A-Z]{2})\s*-\s*(.+)$/);
   if (!match) return null;
   const state = match[1];
   const city = match[2].trim();
@@ -223,7 +225,7 @@ function parseUsDashFormat(raw: string): ParsedLocation | null {
  * ("US-North Carolina-Winston-Salem").
  */
 function parseUsDashFullStateFormat(raw: string): ParsedLocation | null {
-  const match = raw.trim().match(/^US-([A-Za-z][A-Za-z ]+?)-(.+)$/);
+  const match = raw.trim().match(/^US\s*-\s*([A-Za-z][A-Za-z ]+?)\s*-\s*(.+)$/);
   if (!match) return null;
   const state = US_STATE_NAMES[match[1].trim().toLowerCase()];
   const city = match[2].trim();
