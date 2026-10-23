@@ -1163,3 +1163,6 @@ Amazon,amazon,amazon,verified,2026-10-23T19:29:52.000Z,Added manually (amazon.jo
 Microsoft,microsoft,microsoft,verified,2026-10-23T19:29:52.000Z,Added manually (apply.careers.microsoft.com /api/pcsx/search -- see sources/microsoft.ts)
 Booking.com,booking,booking,verified,2026-10-23T19:29:52.000Z,Added manually (jobs.booking.com Jibe /api/jobs -- see sources/booking.ts)
 Canva,Canva,smartrecruiters,verified,2026-10-23T19:29:52.000Z,Added manually (SmartRecruiters public Posting API)
+American Express,egug.fa.us2.oraclecloud.com|CX_1|product,oracle,verified,2026-10-23T21:05:24.000Z,Added manually (Oracle Recruiting Cloud behind careers.americanexpress.com -- see sources/oracle.ts)
+NBA,nba|wd108|nbacareers,workday,verified,2026-10-23T21:05:24.000Z,Added manually (Workday behind careers.nba.com)
+NFL,nflcareers,greenhouse,verified,2026-10-23T21:05:24.000Z,Added manually (Greenhouse board linked from nfl.com/careers)

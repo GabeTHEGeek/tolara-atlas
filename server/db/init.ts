@@ -76,6 +76,7 @@ const COMPANY_SOURCES_PLATFORMS = [
   "microsoft",
   "booking",
   "smartrecruiters",
+  "oracle",
   "gem",
 ] as const;
 

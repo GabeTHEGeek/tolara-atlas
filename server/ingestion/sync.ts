@@ -33,6 +33,7 @@ import { searchAmazon } from "./sources/amazon.js";
 import { searchMicrosoft } from "./sources/microsoft.js";
 import { searchBooking } from "./sources/booking.js";
 import { searchSmartRecruiters } from "./sources/smartrecruiters.js";
+import { searchOracle } from "./sources/oracle.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import type { RawJob, SearchMeta } from "./sources/types.js";
 
@@ -84,7 +85,7 @@ function contentHash(job: RawJob): string {
  * afterward via matchesProductManagerFilter, so tuning that function
  * changes what the next sync stores without touching these adapters.
  */
-type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold" | "atlassian" | "amazon" | "microsoft" | "booking" | "smartrecruiters";
+type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold" | "atlassian" | "amazon" | "microsoft" | "booking" | "smartrecruiters" | "oracle";
 const ALL_PLATFORMS: Platform[] = [
   "greenhouse",
   "ashby",
@@ -102,6 +103,7 @@ const ALL_PLATFORMS: Platform[] = [
   "microsoft",
   "booking",
   "smartrecruiters",
+  "oracle",
 ];
 
 // Boards big enough that PER_BOARD_LIMIT would cut off real PM roles. TikTok
@@ -144,6 +146,8 @@ async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jo
       return searchBooking("", options);
     case "smartrecruiters":
       return searchSmartRecruiters("", options);
+    case "oracle":
+      return searchOracle("", options);
   }
 }
 

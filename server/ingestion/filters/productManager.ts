@@ -31,6 +31,10 @@ export const PM_TITLE_INCLUDE: string[] = [
   "group product manager",
   "technical product manager",
   "product management",
+  // Abbreviated forms -- American Express titles its PM roles "Mgr-Digital
+  // Product Mgmt" and "Sr Mgr-Digital Product Mgmt".
+  "product mgmt",
+  "product mgr",
   "product strategist",
   "outcomes manager",
   "product director",
