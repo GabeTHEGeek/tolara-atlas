@@ -14,3 +14,6 @@ dist/
 .env.*
 # ...but the template carries no values and documents the variables.
 !.env.example
+
+# Personal match inputs and outputs (resumes, parsed profiles, test reports)
+.local/
