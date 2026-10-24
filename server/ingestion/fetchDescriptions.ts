@@ -1,8 +1,9 @@
 /**
  * ingestion/fetchDescriptions.ts
  * Fills in the posting text for roles whose board's list endpoint doesn't
- * include it -- Workday's search returns titles, locations and dates only,
- * and the text needs one more request per posting.
+ * include it -- Workday, Microsoft, Meta, Oracle, Eightfold, BambooHR and
+ * some iCIMS tenants return titles, locations and dates only, and the text
+ * needs one more request per posting.
  *
  * Only roles with no stored text are fetched, newest first, so after the
  * first run a nightly pass only touches what was posted since yesterday.
@@ -16,7 +17,7 @@
  * next sync still sees the posting as unchanged. sync.ts keeps a stored
  * description when the board sends none.
  *
- * Usage: npm run descriptions -- --minutes=10
+ * Usage: npm run descriptions -- --minutes=10 [--only=workday,oracle]
  */
 
 import { getDb } from "../db/client.js";
@@ -34,18 +35,67 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function getJson(url: string, timeoutMs = 20000): Promise<unknown | null> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
+/**
+ * One GET, retrying a 429 a few times after a flat wait -- Microsoft's
+ * endpoint refuses quick requests with no Retry-After (see
+ * sources/microsoft.ts). Returns the body text, or null.
+ */
+async function getText(url: string, { json = false, rateLimitWaitMs = 15000, timeoutMs = 20000 } = {}): Promise<string | null> {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const resp = await fetch(url, {
+        signal: controller.signal,
+        redirect: "follow",
+        headers: { "User-Agent": USER_AGENT, Accept: json ? "application/json" : "text/html,application/json" },
+      });
+      if (resp.status === 429) {
+        await sleep(rateLimitWaitMs);
+        continue;
+      }
+      return resp.ok ? await resp.text() : null;
+    } catch {
+      return null;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  return null;
+}
+
+async function getJson(url: string, opts?: { rateLimitWaitMs?: number }): Promise<unknown | null> {
+  const text = await getText(url, { json: true, ...opts });
+  if (!text) return null;
   try {
-    const resp = await fetch(url, { signal: controller.signal, headers: { "User-Agent": USER_AGENT, Accept: "application/json" } });
-    if (!resp.ok) return null;
-    return await resp.json();
+    return JSON.parse(text);
   } catch {
     return null;
-  } finally {
-    clearTimeout(timer);
   }
+}
+
+/**
+ * The schema.org JobPosting a page embeds for search engines -- Meta's and
+ * iCIMS's job pages both carry one. Joins its description with the
+ * responsibilities/qualifications fields some boards split out.
+ */
+function jobPostingFromHtml(html: string): string | null {
+  for (const block of html.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
+    try {
+      const parsed = JSON.parse(block[1]) as unknown;
+      const items = (Array.isArray(parsed) ? parsed : [parsed]) as Array<Record<string, unknown>>;
+      const posting = items.find((i) => i?.["@type"] === "JobPosting") ?? items.flatMap((i) => (i?.["@graph"] as Array<Record<string, unknown>>) ?? []).find((i) => i?.["@type"] === "JobPosting");
+      if (!posting) continue;
+      const parts = ["description", "responsibilities", "qualifications", "experienceRequirements"]
+        .map((k) => posting[k])
+        .map((v) => (Array.isArray(v) ? v.join(" ") : typeof v === "string" ? v : ""))
+        .filter(Boolean);
+      if (parts.length > 0) return parts.join(" ");
+    } catch {
+      /* a malformed block -- try the next */
+    }
+  }
+  return null;
 }
 
 /**
@@ -63,10 +113,73 @@ const fetchWorkday: Fetcher = async (url) => {
   return data?.jobPostingInfo?.jobDescription ?? null;
 };
 
-// One entry per platform this can fill in, with how gently to ask: Workday
-// tenants sit behind a WAF, so two at a time with a pause between.
+/** https://apply.careers.microsoft.com/careers/job/{id} -> the PCSX details the page loads. */
+const fetchMicrosoft: Fetcher = async (url) => {
+  const id = url.match(/\/careers\/job\/(\d+)/)?.[1];
+  if (!id) return null;
+  const data = (await getJson(
+    `https://apply.careers.microsoft.com/api/pcsx/position_details?position_id=${id}&domain=microsoft.com&hl=en`,
+  )) as { data?: { jobDescription?: string } } | null;
+  return data?.data?.jobDescription ?? null;
+};
+
+/** {host}/careers/job/{id}?domain={domain} -> Eightfold's per-job JSON (the list omits text even with full=true). */
+const fetchEightfold: Fetcher = async (url) => {
+  const m = url.match(/^https:\/\/([^/]+)\/careers\/job\/(\d+)\?domain=([^&]+)/);
+  if (!m) return null;
+  const data = (await getJson(`https://${m[1]}/api/apply/v2/jobs/${m[2]}?domain=${m[3]}`)) as { job_description?: string } | null;
+  return data?.job_description ?? null;
+};
+
+/** {host}/hcmUI/CandidateExperience/en/sites/{site}/job/{id} -> Oracle's requisition details. */
+const fetchOracle: Fetcher = async (url) => {
+  const m = url.match(/^https:\/\/([^/]+)\/hcmUI\/CandidateExperience\/[a-z]{2}\/sites\/([^/]+)\/job\/(\d+)/);
+  if (!m) return null;
+  const [, host, site, id] = m;
+  const data = (await getJson(
+    `https://${host}/hcmRestApi/resources/latest/recruitingCEJobRequisitionDetails?expand=all&onlyData=true&finder=ById;Id=%22${id}%22,siteNumber=${site}`,
+  )) as { items?: Array<Record<string, unknown>> } | null;
+  const item = data?.items?.[0] as (Record<string, unknown> & { requisitionFlexFields?: Array<{ Prompt?: string; Value?: string }> }) | undefined;
+  if (!item) return null;
+  const text = ["ExternalDescriptionStr", "ExternalResponsibilitiesStr", "ExternalQualificationsStr"].map((k) => String(item[k] ?? "")).join(" ");
+  // Amex states pay in a custom "Salary Range" field, not in the text.
+  const pay = (item.requisitionFlexFields ?? []).find((f) => /salary|pay|compensation/i.test(f.Prompt ?? ""));
+  return pay?.Value ? `${text} ${pay.Prompt}: ${pay.Value}` : text;
+};
+
+/** {tenant}.bamboohr.com/careers/{id} -> the same path + /detail, which is JSON. */
+const fetchBambooHr: Fetcher = async (url) => {
+  const m = url.match(/^(https:\/\/[^/]+\.bamboohr\.com\/careers\/\d+)/);
+  if (!m) return null;
+  const data = (await getJson(`${m[1]}/detail`)) as { result?: { jobOpening?: { description?: string } } } | null;
+  return data?.result?.jobOpening?.description ?? null;
+};
+
+/** Meta's job page redirects to its profile view, which embeds a JobPosting. */
+const fetchMeta: Fetcher = async (url) => {
+  const html = await getText(url);
+  return html ? jobPostingFromHtml(html) : null;
+};
+
+/** iCIMS job pages (in_iframe=1, the same WAF-free view icims.ts lists from) embed a JobPosting. */
+const fetchIcims: Fetcher = async (url) => {
+  const html = await getText(`${url}${url.includes("?") ? "&" : "?"}in_iframe=1`);
+  return html ? jobPostingFromHtml(html) : null;
+};
+
+// One entry per platform, with how gently to ask, run in this order. The
+// quick ones go first so Microsoft -- one request per ~12s, its measured
+// limit -- can't spend the whole time budget before they get a turn; its
+// backlog finishes over a couple of nights. Meta gets the same 1.5s spacing
+// sources/meta.ts uses.
 const FETCHERS: Record<string, { fetch: Fetcher; concurrency: number; delayMs: number }> = {
   workday: { fetch: fetchWorkday, concurrency: 2, delayMs: 300 },
+  oracle: { fetch: fetchOracle, concurrency: 2, delayMs: 300 },
+  eightfold: { fetch: fetchEightfold, concurrency: 2, delayMs: 300 },
+  bamboohr: { fetch: fetchBambooHr, concurrency: 2, delayMs: 300 },
+  icims: { fetch: fetchIcims, concurrency: 2, delayMs: 300 },
+  meta: { fetch: fetchMeta, concurrency: 1, delayMs: 1500 },
+  microsoft: { fetch: fetchMicrosoft, concurrency: 1, delayMs: 12000 },
 };
 
 function minutesArg(): number {
@@ -78,7 +191,9 @@ function minutesArg(): number {
 async function main() {
   const db = getDb();
   const deadline = Date.now() + minutesArg() * 60_000;
-  const platforms = Object.keys(FETCHERS);
+  // --only=oracle,eightfold limits a run to some platforms (e.g. to re-test one).
+  const only = process.argv.find((a) => a.startsWith("--only="))?.split("=")[1]?.split(",");
+  const platforms = Object.keys(FETCHERS).filter((p) => !only || only.includes(p));
 
   const pending = db
     .prepare(

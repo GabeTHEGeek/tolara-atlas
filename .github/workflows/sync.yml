@@ -30,10 +30,13 @@ jobs:
       - name: Run sync
         run: npm run sync
 
-      # Workday's list endpoint has no posting text; this fills it in for
-      # roles that don't have it yet (newest first, time-budgeted).
+      # Several boards' list endpoints have no posting text (Workday,
+      # Microsoft, Meta, Oracle, Eightfold, BambooHR); this fills it in for
+      # roles that don't have it yet, newest first. The budget mostly goes to
+      # Microsoft's ~12s-per-request limit; after the first backfill a
+      # night's new postings take a minute or two.
       - name: Fetch missing descriptions
-        run: npm run descriptions -- --minutes=10
+        run: npm run descriptions -- --minutes=20
 
       - name: Geocode newly-synced roles
         run: npm run geocode

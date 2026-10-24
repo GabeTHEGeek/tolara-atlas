@@ -11,7 +11,13 @@ const RANGE_PATTERNS = [
   // Optional cents on either figure: "$188,997.50 - $255,863.00" (6sense).
   // An optional "/yr" after the first figure: "$140,300/yr to $260,500/yr"
   // (Genentech).
-  /(?:USD|US\$|\$)\s?\d{1,3}(?:,\d{3}(?:\.\d{2})?|k)(?:\s?\/\s?(?:yr|year))?\s?(?:-|to|–|—)\s?(?:USD|US\$|\$)?\s?\d{1,3}(?:,\d{3}(?:\.\d{2})?|k)/i,
+  // Any number of comma groups: "$520,000.00 - $1,000,000.00" (Netflix) once
+  // read as $520k-$1,000 because only one group was allowed.
+  /(?:USD|US\$|\$)\s?\d{1,3}(?:(?:,\d{3})+(?:\.\d{2})?|k)(?:\s?\/\s?(?:yr|year))?\s?(?:-|to|–|—)\s?(?:USD|US\$|\$)?\s?\d{1,3}(?:(?:,\d{3})+(?:\.\d{2})?|k)/i,
+  // No thousands separators at all: "$123000 - $215250 annually" (Amex's
+  // Oracle salary field). Five to seven digits, so a stray small number
+  // can't form a range.
+  /(?:USD|US\$|\$)\s?\d{5,7}(?:\.\d{2})?\s?(?:-|to|–|—)\s?(?:USD|US\$|\$)?\s?\d{5,7}/i,
   // "ranges from $175,000/year in our lowest geographic market up to
   // $220,000/year in our highest" (Coalition and other multi-market
   // postings). The gap is capped so "from $X" can't pair with an unrelated
