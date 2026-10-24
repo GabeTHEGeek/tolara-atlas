@@ -1,6 +1,7 @@
 import type { RemoteCompanyData } from "../types.js";
 import { roleHref } from "../router.js";
 import { formatSalary } from "../format.js";
+import FreshnessTag from "./FreshnessTag.js";
 
 interface RemotePanelProps {
   companies: RemoteCompanyData[];
@@ -67,6 +68,7 @@ export default function RemotePanel({ companies, open, onClose }: RemotePanelPro
                       )}
                     </div>
                     <div className="role-meta">
+                      <FreshnessTag role={role} />
                       {role.location && <span>{role.location}</span>}
                       {salary && (
                         <span className="role-salary" title="From the posting, not estimated">

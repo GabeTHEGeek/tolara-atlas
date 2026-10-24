@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { roleHref } from "../router.js";
 import { formatSalary, relativeTime } from "../format.js";
+import FreshnessTag from "./FreshnessTag.js";
 import type {
   CompanyDetails,
   CompanyDetailsRole,
@@ -284,7 +285,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
           <div>
             <h1 className="role-page-title">
               {role.title}
-              {role.isNew && <span className="badge-new">NEW</span>}
+              <FreshnessTag role={role} />
             </h1>
             <p className="role-subtitle">
               {[details.company.name, role.team, locationLabel(role)].filter(Boolean).join(" · ")}

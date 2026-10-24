@@ -3,6 +3,7 @@ import { SENIORITY_LABELS, SENIORITY_TIERS, type LocationPinData, type RemoteCom
 import { EMPTY_FILTERS, isFiltering, roleDate, type RemoteMode, type RoleFilters } from "../filters.js";
 import { formatSalary, relativeTime } from "../format.js";
 import { roleHref } from "../router.js";
+import FreshnessTag from "./FreshnessTag.js";
 
 /**
  * The job board: every role the map shows, as one searchable list.
@@ -341,7 +342,7 @@ export default function JobBoard({
                       ) : (
                         row.role.title
                       )}
-                      {row.role.isNew && <span className="job-new">New</span>}
+                      <FreshnessTag role={row.role} />
                     </p>
                     <p className="job-meta">
                       <span className="job-company">{row.companyName}</span>

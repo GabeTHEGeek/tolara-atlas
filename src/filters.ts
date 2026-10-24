@@ -50,7 +50,7 @@ export function isFiltering(f: RoleFilters): boolean {
  * Returns null only if neither parses, in which case date filters skip it
  * rather than guessing.
  */
-export function roleDate(role: RoleData): number | null {
+export function roleDate(role: Pick<RoleData, "postedAt" | "firstSeenAt">): number | null {
   if (role.postedAt) {
     const posted = Date.parse(role.postedAt);
     if (!Number.isNaN(posted)) return posted;

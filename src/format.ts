@@ -76,3 +76,31 @@ export function formatSalary(
   if (max == null) return `from ${first(min)}${suffix}`;
   return `${first(min)}${suffix}`;
 }
+
+/**
+ * How fresh a posting is, as a tag a reader can scan for. Ages come from
+ * filters.ts's roleDate -- the board's own posting date, else when our sync
+ * first saw the role -- so an "Aging" role is at least that old, never
+ * younger. Roles 8–29 days old get no tag: that's the unremarkable middle.
+ */
+export type Freshness = "hot" | "new" | "aging" | "stale";
+
+export const FRESHNESS_TAGS: Record<Freshness, { emoji: string; label: string; title: string }> = {
+  hot: { emoji: "🔥", label: "Hot", title: "Posted in the last 3 days" },
+  new: { emoji: "✨", label: "New", title: "Posted in the last week" },
+  aging: { emoji: "🧊", label: "Aging", title: "Posted 30–59 days ago" },
+  stale: { emoji: "🥶", label: "Stale", title: "Posted 60+ days ago — it may already be filled" },
+};
+
+const DAY_MS = 86_400_000;
+
+/** `date` is roleDate()'s epoch ms (null when nothing parses); `isNew` is the export's own flag. */
+export function freshnessOf(date: number | null, isNew: boolean, now: number): Freshness | null {
+  if (date == null) return isNew ? "new" : null;
+  const days = (now - date) / DAY_MS;
+  if (days <= 3) return "hot";
+  if (isNew || days <= 7) return "new";
+  if (days >= 60) return "stale";
+  if (days >= 30) return "aging";
+  return null;
+}

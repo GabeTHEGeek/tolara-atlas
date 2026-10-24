@@ -1863,17 +1863,6 @@ h1.role-page-title {
   color: var(--accent);
 }
 
-.job-new {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 1px 7px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 600;
-  vertical-align: 2px;
-}
 
 .job-meta {
   display: flex;
@@ -2015,4 +2004,52 @@ h1.role-page-title {
     align-items: center;
     gap: 14px;
   }
+}
+
+/* ---------- Freshness tags (🔥 Hot / ✨ New / 🧊 Aging / 🥶 Stale) ---------- */
+
+.fresh-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 8px;
+  padding: 1px 8px 1px 6px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  vertical-align: 2px;
+  white-space: nowrap;
+}
+
+/* Inside a meta row it leads the row, so no left margin. */
+.role-meta .fresh-tag {
+  margin-left: 0;
+  vertical-align: 0;
+}
+
+.fresh-tag.is-hot {
+  color: #fdba74;
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.35);
+}
+
+.fresh-tag.is-new {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: rgba(111, 224, 196, 0.35);
+}
+
+.fresh-tag.is-aging {
+  color: #93c5fd;
+  background: rgba(96, 165, 250, 0.1);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.fresh-tag.is-stale {
+  color: #a5b4fc;
+  background: rgba(129, 140, 248, 0.08);
+  border-color: rgba(129, 140, 248, 0.25);
+  opacity: 0.85;
 }
