@@ -9,7 +9,9 @@
 // "$80,000-$100,000/yr", "USD 150,250 - 215,250", em/en dash included.
 const RANGE_PATTERNS = [
   // Optional cents on either figure: "$188,997.50 - $255,863.00" (6sense).
-  /(?:USD|US\$|\$)\s?\d{1,3}(?:,\d{3}(?:\.\d{2})?|k)\s?(?:-|to|–|—)\s?(?:USD|US\$|\$)?\s?\d{1,3}(?:,\d{3}(?:\.\d{2})?|k)/i,
+  // An optional "/yr" after the first figure: "$140,300/yr to $260,500/yr"
+  // (Genentech).
+  /(?:USD|US\$|\$)\s?\d{1,3}(?:,\d{3}(?:\.\d{2})?|k)(?:\s?\/\s?(?:yr|year))?\s?(?:-|to|–|—)\s?(?:USD|US\$|\$)?\s?\d{1,3}(?:,\d{3}(?:\.\d{2})?|k)/i,
   // "ranges from $175,000/year in our lowest geographic market up to
   // $220,000/year in our highest" (Coalition and other multi-market
   // postings). The gap is capped so "from $X" can't pair with an unrelated
@@ -27,9 +29,14 @@ const RANGE_PATTERNS = [
 ];
 
 // Fallback for a single stated figure, no range: "$150,000 per year", "$150K".
-const SINGLE_PATTERNS = [
-  /(?:USD|US\$|\$)\s?\d{1,3}(?:,\d{3}|k)\s?(?:\/\s?(?:yr|year|hour|hr)|per\s?(?:year|yr|hour))?/i,
-];
+// Global, so every candidate can be tested against its context below.
+const SINGLE_PATTERN = /(?:USD|US\$|\$)\s?\d{1,3}(?:,\d{3}|k)\s?(?:\/\s?(?:yr|year|hour|hr)|per\s?(?:year|yr|hour))?/gi;
+
+// A lone dollar figure only counts as pay when the words just before it say
+// so -- and never when they describe a benefit. Without this, "401(k) match
+// up to $12,000 annually" was stored as a $12k salary.
+const PAY_CONTEXT = /\b(salary|pay|base|compensation|wage|earn|range|rate)\b/i;
+const BENEFIT_CONTEXT = /\b(401\(?k\)?|match|bonus|stipend|reimburse\w*|allowance|tuition|signing|sign-on|relocation|equity|commission|budget|credit|award|referral)\b/i;
 
 /**
  * Tries ranges first (more informative), then falls back to a single stated
@@ -41,9 +48,11 @@ export function extractSalary(text: string | null | undefined): string {
     const match = text.match(pattern);
     if (match) return match[0].trim();
   }
-  for (const pattern of SINGLE_PATTERNS) {
-    const match = text.match(pattern);
-    if (match) return match[0].trim();
+  for (const match of text.matchAll(SINGLE_PATTERN)) {
+    // Only the figure's own sentence: a stipend mentioned in the sentence
+    // before mustn't veto "Compensation: $165,000".
+    const before = text.slice(Math.max(0, (match.index ?? 0) - 80), match.index).split(/[.;!?]\s/).pop() ?? "";
+    if (PAY_CONTEXT.test(before) && !BENEFIT_CONTEXT.test(before)) return match[0].trim();
   }
   return "";
 }

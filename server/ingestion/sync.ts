@@ -265,9 +265,13 @@ async function main() {
     // sync, rather than leaving it pointed at a now-stale city forever. The
     // role's role_locations rows are separately cleared and rebuilt by
     // geocode.ts itself once it reprocesses the role.
+    // A board that sends no description (Workday's list endpoint) keeps the
+    // one fetchDescriptions.ts stored, rather than blanking it each sync.
     const updateRole = db.prepare(`
       UPDATE roles SET
-        title = @title, description = @description, location = @location,
+        title = @title,
+        description = CASE WHEN length(@description) = 0 THEN description ELSE @description END,
+        location = @location,
         salary_min = @salaryMin, salary_max = @salaryMax, salary_currency = @salaryCurrency,
         salary_period = @salaryPeriod, category = @category, url = @url, posted_at = @postedAt,
         content_hash = @contentHash, last_seen_at = datetime('now'), status = 'active',

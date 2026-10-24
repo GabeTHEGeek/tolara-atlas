@@ -26,7 +26,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { getDb } from "../server/db/client.js";
 import { readCachedIntelligence } from "../server/enrichment/intelligence.js";
-import { analyzeRole, loadCache, saveCache, type RoleAnalysis } from "../server/match/analyzeRole.js";
+import { analyzeRole, cleanDescription, loadCache, saveCache, type RoleAnalysis } from "../server/match/analyzeRole.js";
 import { checkRequirements, type RequirementsCheck } from "../server/match/check.js";
 import { mapLimit } from "../server/match/llm.js";
 import { parseResume, type CandidateProfile } from "../server/match/profile.js";
@@ -164,7 +164,11 @@ async function main() {
   const cache = loadCache(CACHE_PATH);
   const analysisOf = (r: RoleRow): RoleAnalysis | null => {
     const a = cache[String(r.facts.id)];
-    return a && a.contentHash === r.contentHash ? a : null;
+    if (!a || a.contentHash !== r.contentHash) return null;
+    // Backfilled text doesn't change content_hash (fetchDescriptions.ts), so
+    // a title-only analysis is also stale once the posting's text arrives.
+    if (!a.descriptionAvailable && cleanDescription(r.description).length > 200) return null;
+    return a;
   };
   const provisional = roles
     .map((r) => ({ r, s: scoreRole(r.facts, profile, prefs, analysisOf(r)) }))

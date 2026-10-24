@@ -30,6 +30,11 @@ jobs:
       - name: Run sync
         run: npm run sync
 
+      # Workday's list endpoint has no posting text; this fills it in for
+      # roles that don't have it yet (newest first, time-budgeted).
+      - name: Fetch missing descriptions
+        run: npm run descriptions -- --minutes=10
+
       - name: Geocode newly-synced roles
         run: npm run geocode
 
