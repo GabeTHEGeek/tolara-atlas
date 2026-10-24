@@ -46,7 +46,7 @@ const PAGE_SIZE = 50;
 const SALARY_STEPS = [150_000, 175_000, 200_000, 250_000];
 const POSTED_STEPS = [7, 14, 30];
 const REMOTE_LABELS: Record<RemoteMode, string> = {
-  all: "Anywhere",
+  all: "All locations",
   "office-only": "In-office",
   "remote-only": "Remote",
 };
@@ -249,7 +249,7 @@ export default function JobBoard({
             >
               {(Object.keys(REMOTE_LABELS) as RemoteMode[]).map((mode) => (
                 <option key={mode} value={mode}>
-                  {mode === "all" ? "Remote" : REMOTE_LABELS[mode]}
+                  {REMOTE_LABELS[mode]}
                 </option>
               ))}
             </select>
