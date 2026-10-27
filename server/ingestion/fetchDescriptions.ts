@@ -5,8 +5,9 @@
  * some iCIMS tenants return titles, locations and dates only, and the text
  * needs one more request per posting.
  *
- * Only roles with no stored text are fetched, newest first, so after the
- * first run a nightly pass only touches what was posted since yesterday.
+ * Only roles with no stored text (or no pay -- see the cap note in main)
+ * are fetched, newest first, so after the first run a nightly pass only
+ * touches what was posted since yesterday.
  * Time-budgeted (--minutes) like prewarm.ts, so a big backlog spreads over
  * several nights instead of stretching one. While the full text is in hand
  * it also fills in a missing salary band, since many Workday postings state
@@ -188,10 +189,22 @@ const fetchAshby: Fetcher = async (url) => {
   }
 };
 
-/** Meta's job page redirects to its profile view, which embeds a JobPosting. */
+/**
+ * Meta's job page redirects to its profile view, which embeds a JobPosting.
+ * Pay isn't in it: the page carries it separately as public_compensation
+ * ("$173,000/year" to "$241,000/year" per country), so the US line is
+ * added to the text, where extractSalary reads it.
+ */
 const fetchMeta: Fetcher = async (url) => {
   const html = await getText(url);
-  return html ? jobPostingFromHtml(html) : null;
+  if (!html) return null;
+  const text = jobPostingFromHtml(html);
+  const us = html.match(
+    /"compensation_amount_minimum":"([^"]+)","compensation_amount_maximum":"([^"]+)","country_code":"US"/,
+  );
+  if (!text || !us) return text;
+  const [min, max] = [us[1], us[2]].map((s) => s.replace(/\\\//g, "/"));
+  return `Compensation: ${min} to ${max}. ${text}`;
 };
 
 /** iCIMS job pages (in_iframe=1, the same WAF-free view icims.ts lists from) embed a JobPosting. */
@@ -216,6 +229,11 @@ const FETCHERS: Record<string, { fetch: Fetcher; concurrency: number; delayMs: n
   microsoft: { fetch: fetchMicrosoft, concurrency: 1, delayMs: 12000 },
 };
 
+// Boards whose pay sits outside the posting text the first fetch stored
+// (Meta's public_compensation field), so a role there without a band is
+// fetched again -- a few dozen requests a night at Meta's spacing.
+const PAY_OUTSIDE_TEXT = ["meta"];
+
 function minutesArg(): number {
   const raw = process.argv.find((a) => a.startsWith("--minutes="))?.split("=")[1];
   const n = Number(raw);
@@ -234,7 +252,9 @@ async function main() {
       `SELECT id, platform, url, salary_min FROM roles
        WHERE status = 'active' AND url IS NOT NULL
          AND platform IN (${platforms.map(() => "?").join(",")})
-         AND (description IS NULL OR length(description) < ${MIN_TEXT})
+         AND (description IS NULL OR length(description) < ${MIN_TEXT}
+              OR (platform IN (${PAY_OUTSIDE_TEXT.map((p) => `'${p}'`).join(",")}) AND salary_min IS NULL)
+              OR (salary_min IS NULL AND length(description) = ${MAX_DESCRIPTION}))
        ORDER BY first_seen_at DESC`,
     )
     .all(...platforms) as Array<{ id: number; platform: string; url: string; salary_min: number | null }>;
@@ -245,6 +265,22 @@ async function main() {
     `UPDATE roles SET salary_min = @min, salary_max = @max, salary_currency = @currency, salary_period = @period
      WHERE id = @id AND salary_min IS NULL`,
   );
+
+  // First, no requests at all: re-read pay from text already stored, for
+  // roles without a band -- picks up whatever extract.ts has learned since
+  // the text was fetched.
+  const unpaid = db
+    .prepare(`SELECT id, description FROM roles WHERE status = 'active' AND salary_min IS NULL AND length(description) >= ${MIN_TEXT}`)
+    .all() as Array<{ id: number; description: string }>;
+  let reread = 0;
+  for (const role of unpaid) {
+    const parsed = parseSalary(extractSalary(role.description));
+    if (parsed.min != null) {
+      setSalary.run({ id: role.id, ...parsed });
+      reread++;
+    }
+  }
+  console.log(`Salary bands re-read from stored text: ${reread} of ${unpaid.length} roles without one`);
 
   let filled = 0;
   let salaries = 0;
@@ -263,14 +299,19 @@ async function main() {
         const html = await fetchOne(role.url);
         const text = html ? decodeEntities(stripHtml(decodeEntities(html))).replace(/\s+/g, " ").trim() : "";
         if (text.length >= MIN_TEXT) {
-          setDescription.run(text.slice(0, MAX_DESCRIPTION), role.id);
+          const parsed = role.salary_min == null ? parseSalary(extractSalary(text)) : null;
+          // Stored text is cut at MAX_DESCRIPTION, and many boards state pay
+          // at the very end -- so an unpaid role whose text fills the cap is
+          // fetched again in case the band was past the cut (a sync used to
+          // blank bands found that way). One fetch is enough: if the full
+          // text has no band, one character less is stored, so it isn't
+          // picked up again every night.
+          const cap = parsed && parsed.min == null ? MAX_DESCRIPTION - 1 : MAX_DESCRIPTION;
+          setDescription.run(text.slice(0, cap), role.id);
           filled++;
-          if (role.salary_min == null) {
-            const parsed = parseSalary(extractSalary(text));
-            if (parsed.min != null) {
-              setSalary.run({ id: role.id, ...parsed });
-              salaries++;
-            }
+          if (parsed?.min != null) {
+            setSalary.run({ id: role.id, ...parsed });
+            salaries++;
           }
         } else failed++;
         await sleep(delayMs);

@@ -14,6 +14,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { parseSalary, type ParsedSalary } from "./salary.js";
+import { extractSalary } from "./extract.js";
 
 import { getDb } from "../db/client.js";
 import { parseCompaniesCsv, type CompanyRow } from "./csv.js";
@@ -74,6 +75,15 @@ function salariesDiffer(
     stored.salary_currency !== parsed.currency ||
     stored.salary_period !== parsed.period
   );
+}
+
+// A posting listed with neither pay nor full text (Workday, Microsoft, Meta
+// and the other boards fetchDescriptions.ts fills in; iCIMS lists a short
+// snippet) can't say its pay is gone: its band, if any, was read from the
+// text fetched afterwards. Left to the repair below, every sync blanked
+// those bands again. 200 is fetchDescriptions.ts's "missing text" bar.
+function keepsStoredSalary(job: RawJob): boolean {
+  return job.salary === "" && job.description.length < 200;
 }
 
 function contentHash(job: RawJob): string {
@@ -270,14 +280,19 @@ async function main() {
     // role's role_locations rows are separately cleared and rebuilt by
     // geocode.ts itself once it reprocesses the role.
     // A board that sends no description (Workday's list endpoint) keeps the
-    // one fetchDescriptions.ts stored, rather than blanking it each sync.
+    // one fetchDescriptions.ts stored, rather than blanking it each sync --
+    // and, the same way, keeps the pay band read from that text when the
+    // board sends neither pay nor text (keepSalary).
     const updateRole = db.prepare(`
       UPDATE roles SET
         title = @title,
         description = CASE WHEN length(@description) = 0 THEN description ELSE @description END,
         location = @location,
-        salary_min = @salaryMin, salary_max = @salaryMax, salary_currency = @salaryCurrency,
-        salary_period = @salaryPeriod, category = @category, url = @url, posted_at = @postedAt,
+        salary_min = CASE WHEN @salaryMin IS NULL AND @keepSalary = 1 THEN salary_min ELSE @salaryMin END,
+        salary_max = CASE WHEN @salaryMin IS NULL AND @keepSalary = 1 THEN salary_max ELSE @salaryMax END,
+        salary_currency = CASE WHEN @salaryMin IS NULL AND @keepSalary = 1 THEN salary_currency ELSE @salaryCurrency END,
+        salary_period = CASE WHEN @salaryMin IS NULL AND @keepSalary = 1 THEN salary_period ELSE @salaryPeriod END,
+        category = @category, url = @url, posted_at = @postedAt,
         content_hash = @contentHash, last_seen_at = datetime('now'), status = 'active',
         geocoded_at = NULL, resolved_city = NULL, resolved_state = NULL, latitude = NULL, longitude = NULL
       WHERE id = @id
@@ -397,7 +412,9 @@ async function main() {
         const boardJobs = jobsByBoard.get(board) ?? [];
         for (const job of boardJobs) {
           const hash = contentHash(job);
-          const salary = parseSalary(job.salary);
+          // Boards without a pay field (Amazon) may still state it in the
+          // text they list -- the same text fetchDescriptions.ts re-reads.
+          const salary = parseSalary(job.salary || extractSalary(job.description));
           const { min, max, currency } = salary;
           const existingRole = getRole.get(companyId, job.id) as
             | {
@@ -443,11 +460,12 @@ async function main() {
               url: job.url,
               postedAt: job.published || null,
               contentHash: hash,
+              keepSalary: keepsStoredSalary(job) ? 1 : 0,
             });
             rolesUpdated += 1;
           } else {
             touchRole.run(existingRole.id);
-            if (salariesDiffer(existingRole, salary)) {
+            if (salariesDiffer(existingRole, salary) && !(min == null && keepsStoredSalary(job))) {
               repairSalary.run({
                 id: existingRole.id,
                 salaryMin: min,

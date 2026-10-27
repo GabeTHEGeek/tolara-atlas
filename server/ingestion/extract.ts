@@ -14,6 +14,8 @@ const RANGE_PATTERNS = [
   // Any number of comma groups: "$520,000.00 - $1,000,000.00" (Netflix) once
   // read as $520k-$1,000 because only one group was allowed.
   /(?:USD|US\$|\$)\s?\d{1,3}(?:(?:,\d{3})+(?:\.\d{2})?|k)(?:\s?\/\s?(?:yr|year))?\s?(?:-|to|–|—)\s?(?:USD|US\$|\$)?\s?\d{1,3}(?:(?:,\d{3})+(?:\.\d{2})?|k)/i,
+  // Currency after the figures: "208,000 USD - 327,750 USD" (NVIDIA).
+  /\d{1,3}(?:,\d{3})+(?:\.\d{2})?\s?USD\s?(?:-|to|–|—)\s?\d{1,3}(?:,\d{3})+(?:\.\d{2})?\s?USD/i,
   // No thousands separators at all: "$123000 - $215250 annually" (Amex's
   // Oracle salary field). Five to seven digits, so a stray small number
   // can't form a range.
