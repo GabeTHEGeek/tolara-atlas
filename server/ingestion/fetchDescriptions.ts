@@ -155,6 +155,39 @@ const fetchBambooHr: Fetcher = async (url) => {
   return data?.result?.jobOpening?.description ?? null;
 };
 
+/**
+ * jobs.ashbyhq.com/{board}/{id} -> the posting via the board page's GraphQL.
+ * Only boards whose public API is switched off (Whatnot) reach this: every
+ * other Ashby board's postings arrive with their text already.
+ */
+const fetchAshby: Fetcher = async (url) => {
+  const m = url.match(/^https:\/\/jobs\.ashbyhq\.com\/([^/]+)\/([0-9a-f-]{36})/);
+  if (!m) return null;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 20000);
+  try {
+    const resp = await fetch("https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiJobPosting", {
+      method: "POST",
+      signal: controller.signal,
+      headers: { "Content-Type": "application/json", "User-Agent": USER_AGENT },
+      body: JSON.stringify({
+        operationName: "ApiJobPosting",
+        variables: { organizationHostedJobsPageName: m[1], jobPostingId: m[2] },
+        query: `query ApiJobPosting($organizationHostedJobsPageName: String!, $jobPostingId: String!) {
+          jobPosting(organizationHostedJobsPageName: $organizationHostedJobsPageName, jobPostingId: $jobPostingId) { descriptionHtml }
+        }`,
+      }),
+    });
+    if (!resp.ok) return null;
+    const data = (await resp.json()) as { data?: { jobPosting?: { descriptionHtml?: string } | null } };
+    return data.data?.jobPosting?.descriptionHtml ?? null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+};
+
 /** Meta's job page redirects to its profile view, which embeds a JobPosting. */
 const fetchMeta: Fetcher = async (url) => {
   const html = await getText(url);
@@ -178,6 +211,7 @@ const FETCHERS: Record<string, { fetch: Fetcher; concurrency: number; delayMs: n
   eightfold: { fetch: fetchEightfold, concurrency: 2, delayMs: 300 },
   bamboohr: { fetch: fetchBambooHr, concurrency: 2, delayMs: 300 },
   icims: { fetch: fetchIcims, concurrency: 2, delayMs: 300 },
+  ashby: { fetch: fetchAshby, concurrency: 2, delayMs: 300 },
   meta: { fetch: fetchMeta, concurrency: 1, delayMs: 1500 },
   microsoft: { fetch: fetchMicrosoft, concurrency: 1, delayMs: 12000 },
 };

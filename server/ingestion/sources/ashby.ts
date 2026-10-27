@@ -6,6 +6,12 @@
  * api.ashbyhq.com/posting-api/job-board/{board_name}.
  *
  * Docs: https://developers.ashbyhq.com/reference/jobboardapi-jobboard-info
+ *
+ * Some companies switch that public API off (Whatnot): it answers 404 even
+ * though jobs.ashbyhq.com/{board} is live. For those, the board page's own
+ * GraphQL endpoint is read instead -- the request the page itself makes.
+ * It lists titles, locations and pay but no description; the nightly
+ * description step (fetchDescriptions.ts) fills that in.
  */
 
 import { normalizeTitle, stripHtml, titleMatchesQueryWord } from "./common.js";
@@ -13,6 +19,47 @@ import { extractSalary } from "../extract.js";
 import type { RawJob, SearchMeta, SearchOptions } from "./types.js";
 
 const ASHBY_URL = "https://api.ashbyhq.com/posting-api/job-board/{board}";
+const ASHBY_GRAPHQL_URL = "https://jobs.ashbyhq.com/api/non-user-graphql?op=ApiJobBoardWithTeams";
+const BOARD_QUERY = `query ApiJobBoardWithTeams($organizationHostedJobsPageName: String!) {
+  jobBoard: jobBoardWithTeams(organizationHostedJobsPageName: $organizationHostedJobsPageName) {
+    jobPostings { id title locationName secondaryLocations { locationName } compensationTierSummary }
+  }
+}`;
+
+/** The board page's own job list, for boards whose public API is switched off. */
+async function fetchBoardFromPage(boardToken: string, timeoutMs: number): Promise<{ jobs: AshbyJob[]; failed: boolean }> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const resp = await fetch(ASHBY_GRAPHQL_URL, {
+      method: "POST",
+      signal: controller.signal,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ operationName: "ApiJobBoardWithTeams", variables: { organizationHostedJobsPageName: boardToken }, query: BOARD_QUERY }),
+    });
+    if (!resp.ok) return { jobs: [], failed: true };
+    const data = (await resp.json()) as {
+      data?: { jobBoard?: { jobPostings?: Array<{ id: string; title?: string; locationName?: string; secondaryLocations?: Array<{ locationName?: string }>; compensationTierSummary?: string | null }> } | null };
+    };
+    const postings = data.data?.jobBoard?.jobPostings;
+    // No board at all means a dead token, not an empty board.
+    if (!postings) return { jobs: [], failed: true };
+    return {
+      jobs: postings.map((p) => ({
+        id: p.id,
+        title: p.title?.trim(),
+        jobUrl: `https://jobs.ashbyhq.com/${boardToken}/${p.id}`,
+        location: [p.locationName, ...(p.secondaryLocations ?? []).map((l) => l.locationName)].filter(Boolean).join("; "),
+        compensation: p.compensationTierSummary ? { compensationTierSummary: p.compensationTierSummary } : undefined,
+      })),
+      failed: false,
+    };
+  } catch {
+    return { jobs: [], failed: true };
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 interface AshbyJob {
   id: string;
@@ -47,6 +94,7 @@ async function fetchBoard(boardToken: string, timeoutMs = 15000): Promise<{ jobs
       url.searchParams.set("includeCompensation", "true");
       const resp = await fetch(url, { signal: controller.signal });
       clearTimeout(timer);
+      if (resp.status === 404) return fetchBoardFromPage(boardToken, timeoutMs);
       if (!resp.ok) return { jobs: [], failed: true };
       const data = (await resp.json()) as { jobs?: AshbyJob[] };
       return { jobs: data.jobs ?? [], failed: false };
