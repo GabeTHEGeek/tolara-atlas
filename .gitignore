@@ -17,3 +17,6 @@ dist/
 
 # Personal match inputs and outputs (resumes, parsed profiles, test reports)
 .local/
+
+# Playwright MCP session logs
+.playwright-mcp/

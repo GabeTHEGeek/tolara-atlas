@@ -20,6 +20,25 @@ worse than a blank.
 ![Node](https://img.shields.io/badge/Node-22-5fa04e?logo=nodedotjs&logoColor=white)
 ![Paid data](https://img.shields.io/badge/paid%20data-none-6fe0c4)
 
+![The map: one pin per company office, sized by open PM roles](docs/screenshots/map.png)
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/job-board.png" alt="Job board with search, filters, salary bands and freshness tags"></td>
+    <td width="50%"><img src="docs/screenshots/company.png" alt="A company's office on the map, listing its open roles with pay"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>Job board</b> — search, filters, pay and freshness</sub></td>
+    <td align="center"><sub><b>Company view</b> — every role at one office</sub></td>
+  </tr>
+  <tr>
+    <td colspan="2"><img src="docs/screenshots/role-prep.png" alt="Role-prep page with pay from the posting, leadership, company snapshot, hiring signals and news"></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><sub><b>Role prep</b> — pay from the posting, leadership, company snapshot, hiring signals and news</sub></td>
+  </tr>
+</table>
+
 ---
 
 ## What it does
