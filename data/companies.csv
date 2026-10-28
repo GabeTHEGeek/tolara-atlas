@@ -1203,3 +1203,4 @@ Sidecar Health,sidecarhealth,greenhouse,verified,2026-10-26T20:11:14.000Z,Added 
 Evolve,evolvevacationrental,greenhouse,verified,2026-10-26T20:11:14.000Z,Added manually (remote-first hiring list)
 Whatnot,whatnot,ashby,verified,2026-10-26T20:13:25.000Z,Added manually (Ashby board with its public API off -- read via the board page; see sources/ashby.ts)
 Google,google,google,verified,2026-10-27T00:00:00.000Z,Added manually (google.com/about/careers results pages -- see sources/google.ts)
+JPMorgan Chase,jpmc.fa.oraclecloud.com|CX_1001|product,oracle,verified,2026-10-27T00:00:00.000Z,Added manually (Oracle Recruiting Cloud behind careers.jpmorgan.com -- see sources/oracle.ts)

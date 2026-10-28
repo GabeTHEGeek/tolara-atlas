@@ -1,7 +1,8 @@
 /**
  * sources/oracle.ts
  * Pulls postings from careers sites built on Oracle Recruiting Cloud
- * (American Express's careers.americanexpress.com, among others) through
+ * (American Express's careers.americanexpress.com, JPMorgan Chase's
+ * jpmc.fa.oraclecloud.com, among others) through
  * the keyless REST endpoint the candidate site itself calls:
  *
  *   GET https://{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions
@@ -60,7 +61,12 @@ async function fetchPage(
     t.keyword ? `keyword=${encodeURIComponent(t.keyword)}` : "",
     `limit=${PAGE_SIZE}`,
     `offset=${offset}`,
-    "sortBy=POSTING_DATES_DESC",
+    // With a keyword, best matches first: the search is loose (JPMorgan's
+    // "product manager" matches 5,500 postings, and the endpoint stops near
+    // 3,000), but the PM titles all rank in the first few hundred, so the
+    // sync's per-board cap keeps every one. Newest first would keep only
+    // the newest few hundred matches of any kind.
+    `sortBy=${t.keyword ? "RELEVANCY" : "POSTING_DATES_DESC"}`,
   ]
     .filter(Boolean)
     .join(",");

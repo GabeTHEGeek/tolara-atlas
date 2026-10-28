@@ -121,7 +121,10 @@ const ALL_PLATFORMS: Platform[] = [
 // Boards big enough that PER_BOARD_LIMIT would cut off real PM roles. TikTok
 // is one company with ~4,300 postings worldwide, and the cap is applied
 // before the PM filter, so 500 would keep an arbitrary eighth of them.
-const PER_BOARD_LIMIT_OVERRIDES: Partial<Record<Platform, number>> = { tiktok: 10000, eightfold: 2000, amazon: 2000, microsoft: 2000 };
+// Oracle boards search one loose keyword, best matches first: JPMorgan's
+// "product" matches thousands, with PM and Product Owner titles spread
+// through the first ~1,000 (sources/oracle.ts).
+const PER_BOARD_LIMIT_OVERRIDES: Partial<Record<Platform, number>> = { tiktok: 10000, eightfold: 2000, amazon: 2000, microsoft: 2000, oracle: 1000 };
 
 async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
   const options = { boards, limit: PER_BOARD_LIMIT_OVERRIDES[platform] ?? PER_BOARD_LIMIT };
