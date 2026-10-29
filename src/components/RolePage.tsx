@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { roleHref } from "../router.js";
 import { formatSalary, relativeTime } from "../format.js";
 import FreshnessTag from "./FreshnessTag.js";
+import PeoplePanel, { FindPeopleButton } from "./PeoplePanel.js";
 import type {
   CompanyDetails,
   CompanyDetailsRole,
@@ -292,6 +293,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
             </p>
           </div>
           <div className="role-actions">
+            <FindPeopleButton roleId={role.id} />
             <button className={`btn btn-secondary${isSaved ? " is-active" : ""}`} onClick={toggleSave} aria-pressed={isSaved}>
               {isSaved ? "Saved" : "Save"}
             </button>
@@ -347,6 +349,8 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
         )}
 
         <div className="card-grid">
+          <PeoplePanel roleId={role.id} company={details.company.name} />
+
           <section className="card">
             <h2 className="card-label">Leadership</h2>
             {!intelLoaded ? (

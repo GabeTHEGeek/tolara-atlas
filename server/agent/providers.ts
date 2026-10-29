@@ -230,11 +230,20 @@ const BACKOFF_MS = [400, 1200];
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-export async function chat(messages: ChatMessage[], tools: ToolSchema[]): Promise<ChatResult> {
+/**
+ * `timeoutMs` is for callers nobody is waiting on mid-sentence: a batch
+ * job writing a few thousand tokens of JSON (Find people's ranking takes
+ * 20-40s on DeepSeek) would otherwise time out on every attempt.
+ */
+export async function chat(
+  messages: ChatMessage[],
+  tools: ToolSchema[],
+  options: { timeoutMs?: number } = {},
+): Promise<ChatResult> {
   let lastError: ProviderError | null = null;
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     try {
-      return await chatOnce(messages, tools);
+      return await chatOnce(messages, tools, options.timeoutMs ?? REQUEST_TIMEOUT_MS);
     } catch (err) {
       if (!(err instanceof ProviderError) || !err.retryable || attempt === MAX_ATTEMPTS - 1) throw err;
       lastError = err;
@@ -244,10 +253,10 @@ export async function chat(messages: ChatMessage[], tools: ToolSchema[]): Promis
   throw lastError ?? new ProviderError("Request failed", null, true);
 }
 
-async function chatOnce(messages: ChatMessage[], tools: ToolSchema[]): Promise<ChatResult> {
+async function chatOnce(messages: ChatMessage[], tools: ToolSchema[], timeoutMs: number): Promise<ChatResult> {
   const { config, apiKey, model } = resolveProvider();
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const resp = await fetch(`${config.baseUrl}/chat/completions`, {
@@ -323,7 +332,7 @@ async function chatOnce(messages: ChatMessage[], tools: ToolSchema[]): Promise<C
   } catch (err) {
     if (err instanceof ProviderError) throw err;
     if (err instanceof Error && err.name === "AbortError") {
-      throw new ProviderError(`${config.label} timed out after ${REQUEST_TIMEOUT_MS / 1000}s`, null, true);
+      throw new ProviderError(`${config.label} timed out after ${timeoutMs / 1000}s`, null, true);
     }
     throw new ProviderError(err instanceof Error ? err.message : String(err), null, true);
   } finally {

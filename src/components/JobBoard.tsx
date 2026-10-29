@@ -4,6 +4,8 @@ import { EMPTY_FILTERS, isFiltering, roleDate, type RemoteMode, type RoleFilters
 import { formatSalary, relativeTime } from "../format.js";
 import { roleHref } from "../router.js";
 import FreshnessTag from "./FreshnessTag.js";
+import { FindPeopleButton } from "./PeoplePanel.js";
+import { useContacts } from "../contacts.js";
 
 /**
  * The job board: every role the map shows, as one searchable list.
@@ -188,6 +190,7 @@ export default function JobBoard({
 }: JobBoardProps) {
   const [shown, setShown] = useState(PAGE_SIZE);
   const [moreOpen, setMoreOpen] = useState(filters.postedWithinDays != null || filters.newOnly);
+  const { counts: peopleFound } = useContacts();
 
   const rows = useMemo(() => buildRows(pins, remoteCompanies), [pins, remoteCompanies]);
   const matched = useMemo(() => {
@@ -343,6 +346,15 @@ export default function JobBoard({
                         row.role.title
                       )}
                       <FreshnessTag role={row.role} />
+                      {peopleFound[row.role.id] > 0 && (
+                        <a
+                          className="people-badge"
+                          href={roleHref(row.companySlug, row.role.id)}
+                          title="People to reach about this role — open role prep"
+                        >
+                          {peopleFound[row.role.id]} {peopleFound[row.role.id] === 1 ? "person" : "people"}
+                        </a>
+                      )}
                     </p>
                     <p className="job-meta">
                       <span className="job-company">{row.companyName}</span>
@@ -360,6 +372,7 @@ export default function JobBoard({
                     <a className="job-prep" href={roleHref(row.companySlug, row.role.id)}>
                       Role prep
                     </a>
+                    <FindPeopleButton roleId={row.role.id} compact />
                   </div>
                 </li>
               );
