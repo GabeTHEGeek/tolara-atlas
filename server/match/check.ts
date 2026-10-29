@@ -12,7 +12,7 @@
 
 import type { RoleAnalysis } from "./analyzeRole.js";
 import { cleanDescription } from "./analyzeRole.js";
-import type { CandidateProfile } from "./profile.js";
+import { countedYears, type CandidateProfile } from "./profile.js";
 import { jsonCall } from "./llm.js";
 
 export interface RequirementsCheck {
@@ -24,7 +24,9 @@ const SYSTEM = `You check whether a candidate meets a job's HARD requirements --
 Rules:
 - Keyword overlap is not evidence. Credit a requirement only when the candidate's jobs, highlights or archetype evidence show it.
 - Applied AI product work (prompt engineering, LLM orchestration, agents, API integration) is not deep ML (model training, fine-tuning, ML infrastructure). If the job requires deep ML and the candidate shows only applied work, that is unmet.
-- Years of experience are given as computed facts -- use them, do not recount from bullets.
+- Years of experience are given as computed facts -- use them, do not recount from bullets. Use the "counted" figure for a general PM-years requirement.
+- A requirement for years of a SPECIFIC kind of work ("4 years driving consumer growth", "3 years in payments") is met only by the jobs whose titles and dates show that work -- add up those jobs' date ranges, never the candidate's total years.
+- If the posting states no hard requirements at all, you cannot confirm them: answer "one_stretch" and say so.
 - A degree line is never a failed requirement.
 - A required domain the candidate hasn't worked in is a stretch, not automatically unmet, unless the posting makes it a hard gate.
 Answer ONLY with JSON: {"status": "<met|one_stretch|unmet>", "reason": "<one sentence quoting the decisive requirement and the candidate evidence (or its absence)>"}
@@ -36,7 +38,7 @@ export async function checkRequirements(
   analysis: RoleAnalysis,
 ): Promise<RequirementsCheck> {
   const candidate = [
-    `Years in product roles: ${profile.totalYears} total (${profile.employedPmYears} employed PM, ${profile.founderYears} as founder/head of product)`,
+    `Years in product roles: ${countedYears(profile)} counted (${profile.employedPmYears} employed PM in full, ${profile.founderYears} as founder/head of product at half; ${profile.totalYears} calendar years)`,
     `Jobs: ${profile.jobs.map((j) => `${j.title} at ${j.company} (${j.start} to ${j.end ?? "present"})`).join("; ")}`,
     `Archetypes: ${profile.archetypes.map((a) => `${a.archetype} -- "${a.evidence}"`).join("; ")}`,
     `Highlights: ${profile.highlights.join("; ")}`,

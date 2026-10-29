@@ -94,6 +94,18 @@ export function yearsFrom(jobs: ResumeJob[], now = Date.now()): { total: number;
   return { total: toYears(unionMonths(all)), employed: toYears(unionMonths(employed)), founder: toYears(unionMonths(founder)) };
 }
 
+/**
+ * Years of PM experience as a hiring team would count them: employed PM
+ * time in full, founder / head-of-product time at half. A founder runs
+ * product, but usually without the scale, team and process an employed PM
+ * role is levelled on -- counting it in full put a 3.5-year employed PM at
+ * Principal.
+ */
+export function countedYears(profile: Pick<CandidateProfile, "totalYears" | "employedPmYears" | "founderYears">): number {
+  const years = profile.employedPmYears + profile.founderYears / 2;
+  return Math.round(Math.min(profile.totalYears, years) * 10) / 10;
+}
+
 export async function parseResume(resumeText: string): Promise<CandidateProfile> {
   const raw = (await jsonCall(SYSTEM, `RESUME:\n${resumeText.slice(0, 12000)}`)) as Record<string, unknown>;
   const jobs: ResumeJob[] = (Array.isArray(raw.jobs) ? raw.jobs : []).map((j: Record<string, unknown>) => ({

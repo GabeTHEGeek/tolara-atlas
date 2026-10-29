@@ -4,11 +4,17 @@
  * values each category can award. score.ts reads this rather than having
  * numbers scattered through code, so tuning the rubric is an edit here.
  *
- * This is the owner's Profile v2 rubric: six categories totalling 95,
+ * Started from the owner's Profile v2 rubric: six categories totalling 95,
  * scaled to 100. Domain match is decided by PM archetype
  * (archetypes.ts) rather than a free-form judgement, and Maester's
  * guardrail -- an engineering role wearing a PM title caps the score -- is
  * applied on top.
+ *
+ * Nothing here is one person's taste any more. Domain, level and
+ * requirements compare a resume with a posting; location, pay and company
+ * type come from the onboarding answers (onboarding.ts), and a category the
+ * candidate has no preference on isn't counted -- the score is scaled over
+ * the categories that are.
  */
 
 export type CategoryId = "domain" | "company" | "level" | "requirements" | "location" | "comp";
@@ -28,11 +34,12 @@ export const CATEGORIES: Category[] = [
   { id: "comp", label: "Comp", max: 10 },
 ];
 
-export const RAW_MAX = CATEGORIES.reduce((sum, c) => sum + c.max, 0); // 95
-
 export const ANCHORS = {
   domain: { same: 25, adjacent: 15, newPreferred: 5, newRequired: 0 },
-  company: { established: 20, growth: 10, seed: 3, aiFirstStartupAiTitle: 0, unknown: 10 },
+  // Stage is scored by distance from the stage the candidate asked for:
+  // established -> growth -> seed.
+  company: { sameStage: 20, oneStageAway: 10, twoStagesAway: 3, aiFirstStartupAiTitle: 0, unknown: 10, noStagePreference: 20 },
+  // By distance between the role's level and the candidate's target.
   level: { strong: 15, partial: 8, poor: 3 },
   requirements: { met: 15, oneStretch: 8, unmet: 0 },
   location: { preferred: 10, secondary: 5, other: 2 },
@@ -48,8 +55,8 @@ export const ENGINEERING_CAP = 50;
 // Companies at or above this many employees count as "established" when
 // headcount is known; the posting's own description decides otherwise.
 export const ESTABLISHED_EMPLOYEES = 1000;
-// "Top brand" for Level fit: big enough that a PM or Sr PM title there
-// carries the scope a Lead title does at a mid-size company.
+// "Top brand" for Level fit: big enough that a title there carries the
+// scope of the next level up at a mid-size company.
 export const TOP_BRAND_EMPLOYEES = 10000;
 
 export type Tier = "Strong Apply" | "Apply" | "Consider" | "Pass";
@@ -61,14 +68,30 @@ export function tierOf(score: number): Tier {
   return "Pass";
 }
 
-/** The candidate's preferences -- the three questions, pre-filled from the resume. */
+export type Level = "associate" | "mid" | "senior" | "principal" | "director";
+export const LEVEL_ORDER: Level[] = ["associate", "mid", "senior", "principal", "director"];
+
+/** Years in product -> the level a resume points to, when the candidate doesn't pick one. */
+export function levelFromYears(years: number, managedPeople: boolean): Level {
+  if (years < 2) return "associate";
+  if (years < 5) return "mid";
+  if (years < 8) return "senior";
+  return years >= 12 && managedPeople ? "director" : "principal";
+}
+
+export type StagePreference = "established" | "growth" | "seed";
+
+/** The candidate's preferences, from the onboarding answers. null = no preference: not scored. */
 export interface Preferences {
-  // City names ("New York", "Baltimore") or "Remote US"; matched against a
-  // role's offices and its remote flag.
-  preferredLocations: string[];
-  secondaryLocations: string[];
-  relocationOk: boolean;
-  payFloor: number; // below this top-of-band is 2 points
-  payTarget: number; // at or above this top-of-band is full points
+  targetLevel: Level | null; // null: read from the resume
+  locations: {
+    // "City, ST" as the export spells it, or "Remote US"; matched against a
+    // role's offices and its remote flag.
+    preferred: string[];
+    secondary: string[];
+    relocationOk: boolean;
+  } | null;
+  pay: { floor: number; target: number } | null; // under floor: 2 points; at target: full
+  companyStage: StagePreference | null;
   skipAiFirstStartups: boolean;
 }
