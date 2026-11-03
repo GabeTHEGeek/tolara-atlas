@@ -1938,6 +1938,143 @@ h1.role-page-title {
   text-decoration: underline;
 }
 
+/* "Find people" on a card: as quiet as Role prep, since it's a side action. */
+.job-find {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.job-find:hover:not(:disabled) {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.job-find:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.people-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  vertical-align: middle;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ---------- People to reach (role prep) ---------- */
+
+.people-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.people-when {
+  font-size: 12px;
+}
+
+.people-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.people-empty .card-empty {
+  flex: 1;
+  min-width: 240px;
+  line-height: 1.5;
+}
+
+.people-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.people-spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent);
+  animation: people-spin 0.9s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes people-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.people-stop {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--caution);
+  color: var(--caution);
+  font-size: 14px;
+}
+
+.people-list strong {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.people-label,
+.people-conf {
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+}
+
+.people-label--hiring_manager {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.people-conf--high {
+  color: var(--positive);
+}
+
+.people-conf--low {
+  color: var(--text-faint);
+}
+
+.leader-text .people-reason {
+  color: var(--text);
+}
+
+.people-local-only {
+  align-self: center;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
 .job-more-button {
   display: block;
   width: 100%;
