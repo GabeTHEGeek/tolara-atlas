@@ -8,23 +8,27 @@
  * A role with no analysis yet still scores, with neutral values for the
  * unknowns; that provisional score is what picks which roles get analysed.
  * Every category returns one line of evidence, so a score can always be
- * explained.
+ * explained. A category the candidate has no preference on returns null and
+ * isn't counted: the score is scaled over the categories that are.
  */
 
 import { isAdjacent, type Archetype } from "./archetypes.js";
 import type { RoleAnalysis } from "./analyzeRole.js";
-import type { CandidateProfile } from "./profile.js";
+import { countedYears, type CandidateProfile } from "./profile.js";
 import type { RequirementsCheck } from "./check.js";
 import {
   ANCHORS,
   CATEGORIES,
   ENGINEERING_CAP,
   ESTABLISHED_EMPLOYEES,
-  RAW_MAX,
+  LEVEL_ORDER,
   TOP_BRAND_EMPLOYEES,
+  levelFromYears,
   tierOf,
   type CategoryId,
+  type Level,
   type Preferences,
+  type StagePreference,
   type Tier,
 } from "./rubric.js";
 
@@ -48,12 +52,14 @@ export interface CategoryScore {
   id: CategoryId;
   points: number;
   max: number;
+  counted: boolean; // false: no preference given, left out of the score
   evidence: string;
 }
 
 export interface MatchScore {
   score: number; // 0-100
-  raw: number; // out of RAW_MAX
+  raw: number; // out of rawMax
+  rawMax: number; // the counted categories' maximums
   tier: Tier;
   capped: string | null; // why the engineering cap applied, if it did
   provisional: boolean; // no analysis yet: unknowns scored neutrally
@@ -103,41 +109,68 @@ function scoreDomain(profile: CandidateProfile, a: RoleAnalysis | null): [number
 
 const AI_TITLE = /\b(ai|ml|llm|agent|agents|agentic|genai)\b|forward[- ]deployed/i;
 
-function scoreCompany(role: RoleFacts, a: RoleAnalysis | null, prefs: Preferences): [number, string] {
+type Scored = [number, string] | null;
+
+const STAGE_ORDER: StagePreference[] = ["established", "growth", "seed"];
+const STAGE_LABEL: Record<StagePreference, string> = { established: "Established", growth: "Growth stage", seed: "Early stage" };
+
+function scoreCompany(role: RoleFacts, a: RoleAnalysis | null, prefs: Preferences): Scored {
   if (a?.aiFirstStartup && prefs.skipAiFirstStartups && AI_TITLE.test(role.title) && (role.employees ?? 0) < ESTABLISHED_EMPLOYEES) {
     return [ANCHORS.company.aiFirstStartupAiTitle, "AI-first startup hiring an AI / forward-deployed title (you chose to skip these)"];
   }
+  if (!prefs.companyStage) {
+    return prefs.skipAiFirstStartups ? [ANCHORS.company.noStagePreference, "Not an AI-first startup role"] : null;
+  }
+  let stage: StagePreference | null = null;
+  let why = "";
   if (role.employees != null && role.employees >= ESTABLISHED_EMPLOYEES) {
-    return [ANCHORS.company.established, `Established: about ${role.employees.toLocaleString()} employees`];
+    [stage, why] = ["established", `about ${role.employees.toLocaleString()} employees`];
+  } else if (a && a.companyStage !== "unknown") {
+    [stage, why] = [a.companyStage, "per the posting"];
   }
-  switch (a?.companyStage) {
-    case "established":
-      return [ANCHORS.company.established, "Established or late stage, per the posting"];
-    case "growth":
-      return [ANCHORS.company.growth, "Growth stage with revenue, per the posting"];
-    case "seed":
-      return [ANCHORS.company.seed, "Seed / early stage, per the posting"];
-    default:
-      return [ANCHORS.company.unknown, "Company stage unknown -- scored as growth"];
-  }
+  if (!stage) return [ANCHORS.company.unknown, "Company stage unknown -- scored halfway"];
+  const away = Math.abs(STAGE_ORDER.indexOf(stage) - STAGE_ORDER.indexOf(prefs.companyStage));
+  const points = [ANCHORS.company.sameStage, ANCHORS.company.oneStageAway, ANCHORS.company.twoStagesAway][away];
+  return [points, `${STAGE_LABEL[stage]}, ${why}${away === 0 ? " -- the kind you asked for" : ""}`];
 }
 
-function scoreLevel(role: RoleFacts, a: RoleAnalysis | null): [number, string] {
+const LEVEL_LABEL: Record<Level, string> = {
+  associate: "Associate",
+  mid: "PM",
+  senior: "Sr PM",
+  principal: "Lead / Principal",
+  director: "Group PM / Director",
+};
+
+/** The role's level, from its seniority facet and title. */
+function roleLevel(role: RoleFacts, a: RoleAnalysis | null): Level {
   const t = role.title.toLowerCase();
-  const topBrand = (role.employees ?? 0) >= TOP_BRAND_EMPLOYEES;
-  if (a?.managesPMs) return [ANCHORS.level.poor, "Requires managing PMs"];
-  if (role.seniority === "director") return [ANCHORS.level.poor, "Director-level or above"];
-  if (/\bstaff\b/.test(t)) return [ANCHORS.level.poor, "Staff title"];
-  if (role.seniority === "associate") return [ANCHORS.level.poor, "Associate level -- under your level"];
-  if (/group product manager|\bgpm\b/.test(t)) return [ANCHORS.level.partial, "Group PM without required reports"];
-  // roleFacets files "Lead" under senior; the rubric scores a Lead IC like
-  // a Principal, so it's checked by title here.
-  if (role.seniority === "principal" || /\blead (product manager|pm)\b|\bproduct lead\b/.test(t)) {
-    return [ANCHORS.level.strong, "Lead / Principal IC"];
-  }
-  if (topBrand) return [ANCHORS.level.strong, `${role.seniority === "senior" ? "Sr PM" : "PM"} at a top brand`];
-  return [ANCHORS.level.partial, `${role.seniority === "senior" ? "Sr PM" : "PM"} at a mid-size company`];
+  if (a?.managesPMs || role.seniority === "director") return "director";
+  // roleFacets files "Lead" and "Staff" under senior; they're principal-
+  // level ICs, as is a Group PM without required reports.
+  if (role.seniority === "principal" || /\bstaff\b|\blead (product manager|pm)\b|\bproduct lead\b|group product manager|\bgpm\b/.test(t)) return "principal";
+  return role.seniority;
 }
+
+function scoreLevel(role: RoleFacts, a: RoleAnalysis | null, profile: CandidateProfile, prefs: Preferences): [number, string] {
+  const target = prefs.targetLevel ?? levelFromYears(countedYears(profile), profile.managedPeople);
+  const level = roleLevel(role, a);
+  if (a?.managesPMs && !profile.managedPeople) return [ANCHORS.level.poor, "Requires managing PMs, which your resume doesn't show"];
+  let gap = LEVEL_ORDER.indexOf(level) - LEVEL_ORDER.indexOf(target);
+  // A title at a top brand carries the next level's scope elsewhere.
+  const topBrand = gap < 0 && (role.employees ?? 0) >= TOP_BRAND_EMPLOYEES;
+  if (topBrand) gap += 1;
+  const at = `${LEVEL_LABEL[level]}${topBrand ? " at a top brand" : ""}`;
+  const aim = `you're aiming for ${LEVEL_LABEL[target]}`;
+  if (gap === 0) return [ANCHORS.level.strong, `${at} -- ${aim}`];
+  if (Math.abs(gap) === 1) return [ANCHORS.level.partial, `${at} -- one level ${gap > 0 ? "above" : "below"} ${LEVEL_LABEL[target]}`];
+  return [ANCHORS.level.poor, `${at} -- ${gap > 0 ? "well above" : "well below"} ${LEVEL_LABEL[target]}`];
+}
+
+// Requirements no resume can show: a role gated on these is unmet unless
+// the candidate's resume says otherwise, which the check can't confirm
+// either. Read from the analysis's extracted must-haves.
+const HARD_GATE = /\b(security clearance|ts\/sci|top secret|polygraph|secret clearance|active clearance)\b/i;
 
 function scoreRequirements(profile: CandidateProfile, a: RoleAnalysis | null, check: RequirementsCheck | null): [number, string] {
   // Unknown isn't met: with no posting text there's nothing to check the
@@ -145,13 +178,19 @@ function scoreRequirements(profile: CandidateProfile, a: RoleAnalysis | null, ch
   if (a && !a.descriptionAvailable) {
     return [ANCHORS.requirements.oneStretch, "Can't confirm requirements -- the posting text isn't available"];
   }
-  let points: number = ANCHORS.requirements.met;
-  let why = "No years stated";
+  const gate = a?.hardRequirements.find((r) => HARD_GATE.test(r));
+  if (gate) return [ANCHORS.requirements.unmet, `Requires: "${gate}"`];
+  // Only a check against the resume can say requirements are met. Before
+  // one runs -- and when the posting lists nothing to check -- the best a
+  // role can do is one stretch; years still pull it lower.
+  let points: number = check && a && a.hardRequirements.length > 0 ? ANCHORS.requirements.met : ANCHORS.requirements.oneStretch;
+  let why = !a || a.hardRequirements.length > 0 ? "Not checked against your resume yet" : "The posting lists no requirements to check";
   if (a?.yearsRequired != null) {
-    const gap = a.yearsRequired - profile.totalYears;
-    if (gap <= 0.5) why = `${a.yearsRequired}+ years asked, you have ${profile.totalYears}`;
-    else if (gap <= 2) [points, why] = [ANCHORS.requirements.oneStretch, `${a.yearsRequired}+ years asked, you have ${profile.totalYears} -- a stretch`];
-    else [points, why] = [ANCHORS.requirements.unmet, `${a.yearsRequired}+ years asked, you have ${profile.totalYears}`];
+    const years = countedYears(profile);
+    const gap = a.yearsRequired - years;
+    if (gap <= 0.5) why = `${a.yearsRequired}+ years asked, you have ${years}${points < ANCHORS.requirements.met ? " -- the rest not checked yet" : ""}`;
+    else if (gap <= 2) [points, why] = [ANCHORS.requirements.oneStretch, `${a.yearsRequired}+ years asked, you have ${years} -- a stretch`];
+    else [points, why] = [ANCHORS.requirements.unmet, `${a.yearsRequired}+ years asked, you have ${years}`];
   }
   if (check) {
     const fromCheck = check.status === "met" ? ANCHORS.requirements.met : check.status === "one_stretch" ? ANCHORS.requirements.oneStretch : ANCHORS.requirements.unmet;
@@ -168,18 +207,22 @@ function inList(city: string, list: string[]): boolean {
   return list.some((l) => norm(l) === c);
 }
 
-function scoreLocation(role: RoleFacts, prefs: Preferences): [number, string] {
-  const remoteOk = prefs.preferredLocations.some((l) => /remote/i.test(l));
+function scoreLocation(role: RoleFacts, prefs: Preferences): Scored {
+  const loc = prefs.locations;
+  if (!loc) return null;
+  const remoteOk = loc.preferred.some((l) => /remote/i.test(l));
   if (role.isRemote && remoteOk) return [ANCHORS.location.preferred, "Remote US"];
-  const preferred = role.cities.find((c) => inList(c, prefs.preferredLocations));
+  const preferred = role.cities.find((c) => inList(c, loc.preferred));
   if (preferred) return [ANCHORS.location.preferred, preferred];
-  const secondary = role.cities.find((c) => inList(c, prefs.secondaryLocations));
+  const secondary = role.cities.find((c) => inList(c, loc.secondary));
   if (secondary) return [ANCHORS.location.secondary, secondary];
-  if (prefs.relocationOk) return [ANCHORS.location.secondary, `${role.cities[0] ?? "Elsewhere"} (you're open to relocating)`];
+  if (loc.relocationOk) return [ANCHORS.location.secondary, `${role.cities[0] ?? "Elsewhere"} (you're open to relocating)`];
   return [ANCHORS.location.other, role.cities.slice(0, 2).join(" / ") || "Location not listed"];
 }
 
-function scoreComp(role: RoleFacts, prefs: Preferences): [number, string] {
+function scoreComp(role: RoleFacts, prefs: Preferences): Scored {
+  if (!prefs.pay) return null;
+  const { floor, target } = prefs.pay;
   const yearlyUsd = (role.salaryPeriod ?? "year") === "year" && (role.salaryCurrency ?? "USD") === "USD";
   const top = yearlyUsd ? (role.salaryMax ?? role.salaryMin) : null;
   if (top == null) {
@@ -187,9 +230,9 @@ function scoreComp(role: RoleFacts, prefs: Preferences): [number, string] {
     return large ? [ANCHORS.comp.unpostedLarge, "Pay not posted (large company)"] : [ANCHORS.comp.unpostedSmall, "Pay not posted"];
   }
   const k = (n: number) => `$${Math.round(n / 1000)}k`;
-  if (top >= prefs.payTarget) return [ANCHORS.comp.atTarget, `Top of band ${k(top)} -- at or above your ${k(prefs.payTarget)} target`];
-  if (top >= prefs.payFloor) return [ANCHORS.comp.betweenFloorAndTarget, `Top of band ${k(top)}`];
-  return [ANCHORS.comp.belowFloor, `Top of band ${k(top)} -- under your ${k(prefs.payFloor)} floor`];
+  if (top >= target) return [ANCHORS.comp.atTarget, `Top of band ${k(top)} -- at or above your ${k(target)} target`];
+  if (top >= floor) return [ANCHORS.comp.betweenFloorAndTarget, `Top of band ${k(top)}`];
+  return [ANCHORS.comp.belowFloor, `Top of band ${k(top)} -- under your ${k(floor)} floor`];
 }
 
 export function scoreRole(
@@ -199,22 +242,27 @@ export function scoreRole(
   analysis: RoleAnalysis | null,
   check: RequirementsCheck | null = null,
 ): MatchScore {
-  const results: Record<CategoryId, [number, string]> = {
+  const results: Record<CategoryId, Scored> = {
     domain: scoreDomain(profile, analysis),
     company: scoreCompany(role, analysis, prefs),
-    level: scoreLevel(role, analysis),
+    level: scoreLevel(role, analysis, profile, prefs),
     requirements: scoreRequirements(profile, analysis, check),
     location: scoreLocation(role, prefs),
     comp: scoreComp(role, prefs),
   };
-  const categories = CATEGORIES.map((c) => ({ id: c.id, max: c.max, points: results[c.id][0], evidence: results[c.id][1] }));
-  const raw = categories.reduce((sum, c) => sum + c.points, 0);
-  let score = Math.round((raw * 100) / RAW_MAX);
+  const categories = CATEGORIES.map((c) => {
+    const r = results[c.id];
+    return { id: c.id, max: c.max, counted: r != null, points: r?.[0] ?? 0, evidence: r?.[1] ?? "No preference -- not counted" };
+  });
+  const counted = categories.filter((c) => c.counted);
+  const raw = counted.reduce((sum, c) => sum + c.points, 0);
+  const rawMax = counted.reduce((sum, c) => sum + c.max, 0);
+  let score = Math.round((raw * 100) / rawMax);
 
   let capped: string | null = null;
   if (analysis?.engineeringInDisguise) capped = "Engineering role with a PM title";
   else if (analysis?.deepMlRequired && profile.mlDepth !== "deep") capped = "Requires deep ML depth your resume doesn't show";
   if (capped) score = Math.min(score, ENGINEERING_CAP);
 
-  return { score, raw, tier: tierOf(score), capped, provisional: analysis == null, categories };
+  return { score, raw, rawMax, tier: tierOf(score), capped, provisional: analysis == null, categories };
 }

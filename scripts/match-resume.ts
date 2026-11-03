@@ -3,7 +3,12 @@
  * Scores every live role against one resume and writes a report to check
  * by hand -- the first test of the resume-match rubric, before any UI.
  *
- *   npx tsx scripts/match-resume.ts .local/resume.txt [--prefs .local/prefs.json] [--analyze 300] [--check 50]
+ *   npx tsx scripts/match-resume.ts .local/resume.txt [--answers .local/answers.json] [--analyze 300] [--check 50]
+ *
+ * Without --answers it scores as a new user who skipped onboarding: no
+ * location, pay or company preference, level read from the resume. An
+ * answers file holds the quiz answers (server/match/onboarding.ts); any it
+ * leaves out stay generic.
  *
  * The flow (see server/match/*):
  *   1. Parse the resume into a profile (one model call; cached in .local/
@@ -29,34 +34,15 @@ import { readCachedIntelligence } from "../server/enrichment/intelligence.js";
 import { analyzeRole, cleanDescription, loadCache, saveCache, type RoleAnalysis } from "../server/match/analyzeRole.js";
 import { checkRequirements, type RequirementsCheck } from "../server/match/check.js";
 import { mapLimit } from "../server/match/llm.js";
-import { parseResume, type CandidateProfile } from "../server/match/profile.js";
-import { CATEGORIES, type Preferences } from "../server/match/rubric.js";
+import { countedYears, parseResume, type CandidateProfile } from "../server/match/profile.js";
+import { GENERIC_ANSWERS, preferencesFrom, type Answers } from "../server/match/onboarding.js";
+import { ANCHORS, CATEGORIES, levelFromYears, type Preferences } from "../server/match/rubric.js";
 import { scoreRole, type MatchScore, type RoleFacts } from "../server/match/score.js";
 import type { MapData } from "../src/types.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const LOCAL = path.join(ROOT, ".local");
 const CACHE_PATH = path.join(ROOT, "data", "role-analysis.json");
-
-// The owner's Profile v2 values. A --prefs file overrides any of them.
-const DEFAULT_PREFS: Preferences = {
-  preferredLocations: [
-    "Remote US",
-    "New York, NY", "Brooklyn, NY",
-    "Baltimore, MD", "Towson, MD", "Columbia, MD",
-    "Washington, DC", "Arlington, VA", "Alexandria, VA", "McLean, VA", "Reston, VA", "Herndon, VA",
-    "Tysons, VA", "Bethesda, MD", "Rockville, MD", "Silver Spring, MD",
-  ],
-  secondaryLocations: [
-    "San Francisco, CA", "South San Francisco, CA", "Oakland, CA", "Palo Alto, CA", "Menlo Park, CA",
-    "Mountain View, CA", "Sunnyvale, CA", "San Jose, CA", "Redwood City, CA", "San Mateo, CA",
-    "Seattle, WA", "Bellevue, WA", "Redmond, WA", "Kirkland, WA",
-  ],
-  relocationOk: false,
-  payFloor: 150_000,
-  payTarget: 180_000,
-  skipAiFirstStartups: true,
-};
 
 function arg(name: string, fallback: string): string {
   const i = process.argv.indexOf(`--${name}`);
@@ -128,7 +114,7 @@ function loadRoles(): RoleRow[] {
 async function main() {
   const resumePath = process.argv[2];
   if (!resumePath || !existsSync(resumePath)) {
-    console.error("Usage: npx tsx scripts/match-resume.ts <resume.txt|.md> [--prefs file.json] [--analyze 300] [--check 50]");
+    console.error("Usage: npx tsx scripts/match-resume.ts <resume.txt|.md> [--answers file.json] [--analyze 300] [--check 50]");
     process.exit(1);
   }
   if (resumePath.toLowerCase().endsWith(".pdf")) {
@@ -138,8 +124,10 @@ async function main() {
   mkdirSync(LOCAL, { recursive: true });
   const analyzeN = Number(arg("analyze", "300"));
   const checkN = Number(arg("check", "50"));
-  const prefsPath = arg("prefs", "");
-  const prefs: Preferences = prefsPath ? { ...DEFAULT_PREFS, ...JSON.parse(readFileSync(prefsPath, "utf-8")) } : DEFAULT_PREFS;
+  const answersPath = arg("answers", "");
+  const answers: Answers = { ...GENERIC_ANSWERS, ...(answersPath ? (JSON.parse(readFileSync(answersPath, "utf-8")) as Partial<Answers>) : {}) };
+  const prefs: Preferences = preferencesFrom(answers);
+  console.log(`Answers: ${answersPath || "none (generic onboarding)"}`);
 
   // 1. Profile, cached by the resume's hash.
   const resumeText = readFileSync(resumePath, "utf-8");
@@ -155,7 +143,7 @@ async function main() {
     writeFileSync(profilePath, JSON.stringify(profile, null, 2));
   }
   console.log(
-    `  ${profile.name}: ${profile.totalYears} yrs in product (${profile.employedPmYears} employed PM, ${profile.founderYears} founder); ` +
+    `  ${profile.name}: ${countedYears(profile)} counted yrs in product (${profile.employedPmYears} employed PM, ${profile.founderYears} founder at half); ` +
       `archetypes ${profile.archetypes.map((a) => `${a.archetype}${a.strength === "primary" ? "*" : ""}`).join(", ")}; ML depth ${profile.mlDepth}`,
   );
 
@@ -220,17 +208,32 @@ async function main() {
     .sort((a, b) => b.s.score - a.s.score);
 
   // 5. Report.
-  writeReport(profile, prefs, scored);
+  writeReport(profile, answers, prefs, scored);
 }
+
+// The answers each multiple-choice column allows, by the points they score.
+const CHOICES = {
+  domain: [[ANCHORS.domain.same, "same"], [ANCHORS.domain.adjacent, "adjacent"], [ANCHORS.domain.newPreferred, "new"], [ANCHORS.domain.newRequired, "new_required"]],
+  level: [[ANCHORS.level.strong, "strong"], [ANCHORS.level.partial, "partial"], [ANCHORS.level.poor, "poor"]],
+  requirements: [[ANCHORS.requirements.met, "met"], [ANCHORS.requirements.oneStretch, "one_stretch"], [ANCHORS.requirements.unmet, "unmet"]],
+} as const satisfies Record<string, ReadonlyArray<readonly [number, string]>>;
 
 function cell(s: string): string {
   return s.replace(/\|/g, "/").replace(/\n/g, " ");
 }
 
-function writeReport(profile: CandidateProfile, prefs: Preferences, all: Array<{ r: RoleRow; s: MatchScore }>) {
+function writeReport(profile: CandidateProfile, answers: Answers, prefs: Preferences, all: Array<{ r: RoleRow; s: MatchScore }>) {
   // Only analysed roles are ranked: a provisional score is a guess used to
-  // decide what to analyse, not a recommendation.
-  const scored = all.filter(({ s }) => !s.provisional);
+  // decide what to analyse, not a recommendation. One posting listed once
+  // per office (Fivetran's three identical Staff PM roles) is one role here.
+  const seen = new Set<string>();
+  const scored = all.filter(({ r, s }) => {
+    if (s.provisional) return false;
+    const key = `${r.facts.company}|${r.facts.title.toLowerCase()}|${r.description?.length ?? 0}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
   const unanalysed = all.length - scored.length;
   // At most 3 per company in the top 25: Amazon alone posts hundreds of PM
   // roles, and a list that's all one employer isn't a useful shortlist.
@@ -251,21 +254,30 @@ function writeReport(profile: CandidateProfile, prefs: Preferences, all: Array<{
 
   const lines: string[] = [];
   lines.push(`# Resume match test — ${profile.name}`, "");
-  lines.push(`Generated ${new Date().toISOString()}. Rubric: Profile v2 (95 raw, scaled to 100), domain by archetype, engineering cap ${50}.`, "");
+  lines.push(`Generated ${new Date().toISOString()}. Rubric: Profile v2, scaled to 100 over the counted categories; domain by archetype, engineering cap ${50}.`, "");
   lines.push("## Profile as read", "");
-  lines.push(`- **Years in product:** ${profile.totalYears} (${profile.employedPmYears} employed PM, ${profile.founderYears} founder/head of product)`);
+  lines.push(`- **Years in product:** ${countedYears(profile)} counted (${profile.employedPmYears} employed PM, ${profile.founderYears} founder/head of product at half; ${profile.totalYears} calendar)`);
   lines.push(`- **Jobs:** ${profile.jobs.map((j) => `${j.title}, ${j.company} (${j.start}–${j.end ?? "present"})`).join("; ")}`);
   lines.push(`- **Archetypes:** ${profile.archetypes.map((a) => `${a.archetype} (${a.strength}) — "${a.evidence}"`).join("; ")}`);
   lines.push(`- **Domains:** ${profile.domains.join(", ")}`);
   lines.push(`- **ML depth:** ${profile.mlDepth} · **Managed people:** ${profile.managedPeople ? "yes" : "no"}`);
-  lines.push(`- **Preferences:** pay floor $${prefs.payFloor / 1000}k, target $${prefs.payTarget / 1000}k; skip AI-first startups: ${prefs.skipAiFirstStartups ? "yes" : "no"}`, "");
+  const target = prefs.targetLevel ?? `${levelFromYears(countedYears(profile), profile.managedPeople)} (from the resume)`;
+  lines.push(
+    `- **Onboarding answers:** level ${target}; locations ${answers.locations.join(", ")}${answers.alsoConsider.length ? `, also ${answers.alsoConsider.join(", ")}` : ""}; ` +
+      `pay ${prefs.pay ? `floor $${prefs.pay.floor / 1000}k, target $${prefs.pay.target / 1000}k` : "no preference"}; company ${prefs.companyStage ?? "no preference"}; ` +
+      `skip AI-first startups: ${prefs.skipAiFirstStartups ? "yes" : "no"}`,
+    "",
+  );
   lines.push(`**Tiers across the ${scored.length} analysed roles** (${unanalysed} lower-ranked roles not analysed): ${["Strong Apply", "Apply", "Consider", "Pass"].map((t) => `${t} ${tierCounts[t] ?? 0}`).join(" · ")}`, "");
 
   const table = (rows: Array<{ r: RoleRow; s: MatchScore }>, startRank: (i: number) => number) => {
     lines.push(`| # | Score | Tier | Role | Company | ${CATEGORIES.map((c) => `${c.label.split(" ")[0]} /${c.max}`).join(" | ")} |`);
     lines.push(`|---|---|---|---|---|${CATEGORIES.map(() => "---").join("|")}|`);
     rows.forEach(({ r, s }, i) => {
-      const pts = CATEGORIES.map((c) => String(s.categories.find((x) => x.id === c.id)!.points));
+      const pts = CATEGORIES.map((c) => {
+        const x = s.categories.find((y) => y.id === c.id)!;
+        return x.counted ? String(x.points) : "–";
+      });
       lines.push(
         `| ${startRank(i)} | ${s.score}${s.capped ? "†" : ""}${s.provisional ? "?" : ""} | ${s.tier} | [${cell(r.facts.title)}](${r.facts.url ?? ""}) | ${cell(r.facts.company)} | ${pts.join(" | ")} |`,
       );
@@ -278,7 +290,7 @@ function writeReport(profile: CandidateProfile, prefs: Preferences, all: Array<{
   lines.push("## Why — top 25", "");
   top.forEach(({ r, s }, i) => {
     lines.push(`**${i + 1}. ${r.facts.title} — ${r.facts.company}** (${s.score}, ${s.tier})${s.capped ? ` — capped: ${s.capped}` : ""}`);
-    for (const c of s.categories) lines.push(`- ${CATEGORIES.find((x) => x.id === c.id)!.label} ${c.points}/${c.max}: ${c.evidence}`);
+    for (const c of s.categories.filter((x) => x.counted)) lines.push(`- ${CATEGORIES.find((x) => x.id === c.id)!.label} ${c.points}/${c.max}: ${c.evidence}`);
     lines.push("");
   });
   lines.push("## Calibration sample — spread across every other analysed role", "");
@@ -286,15 +298,28 @@ function writeReport(profile: CandidateProfile, prefs: Preferences, all: Array<{
 
   writeFileSync(path.join(LOCAL, "match-report.md"), lines.join("\n"));
 
+  // Multiple choice, not a 0-100 total: each column asks a factual
+  // question about the resume and the posting, which anyone can answer the
+  // same way -- so agreement checks the rubric, not one person's taste.
+  const choice = (s: MatchScore, id: "domain" | "level" | "requirements") => {
+    const points = s.categories.find((c) => c.id === id)!.points;
+    return CHOICES[id].find(([p]) => p === points)?.[1] ?? String(points);
+  };
   const csv = [
-    ["rank", "role_id", "title", "company", "url", "our_score", "our_tier", "your_score", "your_tier", "notes"].join(","),
+    ["rank", "role_id", "title", "company", "url", "our_score", "our_domain", "our_level", "our_requirements", "your_domain", "your_level", "your_requirements", "notes"].join(","),
     ...[...top, ...sample].map(({ r, s }) =>
-      [scored.findIndex((x) => x.r === r) + 1, r.facts.id, r.facts.title, r.facts.company, r.facts.url ?? "", s.score, s.tier, "", "", ""]
+      [scored.findIndex((x) => x.r === r) + 1, r.facts.id, r.facts.title, r.facts.company, r.facts.url ?? "", s.score, choice(s, "domain"), choice(s, "level"), choice(s, "requirements"), "", "", "", ""]
         .map((v) => `"${String(v).replace(/"/g, '""')}"`)
         .join(","),
     ),
   ].join("\n");
   writeFileSync(path.join(LOCAL, "match-handscore.csv"), csv);
+  // Every analysed role's answers, so a hand-scored sheet from an earlier
+  // run can still be compared after the shortlist changes.
+  writeFileSync(
+    path.join(LOCAL, "match-all.json"),
+    JSON.stringify(Object.fromEntries(scored.map(({ r, s }) => [r.facts.id, { score: s.score, domain: choice(s, "domain"), level: choice(s, "level"), requirements: choice(s, "requirements") }]))),
+  );
 
   console.log(`\nTiers (${scored.length} analysed roles): ${Object.entries(tierCounts).map(([t, n]) => `${t} ${n}`).join(" · ")}`);
   console.log("Top 10:");
