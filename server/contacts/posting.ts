@@ -53,11 +53,8 @@ export function reportsToFrom(description: string): string | null {
 
 // "Senior Product Manager, Pricing" / "Product Manager - Payments" /
 // "PM (Growth)": the part after the separator is the team.
-export function teamFromTitle(title: string): string | null {
-  const m =
-    title.match(/(?:,|\s[-–—|]\s|:)\s*([^,(]+?)\s*(?:\(.*\))?$/) ?? title.match(/\(([^)]+)\)\s*$/);
-  if (!m) return null;
-  const team = m[1].trim();
+function teamOrNull(team: string): string | null {
+  team = team.trim();
   // Locations and levels aren't teams.
   if (/^(remote|hybrid|us|usa|united states|new york|nyc|sf|san francisco|seattle|austin|[A-Z]{2}|i{1,3}|iv|v|\d+)$/i.test(team)) return null;
   if (/^(senior|staff|principal|lead|associate|sr\.?|group)$/i.test(team)) return null;
@@ -65,10 +62,29 @@ export function teamFromTitle(title: string): string | null {
   return team.length <= 60 ? team : null;
 }
 
+// "Senior Product Manager, Pricing" / "Product Manager - Payments" /
+// "PM (Growth)": the part after the separator is the team. When that part
+// is just the discipline ("Director, Product Management (Discovery,
+// Search)"), the parenthetical is.
+export function teamFromTitle(title: string): string | null {
+  const after = title.match(/(?:,|\s[-–—|]\s|:)\s*([^,(]+?)\s*(?:\(.*\))?$/);
+  const paren = title.match(/\(([^)]+)\)\s*$/);
+  return (after && teamOrNull(after[1])) || (paren && teamOrNull(paren[1])) || null;
+}
+
+// "As part of Epic's Fortnite Game Publishing team" / "join our Payments
+// team": for titles that don't name the team at all.
+export function teamFromDescription(description: string): string | null {
+  const m = description.match(
+    /\b(?:part of|join(?:ing)?|on)\s+(?:the\s+|our\s+|[A-Z][\w&.]*[’']s\s+)?((?:[A-Z][\w&/-]*\s+){1,5})team\b/,
+  );
+  return m ? teamOrNull(m[1]) : null;
+}
+
 export function hintsFor(title: string, description: string | null, team: string | null): PostingHints {
   return {
     reportsTo: description ? reportsToFrom(description) : null,
-    team: team?.trim() || teamFromTitle(title),
+    team: team?.trim() || teamFromTitle(title) || (description ? teamFromDescription(description) : null),
   };
 }
 

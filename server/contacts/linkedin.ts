@@ -74,6 +74,10 @@ async function openContext(): Promise<BrowserContext> {
     headless: false,
     viewport: { width: 1280, height: 900 },
   });
+  // tsx and Vite compile with esbuild's keepNames, which wraps named inner
+  // functions in a __name() helper that doesn't exist in the page; the
+  // extractors below run there via page.evaluate. A no-op stands in.
+  await ctx.addInitScript("globalThis.__name = (fn) => fn;");
   ctx.on("close", () => {
     if (context === ctx) context = null;
   });
