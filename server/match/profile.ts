@@ -33,6 +33,7 @@ export interface CandidateProfile {
   archetypes: Array<{ archetype: Archetype; strength: "primary" | "some"; evidence: string }>;
   domains: string[];
   highlights: string[]; // strongest quantified evidence, as written
+  skills?: string[]; // tools and skills as listed (SQL, Figma, A/B testing); absent in profiles read before it was added
   mlDepth: "none" | "applied" | "deep";
   managedPeople: boolean;
 }
@@ -46,6 +47,7 @@ Answer ONLY with a JSON object, no prose, using exactly these keys:
   "archetypes": [{"archetype": "<one of: ${ARCHETYPE_IDS.join(", ")}>", "strength": "<primary|some>", "evidence": "<the resume line that shows it, under 25 words>"}],
   "domains": [<up to 6 product domains the candidate has shipped in, 2-4 words each>],
   "highlights": [<up to 6 strongest quantified results, quoted closely from the resume>],
+  "skills": [<up to 25 tools and skills as the resume lists them, e.g. "SQL", "A/B Testing", "Figma">],
   "mlDepth": "<none|applied|deep: applied = prompt engineering, LLM orchestration, agents, API integration; deep = model training, fine-tuning or ML infrastructure>",
   "managedPeople": <true if the resume shows directly managing people>
 }
@@ -96,13 +98,13 @@ export function yearsFrom(jobs: ResumeJob[], now = Date.now()): { total: number;
 
 /**
  * Years of PM experience as a hiring team would count them: employed PM
- * time in full, founder / head-of-product time at half. A founder runs
- * product, but usually without the scale, team and process an employed PM
- * role is levelled on -- counting it in full put a 3.5-year employed PM at
- * Principal.
+ * time in full, founder / head-of-product time at two-thirds. A founder
+ * runs product, but usually without the scale, team and process an employed
+ * PM role is levelled on -- counting it in full put a 3.5-year employed PM
+ * at Principal. Two-thirds is the owner's calibration (half undercounted).
  */
 export function countedYears(profile: Pick<CandidateProfile, "totalYears" | "employedPmYears" | "founderYears">): number {
-  const years = profile.employedPmYears + profile.founderYears / 2;
+  const years = profile.employedPmYears + (profile.founderYears * 2) / 3;
   return Math.round(Math.min(profile.totalYears, years) * 10) / 10;
 }
 
@@ -134,6 +136,7 @@ export async function parseResume(resumeText: string): Promise<CandidateProfile>
       })),
     domains: (Array.isArray(raw.domains) ? raw.domains : []).map(String).slice(0, 6),
     highlights: (Array.isArray(raw.highlights) ? raw.highlights : []).map(String).slice(0, 6),
+    skills: (Array.isArray(raw.skills) ? raw.skills : []).map(String).slice(0, 25),
     mlDepth: mlDepth === "applied" || mlDepth === "deep" ? mlDepth : "none",
     managedPeople: raw.managedPeople === true,
   };

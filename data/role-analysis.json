@@ -420,6 +420,102 @@
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-24T18:48:58.315Z"
  },
+ "805": {
+  "contentHash": "9af6688cd03f9a30ab05ebf077f15ac8c64b69c45176bea69d8f2f92800ccb57",
+  "archetypes": [
+   "platform",
+   "internal"
+  ],
+  "productDomain": "internal developer platform",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years in B2B SaaS Product Management or related technical leadership",
+   "focused on developer platforms, infrastructure, or SDLC tooling",
+   "Experience operationalizing engineering performance and reliability metrics, including DORA metrics",
+   "Strong perspective on how AI is transforming software engineering workflows",
+   "Bachelor’s degree in Engineering, Computer Science, Information Technology, or equivalent practical experience"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:27.958Z"
+ },
+ "807": {
+  "contentHash": "1e35c660a162a215f43158a1d1c7f5230ec4ee40937d2a753faf626b8cead995",
+  "archetypes": [
+   "ai-agents",
+   "platform"
+  ],
+  "productDomain": "AI agent platform",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Experience building platforms or ecosystems that enable developers, teams, or products to create value",
+   "Strong technical background in AI systems, APIs, platform architecture, developer tooling, and integration patterns",
+   "Define vision, strategy, and roadmap for Datadog's Agent Builder platform and ecosystem",
+   "Partner closely with AI, platform, infrastructure, and product teams across Datadog",
+   "Excellent verbal and written communication skills"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:26.148Z"
+ },
+ "809": {
+  "contentHash": "40a380d05385686bc5f05d92aaa1b3e929a94bcbbc33e51c67d88234d1eab1a4",
+  "archetypes": [
+   "platform",
+   "data"
+  ],
+  "productDomain": "observability fleet management",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of product management experience",
+   "Experience shipping infrastructure, DevOps, IT operations, or observability/monitoring products",
+   "Build product direction across multiple engineering teams",
+   "Drive alignment without direct authority",
+   "Bachelor's degree or equivalent practical experience"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:27.623Z"
+ },
+ "810": {
+  "contentHash": "72df014d3bf321c19ea6415e07d907f017c2f1961f0d327e01b836f54be43dee",
+  "archetypes": [
+   "data",
+   "b2b-saas"
+  ],
+  "productDomain": "digital experience monitoring",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of experience in B2B SaaS Product Management",
+   "Domain knowledge of Real User Monitoring, Synthetics, Product Analytics, APM",
+   "Strong analytical skills - you can write SQL",
+   "Sharp communication skills with technical stakeholders and executives",
+   "Strong sense of ownership with entrepreneurial mindset, comfortable with ambiguity"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:28.959Z"
+ },
  "817": {
   "contentHash": "a52b211e3598f9d6eef3772363ec25909fb29c16bfece9fa881e54fb46d581c2",
   "archetypes": [
@@ -491,6 +587,78 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-24T18:54:46.085Z"
+ },
+ "889": {
+  "contentHash": "f63f38a1398d78bff4a9596389bf3fdd243a15d699ed83e7e274206791ebca06",
+  "archetypes": [
+   "security",
+   "platform"
+  ],
+  "productDomain": "authentication and MFA",
+  "domainRequired": true,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Functional experience in identity management, authentication factors, or security",
+   "Technical aptitude and fluency to communicate with engineering teams and customer developers",
+   "Track record of successful delivery of technical enterprise products",
+   "Strong leadership skills and presence",
+   "Excellent communication skills with both internal and external stakeholders"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:31.799Z"
+ },
+ "896": {
+  "contentHash": "3b12c03954d58a3a493988aed0fde8346e55bcbc99ec01b4f719768ebcdd3b9c",
+  "archetypes": [
+   "platform",
+   "b2b-saas"
+  ],
+  "productDomain": "UI platform",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5-8+ years Product Management experience in enterprise-scale SaaS platforms or core software infrastructure",
+   "BS in Computer Science, Computer Engineering, or equivalent technical experience",
+   "Proven ability to produce solid, actionable plans from incomplete, conflicting, or highly ambiguous inputs",
+   "Exceptional communication and presentation skills; collaborating across global functions and time zones",
+   "Demonstrated business results from platform capabilities or products you have shipped at scale"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:41.956Z"
+ },
+ "898": {
+  "contentHash": "dd7952507d4768991a2409a4ad921757f307eab4a59a47fa0379ade61db0c593",
+  "archetypes": [
+   "security",
+   "ai-agents"
+  ],
+  "productDomain": "agentic identity security",
+  "domainRequired": true,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "direct, hands-on experience in agentic security product management",
+   "command of the OWASP Top 10 for Agentic AI",
+   "experience identifying and responding to prompt injection and rogue agents",
+   "strong fluency in fraud and risk mitigation",
+   "knowledge of Account Takeover, resource draining, fraudulent account creation"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:30.249Z"
  },
  "947": {
   "contentHash": "f7c52d5e894fb2c14f60dd49ca8e92c5c12082262539a64d974dabc033a73dd8",
@@ -825,6 +993,126 @@
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-24T18:47:45.672Z"
  },
+ "1066": {
+  "contentHash": "d813a5ae593daa11b4613711c1f2e2fd4bb5c96820d9c3f04a145f3575939681",
+  "archetypes": [
+   "growth",
+   "consumer"
+  ],
+  "productDomain": "discovery and personalization",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of Product Management experience",
+   "meaningful exposure to discovery systems, content platforms, recommendation engines, or large-scale consumer products",
+   "Strong analytical skills with the ability to use data to inform product decisions",
+   "Passion for games and a solid understanding of growth, retention, and monetization mechanics",
+   "Track record of shipping products in fast-paced, highly collaborative environments with multiple stakeholders"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:33.252Z"
+ },
+ "1067": {
+  "contentHash": "5ebed2fdfcdc1734070ba2ff73f257262fd98861cc10c3bcae4b9783e1c58a81",
+  "archetypes": [
+   "growth",
+   "consumer"
+  ],
+  "productDomain": "game discovery",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of Product Management experience",
+   "Meaningful exposure to discovery systems, content platforms, recommendation engines, or large-scale consumer products",
+   "Strong analytical skills to inform product decisions and define success metrics",
+   "Track record of shipping products in fast-paced, highly collaborative environments",
+   "Strong written and verbal communication skills, including product requirement documents"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:28.920Z"
+ },
+ "1070": {
+  "contentHash": "8c57a26078bf783d8e00b305a9b4cc0ef85bd03511e75b967bd569c08a78a24c",
+  "archetypes": [
+   "platform",
+   "consumer"
+  ],
+  "productDomain": "cross-platform player platform",
+  "domainRequired": true,
+  "yearsRequired": 6,
+  "hardRequirements": [
+   "6+ years of Product Management experience building and scaling consumer-facing platform products",
+   "Proven track record delivering platform features that power core player experiences",
+   "Strong analytical skills leveraging data to improve platform adoption and engagement",
+   "Experience partnering closely with engineering on complex systems",
+   "Familiarity with cross-platform ecosystems (PC, console, mobile)"
+  ],
+  "managesPMs": false,
+  "companyStage": "unknown",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:37.890Z"
+ },
+ "1071": {
+  "contentHash": "248565940a09d295818040278f1215d9f39e69d47302a5a8b2a31accc1175557",
+  "archetypes": [
+   "platform",
+   "consumer"
+  ],
+  "productDomain": "cross-platform gaming",
+  "domainRequired": true,
+  "yearsRequired": 6,
+  "hardRequirements": [
+   "6+ years Product Management building and scaling consumer-facing platform products",
+   "Proven track record delivering platform features such as identity, progression, social, cross-platform continuity",
+   "Strong analytical skills leveraging data to improve platform adoption and engagement",
+   "Translate user needs and business goals into scalable cross-device platform solutions",
+   "Experience partnering with engineering on complex systems, usability, performance, scalability"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:37.700Z"
+ },
+ "1072": {
+  "contentHash": "8b202ffe0306beba6d31c2620b3a8eb0591a68dd365a6e43c7dbf90967b8e286",
+  "archetypes": [
+   "platform",
+   "growth"
+  ],
+  "productDomain": "game engine ecosystem",
+  "domainRequired": true,
+  "yearsRequired": 12,
+  "hardRequirements": [
+   "12+ years of product management experience",
+   "meaningful time spent on developer tools, game engines, or complex platform ecosystems",
+   "Deep understanding of the game development process",
+   "Experience defining and tracking product KPIs",
+   "Experience managing and developing high-performing product managers"
+  ],
+  "managesPMs": true,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:39.586Z"
+ },
  "1200": {
   "contentHash": "2a97c6ad07f6a363b01dd946970d8960ffd985dbe6eb7b96935dc103e5f86cea",
   "archetypes": [
@@ -1016,6 +1304,30 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-24T18:54:53.171Z"
+ },
+ "1698": {
+  "contentHash": "495ace934f714640fff7020171b33294778495f1cf2ce9cfff3b8aa9bea4f6fa",
+  "archetypes": [
+   "monetization",
+   "marketplace"
+  ],
+  "productDomain": "domains monetization",
+  "domainRequired": false,
+  "yearsRequired": 6,
+  "hardRequirements": [
+   "6+ years of product management experience or equivalent",
+   "Strong analytical skills and understanding of revenue drivers, unit economics",
+   "Experience with pricing, experimentation, marketplace dynamics, or commercial product problems",
+   "Turn ambiguous business objectives into clear product strategies and roadmaps",
+   "Ability to influence stakeholders across Commercial, Growth, Design, and Engineering"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:02.964Z"
  },
  "1975": {
   "contentHash": "4168cedd4d11ae4d9b820b6a87b9bbe6aea27452ab076143b669304836ef5ef7",
@@ -1412,6 +1724,29 @@
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:04:07.406Z"
  },
+ "2071": {
+  "contentHash": "55c739ee24cdd42baf33b33b5082ce3f479e09c68b789159e0c64d4161917cf6",
+  "archetypes": [
+   "data",
+   "platform"
+  ],
+  "productDomain": "data governance",
+  "domainRequired": false,
+  "yearsRequired": 4,
+  "hardRequirements": [
+   "Bachelor's or Master's in quantitative field, Business, or Marketing",
+   "OR Bachelor's in any field and at least 4 years Product Management experience",
+   "Capital One will not sponsor a new applicant for employment authorization",
+   "Lead and mentor a team of product managers"
+  ],
+  "managesPMs": true,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:24.421Z"
+ },
  "2091": {
   "contentHash": "bf1887b4276a44e2e57d4034feee430a4030a849542a974e7948fd8b02e845dd",
   "archetypes": [
@@ -1649,6 +1984,29 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:23:04.367Z"
+ },
+ "2308": {
+  "contentHash": "6cbc221a79f7a3cc23679a16268c16b76bd418808e90285bc00c031755e988d1",
+  "archetypes": [
+   "consumer",
+   "marketplace"
+  ],
+  "productDomain": "travel booking",
+  "domainRequired": false,
+  "yearsRequired": 4,
+  "hardRequirements": [
+   "Currently has or is obtaining Bachelor's/Master's in quantitative field, Business, or Marketing",
+   "Or Bachelor's in any field and at least 4 years Product Management experience",
+   "Capital One will not sponsor a new applicant for employment authorization",
+   "Adhere to hybrid policy with required on-site presence at designated office"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:20.957Z"
  },
  "2317": {
   "contentHash": "6ea0a072fd5be22b155f736e60474796d16b7cd40a0f1edeea6566b492b25cf6",
@@ -3204,20 +3562,20 @@
   "analyzedAt": "2026-10-24T18:47:57.239Z"
  },
  "2684": {
-  "contentHash": "44013188c1c22aa25f3aa9e3f3370c923dc5dacd8ee1a19d6d29eda095e7a0e3",
+  "contentHash": "bbe09d65cf365237727e4117ead73859c3ba514a079f7f782c1d71dd062591ba",
   "archetypes": [
    "platform",
    "internal"
   ],
-  "productDomain": "developer productivity platform",
-  "domainRequired": false,
-  "yearsRequired": null,
+  "productDomain": "developer productivity",
+  "domainRequired": true,
+  "yearsRequired": 10,
   "hardRequirements": [
+   "10+ years of product management experience building tools and platforms for technical users",
+   "Experience building developer tooling, infrastructure, or platform products",
+   "Track record of improving developer or engineering productivity, with measurements to prove it",
    "Own cross-cutting developer workflows end to end",
-   "Define how we measure developer productivity",
-   "Create and own Product Requirements Documents and Business Requirements Documents",
-   "Influence teams you don't own",
-   "Develop a deep understanding of Airbnb's engineers and technical architecture"
+   "Influence teams you don't own"
   ],
   "managesPMs": false,
   "companyStage": "established",
@@ -3225,23 +3583,47 @@
   "engineeringInDisguise": false,
   "deepMlRequired": false,
   "descriptionAvailable": true,
-  "analyzedAt": "2026-10-24T18:47:44.439Z"
+  "analyzedAt": "2026-11-03T05:46:36.348Z"
  },
  "2685": {
-  "contentHash": "1ed1db89c0d27debfd80730f70ad85904fcd10b8e87ef51fc1375e3a187f1ebf",
+  "contentHash": "11b9bbe32b45848bfd00c9ef06148bc7d30ae3088ae4495b6e118652294033e9",
   "archetypes": [
    "platform",
    "monetization"
   ],
-  "productDomain": "guest payments",
+  "productDomain": "payments platform",
+  "domainRequired": true,
+  "yearsRequired": 12,
+  "hardRequirements": [
+   "12+ years of product management experience in inbound and outbound money movement",
+   "experience within a payments, finance, or heavily transactional company",
+   "manage all aspects of our guest payment capabilities and experiences",
+   "Lead, mentor, and develop a high-performing team of senior platform managers",
+   "deep understanding of stakeholder needs"
+  ],
+  "managesPMs": true,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:35.059Z"
+ },
+ "2686": {
+  "contentHash": "f9db9bb0ac2b9db8dac3e85f85f3e5ecf14e8bca0493b1fde798f823c55ec4fd",
+  "archetypes": [
+   "internal",
+   "data"
+  ],
+  "productDomain": "finance accounting platform",
   "domainRequired": false,
   "yearsRequired": null,
   "hardRequirements": [
-   "Lead the development and execution of the Payments platform strategy and roadmap",
-   "Oversee the end-to-end product development lifecycle",
-   "Guide and collaborate with cross-functional teams",
-   "Manage all aspects of our guest payment capabilities and experiences",
-   "Senior Platform leader"
+   "senior finance systems product role",
+   "product owner for the platform, its roadmap, and its controls",
+   "thrives at the intersection of finance, product, and engineering",
+   "proven track record of implementing platform solutions that scale",
+   "define and refine data pipeline monitoring and SOX controls"
   ],
   "managesPMs": false,
   "companyStage": "established",
@@ -3249,7 +3631,55 @@
   "engineeringInDisguise": false,
   "deepMlRequired": false,
   "descriptionAvailable": true,
-  "analyzedAt": "2026-10-24T18:47:45.669Z"
+  "analyzedAt": "2026-11-03T05:46:37.525Z"
+ },
+ "2687": {
+  "contentHash": "7a721bdfc3af6c64b45cbd16e51d9ce0da42229fc9bd9160fea2edabb05a217f",
+  "archetypes": [
+   "platform",
+   "monetization"
+  ],
+  "productDomain": "payments platform accounts",
+  "domainRequired": true,
+  "yearsRequired": 7,
+  "hardRequirements": [
+   "7+ years building payment platforms or fintech products in a product management role",
+   "Demonstrated experience building enterprise or B2B2C products for large marketplaces",
+   "Deep understanding of identity workflows, compliance requirements, and fraud & losses",
+   "Experience building or managing API-based products and developer-facing platforms",
+   "Experience contributing to products serving multiple geographies, currencies, or regulatory environments"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:34.642Z"
+ },
+ "2688": {
+  "contentHash": "03509db7128971dfb8d67236b876d2c0b3f49f2a37131ae0a6726357fdd60cb0",
+  "archetypes": [
+   "platform",
+   "security"
+  ],
+  "productDomain": "trust and safety",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years product management experience",
+   "Prior product, operation, or engineering experience in trust, safety, risk or fraud",
+   "Experience building machine learning products or technical product management",
+   "Outstanding written and verbal communication ability",
+   "Strong analytical, troubleshooting, and problem-solving skills"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:33.213Z"
  },
  "2696": {
   "contentHash": "466b19d27746b12944f735eb7c9369db4730cc3de441151196cc01dcfbb3bc1d",
@@ -3693,6 +4123,30 @@
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:05:31.361Z"
  },
+ "2834": {
+  "contentHash": "58033411e84f34e465f3750a7b4571c4775582967cdff7b0e7712851f805b9eb",
+  "archetypes": [
+   "platform",
+   "ai-agents"
+  ],
+  "productDomain": "feature flagging",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "+5 years working closely with engineering teams, ideally as an engineer yourself",
+   "+2 years writing code that shipped to production through a full release cycle",
+   "real technical understanding of software architecture",
+   "B2B experience - you've personally helped close deals",
+   "AI-fluent: shipped code with agentic tools yourself"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:30.470Z"
+ },
  "2894": {
   "contentHash": "6ea8211b68e030a6ab27a61cc26cdce42010a79772928f0eb4d3ab3a402c82a9",
   "archetypes": [
@@ -3901,6 +4355,30 @@
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-24T18:47:49.797Z"
  },
+ "2934": {
+  "contentHash": "4279f0e19fc86b0df822775a07b3a58c735a10df6754d643d5acc44db1c68636",
+  "archetypes": [
+   "monetization",
+   "b2b-saas"
+  ],
+  "productDomain": "scheduling payments",
+  "domainRequired": true,
+  "yearsRequired": 6,
+  "hardRequirements": [
+   "6–8+ years of product management experience in SaaS or consumer software",
+   "Deep experience with payments, fintech, or transaction products",
+   "Experience leading mobile product development across iOS and Android surfaces",
+   "Strong data and financial analysis skills",
+   "High technical fluency; comfortable partnering on complex workflows, data models, and platform integrations"
+  ],
+  "managesPMs": false,
+  "companyStage": "unknown",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:04.427Z"
+ },
  "2941": {
   "contentHash": "477f67027a8b4b2740c0a46b1dc8d18a6cf1ecdeec190c053f5f672de729b29b",
   "archetypes": [
@@ -3924,6 +4402,54 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:04:04.598Z"
+ },
+ "2947": {
+  "contentHash": "f8914b8d5e0dd2c63914e403b368eed533cb6c800462ba1e1841e0cf4730db46",
+  "archetypes": [
+   "security",
+   "consumer"
+  ],
+  "productDomain": "trust and safety",
+  "domainRequired": false,
+  "yearsRequired": 6,
+  "hardRequirements": [
+   "6+ years of product management experience",
+   "owning complex, cross-product, or platform initiatives",
+   "Direct, hands-on experience partnering with legal, regulatory, or compliance teams",
+   "Strong written and verbal communicator",
+   "Strong technical foundation and a track record of learning new technologies fast"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:31.229Z"
+ },
+ "2948": {
+  "contentHash": "c32ef02784ae737043342dde41e07a52fa991782418ff1c5023fc01f2cd229c6",
+  "archetypes": [
+   "security",
+   "consumer"
+  ],
+  "productDomain": "trust and safety",
+  "domainRequired": false,
+  "yearsRequired": 6,
+  "hardRequirements": [
+   "6+ years of product management experience",
+   "Direct, hands-on experience partnering with legal, regulatory, or compliance teams",
+   "Track record of owning complex, cross-product, or platform initiatives",
+   "Strong technical foundation and a track record of learning new technologies fast",
+   "Quantitative thinker who drives visibility into product performance"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:32.680Z"
  },
  "2996": {
   "contentHash": "82a0b86043a7ac702b7cb91433aef3c0057f5cdac96ebaee24e0f3b8c3d54cbf",
@@ -4054,6 +4580,30 @@
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:05:34.131Z"
  },
+ "3021": {
+  "contentHash": "ca2733125b46199bea14c182f9ff03523206863489f1b73b7bfeba44363b5324",
+  "archetypes": [
+   "growth",
+   "consumer"
+  ],
+  "productDomain": "game engagement",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Current MBA student",
+   "Prior experience in product management, strategy, analytics, or consulting",
+   "Hands-on experience applying AI/LLM tools to real workflows",
+   "Strong analytical skills; comfort working with large datasets",
+   "Excellent communication and presentation skills"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:32.916Z"
+ },
  "3057": {
   "contentHash": "ab1b0ce001780b971323a0c3a88c409323e3107a823f2e7f2a11a155b8e55f8b",
   "archetypes": [
@@ -4142,6 +4692,29 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-24T18:47:04.755Z"
+ },
+ "3116": {
+  "contentHash": "9e3db7fdecb5e5e50aa7e6ea7581c6e4019158d14120864692984f52d18ce669",
+  "archetypes": [
+   "security",
+   "b2b-saas"
+  ],
+  "productDomain": "identity governance",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of product management experience",
+   "Developed a phased roadmap for complex or abstract projects",
+   "Customer obsessed, have an owner mindset",
+   "Bachelor's degree or an MBA"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:33.856Z"
  },
  "3118": {
   "contentHash": "b910b88ae2961d3dba62111c43d7b6a165516244255cf99fa58a27a5b148ed93",
@@ -4372,21 +4945,21 @@
   "descriptionAvailable": false,
   "analyzedAt": "2026-10-24T18:46:57.027Z"
  },
- "3183": {
-  "contentHash": "d9669af700548fb0b547eef4721cc07473c0c49d0145a9bf4ae6a7eb3bee9955",
+ "3182": {
+  "contentHash": "eed3b15d7f90ffd34f77cb3e4f43ae5062ed9849f6ca29e91f1de1381d0a3abc",
   "archetypes": [
    "consumer",
    "growth"
   ],
-  "productDomain": "consumer live operations",
+  "productDomain": "game live operations",
   "domainRequired": true,
   "yearsRequired": 5,
   "hardRequirements": [
-   "5+ years Product Management experience in live operations for consumer-facing products or games",
-   "Comfort operating as a generalist managing multiple concurrent initiatives across a broad feature portfolio",
-   "Strong analytical skills; interpret large datasets into actionable product decisions; SQL proficiency required",
-   "Outstanding written and oral communication skills; write product requirement documents; present to senior stakeholders",
-   "Passion for games; deep understanding of player retention, engagement, and progression mechanics"
+   "5+ years of Product Management experience in live operations",
+   "Experience with consumer-facing products or games",
+   "Success managing multiple concurrent initiatives across a broad feature portfolio",
+   "Understanding of player retention, engagement, and progression mechanics",
+   "SQL proficiency required"
   ],
   "managesPMs": false,
   "companyStage": "established",
@@ -4394,7 +4967,31 @@
   "engineeringInDisguise": false,
   "deepMlRequired": false,
   "descriptionAvailable": true,
-  "analyzedAt": "2026-10-24T18:47:59.068Z"
+  "analyzedAt": "2026-11-03T05:15:26.198Z"
+ },
+ "3183": {
+  "contentHash": "2b5228d3f9998b753f17b0e0b7b0b734ee86920161e881f2b07f19bc2b0f0135",
+  "archetypes": [
+   "consumer",
+   "growth"
+  ],
+  "productDomain": "gaming live operations",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of Product Management experience in live operations for consumer-facing products or games",
+   "Comfort operating as a generalist with proven success managing multiple concurrent initiatives",
+   "Deep understanding of player retention, engagement, and progression mechanics",
+   "Strong analytical skills; SQL proficiency required",
+   "Outstanding written and oral communication skills, including product requirement documents"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:27.872Z"
  },
  "3185": {
   "contentHash": "d58a5b17b592fc097134ca3014dc136a22a5e2a56ade9f6faf19ebea880a075b",
@@ -4557,6 +5154,30 @@
   "descriptionAvailable": false,
   "analyzedAt": "2026-10-24T18:47:00.729Z"
  },
+ "3311": {
+  "contentHash": "ae7a2e162e05b21b169c046623294c9f5852695a5d1b89d334668c7f07e4bfd6",
+  "archetypes": [
+   "ai-agents",
+   "security"
+  ],
+  "productDomain": "AI agent identity",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years technical product management experience in enterprise-scale SaaS",
+   "Strong knowledge of IAM protocols such as OAuth2, OIDC, SAML",
+   "Deep understanding of API security and developer experience",
+   "Bachelor’s degree in Computer Science, Computer Engineering, or equivalent",
+   "Ability to work cross-functionally with research, design, engineering, customer success"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:27.566Z"
+ },
  "3328": {
   "contentHash": "2b5367628e8c7960b4a0ba6c23c7cf2b1d05760bd7bd228503d90b8307d67cbb",
   "archetypes": [
@@ -4668,6 +5289,28 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-24T18:55:02.722Z"
+ },
+ "3381": {
+  "contentHash": "4c41d128c9f5f0dec3cbde6ffdb67c4f2f67c48a013baeb0e82c42acdbde3b9e",
+  "archetypes": [
+   "ai-agents",
+   "internal"
+  ],
+  "productDomain": "payments AI enablement",
+  "domainRequired": false,
+  "yearsRequired": 4,
+  "hardRequirements": [
+   "Bachelor's or Master's in quantitative field, Business, or Marketing",
+   "Or bachelor's in any field and at least 4 years Product Management experience",
+   "Hybrid position; adhere to Capital One's hybrid policy"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:21.571Z"
  },
  "3388": {
   "contentHash": "52c7b1999f5137d36e93c166f8cc1306ec7ca12a48d7e53cf675374a7894c9d2",
@@ -5329,6 +5972,29 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-24T18:55:00.237Z"
+ },
+ "3645": {
+  "contentHash": "c483a43bbc7c5dbd7aace3a7c02d4817e5cacdd8099ffe7c99010763698ae38c",
+  "archetypes": [
+   "monetization",
+   "platform"
+  ],
+  "productDomain": "global payment network",
+  "domainRequired": false,
+  "yearsRequired": 4,
+  "hardRequirements": [
+   "Bachelor's or Master's in quantitative field, Business, or Marketing",
+   "OR Bachelor's in any field and at least 4 years Product Management experience",
+   "Required degree obtained on or before scheduled start date",
+   "Capital One will not sponsor a new applicant for employment authorization"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:21.113Z"
  },
  "3653": {
   "contentHash": "03d50546a05255fe51c2803200ef8f1bd9f2664f926bd81412c2a47fd9692902",
@@ -6494,7 +7160,7 @@
   "analyzedAt": "2026-10-24T18:50:36.419Z"
  },
  "3931": {
-  "contentHash": "76aae60e6a7065428de3b920c3bdbf97f14ace0343666956d66118f4ff86897f",
+  "contentHash": "632b4729fa4fd2aba63d5bce2b33f830dd23a5d15b54a883f1160589a1bb6612",
   "archetypes": [
    "internal",
    "hardware"
@@ -6503,11 +7169,11 @@
   "domainRequired": true,
   "yearsRequired": null,
   "hardRequirements": [
-   "U.S. citizen or national, permanent resident, refugee, or asylee",
-   "single-threaded owner of Amazon Leo's enterprise process architecture",
-   "deep focus on ERP (SAP S/4HANA) and PLM (Teamcenter)",
-   "define integration and data-flow patterns",
-   "protect master-data integrity across the digital thread"
+   "U.S. citizen, national, permanent resident, refugee, or asylee",
+   "Single-threaded owner of enterprise process architecture",
+   "Deep focus on ERP (SAP S/4HANA) and PLM (Teamcenter)",
+   "Define integration and data-flow patterns; protect master-data integrity",
+   "Partner with manufacturing, supply chain, quality, finance, IT, engineering leadership"
   ],
   "managesPMs": false,
   "companyStage": "established",
@@ -6515,7 +7181,7 @@
   "engineeringInDisguise": false,
   "deepMlRequired": false,
   "descriptionAvailable": true,
-  "analyzedAt": "2026-10-24T18:48:34.262Z"
+  "analyzedAt": "2026-11-03T05:47:09.848Z"
  },
  "3932": {
   "contentHash": "2e33aafaae58ab7046198c7eae571c4a7a7c4ae708447b16f4fbb6d7424b8fe8",
@@ -10294,20 +10960,20 @@
   "analyzedAt": "2026-10-24T18:48:43.275Z"
  },
  "4105": {
-  "contentHash": "34c32392a2d79782fd4b3cfbb3a89e236d6d4d7849b510c1b47d68aa0afb337d",
+  "contentHash": "91a8df655195c5043c64f09a0a2c1b73cc49c491b840eb2bbf8523bfbecbce23",
   "archetypes": [
    "internal",
    "b2b-saas"
   ],
-  "productDomain": "financial consolidation ERP",
+  "productDomain": "finance ERP consolidation",
   "domainRequired": true,
   "yearsRequired": null,
   "hardRequirements": [
-   "Strong accounting and consolidation expertise",
-   "Experience managing enterprise financial products",
-   "Working knowledge of SAP S/4HANA Group Reporting or comparable consolidation platforms",
-   "Move between detailed accounting requirements and broader product decisions",
-   "Translate complex consolidation, controllership, and financial reporting needs into product vision"
+   "experienced ERP Product Manager",
+   "strong accounting and consolidation expertise",
+   "experience managing enterprise financial products",
+   "working knowledge of SAP S/4HANA Group Reporting",
+   "move between detailed accounting requirements and broader product decisions"
   ],
   "managesPMs": false,
   "companyStage": "established",
@@ -10315,7 +10981,7 @@
   "engineeringInDisguise": false,
   "deepMlRequired": false,
   "descriptionAvailable": true,
-  "analyzedAt": "2026-10-24T18:46:36.215Z"
+  "analyzedAt": "2026-11-03T05:47:20.025Z"
  },
  "4106": {
   "contentHash": "878aafa508c9f2e5e7593595cdd7a80382ad5b8a82bb42302cc9166d8a409cab",
@@ -13465,19 +14131,24 @@
  "4249": {
   "contentHash": "b2dd9624566814ad050bdd0eac24daa400bc3a57b78ff435fa821c2c4e9dd639",
   "archetypes": [
+   "security",
    "b2b-saas"
   ],
-  "productDomain": "unspecified product area",
+  "productDomain": "security and identity",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 2,
+  "hardRequirements": [
+   "Bachelor's Degree AND 2+ years experience in product/service/project/program management or software development",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud background check upon hire and every two years thereafter"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:10.647Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:49.262Z"
  },
  "4250": {
   "contentHash": "20a6533f00ed2f42fdc99b241535dbc8daea4e055742a338c379ba9eacc0f576",
@@ -13570,19 +14241,26 @@
  "4255": {
   "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
   "archetypes": [
-   "b2b-saas"
+   "ai-agents",
+   "consumer"
   ],
-  "productDomain": "unknown",
+  "productDomain": "AI-powered search",
   "domainRequired": false,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "Take important search initiatives from early concept to launch",
+   "Manage complex dependencies across engineering, data science, research and design",
+   "Technical enough to go deep with engineers on systems and architecture",
+   "Define and measure success metrics for AI-powered search",
+   "Translate team priorities into clear requirements, user stories and success criteria"
+  ],
   "managesPMs": false,
-  "companyStage": "unknown",
+  "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:08.399Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:47.739Z"
  },
  "4256": {
   "contentHash": "18b343ac43209af634acf8871309f43e55ff969274e11a1b6a337fb05b5dbea3",
@@ -13656,22 +14334,26 @@
  "4260": {
   "contentHash": "ce37f219de5befc400cd16d3a9df2d628d34488fdb0eb6d6f78077e7917047dc",
   "archetypes": [
+   "ai-agents",
    "platform"
   ],
-  "productDomain": "developer tools",
+  "productDomain": "AI developer tools",
   "domainRequired": false,
   "yearsRequired": null,
   "hardRequirements": [
-   "Senior Product Manager",
-   "Python and Java developer experiences"
+   "Passionate about programming languages and developer tools",
+   "Care deeply about Python and Java developers and understand their ecosystem",
+   "Fluent in AI-assisted development, regularly use GitHub Copilot",
+   "Move from customer problem to specification to working prototype",
+   "Define and own product strategy for Python and Java developer tools"
   ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:20.204Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:58.545Z"
  },
  "4261": {
   "contentHash": "63b1c8aa1776df46ad989315342e2c397b203fcbb13382dea9501b67e2caa0e0",
@@ -13732,17 +14414,21 @@
    "security",
    "ai-agents"
   ],
-  "productDomain": "endpoint security",
+  "productDomain": "endpoint exposure management",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 2,
+  "hardRequirements": [
+   "Bachelor's Degree AND 2+ years experience in product management OR equivalent experience.",
+   "Ability to meet Microsoft, customer and/or government security screening requirements.",
+   "Pass Microsoft Cloud Background Check upon hire/transfer and every two years thereafter."
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:03.952Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:46.440Z"
  },
  "4265": {
   "contentHash": "aff8759291b42fefacc53beb2eaeb59454cd93d045f26d46aa7e2f46d93da8c5",
@@ -13768,17 +14454,23 @@
    "ai-agents",
    "platform"
   ],
-  "productDomain": "AI agent platform",
-  "domainRequired": false,
+  "productDomain": "AI developer platform",
+  "domainRequired": true,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "Real experience using AI developer tools",
+   "Shipping products in fast-moving spaces",
+   "Turning ambiguity into things that work",
+   "Use AI tools in your daily work",
+   "Prototype product concepts yourself"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:20.586Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:02.245Z"
  },
  "4267": {
   "contentHash": "ff638210fce20cc283e3ea99d65c3b0f9640a57b1c0aba750e42e892b4b32a1c",
@@ -13855,17 +14547,23 @@
   "archetypes": [
    "platform"
   ],
-  "productDomain": "cloud networking platform",
-  "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "productDomain": "network connectivity platform",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree",
+   "5+ years experience in product management",
+   "driving a large-scale infrastructure migration or network transition",
+   "on-call for the platform",
+   "in office minimum of 3 days per week"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:19.545Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:57.699Z"
  },
  "4272": {
   "contentHash": "3a8b05729f08168302c22fd5d289f65246be666f9ac7e8628b1e7fbffce18d43",
@@ -13888,19 +14586,25 @@
  "4273": {
   "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
   "archetypes": [
-   "b2b-saas"
+   "security",
+   "ai-agents"
   ],
-  "productDomain": "unspecified product area",
+  "productDomain": "SASE and AI security",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 7,
+  "hardRequirements": [
+   "Bachelor's Degree",
+   "7+ years experience in product/service/program management or software development OR equivalent experience",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud background check upon hire/transfer and every two years thereafter"
+  ],
   "managesPMs": false,
-  "companyStage": "unknown",
+  "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:11.300Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:50.916Z"
  },
  "4274": {
   "contentHash": "836fd2d94f87ab1c81c4eecab7fe26419cabaeddcaf181636c24a4ff623f0013",
@@ -13922,19 +14626,26 @@
  "4275": {
   "contentHash": "20b09fe69f7a7da19016e0da9470f69b6f360750784f54ed6b1f016e1e963e88",
   "archetypes": [
-   "ai-agents"
+   "security",
+   "consumer"
   ],
-  "productDomain": "AI experiences",
-  "domainRequired": false,
+  "productDomain": "content trust and safety",
+  "domainRequired": true,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "Drive measurable improvements in content safety and compliance",
+   "Lead AI/ML model roadmap that supports product teams",
+   "Develop safety features and technical strategies for trust and safety",
+   "Partner with policy experts, engineers, data scientists, operations, and legal/PR teams",
+   "Define policies for compliance, privacy, and risk management parameters"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:46:27.482Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:02.307Z"
  },
  "4276": {
   "contentHash": "aff8759291b42fefacc53beb2eaeb59454cd93d045f26d46aa7e2f46d93da8c5",
@@ -13956,20 +14667,26 @@
  "4277": {
   "contentHash": "6b63cfadaf6af9d4590acdf8d4ad563b45e26dcc9087f6476b5d459bea78a872",
   "archetypes": [
-   "platform",
+   "ai-agents",
    "b2b-saas"
   ],
-  "productDomain": "unspecified product area",
+  "productDomain": "partner platform",
   "domainRequired": false,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "Develop a deep understanding of partner needs, responsibilities, and workflows",
+   "Independently own product capabilities within a defined area",
+   "Identify opportunities for AI, agents, automation, and data-driven insights",
+   "Design and run product experiments that test customer value",
+   "Partner with Engineering, Design, and Data Science"
+  ],
   "managesPMs": false,
-  "companyStage": "unknown",
+  "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:09.096Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:49.742Z"
  },
  "4278": {
   "contentHash": "c6b07fe3eec63c82b4923be40536f4b3759f716b0d96d827b14aad8d08cdf11d",
@@ -13992,37 +14709,48 @@
  "4279": {
   "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
   "archetypes": [
-   "b2b-saas"
+   "security",
+   "data"
   ],
-  "productDomain": "unspecified product area",
+  "productDomain": "data security governance",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree AND 5+ years product/service/program management or software development",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud background check upon hire/transfer and every two years"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:16.041Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:51.981Z"
  },
  "4280": {
   "contentHash": "d377c58b81b516aa8b3dadaf3734a0ed2911f7a790a41304ecae3c319f07916c",
   "archetypes": [
-   "platform",
-   "data"
+   "hardware",
+   "platform"
   ],
-  "productDomain": "AI infrastructure",
-  "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "productDomain": "GPU back-end networking",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree AND 5+ years experience in product/service/program management or software development",
+   "1+ years experience with GPU or AI-accelerated hardware systems and infrastructure",
+   "1+ years experience with datacenter networking or accelerated computing infrastructure",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Translate complex system concepts into product requirements, roadmaps, and execution plans"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
-  "deepMlRequired": true,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:46:28.355Z"
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:00.346Z"
  },
  "4281": {
   "contentHash": "aff8759291b42fefacc53beb2eaeb59454cd93d045f26d46aa7e2f46d93da8c5",
@@ -14061,53 +14789,72 @@
  "4283": {
   "contentHash": "88ec5d079aecba1d9b448036fc7b2912cb1732f8a0512bd9416bdfcfa663054c",
   "archetypes": [
-   "b2b-saas"
+   "hardware",
+   "platform"
   ],
-  "productDomain": "unknown",
+  "productDomain": "datacenter hardware platforms",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree AND 5+ years experience in product/service/program management or software development",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud background check upon hire/transfer and every two years thereafter"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:19.674Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:00.258Z"
  },
  "4284": {
   "contentHash": "a84f89ff8cc24ee041a65705ad21febe6e6a6b20a00dd80ae3da4532636a3c3e",
   "archetypes": [
-   "platform"
+   "platform",
+   "security"
   ],
-  "productDomain": "unknown product area",
+  "productDomain": "sovereign cloud infrastructure",
   "domainRequired": false,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "Partner closely with engineering teams",
+   "Define capabilities and partner with engineering counterparts",
+   "Work closely with stakeholders to understand their needs",
+   "Define the product roadmap",
+   "Collaborate across engineering and business stakeholders"
+  ],
   "managesPMs": false,
-  "companyStage": "unknown",
+  "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:19.411Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:53.658Z"
  },
  "4285": {
   "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
   "archetypes": [
+   "platform",
    "b2b-saas"
   ],
-  "productDomain": "unknown",
+  "productDomain": "email transport infrastructure",
   "domainRequired": false,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "Set the strategy and roadmap for your area of the pipeline",
+   "Write the specs that engineering builds from",
+   "Own one or more service or business metrics for your area",
+   "Carry security, privacy, compliance, and accessibility obligations as part of definition of done",
+   "Mentor less experienced product managers"
+  ],
   "managesPMs": false,
-  "companyStage": "unknown",
+  "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:17.911Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:56.480Z"
  },
  "4286": {
   "contentHash": "35b320e4d8b9bb453028365fbfdeac20c12d0cb999851d121c0451623119d580",
@@ -14199,19 +14946,24 @@
  "4291": {
   "contentHash": "543f4901f2194028b9db7c9ebd630d42af8ddd8836a2cb5d5a8137ae9ec2c8f3",
   "archetypes": [
-   "b2b-saas"
+   "data",
+   "platform"
   ],
-  "productDomain": "unknown",
+  "productDomain": "data lake platform",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 2,
+  "hardRequirements": [
+   "Bachelor's Degree AND 2+ years experience in product/service/program management or software development",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud background check upon hire/transfer and every two years thereafter"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:47:55.454Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:47.518Z"
  },
  "4292": {
   "contentHash": "d3a3bdf49edc2cb7b3de591ae115bb870257fa419a5f8d60e9bca3049c31ebe8",
@@ -14290,17 +15042,21 @@
    "ai-agents",
    "platform"
   ],
-  "productDomain": "AI platform",
+  "productDomain": "AI agent platform",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree AND 5+ years experience in product/service/program management or software development OR equivalent",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud Background Check upon hire/transfer and every two years thereafter"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:00.090Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:44.989Z"
  },
  "4297": {
   "contentHash": "dcdf6ea48d042a94bc05620dcb9994ae9e800f1140a108812265b7e9fbf2b329",
@@ -14357,37 +15113,48 @@
  "4300": {
   "contentHash": "bf805e66abea62d15ab455dfb239f0e31753769a74611d78bee1b62ea6bb4954",
   "archetypes": [
-   "ai-agents",
-   "platform"
+   "platform",
+   "internal"
   ],
-  "productDomain": "AI platform",
-  "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
-  "managesPMs": false,
-  "companyStage": "unknown",
-  "aiFirstStartup": false,
-  "engineeringInDisguise": false,
-  "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:18.891Z"
- },
- "4301": {
-  "contentHash": "c2422c43a8dfee88268cf0bf4b7234ff45d8a42d633272929a8917cfc7f2242a",
-  "archetypes": [
-   "security"
+  "productDomain": "developer productivity tools",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree AND 5+ years experience in product/service/program management or software development",
+   "Background in coding or be a developer transitioning to product management",
+   "Familiar with software engineering tools landscape, understand CI/CD systems",
+   "Experience pitching ideas for the developer persona",
+   "Meet Microsoft, customer and/or government security screening requirements"
   ],
-  "productDomain": "identity and network access",
-  "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:19.375Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:54.872Z"
+ },
+ "4301": {
+  "contentHash": "c2422c43a8dfee88268cf0bf4b7234ff45d8a42d633272929a8917cfc7f2242a",
+  "archetypes": [
+   "security",
+   "b2b-saas"
+  ],
+  "productDomain": "identity access management",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree AND 5+ years experience in product/service/program management or software development",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud background check upon hire/transfer and every two years thereafter"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:55.467Z"
  },
  "4302": {
   "contentHash": "aff8759291b42fefacc53beb2eaeb59454cd93d045f26d46aa7e2f46d93da8c5",
@@ -14462,19 +15229,26 @@
  "4306": {
   "contentHash": "fa7f1ec96ef2aee0779e55373f219c149a4ffccb2042da4aab5a95cf4248afcc",
   "archetypes": [
-   "b2b-saas"
+   "ai-agents",
+   "platform"
   ],
-  "productDomain": "unspecified product area",
+  "productDomain": "Copilot memory",
   "domainRequired": false,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "strong technical fluency",
+   "excellent end-to-end product judgment",
+   "hands-on approach to AI quality and evaluation",
+   "customer obsession with systems thinking",
+   "operate with significant autonomy"
+  ],
   "managesPMs": false,
-  "companyStage": "unknown",
+  "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:46:24.994Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:52.848Z"
  },
  "4307": {
   "contentHash": "aff8759291b42fefacc53beb2eaeb59454cd93d045f26d46aa7e2f46d93da8c5",
@@ -14530,19 +15304,25 @@
  "4310": {
   "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
   "archetypes": [
-   "b2b-saas"
+   "platform"
   ],
-  "productDomain": "unknown",
+  "productDomain": "cloud routing infrastructure",
   "domainRequired": false,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "Partner across engineering, Azure, capacity planning, and infrastructure organizations",
+   "Drive platform-wide improvements that increase performance, resiliency, scalability, and cost efficiency",
+   "Use agents, automation, and AI-driven analysis alongside standard PM tools",
+   "Translate hard technical and financial tradeoffs into terms leaders can act on",
+   "Based in Redmond, Washington; in office minimum 3 days per week"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:21.506Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:58.547Z"
  },
  "4311": {
   "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
@@ -14617,19 +15397,22 @@
  "4315": {
   "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
   "archetypes": [
-   "b2b-saas"
+   "data",
+   "internal"
   ],
-  "productDomain": "unknown",
+  "productDomain": "search data insights",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree AND 5+ years experience in product/service/program management or software development"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:07.624Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:56.922Z"
  },
  "4316": {
   "contentHash": "aff8759291b42fefacc53beb2eaeb59454cd93d045f26d46aa7e2f46d93da8c5",
@@ -14653,17 +15436,21 @@
   "archetypes": [
    "hardware"
   ],
-  "productDomain": "AI hardware",
+  "productDomain": "AI cloud hardware",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree AND 5+ years product/service/program management or software development",
+   "Meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud Background Check upon hire/transfer and every two years"
+  ],
   "managesPMs": false,
-  "companyStage": "unknown",
+  "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:10.241Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:51.943Z"
  },
  "4318": {
   "contentHash": "aff8759291b42fefacc53beb2eaeb59454cd93d045f26d46aa7e2f46d93da8c5",
@@ -14686,19 +15473,24 @@
  "4319": {
   "contentHash": "5e168192d99d92779e35241042adf21209a10de2b7878d903421bbeafc7ac61b",
   "archetypes": [
-   "consumer"
+   "consumer",
+   "growth"
   ],
-  "productDomain": "consumer gaming",
+  "productDomain": "gaming experiences",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's Degree",
+   "5+ years experience in product/service/program management or software development OR equivalent experience",
+   "Based in Redmond, WA"
+  ],
   "managesPMs": false,
-  "companyStage": "unknown",
+  "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:07.648Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:48.254Z"
  },
  "4320": {
   "contentHash": "aff8759291b42fefacc53beb2eaeb59454cd93d045f26d46aa7e2f46d93da8c5",
@@ -14757,19 +15549,25 @@
   "contentHash": "221c48db76ed11f052c79e8cdd522a53a4227301690216820b8ce9e0f564ea8e",
   "archetypes": [
    "ai-agents",
-   "b2b-saas"
+   "data"
   ],
-  "productDomain": "spreadsheet productivity",
+  "productDomain": "spreadsheet AI copilot",
   "domainRequired": false,
   "yearsRequired": null,
-  "hardRequirements": [],
+  "hardRequirements": [
+   "Identify customer needs and product opportunities through customer engagement",
+   "Evaluate AI capabilities, including foundation models and agentic systems",
+   "Translate applicable capabilities into product",
+   "Own developing a point of view grounded in customers and data",
+   "Make tradeoffs, ship, measure what happens, decide next"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:47:58.215Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:44.688Z"
  },
  "4324": {
   "contentHash": "c2d5fee0db4d9f0c3e8d5556c559d9faed0d0c007974082c898b75f565fd7842",
@@ -14792,19 +15590,24 @@
   "contentHash": "ae73fa74b2195ee5ac71150c74f4d4345b2fe18d7920b7049e4317aafb55cbde",
   "archetypes": [
    "ai-agents",
-   "security"
+   "platform"
   ],
-  "productDomain": "AI tools governance",
+  "productDomain": "AI agent governance",
   "domainRequired": false,
-  "yearsRequired": null,
-  "hardRequirements": [],
+  "yearsRequired": 2,
+  "hardRequirements": [
+   "Bachelor's Degree AND 2+ years experience in product management of AI features",
+   "Write clear specs, user scenarios, and acceptance criteria",
+   "Pass Microsoft Cloud background check upon hire and every two years",
+   "Meet Microsoft, customer and/or government security screening requirements"
+  ],
   "managesPMs": false,
   "companyStage": "established",
   "aiFirstStartup": false,
   "engineeringInDisguise": false,
   "deepMlRequired": false,
-  "descriptionAvailable": false,
-  "analyzedAt": "2026-10-24T18:48:01.396Z"
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:41.031Z"
  },
  "4326": {
   "contentHash": "ed67abeba41a9a4d6eacfca816acbff15322f10db5e56abb6f24ddcef1c0a713",
@@ -15016,6 +15819,30 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:05:54.053Z"
+ },
+ "4368": {
+  "contentHash": "e0e6b65b08a84184d87034297bf52fac0a9ad7ae3c552b6909f7898115b1671c",
+  "archetypes": [
+   "data",
+   "internal"
+  ],
+  "productDomain": "satellite network capacity",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Bachelor's degree",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with feature delivery and tradeoffs of a product",
+   "Experience contributing to engineering discussions around technology decisions and strategy",
+   "Experience bridging technical and business teams to collect and refine requirements"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:11.200Z"
  },
  "4370": {
   "contentHash": "6ca22b8b0650e8f2e6ad78a4cca537e53458fe88cb44a2735e4ef78b250afcc6",
@@ -15573,6 +16400,51 @@
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:05:48.617Z"
  },
+ "4558": {
+  "contentHash": "98ec63092c9fa84f38912346b08101680c1f87826c10786914d782b03f37b76e",
+  "archetypes": [
+   "security",
+   "ai-agents"
+  ],
+  "productDomain": "AI security",
+  "domainRequired": false,
+  "yearsRequired": 2,
+  "hardRequirements": [
+   "Bachelor's Degree AND 2+ years product/service/program management or software development experience",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud Background Check upon hire/transfer and every two years thereafter"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:45.770Z"
+ },
+ "4559": {
+  "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
+  "archetypes": [
+   "ai-agents",
+   "platform"
+  ],
+  "productDomain": "AI agent governance",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor’s Degree and 5+ years in product/program management, software development, or equivalent",
+   "Recent, hands-on experience building with AI",
+   "Comfortable working across platform, product, and engineering boundaries",
+   "Include a link to a short example of your AI work"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:45.123Z"
+ },
  "4782": {
   "contentHash": "57325e66dce475b45d6ac0a9c7b2a54e679af167ea4198afb17c10cef76e8afd",
   "archetypes": [
@@ -15670,19 +16542,19 @@
   "analyzedAt": "2026-10-29T17:23:47.882Z"
  },
  "4787": {
-  "contentHash": "7bc8a637c07ebcb0afd6c3a93ee96457e762ab1fedf26bd329a6bc340c8afa63",
+  "contentHash": "7489e2e6e4869c152c38816d1b96ac8b454e4ec311015dd1e010a398db09736f",
   "archetypes": [
    "data",
-   "b2b-saas"
+   "monetization"
   ],
-  "productDomain": "media effectiveness measurement",
+  "productDomain": "advertising measurement",
   "domainRequired": true,
   "yearsRequired": 3,
   "hardRequirements": [
    "Bachelor's degree or equivalent practical experience",
    "3 years of experience in product management or a related technical role",
    "1 year of experience taking technical products from conception to launch",
-   "1 year of experience as a product manager for data/analytics/ads measurement software",
+   "1 year as a product manager for data, analytics, or ads measurement software products",
    "Experience integrating generative AI tools or LLM interfaces into workflows"
   ],
   "managesPMs": false,
@@ -15691,7 +16563,7 @@
   "engineeringInDisguise": false,
   "deepMlRequired": false,
   "descriptionAvailable": true,
-  "analyzedAt": "2026-10-29T17:23:48.254Z"
+  "analyzedAt": "2026-11-03T05:46:23.480Z"
  },
  "4788": {
   "contentHash": "aad43ad7f164c0027518e8137626f461e047faccae99b5a8467bd25687d47d9b",
@@ -15925,20 +16797,19 @@
   "analyzedAt": "2026-10-29T17:24:00.128Z"
  },
  "4798": {
-  "contentHash": "db4312138f21f066b1d96eb84cef5b80cfccb962ac35f722d4afe33a8b08c057",
+  "contentHash": "04150e3b7db0bcb8f55f06e3955a46ce7f4cfb980a6744ebbc6e722d811e8ca6",
   "archetypes": [
-   "security",
-   "monetization"
+   "security"
   ],
-  "productDomain": "ads trust and safety",
+  "productDomain": "ad fraud prevention",
   "domainRequired": true,
   "yearsRequired": 3,
   "hardRequirements": [
+   "Bachelor's degree or equivalent practical experience",
    "3 years of experience in product management or related technical role",
    "1 year of experience taking technical products from conception to launch",
    "1 year of experience in Anti abuse/fraud detection",
-   "Experience integrating generative AI tools or LLM interfaces into workflows",
-   "Bachelor's degree or equivalent practical experience"
+   "Experience integrating generative AI tools or LLM interfaces into workflows"
   ],
   "managesPMs": false,
   "companyStage": "established",
@@ -15946,7 +16817,7 @@
   "engineeringInDisguise": false,
   "deepMlRequired": false,
   "descriptionAvailable": true,
-  "analyzedAt": "2026-10-29T17:23:50.318Z"
+  "analyzedAt": "2026-11-03T05:47:03.019Z"
  },
  "4799": {
   "contentHash": "38e4c4eae5ac2c689ce837e890c379a91081f771243e7592819daa4960bd2c9b",
@@ -17957,6 +18828,53 @@
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:05:46.413Z"
  },
+ "4940": {
+  "contentHash": "32f4779afae8f95523405f58474a6a2c6c7908b38c3d72b5987f20c883b99937",
+  "archetypes": [
+   "b2b-saas"
+  ],
+  "productDomain": "cross-border logistics",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's degree or equivalent",
+   "5+ years of product or program management, product marketing, business development or technology experience",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with end to end product delivery",
+   "Experience with feature delivery and tradeoffs of a product"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:07.080Z"
+ },
+ "4941": {
+  "contentHash": "021a04965687214a0a4b27f6708a8146c89cff2b475bae5efe3affb08141df8f",
+  "archetypes": [
+   "ai-agents",
+   "internal"
+  ],
+  "productDomain": "same-day delivery AI",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of product or program management, product marketing, business development or technology experience",
+   "Bachelor's degree or equivalent",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with end to end product delivery",
+   "Experience owning technology products"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:08.363Z"
+ },
  "4942": {
   "contentHash": "8b08b737c452c84f7d4bfba3f4bcbeec75e1e38ec10b99b6f72b5d48b6fe9b6a",
   "archetypes": [
@@ -18004,6 +18922,30 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:05:45.449Z"
+ },
+ "4944": {
+  "contentHash": "5ea308477c544e0aa26841250cd1ea3235294cf5d4be3de72ca38ba9b0407848",
+  "archetypes": [
+   "data",
+   "internal"
+  ],
+  "productDomain": "fulfillment optimization",
+  "domainRequired": true,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Bachelor's degree",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with feature delivery and tradeoffs of a product",
+   "Experience contributing to engineering discussions around technology decisions and strategy related to a product",
+   "Experience managing technical products or online services"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:07.796Z"
  },
  "4960": {
   "contentHash": "337c406c0d94a5a0571b28ce4eb4eb175c2a0eae47ccdd1b1bf6264b5770b900",
@@ -18124,5 +19066,663 @@
   "deepMlRequired": false,
   "descriptionAvailable": true,
   "analyzedAt": "2026-10-29T17:23:27.640Z"
+ },
+ "4968": {
+  "contentHash": "09610ba8b93e3cb04e4c4ee83fbf61d1c3199a5874be86877a98b85f2166166c",
+  "archetypes": [
+   "growth"
+  ],
+  "productDomain": "marketing website",
+  "domainRequired": false,
+  "yearsRequired": 10,
+  "hardRequirements": [
+   "10+ years of experience in web strategy, website management, digital marketing",
+   "Proven experience owning complex B2B or multi-audience websites",
+   "Experience leading large-scale web projects and cross-functional web teams",
+   "Strong understanding of web UX principles, Brand, SEO/GEO, and performance optimization",
+   "Ability to develop and defend a roadmap to an executive leadership team"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:35.467Z"
+ },
+ "4994": {
+  "contentHash": "adbc7a59eaea3ae1a152ed3c611561d0d87b7952f16e75598e66e4b07bdc3c8f",
+  "archetypes": [
+   "monetization",
+   "platform"
+  ],
+  "productDomain": "global payment network",
+  "domainRequired": false,
+  "yearsRequired": 4,
+  "hardRequirements": [
+   "Bachelor's or Master's Degree in quantitative field, Business or Marketing",
+   "OR Bachelor's degree in any field and at least 4 years Product Management experience",
+   "Currently has, or is in process of obtaining, required degree by start date",
+   "Adhere to Capital One's hybrid policy regarding required on-site presence",
+   "Capital One will not sponsor a new applicant for employment authorization"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:20.482Z"
+ },
+ "4997": {
+  "contentHash": "8811ba14606909d5142b3f550d0a950cd5cca85491d9d113b912846dc633366a",
+  "archetypes": [
+   "internal",
+   "b2b-saas"
+  ],
+  "productDomain": "customer service operations",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years in product management or related fields",
+   "Bachelor's degree or equivalent practical experience",
+   "Demonstrated success shipping digital products with business impact",
+   "Proficiency in modern discovery and delivery practices",
+   "Strong analytical thinking with data and experimentation"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:19.367Z"
+ },
+ "4999": {
+  "contentHash": "1c0e99cd4b09ba2afdc1b675b19eb6c96f9f587d69192642f9d7c90d2b3bc622",
+  "archetypes": [
+   "monetization",
+   "consumer"
+  ],
+  "productDomain": "returns and refunds",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "proven product management experience",
+   "strong communication skills (verbal & written)",
+   "Excellent Product Management skills with a proven ability to design scalable solutions",
+   "Strong analytical and data gathering skills",
+   "work independently in a fast-paced and rapidly changing environment"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:05.684Z"
+ },
+ "5000": {
+  "contentHash": "c6a71a7a93c8745c9cde02ef347ea83acedab49462a55b1bc48f7db36bd2b339",
+  "archetypes": [
+   "ai-agents",
+   "internal"
+  ],
+  "productDomain": "enterprise AI productivity",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Bachelor's degree",
+   "6+ years of team management experience",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with feature delivery and tradeoffs of a product"
+  ],
+  "managesPMs": true,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:15.380Z"
+ },
+ "5003": {
+  "contentHash": "42c5881cd92108064654a8dbcd96dd75d93231df6b01f5d28d92460a7394cd25",
+  "archetypes": [
+   "consumer",
+   "monetization"
+  ],
+  "productDomain": "shopping discovery and ads",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Bachelor's degree",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with feature delivery and tradeoffs of a product",
+   "Experience contributing to engineering discussions around technology decisions",
+   "Experience managing technical products or online services"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:14.500Z"
+ },
+ "5004": {
+  "contentHash": "9377b989d98cde7ca137ab8077a7cab3fc194874cb8ac20d05d70d8879b28cd8",
+  "archetypes": [
+   "internal"
+  ],
+  "productDomain": "IT knowledge management",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "Bachelor's degree or equivalent",
+   "5+ years product or program management, product marketing, business development or technology experience",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience owning program strategy and end-to-end delivery, and communicating results to senior leadership",
+   "Experience using data and metrics to determine priorities"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:14.934Z"
+ },
+ "5006": {
+  "contentHash": "216ada5389787b527acc552b43925f9730c02861bba9fc956042c5db0a6af785",
+  "archetypes": [
+   "internal"
+  ],
+  "productDomain": "enterprise finance ERP",
+  "domainRequired": true,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of technical product or program management experience",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with feature delivery and tradeoffs of a product",
+   "6+ years SAP Solution/functional lead or product manager with SAP FICO expertise",
+   "U.S. citizen, national, permanent resident, refugee, or asylee due to export control"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:10.279Z"
+ },
+ "5008": {
+  "contentHash": "3779ac5114ea74259ec8929d209d32a3937da73c5bfd0f20f4644d12a01f913a",
+  "archetypes": [
+   "internal",
+   "ai-agents"
+  ],
+  "productDomain": "cloud infrastructure operations",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Proven track record managing enterprise-level programs in complex cloud infrastructure",
+   "Design and enable agentic workflows to reduce cycle times",
+   "Manage transformational projects to enable automated and integrated tool sets",
+   "Document customer processes and critical handoffs in complex system landscapes",
+   "Work with customers to understand goals, unmet needs, and pain points"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:41.400Z"
+ },
+ "5010": {
+  "contentHash": "45c6e2e20ecc18d743361ee4539d9884fdaf2c66999d7e76e845629e94de7b8b",
+  "archetypes": [
+   "hardware",
+   "platform"
+  ],
+  "productDomain": "AI cloud infrastructure",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Strong technical foundation in cloud infrastructure, semiconductors, or computer systems",
+   "Experience in strategy consulting, corporate strategy, or technology-focused business analysis",
+   "Lead competitive assessments of AI accelerators, CPUs, memory, networking, storage, and rack-scale infrastructure",
+   "Develop analytical models connecting product specifications, workload performance, power, cost, and utilization",
+   "Translate complex and incomplete information into clear insights and recommendations"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:41.276Z"
+ },
+ "5018": {
+  "contentHash": "35dac80789407366fd10fbc61e16a26feff454b873befe829974c531e05e1c38",
+  "archetypes": [
+   "data",
+   "monetization"
+  ],
+  "productDomain": "advertising data management",
+  "domainRequired": true,
+  "yearsRequired": 3,
+  "hardRequirements": [
+   "Bachelor's degree or equivalent practical experience",
+   "3 years of experience in product management or related technical role",
+   "1 year taking technical products from conception to launch",
+   "Experience managing Ad tech products"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:00.342Z"
+ },
+ "5019": {
+  "contentHash": "f575279d72ea0605d79862cac8472fc3722bb6b528f35286e3d2568961722bfa",
+  "archetypes": [
+   "consumer",
+   "ai-agents"
+  ],
+  "productDomain": "visual search",
+  "domainRequired": false,
+  "yearsRequired": 8,
+  "hardRequirements": [
+   "Bachelor's degree or equivalent practical experience",
+   "8 years of experience in product management or related technical role",
+   "3 years taking technical products from conception to launch",
+   "Experience integrating generative AI tools or LLM interfaces into workflows",
+   "Experience leading cross-functional teams to launch user-facing experiences"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:23.207Z"
+ },
+ "5023": {
+  "contentHash": "70cf39d9cb7da0cb2049b86dbfaae6ba37c3100564ca4c1f1f5172d4f82f7bd7",
+  "archetypes": [
+   "platform",
+   "ai-agents"
+  ],
+  "productDomain": "collaboration integrations",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of product management experience shipping technical B2B SaaS products",
+   "Deep experience with integrations, platforms or developer-facing APIs",
+   "Track record of driving roadmaps across organizational boundaries",
+   "Strong technical depth in webhooks, sync models, auth, rate limits, AI/LLM trade-offs",
+   "Enterprise instincts: understand how large organizations run IT operations"
+  ],
+  "managesPMs": false,
+  "companyStage": "unknown",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:27.042Z"
+ },
+ "5044": {
+  "contentHash": "53ee4cd9795a17c946e498186d9c663c9dca7c5f774f4da579828e0c51de10e1",
+  "archetypes": [
+   "monetization",
+   "platform"
+  ],
+  "productDomain": "credit card technology",
+  "domainRequired": false,
+  "yearsRequired": 4,
+  "hardRequirements": [
+   "Bachelor's or Master's in quantitative field, Business or Marketing",
+   "OR Bachelor's in any field with at least 4 years Product Management experience",
+   "Demonstrating strong AI proficiency leveraging AI tooling",
+   "No sponsorship for new employment authorization"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:22.136Z"
+ },
+ "5045": {
+  "contentHash": "400434890b24cefe19556274dfbbdd6df65ee34a44ba2191a98a2e77c8e54aaa",
+  "archetypes": [
+   "data",
+   "platform"
+  ],
+  "productDomain": "enterprise data platform",
+  "domainRequired": false,
+  "yearsRequired": 4,
+  "hardRequirements": [
+   "Bachelor's or Master's in quantitative field, Business or Marketing",
+   "OR Bachelor's in any field and 4 years Product Management experience",
+   "Capital One will not sponsor a new applicant for employment authorization"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:19.860Z"
+ },
+ "5054": {
+  "contentHash": "e03decddac16fba584e0111ebdb7132427f32293b0678d2c077b8c32ab44bea4",
+  "archetypes": [
+   "security"
+  ],
+  "productDomain": "identity and authentication",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of product or program management, product marketing, business development or technology experience",
+   "Bachelor's degree",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with end to end product delivery",
+   "Experience contributing to engineering discussions around technology decisions and strategy related to a product"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:14.391Z"
+ },
+ "5055": {
+  "contentHash": "2d293100ea10488be1f601f433b43c5d72f7b8152f99666bdfb8c1fa6eb5fb0a",
+  "archetypes": [
+   "data",
+   "platform"
+  ],
+  "productDomain": "cloud data integration",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Engage customers and partners, analyze product usage and market signals",
+   "Define the strategy and roadmap for your product area",
+   "Develop product requirements, success criteria, and release plans",
+   "Partner with Engineering and Design to deliver capabilities",
+   "Build alignment with engineering teams and cross-functional partners"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:39.318Z"
+ },
+ "5068": {
+  "contentHash": "ab681191319f9cad32bdcccbd081c4f233c80b9b17b8b76bffa8e5b76bc6d4c1",
+  "archetypes": [
+   "monetization",
+   "platform"
+  ],
+  "productDomain": "cloud pricing",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Bachelor's degree",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with feature delivery and tradeoffs of a product",
+   "Experience contributing to engineering discussions around technology decisions",
+   "Experience managing technical products or online services"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:15.069Z"
+ },
+ "5073": {
+  "contentHash": "6f1a5ad63674bb810e5e0995140b6ac05f589beb57045372c7005608ce05cabe",
+  "archetypes": [
+   "platform",
+   "security"
+  ],
+  "productDomain": "social identity platform",
+  "domainRequired": true,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Product management experience on consumer-facing platform products or shared systems",
+   "Proven track record delivering social and/or identity platform features",
+   "Strong analytical skills with ability to independently pull and interpret data",
+   "Experience working closely with engineering, design, and production teams on complex systems",
+   "Familiarity with cross-platform ecosystems (mobile, PC, console)"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:32.716Z"
+ },
+ "5074": {
+  "contentHash": "07982da6a557341309902321f5a09b58759cc46e3448e6ca2d9378009e273e3d",
+  "archetypes": [
+   "platform",
+   "consumer"
+  ],
+  "productDomain": "social and identity",
+  "domainRequired": true,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Product management experience on consumer-facing platform products or shared systems",
+   "Proven track record delivering social and/or identity platform features",
+   "Strong analytical skills with ability to independently pull and interpret data",
+   "Experience working closely with engineering, design, and production teams on complex systems",
+   "Familiarity with cross-platform ecosystems (mobile, PC, console)"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:15:33.115Z"
+ },
+ "5081": {
+  "contentHash": "abe8bb9f50efc9d926c4685c7a379462a5c4dfef513405a39a98d860df45836d",
+  "archetypes": [
+   "consumer",
+   "marketplace"
+  ],
+  "productDomain": "consumer insurance",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years in management consulting, consumer-facing product management, or equivalent",
+   "Consumer product instincts",
+   "Comfort with data",
+   "A first-principles thinker",
+   "An owner"
+  ],
+  "managesPMs": false,
+  "companyStage": "growth",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:39.740Z"
+ },
+ "5083": {
+  "contentHash": "76fc9dd726f6919201cb2e52d4240d53fbea7bb57e53a768f5b7ae9ac1000ec3",
+  "archetypes": [
+   "data",
+   "internal"
+  ],
+  "productDomain": "scientific informatics",
+  "domainRequired": true,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Substantial drug discovery understanding",
+   "Scientific credibility, practical product capabilities and ownership of outcomes are essential",
+   "Own the roadmap, prioritization and outcomes for assigned products",
+   "Translate scientific needs into clear user stories, functional requirements and acceptance criteria",
+   "Bachelor's or advanced degree in a relevant scientific or technical discipline"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:18.129Z"
+ },
+ "5088": {
+  "contentHash": "7c4687c549f4bc95a61f60e919841d88b743109852eeb291c2676c89fb686baf",
+  "archetypes": [
+   "internal",
+   "data"
+  ],
+  "productDomain": "fulfillment operations",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of product or program management, product marketing, business development or technology experience",
+   "Bachelor's degree",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with end to end product delivery",
+   "Experience managing technical products or online services"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:05.386Z"
+ },
+ "5089": {
+  "contentHash": "70ad987bca73f2f5c5d198d4b9c7061695bdffd1733898e79ea1ef63b50af3f6",
+  "archetypes": [
+   "consumer",
+   "growth"
+  ],
+  "productDomain": "ecommerce recommendations",
+  "domainRequired": false,
+  "yearsRequired": 3,
+  "hardRequirements": [
+   "3+ years of product management experience",
+   "leading cross-functional teams in delivery of major new products or services"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:13.175Z"
+ },
+ "5090": {
+  "contentHash": "498d3a0fe6111fa5870d9b4a113dd70f8811d75fdc8788c322ecab95d2bc545e",
+  "archetypes": [
+   "ai-agents",
+   "b2b-saas"
+  ],
+  "productDomain": "AI learning teammates",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Exceptional problem solving skills, strong business judgment",
+   "Demonstrated experience leading cross-functional teams",
+   "Proven ability to execute both strategically and tactically",
+   "Solid technical background",
+   "Customer-focused with a passion for learning, AI, agents"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:10.394Z"
+ },
+ "5091": {
+  "contentHash": "312ef3fa1706f773da2cf8afaf03abc4a99a763b682d5867ead36402991683de",
+  "archetypes": [
+   "hardware"
+  ],
+  "productDomain": "data center infrastructure",
+  "domainRequired": false,
+  "yearsRequired": null,
+  "hardRequirements": [
+   "Bachelor's degree",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with feature delivery and tradeoffs of a product",
+   "Experience contributing to engineering discussions around technology decisions and strategy related to a product",
+   "Experience managing technical products or online services"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:12.264Z"
+ },
+ "5092": {
+  "contentHash": "aa00cdb8a132cb9c2a8e74d876c5b53f9e41bf815d1c87ab2b58418e9efa18db",
+  "archetypes": [
+   "internal",
+   "data"
+  ],
+  "productDomain": "middle mile logistics",
+  "domainRequired": false,
+  "yearsRequired": 5,
+  "hardRequirements": [
+   "5+ years of product or program management, product marketing, business development or technology experience",
+   "Bachelor's degree or equivalent",
+   "Experience owning/driving roadmap strategy and definition",
+   "Experience with end to end product delivery",
+   "Experience owning technology products"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:47:13.311Z"
+ },
+ "5094": {
+  "contentHash": "33b0b9635dfcf157d2b229825188f370cdbaee13e6c6c7e9dd1ee51af02a398a",
+  "archetypes": [
+   "ai-agents",
+   "platform"
+  ],
+  "productDomain": "developer tools",
+  "domainRequired": false,
+  "yearsRequired": 2,
+  "hardRequirements": [
+   "Bachelor's Degree",
+   "2+ years experience in product/service/program management or software development",
+   "Ability to meet Microsoft, customer and/or government security screening requirements",
+   "Pass Microsoft Cloud background check upon hire/transfer and every two years thereafter"
+  ],
+  "managesPMs": false,
+  "companyStage": "established",
+  "aiFirstStartup": false,
+  "engineeringInDisguise": false,
+  "deepMlRequired": false,
+  "descriptionAvailable": true,
+  "analyzedAt": "2026-11-03T05:46:39.189Z"
  }
 }
