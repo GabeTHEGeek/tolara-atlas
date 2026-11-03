@@ -5,6 +5,9 @@
  *
  *   npx tsx scripts/match-resume.ts .local/resume.txt [--answers .local/answers.json] [--analyze 300] [--check 50]
  *
+ * --company <slug> scores one company's roles only, analysing and checking
+ * every one of them, and writes .local/match-<slug>.md / .csv instead.
+ *
  * Without --answers it scores as a new user who skipped onboarding: no
  * location, pay or company preference, level read from the resume. An
  * answers file holds the quiz answers (server/match/onboarding.ts); any it
@@ -143,12 +146,17 @@ async function main() {
     writeFileSync(profilePath, JSON.stringify(profile, null, 2));
   }
   console.log(
-    `  ${profile.name}: ${countedYears(profile)} counted yrs in product (${profile.employedPmYears} employed PM, ${profile.founderYears} founder at half); ` +
+    `  ${profile.name}: ${countedYears(profile)} counted yrs in product (${profile.employedPmYears} employed PM, ${profile.founderYears} founder at two-thirds); ` +
       `archetypes ${profile.archetypes.map((a) => `${a.archetype}${a.strength === "primary" ? "*" : ""}`).join(", ")}; ML depth ${profile.mlDepth}`,
   );
 
   // 2. Provisional scores for every role.
-  const roles = loadRoles();
+  const company = arg("company", "");
+  const roles = loadRoles().filter((r) => !company || r.facts.companySlug === company);
+  if (company && roles.length === 0) {
+    console.error(`No live roles for company "${company}" (use its slug, as in public/data/companies/<slug>.json).`);
+    process.exit(1);
+  }
   const cache = loadCache(CACHE_PATH);
   const analysisOf = (r: RoleRow): RoleAnalysis | null => {
     const a = cache[String(r.facts.id)];
@@ -198,7 +206,7 @@ async function main() {
   const checks = new Map<number, RequirementsCheck>();
   await mapLimit(shortlist, 8, async ({ r }) => {
     try {
-      checks.set(r.facts.id, await checkRequirements(profile, { title: r.facts.title, company: r.facts.company, description: r.description }, analysisOf(r)!));
+      checks.set(r.facts.id, await checkRequirements(profile, { title: r.facts.title, company: r.facts.company, description: r.description }, analysisOf(r)!, resumeText));
     } catch {
       /* unchecked roles keep their code-only requirements score */
     }
@@ -208,7 +216,7 @@ async function main() {
     .sort((a, b) => b.s.score - a.s.score);
 
   // 5. Report.
-  writeReport(profile, answers, prefs, scored);
+  writeReport(profile, answers, prefs, scored, company);
 }
 
 // The answers each multiple-choice column allows, by the points they score.
@@ -222,7 +230,7 @@ function cell(s: string): string {
   return s.replace(/\|/g, "/").replace(/\n/g, " ");
 }
 
-function writeReport(profile: CandidateProfile, answers: Answers, prefs: Preferences, all: Array<{ r: RoleRow; s: MatchScore }>) {
+function writeReport(profile: CandidateProfile, answers: Answers, prefs: Preferences, all: Array<{ r: RoleRow; s: MatchScore }>, company = "") {
   // Only analysed roles are ranked: a provisional score is a guess used to
   // decide what to analyse, not a recommendation. One posting listed once
   // per office (Fivetran's three identical Staff PM roles) is one role here.
@@ -242,7 +250,7 @@ function writeReport(profile: CandidateProfile, answers: Answers, prefs: Prefere
     .filter(({ r }) => {
       const n = perCompany.get(r.facts.company) ?? 0;
       perCompany.set(r.facts.company, n + 1);
-      return n < 3;
+      return company !== "" || n < 3;
     })
     .slice(0, 25);
   // Roles to hand-score besides the top 25, spread evenly over everything
@@ -256,12 +264,12 @@ function writeReport(profile: CandidateProfile, answers: Answers, prefs: Prefere
   lines.push(`# Resume match test — ${profile.name}`, "");
   lines.push(`Generated ${new Date().toISOString()}. Rubric: Profile v2, scaled to 100 over the counted categories; domain by archetype, engineering cap ${50}.`, "");
   lines.push("## Profile as read", "");
-  lines.push(`- **Years in product:** ${countedYears(profile)} counted (${profile.employedPmYears} employed PM, ${profile.founderYears} founder/head of product at half; ${profile.totalYears} calendar)`);
+  lines.push(`- **Years in product:** ${countedYears(profile)} counted (${profile.employedPmYears} employed PM, ${profile.founderYears} founder/head of product at two-thirds; ${profile.totalYears} calendar)`);
   lines.push(`- **Jobs:** ${profile.jobs.map((j) => `${j.title}, ${j.company} (${j.start}–${j.end ?? "present"})`).join("; ")}`);
   lines.push(`- **Archetypes:** ${profile.archetypes.map((a) => `${a.archetype} (${a.strength}) — "${a.evidence}"`).join("; ")}`);
   lines.push(`- **Domains:** ${profile.domains.join(", ")}`);
   lines.push(`- **ML depth:** ${profile.mlDepth} · **Managed people:** ${profile.managedPeople ? "yes" : "no"}`);
-  const target = prefs.targetLevel ?? `${levelFromYears(countedYears(profile), profile.managedPeople)} (from the resume)`;
+  const target = prefs.targetLevels?.join(" / ") ?? `${levelFromYears(countedYears(profile), profile.managedPeople)} (from the resume)`;
   lines.push(
     `- **Onboarding answers:** level ${target}; locations ${answers.locations.join(", ")}${answers.alsoConsider.length ? `, also ${answers.alsoConsider.join(", ")}` : ""}; ` +
       `pay ${prefs.pay ? `floor $${prefs.pay.floor / 1000}k, target $${prefs.pay.target / 1000}k` : "no preference"}; company ${prefs.companyStage ?? "no preference"}; ` +
@@ -296,7 +304,8 @@ function writeReport(profile: CandidateProfile, answers: Answers, prefs: Prefere
   lines.push("## Calibration sample — spread across every other analysed role", "");
   table(sample, (i) => scored.indexOf(sample[i]) + 1);
 
-  writeFileSync(path.join(LOCAL, "match-report.md"), lines.join("\n"));
+  const base = company ? `match-${company}` : "match";
+  writeFileSync(path.join(LOCAL, `${base === "match" ? "match-report" : base}.md`), lines.join("\n"));
 
   // Multiple choice, not a 0-100 total: each column asks a factual
   // question about the resume and the posting, which anyone can answer the
@@ -313,18 +322,18 @@ function writeReport(profile: CandidateProfile, answers: Answers, prefs: Prefere
         .join(","),
     ),
   ].join("\n");
-  writeFileSync(path.join(LOCAL, "match-handscore.csv"), csv);
+  writeFileSync(path.join(LOCAL, `${base === "match" ? "match-handscore" : base}.csv`), csv);
   // Every analysed role's answers, so a hand-scored sheet from an earlier
   // run can still be compared after the shortlist changes.
   writeFileSync(
-    path.join(LOCAL, "match-all.json"),
+    path.join(LOCAL, `${base}-all.json`),
     JSON.stringify(Object.fromEntries(scored.map(({ r, s }) => [r.facts.id, { score: s.score, domain: choice(s, "domain"), level: choice(s, "level"), requirements: choice(s, "requirements") }]))),
   );
 
   console.log(`\nTiers (${scored.length} analysed roles): ${Object.entries(tierCounts).map(([t, n]) => `${t} ${n}`).join(" · ")}`);
   console.log("Top 10:");
   top.slice(0, 10).forEach(({ r, s }) => console.log(`  ${String(scored.findIndex((x) => x.r === r) + 1).padStart(3)}. ${s.score} ${s.tier.padEnd(12)} ${r.facts.title} — ${r.facts.company}`));
-  console.log(`\nReport: .local/match-report.md · Hand-score sheet: .local/match-handscore.csv`);
+  console.log(`\nReport: .local/${base === "match" ? "match-report" : base}.md · Hand-score sheet: .local/${base === "match" ? "match-handscore" : base}.csv`);
 }
 
 main().catch((err) => {

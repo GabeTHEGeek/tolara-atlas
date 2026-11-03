@@ -86,6 +86,14 @@ function scoreDomain(profile: CandidateProfile, a: RoleAnalysis | null): [number
   // picks up "ai-agents" as a secondary, which made every such role a full
   // match. And a posting read from its title alone can't prove a match.
   const same = primary.some((p) => p.archetype === a.archetypes[0]) ? a.archetypes[0] : undefined;
+  // Applied AI is a way of building, not a kind of product: AI agents in a
+  // developer tool or infrastructure product aren't the same work as AI in
+  // the consumer or marketplace products the candidate built. So an
+  // "ai-agents" match also needs the role's other kind of product to be one
+  // the candidate has done.
+  if (same === "ai-agents" && a.archetypes.length > 1 && !mine.includes(a.archetypes[1])) {
+    return [ANCHORS.domain.adjacent, `AI work, but in ${a.archetypes[1]} products, which you haven't built`];
+  }
   if (same && !a.descriptionAvailable) {
     return [ANCHORS.domain.adjacent, `Looks like ${same} work from the title, but there's no posting text to confirm`];
   }
@@ -93,6 +101,15 @@ function scoreDomain(profile: CandidateProfile, a: RoleAnalysis | null): [number
     const ev = primary.find((x) => x.archetype === same)?.evidence ?? "";
     return [ANCHORS.domain.same, `Same kind of product (${same})${ev ? `: "${ev}"` : ""}`];
   }
+  // The product area itself matches ("social and identity" ~ "web3
+  // identity & social") and the role's kinds of product include one the
+  // candidate has made a main focus: that's the same work, even when the
+  // posting's main archetype is a neighbour (platform, here).
+  const sharedPrimary = a.archetypes.find((r) => primary.some((p) => p.archetype === r));
+  if (domainOverlap && sharedPrimary && a.descriptionAvailable) {
+    return [ANCHORS.domain.same, `Same product area: ${a.productDomain} ~ your ${domainOverlap} (${sharedPrimary})`];
+  }
+  if (sharedPrimary) return [ANCHORS.domain.adjacent, `Your main focus (${sharedPrimary}) is this role's secondary area`];
   const touched = a.archetypes.find((r) => mine.includes(r));
   const adj = a.archetypes.flatMap((r) => primary.filter((m) => isAdjacent(r, m.archetype)).map((m) => [r, m.archetype] as [Archetype, Archetype]))[0];
   if (touched) return [ANCHORS.domain.adjacent, `You've touched ${touched} work, not as a main focus`];
@@ -153,18 +170,23 @@ function roleLevel(role: RoleFacts, a: RoleAnalysis | null): Level {
 }
 
 function scoreLevel(role: RoleFacts, a: RoleAnalysis | null, profile: CandidateProfile, prefs: Preferences): [number, string] {
-  const target = prefs.targetLevel ?? levelFromYears(countedYears(profile), profile.managedPeople);
+  const targets = prefs.targetLevels ?? [levelFromYears(countedYears(profile), profile.managedPeople)];
   const level = roleLevel(role, a);
   if (a?.managesPMs && !profile.managedPeople) return [ANCHORS.level.poor, "Requires managing PMs, which your resume doesn't show"];
-  let gap = LEVEL_ORDER.indexOf(level) - LEVEL_ORDER.indexOf(target);
+  // The gap to the nearest level the candidate would take.
+  const at = LEVEL_ORDER.indexOf(level);
+  let gap = targets.map((t) => at - LEVEL_ORDER.indexOf(t)).reduce((best, g) => (Math.abs(g) < Math.abs(best) ? g : best));
   // A title at a top brand carries the next level's scope elsewhere.
   const topBrand = gap < 0 && (role.employees ?? 0) >= TOP_BRAND_EMPLOYEES;
   if (topBrand) gap += 1;
-  const at = `${LEVEL_LABEL[level]}${topBrand ? " at a top brand" : ""}`;
-  const aim = `you're aiming for ${LEVEL_LABEL[target]}`;
-  if (gap === 0) return [ANCHORS.level.strong, `${at} -- ${aim}`];
-  if (Math.abs(gap) === 1) return [ANCHORS.level.partial, `${at} -- one level ${gap > 0 ? "above" : "below"} ${LEVEL_LABEL[target]}`];
-  return [ANCHORS.level.poor, `${at} -- ${gap > 0 ? "well above" : "well below"} ${LEVEL_LABEL[target]}`];
+  const label = `${LEVEL_LABEL[level]}${topBrand ? " at a top brand" : ""}`;
+  const aim = targets.map((t) => LEVEL_LABEL[t]).join(" / ");
+  // The quiz's Director answer means no reports required: a role that
+  // requires managing PMs is at best partial, whoever has managed people.
+  if (gap === 0 && a?.managesPMs) return [ANCHORS.level.partial, `${label} -- requires managing PMs`];
+  if (gap === 0) return [ANCHORS.level.strong, `${label} -- you're aiming for ${aim}`];
+  if (Math.abs(gap) === 1) return [ANCHORS.level.partial, `${label} -- one level ${gap > 0 ? "above" : "below"} ${aim}`];
+  return [ANCHORS.level.poor, `${label} -- ${gap > 0 ? "well above" : "well below"} ${aim}`];
 }
 
 // Requirements no resume can show: a role gated on these is unmet unless

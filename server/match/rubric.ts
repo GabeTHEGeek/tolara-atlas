@@ -83,7 +83,7 @@ export type StagePreference = "established" | "growth" | "seed";
 
 /** The candidate's preferences, from the onboarding answers. null = no preference: not scored. */
 export interface Preferences {
-  targetLevel: Level | null; // null: read from the resume
+  targetLevels: Level[] | null; // levels the candidate would take; null: read from the resume
   locations: {
     // "City, ST" as the export spells it, or "Remote US"; matched against a
     // role's offices and its remote flag.

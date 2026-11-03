@@ -24,7 +24,7 @@ export interface Question {
 }
 
 export interface Answers {
-  level: string; // "resume" or a Level
+  levels: string[]; // ["resume"] or Levels -- every level the candidate would take
   locations: string[]; // metro ids, "remote", or ["anywhere"]
   alsoConsider: string[]; // second-choice metros; [] for none
   relocate: string; // "yes" | "no"
@@ -77,16 +77,16 @@ const metroOptions: Option[] = Object.entries(METROS).map(([id, m]) => ({ id, la
 
 export const QUESTIONS: Question[] = [
   {
-    id: "level",
-    prompt: "What level are you aiming for?",
-    multi: false,
+    id: "levels",
+    prompt: "Which levels would you take? Pick every one that fits.",
+    multi: true,
     options: [
       { id: "resume", label: "Match my experience (read from my resume)" },
       { id: "associate", label: "Associate / APM" },
       { id: "mid", label: "Product Manager" },
       { id: "senior", label: "Senior PM" },
       { id: "principal", label: "Lead / Principal / Staff PM" },
-      { id: "director", label: "Group PM / Director" },
+      { id: "director", label: "Group PM / Director (no reports required)" },
     ],
   },
   {
@@ -143,7 +143,7 @@ export const QUESTIONS: Question[] = [
 
 /** A user who skips the quiz: no preferences, level read from the resume. */
 export const GENERIC_ANSWERS: Answers = {
-  level: "resume",
+  levels: ["resume"],
   locations: ["anywhere"],
   alsoConsider: [],
   relocate: "no",
@@ -155,6 +155,12 @@ export const GENERIC_ANSWERS: Answers = {
 const LEVELS: Level[] = ["associate", "mid", "senior", "principal", "director"];
 const STAGES: StagePreference[] = ["established", "growth", "seed"];
 
+function levelsOf(ids: string[] | string): Level[] | null {
+  // An answers file from before the question took several answers has one string.
+  const picked = (Array.isArray(ids) ? ids : [ids]).filter((id): id is Level => LEVELS.includes(id as Level));
+  return picked.length > 0 ? picked : null;
+}
+
 function citiesOf(ids: string[]): string[] {
   return ids.flatMap((id) => (id === "remote" ? ["Remote US"] : (METROS[id]?.cities ?? [])));
 }
@@ -165,7 +171,7 @@ export function preferencesFrom(partial: Partial<Answers>): Preferences {
   const anywhere = a.locations.length === 0 || a.locations.includes("anywhere");
   const floor = Number(a.payFloor);
   return {
-    targetLevel: LEVELS.includes(a.level as Level) ? (a.level as Level) : null,
+    targetLevels: levelsOf(a.levels),
     locations: anywhere
       ? null
       : { preferred: citiesOf(a.locations), secondary: citiesOf(a.alsoConsider), relocationOk: a.relocate === "yes" },
