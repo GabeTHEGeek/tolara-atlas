@@ -1,14 +1,464 @@
 {
-  "generatedAt": "2026-11-07T15:45:45.603Z",
-  "companyCount": 537,
-  "pinCount": 731,
-  "roleCount": 2532,
+  "generatedAt": "2026-11-08T16:16:05.479Z",
+  "companyCount": 533,
+  "pinCount": 724,
+  "roleCount": 2494,
   "changes": {
     "windowDays": 7,
-    "since": "2026-10-31T15:45:45.603Z",
-    "added": 335,
-    "closed": 318,
+    "since": "2026-11-01T16:16:05.479Z",
+    "added": 298,
+    "closed": 305,
     "closedRoles": [
+      {
+        "id": 5135,
+        "title": "Principal Product Manager",
+        "companyName": "Microsoft",
+        "companySlug": "microsoft",
+        "city": "Redmond",
+        "state": "WA",
+        "url": "https://apply.careers.microsoft.com/careers/job/1970393556999795",
+        "closedAt": "2026-11-07T15:41:41.000Z"
+      },
+      {
+        "id": 3943,
+        "title": "Senior Product Manager - Tech, Fulfilment by Amazon, Selling Partner Services",
+        "companyName": "Amazon",
+        "companySlug": "amazon",
+        "city": "Bellevue",
+        "state": "WA",
+        "url": "https://www.amazon.jobs/en/jobs/10575318/senior-product-manager-tech-fulfilment-by-amazon-selling-partner-services",
+        "closedAt": "2026-11-07T15:29:25.000Z"
+      },
+      {
+        "id": 3964,
+        "title": "Product Manager, Prime Video, Marketing AI, Automation & Tooling",
+        "companyName": "Amazon",
+        "companySlug": "amazon",
+        "city": "Culver City",
+        "state": "CA",
+        "url": "https://www.amazon.jobs/en/jobs/10569110/product-manager-prime-video-marketing-ai-automation-tooling",
+        "closedAt": "2026-11-07T15:29:25.000Z"
+      },
+      {
+        "id": 4920,
+        "title": "Product Manager – PLE (Product Lifecycle Engineering)",
+        "companyName": "ResMed",
+        "companySlug": "resmed",
+        "city": null,
+        "state": null,
+        "url": "https://resmed.wd3.myworkdayjobs.com/resmed_external_careers/job/Sydney-NSW-Australia/Senior-Lifecycle-Portfolio-Manager_JR_053255",
+        "closedAt": "2026-11-07T15:27:28.000Z"
+      },
+      {
+        "id": 4786,
+        "title": "Product Manager, Media Effectiveness Measurement and Partnerships",
+        "companyName": "Google",
+        "companySlug": "google",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://www.google.com/about/careers/applications/jobs/results/140219605011309254-product-manager-media-effectiveness-measurement-and-partnerships",
+        "closedAt": "2026-11-06T16:54:56.000Z"
+      },
+      {
+        "id": 4787,
+        "title": "Product Manager, Media Effectiveness",
+        "companyName": "Google",
+        "companySlug": "google",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://www.google.com/about/careers/applications/jobs/results/88895029291950790-product-manager-media-effectiveness",
+        "closedAt": "2026-11-06T16:54:56.000Z"
+      },
+      {
+        "id": 4846,
+        "title": "Group Product Manager, Voice Experiences on Search",
+        "companyName": "Google",
+        "companySlug": "google",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://www.google.com/about/careers/applications/jobs/results/75997680588726982-group-product-manager-voice-experiences-on-search",
+        "closedAt": "2026-11-06T16:54:56.000Z"
+      },
+      {
+        "id": 4863,
+        "title": "Senior Product Manager, Energy Projects, Google Research",
+        "companyName": "Google",
+        "companySlug": "google",
+        "city": "Mountain View",
+        "state": "CA",
+        "url": "https://www.google.com/about/careers/applications/jobs/results/75383053588800198-senior-product-manager-energy-projects-google-research",
+        "closedAt": "2026-11-06T16:54:56.000Z"
+      },
+      {
+        "id": 4373,
+        "title": "Sr Mgr-Digital Product Mgmt",
+        "companyName": "American Express",
+        "companySlug": "american-express",
+        "city": null,
+        "state": null,
+        "url": "https://egug.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/26015404",
+        "closedAt": "2026-11-06T16:54:37.000Z"
+      },
+      {
+        "id": 4379,
+        "title": "Sr Mgr-Digital Product Mgmt",
+        "companyName": "American Express",
+        "companySlug": "american-express",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://egug.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/26015453",
+        "closedAt": "2026-11-06T16:54:37.000Z"
+      },
+      {
+        "id": 4642,
+        "title": "Vice President, Platform Product Manager - Identity",
+        "companyName": "JPMorgan Chase",
+        "companySlug": "jpmorgan-chase",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210772618",
+        "closedAt": "2026-11-06T16:54:37.000Z"
+      },
+      {
+        "id": 4727,
+        "title": "Executive Director - AI-enable Product Lead",
+        "companyName": "JPMorgan Chase",
+        "companySlug": "jpmorgan-chase",
+        "city": "Wilmington",
+        "state": "DE",
+        "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210789123",
+        "closedAt": "2026-11-06T16:54:37.000Z"
+      },
+      {
+        "id": 4322,
+        "title": "Principal Product Manager",
+        "companyName": "Microsoft",
+        "companySlug": "microsoft",
+        "city": "Redmond",
+        "state": "WA",
+        "url": "https://apply.careers.microsoft.com/careers/job/1970393557044540",
+        "closedAt": "2026-11-06T16:54:17.000Z"
+      },
+      {
+        "id": 4329,
+        "title": "Product Management Intern - CTJ - TS",
+        "companyName": "Microsoft",
+        "companySlug": "microsoft",
+        "city": "Redmond",
+        "state": "WA",
+        "url": "https://apply.careers.microsoft.com/careers/job/1970393556983226",
+        "closedAt": "2026-11-06T16:54:17.000Z"
+      },
+      {
+        "id": 5008,
+        "title": "Senior Product Manager",
+        "companyName": "Microsoft",
+        "companySlug": "microsoft",
+        "city": "Redmond",
+        "state": "WA",
+        "url": "https://apply.careers.microsoft.com/careers/job/1970393557027384",
+        "closedAt": "2026-11-06T16:54:17.000Z"
+      },
+      {
+        "id": 5058,
+        "title": "Principal Product Manager",
+        "companyName": "Microsoft",
+        "companySlug": "microsoft",
+        "city": "Redmond",
+        "state": "WA",
+        "url": "https://apply.careers.microsoft.com/careers/job/1970393556940372",
+        "closedAt": "2026-11-06T16:54:17.000Z"
+      },
+      {
+        "id": 3950,
+        "title": "Senior Product Manager - Technical, Amazon Key, Amazon Key",
+        "companyName": "Amazon",
+        "companySlug": "amazon",
+        "city": "Austin",
+        "state": "TX",
+        "url": "https://www.amazon.jobs/en/jobs/10573564/senior-product-manager-technical-amazon-key-amazon-key",
+        "closedAt": "2026-11-06T16:39:36.000Z"
+      },
+      {
+        "id": 4038,
+        "title": "Senior Product Manager (Technical), AWS Certificate Manager",
+        "companyName": "Amazon",
+        "companySlug": "amazon",
+        "city": "Seattle",
+        "state": "WA",
+        "url": "https://www.amazon.jobs/en/jobs/10543778/senior-product-manager-technical-aws-certificate-manager",
+        "closedAt": "2026-11-06T16:39:36.000Z"
+      },
+      {
+        "id": 4053,
+        "title": "Principal Product Manager Tech, Prime Video",
+        "companyName": "Amazon",
+        "companySlug": "amazon",
+        "city": "Culver City",
+        "state": "CA",
+        "url": "https://www.amazon.jobs/en/jobs/10536073/principal-product-manager-tech-prime-video",
+        "closedAt": "2026-11-06T16:39:36.000Z"
+      },
+      {
+        "id": 4122,
+        "title": "Principal Technical Product Manager, Quick - Pricing and Billing",
+        "companyName": "Amazon",
+        "companySlug": "amazon",
+        "city": "Seattle",
+        "state": "WA",
+        "url": "https://www.amazon.jobs/en/jobs/10565141/principal-technical-product-manager-quick-pricing-and-billing",
+        "closedAt": "2026-11-06T16:39:36.000Z"
+      },
+      {
+        "id": 4220,
+        "title": "Product Manager - Technical, AI Voice, Ring & Blink Customer Service Technology",
+        "companyName": "Amazon",
+        "companySlug": "amazon",
+        "city": "Hawthorne",
+        "state": "CA",
+        "url": "https://www.amazon.jobs/en/jobs/10425819/product-manager-technical-ai-voice-ring-blink-customer-service-technology",
+        "closedAt": "2026-11-06T16:39:36.000Z"
+      },
+      {
+        "id": 2371,
+        "title": "Senior Product Manager (Data Platform) - User Privacy & Transparency",
+        "companyName": "TikTok",
+        "companySlug": "tiktok",
+        "city": null,
+        "state": null,
+        "url": "https://lifeattiktok.com/search/7646623921182247221",
+        "closedAt": "2026-11-06T16:38:46.000Z"
+      },
+      {
+        "id": 2438,
+        "title": "Senior Product Manager (Data Platform) - User Privacy & Transparency (San Jose)",
+        "companyName": "TikTok",
+        "companySlug": "tiktok",
+        "city": "San Jose",
+        "state": "CA",
+        "url": "https://lifeattiktok.com/search/7647287994324601141",
+        "closedAt": "2026-11-06T16:38:46.000Z"
+      },
+      {
+        "id": 3481,
+        "title": "Senior Technical Product Manager, Infrastructure Resilience",
+        "companyName": "NVIDIA",
+        "companySlug": "nvidia",
+        "city": "Santa Clara",
+        "state": "CA",
+        "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Senior-Technical-Product-Manager--Infrastructure-Resilience_JR2027685",
+        "closedAt": "2026-11-06T16:37:52.000Z"
+      },
+      {
+        "id": 4354,
+        "title": "Senior Manager, Product Manager-Money Movement",
+        "companyName": "Capital One",
+        "companySlug": "capital-one",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Manager--Product-Manager-Digital-Payments_R1004289",
+        "closedAt": "2026-11-06T16:37:52.000Z"
+      },
+      {
+        "id": 4537,
+        "title": "Manager, Product Management - Global Workplace Services (GWS)",
+        "companyName": "Capital One",
+        "companySlug": "capital-one",
+        "city": "Richmond",
+        "state": "VA",
+        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Management---Global-Workplace-Services--GWS-_R1004573-1",
+        "closedAt": "2026-11-06T16:37:52.000Z"
+      },
+      {
+        "id": 4538,
+        "title": "Director, Product Management-Enterprise Architecture & Cloud Governance",
+        "companyName": "Capital One",
+        "companySlug": "capital-one",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Director--Product-Management-CORE_R1003569-1",
+        "closedAt": "2026-11-06T16:37:52.000Z"
+      },
+      {
+        "id": 4986,
+        "title": "Associate Product Manager III - Assuntos Corporativos - ESG Social (Vaga Afirmativa para PcD)",
+        "companyName": "Jobgether",
+        "companySlug": "jobgether",
+        "city": null,
+        "state": null,
+        "url": "https://jobs.lever.co/jobgether/dbb45347-e3b4-4cfb-9318-5e5ecd439081",
+        "closedAt": "2026-11-06T16:37:30.000Z"
+      },
+      {
+        "id": 1319,
+        "title": "Senior Product Manager, Dock Hardware Platform",
+        "companyName": "Skydio",
+        "companySlug": "skydio",
+        "city": "San Mateo",
+        "state": "CA",
+        "url": "https://jobs.ashbyhq.com/skydio/b2441c23-49c4-49b3-81a8-a6f807028d25",
+        "closedAt": "2026-11-06T16:37:12.000Z"
+      },
+      {
+        "id": 1633,
+        "title": "Product Manager, Memory & Personal Intelligence",
+        "companyName": "Speak AI Language",
+        "companySlug": "speak-ai-language",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://jobs.ashbyhq.com/speak/d1202fee-1fdc-45cb-87c7-67a5f07aebfa",
+        "closedAt": "2026-11-06T16:37:12.000Z"
+      },
+      {
+        "id": 2750,
+        "title": "Product Manager, Link Growth [Consumer]",
+        "companyName": "Plaid",
+        "companySlug": "plaid",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://jobs.ashbyhq.com/plaid/34c110d6-61f0-4f51-bbd0-06eb74af00f7",
+        "closedAt": "2026-11-06T16:37:12.000Z"
+      },
+      {
+        "id": 2808,
+        "title": "Technical Product Manager, Data & Analytics Platform",
+        "companyName": "Mariana Minerals",
+        "companySlug": "mariana-minerals",
+        "city": "San Francisco",
+        "state": "CA",
+        "url": "https://jobs.ashbyhq.com/marianaminerals/920eabfb-9308-47a1-add4-65e4d9ea5c96",
+        "closedAt": "2026-11-06T16:37:12.000Z"
+      },
+      {
+        "id": 3327,
+        "title": "Senior/Staff Technical Product Manager, Platform",
+        "companyName": "1X Technologies",
+        "companySlug": "1x-technologies",
+        "city": "San Carlos",
+        "state": "CA",
+        "url": "https://jobs.ashbyhq.com/1x/6bfaa0a0-01b6-4b44-9984-6791a7744adf",
+        "closedAt": "2026-11-06T16:37:12.000Z"
+      },
+      {
+        "id": 3376,
+        "title": "Group Product Manager",
+        "companyName": "Mirage",
+        "companySlug": "mirage",
+        "city": "New York City",
+        "state": "NY",
+        "url": "https://jobs.ashbyhq.com/mirage/360e78ae-ac98-4101-a637-ea9947fb1634",
+        "closedAt": "2026-11-06T16:37:12.000Z"
+      },
+      {
+        "id": 3585,
+        "title": "Director of Product Management, Platform & Infrastructure",
+        "companyName": "Skydio",
+        "companySlug": "skydio",
+        "city": "San Mateo",
+        "state": "CA",
+        "url": "https://jobs.ashbyhq.com/skydio/073e72a7-b7e1-4d7a-b64d-fade3c209fc9",
+        "closedAt": "2026-11-06T16:37:12.000Z"
+      },
+      {
+        "id": 354,
+        "title": "Product Manager - Digital Products and Monetization",
+        "companyName": "Quinstreet",
+        "companySlug": "quinstreet",
+        "city": null,
+        "state": null,
+        "url": "https://www.quinstreet.com/careers/?gh_jid=8192449",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 874,
+        "title": "Senior Product Manager, Growth",
+        "companyName": "Waymo",
+        "companySlug": "waymo",
+        "city": "Mountain View",
+        "state": "CA",
+        "url": "https://careers.withwaymo.com/jobs?gh_jid=8027001",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 2797,
+        "title": "Staff Product Manager, Integrations",
+        "companyName": "Sprout Social",
+        "companySlug": "sprout-social",
+        "city": null,
+        "state": null,
+        "url": "https://sproutsocial.com/careers/open-positions/8220456/?gh_jid=8220456",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 2798,
+        "title": "Staff Product Manager, Integrations",
+        "companyName": "Sprout Social",
+        "companySlug": "sprout-social",
+        "city": null,
+        "state": null,
+        "url": "https://sproutsocial.com/careers/open-positions/8220432/?gh_jid=8220432",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 2877,
+        "title": "Senior Product Manager, Enterprise Solutions",
+        "companyName": "Omada Health",
+        "companySlug": "omada-health",
+        "city": null,
+        "state": null,
+        "url": "https://job-boards.greenhouse.io/omadahealth/jobs/8174091",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 3030,
+        "title": "Product Manager II, Workflows",
+        "companyName": "Box",
+        "companySlug": "box",
+        "city": "Redwood City",
+        "state": "CA",
+        "url": "https://job-boards.greenhouse.io/boxinc/jobs/8237739",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 3061,
+        "title": "Senior Product Manager, Applied AI",
+        "companyName": "Coursera",
+        "companySlug": "coursera",
+        "city": null,
+        "state": null,
+        "url": "https://job-boards.greenhouse.io/coursera/jobs/6211986004",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 3068,
+        "title": "Principal Product Manager, Consumer Money - Consumer Banking",
+        "companyName": "Gusto",
+        "companySlug": "gusto",
+        "city": "Denver",
+        "state": "CO",
+        "url": "https://job-boards.greenhouse.io/gusto/jobs/8160675",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 3220,
+        "title": "Sr. Product Manager",
+        "companyName": "Peloton",
+        "companySlug": "peloton",
+        "city": "New York",
+        "state": "NY",
+        "url": "https://careers.onepeloton.com/en/all-jobs/?gh_jid=8247000",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
+      {
+        "id": 5286,
+        "title": "Sr Product Manager",
+        "companyName": "Natera",
+        "companySlug": "natera",
+        "city": "Austin",
+        "state": "TX",
+        "url": "https://job-boards.greenhouse.io/natera/jobs/6250660004",
+        "closedAt": "2026-11-06T16:37:06.000Z"
+      },
       {
         "id": 4796,
         "title": "Product Manager, Search Intelligence",
@@ -1558,460 +2008,10 @@
         "state": "WA",
         "url": "https://apply.careers.microsoft.com/careers/job/1970393557048765",
         "closedAt": "2026-11-03T17:04:15.000Z"
-      },
-      {
-        "id": 3932,
-        "title": "Principal Product Manager-ES, Desktop Cloud Visualization (DCV)",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Seattle",
-        "state": "WA",
-        "url": "https://www.amazon.jobs/en/jobs/10581463/principal-product-manager-es-desktop-cloud-visualization-dcv",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 3948,
-        "title": "Senior Product Manager Tech, PV Partner Experience",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Culver City",
-        "state": "CA",
-        "url": "https://www.amazon.jobs/en/jobs/10582278/senior-product-manager-tech-pv-partner-experience",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 4015,
-        "title": "Principal Product Manager Tech, Product Quality",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Seattle",
-        "state": "WA",
-        "url": "https://www.amazon.jobs/en/jobs/10548234/principal-product-manager-tech-product-quality",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 4063,
-        "title": "Senior Product Manager Tech, PV Partner Experience",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Culver City",
-        "state": "CA",
-        "url": "https://www.amazon.jobs/en/jobs/10535741/senior-product-manager-tech-pv-partner-experience",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 4115,
-        "title": "Senior Product Manager-Tech, Advertising",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "New York",
-        "state": "NY",
-        "url": "https://www.amazon.jobs/en/jobs/10511667/senior-product-manager-tech-advertising",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 4116,
-        "title": "Senior Product Manager-Tech , Speed + AI, Speed + AI",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Bellevue",
-        "state": "WA",
-        "url": "https://www.amazon.jobs/en/jobs/10510209/senior-product-manager-tech-speed-ai-speed-ai",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 4127,
-        "title": "Sr. Mech Product Manager-Tech, Data Center Engineering",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Austin",
-        "state": "TX",
-        "url": "https://www.amazon.jobs/en/jobs/10510463/sr-mech-product-manager-tech-data-center-engineering",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 4133,
-        "title": "Principal Product Manager - Tech, Global Application Experience",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Seattle",
-        "state": "WA",
-        "url": "https://www.amazon.jobs/en/jobs/10501459/principal-product-manager-tech-global-application-experience",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 4188,
-        "title": "Sr. Product Manager, SSC, Amazon Private Brands",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Seattle",
-        "state": "WA",
-        "url": "https://www.amazon.jobs/en/jobs/10461794/sr-product-manager-ssc-amazon-private-brands",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 4244,
-        "title": "Sr. Product Manager, External Fulfillment",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Seattle",
-        "state": "WA",
-        "url": "https://www.amazon.jobs/en/jobs/10488469/sr-product-manager-external-fulfillment",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 5089,
-        "title": "Product Manager, High Consideration Basket Building",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Seattle",
-        "state": "WA",
-        "url": "https://www.amazon.jobs/en/jobs/10594610/product-manager-high-consideration-basket-building",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 5092,
-        "title": "Sr. Product Manager, Delivery Experience Improvement (DXI)",
-        "companyName": "Amazon",
-        "companySlug": "amazon",
-        "city": "Austin",
-        "state": "TX",
-        "url": "https://www.amazon.jobs/en/jobs/10594194/sr-product-manager-delivery-experience-improvement-dxi",
-        "closedAt": "2026-11-03T16:53:41.000Z"
-      },
-      {
-        "id": 2662,
-        "title": "Director, Product Management - APAC Products",
-        "companyName": "Meta",
-        "companySlug": "meta",
-        "city": "Menlo Park",
-        "state": "CA",
-        "url": "https://www.metacareers.com/jobs/1759909331661321/",
-        "closedAt": "2026-11-03T16:53:11.000Z"
-      },
-      {
-        "id": 2048,
-        "title": "Technical Product Manager Rigging",
-        "companyName": "Prg",
-        "companySlug": "prg",
-        "city": null,
-        "state": null,
-        "url": "https://careers-prg.icims.com/jobs/6011/technical-product-manager-rigging/job",
-        "closedAt": "2026-11-03T16:51:49.000Z"
-      },
-      {
-        "id": 1969,
-        "title": "Product Manager",
-        "companyName": "AssetMark",
-        "companySlug": "assetmark",
-        "city": "Charlotte",
-        "state": "NC",
-        "url": "https://assetmark.wd5.myworkdayjobs.com/assetmark_careers/job/Charlotte-NC/Product-Manager_Req-003969",
-        "closedAt": "2026-11-03T16:51:40.000Z"
-      },
-      {
-        "id": 2600,
-        "title": "Director, Product Management – DOCA",
-        "companyName": "NVIDIA",
-        "companySlug": "nvidia",
-        "city": null,
-        "state": null,
-        "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/Israel-Yokneam/Director--Product-Management---DOCA_JR2019875",
-        "closedAt": "2026-11-03T16:51:40.000Z"
-      },
-      {
-        "id": 3900,
-        "title": "Manager, Cyber Security Product Manager, Cyber Intelligence",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "McLean",
-        "state": "VA",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Manager--Cyber-Security-Product-Manager_R1004309-1",
-        "closedAt": "2026-11-03T16:51:40.000Z"
-      },
-      {
-        "id": 4494,
-        "title": "Manager, Product Manager - Bonus Offers",
-        "companyName": "Capital One",
-        "companySlug": "capital-one",
-        "city": "New York",
-        "state": "NY",
-        "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Manager--Product-Manager---Offers-Data-Integration_R249254-1",
-        "closedAt": "2026-11-03T16:51:40.000Z"
-      },
-      {
-        "id": 1463,
-        "title": "Senior Product Manager -  Scheduling",
-        "companyName": "Deputy",
-        "companySlug": "deputy",
-        "city": null,
-        "state": null,
-        "url": "https://jobs.lever.co/deputy/da25ecf6-2a15-49bb-8f92-75b258216512",
-        "closedAt": "2026-11-03T16:51:16.000Z"
-      },
-      {
-        "id": 3859,
-        "title": "Principal Product Manager - Content Platform",
-        "companyName": "Spotify",
-        "companySlug": "spotify",
-        "city": null,
-        "state": null,
-        "url": "https://jobs.lever.co/spotify/9d1764a1-45fc-4e16-a823-7b7453b61d2e",
-        "closedAt": "2026-11-03T16:51:16.000Z"
-      },
-      {
-        "id": 412,
-        "title": "Staff Product Manager, Marketing Technology",
-        "companyName": "Poshmark",
-        "companySlug": "poshmark",
-        "city": "Redwood City",
-        "state": "CA",
-        "url": "https://jobs.ashbyhq.com/poshmark/c36f4395-9da7-4a77-adfd-9abd9e579cf2",
-        "closedAt": "2026-11-03T16:50:59.000Z"
-      },
-      {
-        "id": 538,
-        "title": "Lead Product Manager, Ads",
-        "companyName": "Airops",
-        "companySlug": "airops",
-        "city": "New York City",
-        "state": "NY",
-        "url": "https://jobs.ashbyhq.com/airops/8b0287c6-216e-4b40-b315-ab8975d43f00",
-        "closedAt": "2026-11-03T16:50:59.000Z"
-      },
-      {
-        "id": 577,
-        "title": "Senior Product Manager",
-        "companyName": "Tango",
-        "companySlug": "tango",
-        "city": null,
-        "state": null,
-        "url": "https://jobs.ashbyhq.com/tango/894e2103-681a-4975-add6-a78555d4ba9f",
-        "closedAt": "2026-11-03T16:50:59.000Z"
-      },
-      {
-        "id": 600,
-        "title": "Principal Product Manager, AI Restaurant Experience",
-        "companyName": "Owner",
-        "companySlug": "owner",
-        "city": "San Francisco",
-        "state": "CA",
-        "url": "https://jobs.ashbyhq.com/owner/d74be412-5b98-48fb-95b0-3f0539cd9fa1",
-        "closedAt": "2026-11-03T16:50:59.000Z"
-      },
-      {
-        "id": 1418,
-        "title": "Senior Product Manager, Growth",
-        "companyName": "Alchemy",
-        "companySlug": "alchemy",
-        "city": "San Francisco",
-        "state": "CA",
-        "url": "https://jobs.ashbyhq.com/alchemy/e25f2923-33ce-45cb-a967-0cdb53b2c8b8",
-        "closedAt": "2026-11-03T16:50:59.000Z"
-      },
-      {
-        "id": 2803,
-        "title": "Lead product manager",
-        "companyName": "Writer",
-        "companySlug": "writer",
-        "city": "San Francisco",
-        "state": "CA",
-        "url": "https://jobs.ashbyhq.com/writer/ceb3bacb-039f-4428-b2a5-3c865b44972f",
-        "closedAt": "2026-11-03T16:50:59.000Z"
-      },
-      {
-        "id": 2804,
-        "title": "Lead product manager (UK)",
-        "companyName": "Writer",
-        "companySlug": "writer",
-        "city": null,
-        "state": null,
-        "url": "https://jobs.ashbyhq.com/writer/526c1bd1-d7af-4d5d-8230-daac8a3a44eb",
-        "closedAt": "2026-11-03T16:50:59.000Z"
-      },
-      {
-        "id": 5035,
-        "title": "Product Management Intern (Summer 2027)",
-        "companyName": "Snowflake",
-        "companySlug": "snowflake",
-        "city": "Menlo Park",
-        "state": "CA",
-        "url": "https://jobs.ashbyhq.com/snowflake/322b82f6-4b18-4f86-ae34-007f55c4bdbf",
-        "closedAt": "2026-11-03T16:50:59.000Z"
-      },
-      {
-        "id": 104,
-        "title": "Senior Product Manager, Ads -  Shopping Catalogs",
-        "companyName": "Reddit",
-        "companySlug": "reddit",
-        "city": null,
-        "state": null,
-        "url": "https://job-boards.greenhouse.io/reddit/jobs/8120503",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 254,
-        "title": "Growth Product Manager",
-        "companyName": "Yipitdata",
-        "companySlug": "yipitdata",
-        "city": null,
-        "state": null,
-        "url": "https://job-boards.greenhouse.io/yipitdata/jobs/8159750",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 325,
-        "title": "Senior Product Manager, Product Foundations",
-        "companyName": "Justworks",
-        "companySlug": "justworks",
-        "city": "New York",
-        "state": "NY",
-        "url": "https://boards.greenhouse.io/justworks/jobs/8139719?gh_jid=8139719",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 326,
-        "title": "Senior Product Manager, Time",
-        "companyName": "Justworks",
-        "companySlug": "justworks",
-        "city": "New York",
-        "state": "NY",
-        "url": "https://boards.greenhouse.io/justworks/jobs/7972369?gh_jid=7972369",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 347,
-        "title": "Director of Product Management – Explainability & Contestability",
-        "companyName": "seekr",
-        "companySlug": "seekr",
-        "city": "Austin",
-        "state": "TX",
-        "url": "https://www.seekr.com/careers/?gh_jid=4689929005",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 817,
-        "title": "Senior Product Manager - Application Protection & Governance",
-        "companyName": "Cloudflare",
-        "companySlug": "cloudflare",
-        "city": null,
-        "state": null,
-        "url": "https://boards.greenhouse.io/cloudflare/jobs/8200670?gh_jid=8200670",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 820,
-        "title": "Senior Product Manager - FinTech",
-        "companyName": "Cloudflare",
-        "companySlug": "cloudflare",
-        "city": null,
-        "state": null,
-        "url": "https://boards.greenhouse.io/cloudflare/jobs/8064473?gh_jid=8064473",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 1079,
-        "title": "Director, Product Management - Channel Infrastructure & Mobile",
-        "companyName": "Klaviyo",
-        "companySlug": "klaviyo",
-        "city": "Boston",
-        "state": "MA",
-        "url": "https://www.klaviyo.com/careers/jobs/7766942003?gh_jid=7766942003",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 1203,
-        "title": "Product Manager - Brokerage - Middle East",
-        "companyName": "Alpaca",
-        "companySlug": "alpaca",
-        "city": null,
-        "state": null,
-        "url": "https://job-boards.greenhouse.io/alpaca/jobs/6187211004",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 1537,
-        "title": "Principal Product Manager - AI/ML",
-        "companyName": "Air AI",
-        "companySlug": "air-ai",
-        "city": "Arlington",
-        "state": "VA",
-        "url": "https://job-boards.greenhouse.io/air/jobs/4233560009",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 1704,
-        "title": "Principal Product Manager-Sovereign Cloud",
-        "companyName": "Zscaler",
-        "companySlug": "zscaler",
-        "city": "San Jose",
-        "state": "CA",
-        "url": "https://job-boards.greenhouse.io/zscaler/jobs/5215309007",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 3075,
-        "title": "Product Owner (Técnico)",
-        "companyName": "Orion Innovation",
-        "companySlug": "orion-innovation",
-        "city": null,
-        "state": null,
-        "url": "https://www.orioninc.com/careers/job/?gh_jid=4717834006",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 3259,
-        "title": "Product Manager, Safe Change & Control Plane",
-        "companyName": "Cloudflare",
-        "companySlug": "cloudflare",
-        "city": null,
-        "state": null,
-        "url": "https://boards.greenhouse.io/cloudflare/jobs/8242904?gh_jid=8242904",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 4341,
-        "title": "VP, Product & Design",
-        "companyName": "NFL",
-        "companySlug": "nfl",
-        "city": "Inglewood",
-        "state": "CA",
-        "url": "https://job-boards.greenhouse.io/nflcareers/jobs/5389925008",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 5070,
-        "title": "Product Manager",
-        "companyName": "Navapbc",
-        "companySlug": "navapbc",
-        "city": null,
-        "state": null,
-        "url": "https://job-boards.greenhouse.io/navapbc/jobs/4293670009",
-        "closedAt": "2026-11-03T16:50:53.000Z"
-      },
-      {
-        "id": 4793,
-        "title": "Product Manager II, Geo Guidance Experience",
-        "companyName": "Google",
-        "companySlug": "google",
-        "city": "Mountain View",
-        "state": "CA",
-        "url": "https://www.google.com/about/careers/applications/jobs/results/132523062271582918-product-manager-ii-geo-guidance-experience",
-        "closedAt": "2026-11-02T19:26:51.000Z"
-      },
-      {
-        "id": 4831,
-        "title": "Senior Product Manager, Agentic AI and Insights Platform",
-        "companyName": "Google",
-        "companySlug": "google",
-        "city": "Boulder",
-        "state": "CO",
-        "url": "https://www.google.com/about/careers/applications/jobs/results/92169649797374662-senior-product-manager-agentic-ai-and-insights-platform",
-        "closedAt": "2026-11-02T19:26:51.000Z"
       }
     ],
     "lastSync": {
-      "finishedAt": "2026-11-07T15:42:17.000Z",
+      "finishedAt": "2026-11-08T16:05:41.000Z",
       "status": "success"
     }
   },
@@ -2345,7 +2345,7 @@
       "state": "VA",
       "latitude": 37.54020821938638,
       "longitude": -77.44194995464683,
-      "roleCount": 6,
+      "roleCount": 5,
       "roles": [
         {
           "id": 2068,
@@ -2388,23 +2388,8 @@
           "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Senior-Manager--Product-Management--Data-Product-Interface-on-GraphQL_R1004744",
           "postedAt": "Posted Yesterday",
           "firstSeenAt": "2026-10-31T15:05:02.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4537,
-          "title": "Manager, Product Management - Global Workplace Services (GWS)",
-          "location": "Richmond, VA",
-          "salaryMin": 164800,
-          "salaryMax": 188100,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/Richmond-VA/Manager--Product-Management---Global-Workplace-Services--GWS-_R1004573-1",
-          "postedAt": "Posted Today",
-          "firstSeenAt": "2026-10-28T15:45:59.000Z",
           "isNew": false,
-          "seniority": "mid",
+          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -2716,7 +2701,7 @@
           "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/McLean-VA/Senior-Manager--Product-Management--Card-Tech_R1004821-2",
           "postedAt": "Posted Yesterday",
           "firstSeenAt": "2026-10-31T15:05:02.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -3136,7 +3121,7 @@
       "state": "CA",
       "latitude": 37.23206410552391,
       "longitude": -121.69427667381798,
-      "roleCount": 42,
+      "roleCount": 41,
       "roles": [
         {
           "id": 2617,
@@ -3287,21 +3272,6 @@
           "isNew": false,
           "seniority": "director",
           "isRemote": false
-        },
-        {
-          "id": 3481,
-          "title": "Senior Technical Product Manager, Infrastructure Resilience",
-          "location": "US CA Santa, Clara",
-          "salaryMin": 208000,
-          "salaryMax": 327750,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Senior-Technical-Product-Manager--Infrastructure-Resilience_JR2027685",
-          "postedAt": "Posted Yesterday",
-          "firstSeenAt": "2026-10-13T16:45:05.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": true
         },
         {
           "id": 3565,
@@ -3837,7 +3807,7 @@
       "state": "NY",
       "latitude": 40.72306938549252,
       "longitude": -74.01724546786583,
-      "roleCount": 23,
+      "roleCount": 21,
       "roles": [
         {
           "id": 3095,
@@ -3910,21 +3880,6 @@
           "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Associate--Product-Manager-Small-Business-Bank-Associate-Servicing_R1004284",
           "postedAt": "Posted Yesterday",
           "firstSeenAt": "2026-10-23T14:05:47.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4354,
-          "title": "Senior Manager, Product Manager-Money Movement",
-          "location": "New York, NY",
-          "salaryMin": 200700,
-          "salaryMax": 229100,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Senior-Manager--Product-Manager-Digital-Payments_R1004289",
-          "postedAt": "Posted Yesterday",
-          "firstSeenAt": "2026-10-24T13:08:57.000Z",
           "isNew": false,
           "seniority": "senior",
           "isRemote": false
@@ -4062,21 +4017,6 @@
           "firstSeenAt": "2026-10-27T15:10:11.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4538,
-          "title": "Director, Product Management-Enterprise Architecture & Cloud Governance",
-          "location": "New York, NY",
-          "salaryMin": 209500,
-          "salaryMax": 239100,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://capitalone.wd12.myworkdayjobs.com/capital_one/job/New-York-NY/Director--Product-Management-CORE_R1003569-1",
-          "postedAt": "Posted Today",
-          "firstSeenAt": "2026-10-28T15:45:59.000Z",
-          "isNew": false,
-          "seniority": "director",
           "isRemote": false
         },
         {
@@ -5306,6 +5246,169 @@
       ]
     },
     {
+      "id": "131-menlo-park-ca",
+      "companyId": 131,
+      "companyName": "Snowflake",
+      "companySlug": "snowflake",
+      "city": "Menlo Park",
+      "state": "CA",
+      "latitude": 37.44896106876309,
+      "longitude": -122.19380415890537,
+      "roleCount": 10,
+      "roles": [
+        {
+          "id": 5387,
+          "title": "Senior Product Manager: Extensible Compute",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 200000,
+          "salaryMax": 287500,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/ba140960-361c-4357-8a8e-e4825f0d200b",
+          "postedAt": "2026-11-07T19:41:13.774+00:00",
+          "firstSeenAt": "2026-11-08T15:48:55.000Z",
+          "isNew": true,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 5225,
+          "title": "Director, Product PR",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 228000,
+          "salaryMax": 299200,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/2b964eec-d95c-47f5-a5cd-982c7b2fa207",
+          "postedAt": "2026-11-04T18:56:55.232+00:00",
+          "firstSeenAt": "2026-11-05T17:07:37.000Z",
+          "isNew": true,
+          "seniority": "director",
+          "isRemote": false
+        },
+        {
+          "id": 3755,
+          "title": "Senior Product Manager - Streamlit",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 200000,
+          "salaryMax": 287500,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/b071b406-6bd0-4def-ba95-380b1cbf6de5",
+          "postedAt": "2026-10-20T17:32:03.100+00:00",
+          "firstSeenAt": "2026-10-21T14:21:31.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 3541,
+          "title": "Director, Product Management - Data Transformation (Frontier Engineering)",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 304000,
+          "salaryMax": 437000,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/2c1ede0e-02c9-4f74-b084-fc1f5ccd83e2",
+          "postedAt": "2026-10-14T19:07:44.776+00:00",
+          "firstSeenAt": "2026-10-15T13:58:53.000Z",
+          "isNew": false,
+          "seniority": "director",
+          "isRemote": false
+        },
+        {
+          "id": 3540,
+          "title": "Senior Product Manager - Horizontal UI Experiences",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 200000,
+          "salaryMax": 287500,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/11e316e5-7c4b-48f0-8dbc-7d42f2b4e7d6",
+          "postedAt": "2026-10-14T18:21:51.371+00:00",
+          "firstSeenAt": "2026-10-15T13:58:53.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 3501,
+          "title": "Senior Product Manager – Agent Marketplace",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 200000,
+          "salaryMax": 287500,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/3c565761-4ce8-40f4-a346-1997b117afbc",
+          "postedAt": "2026-10-13T19:17:25.788+00:00",
+          "firstSeenAt": "2026-10-14T14:21:38.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 507,
+          "title": "STAFF PRODUCT MANAGER",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 236000,
+          "salaryMax": 339200,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/7576ec7f-01c9-41b9-b451-8cd43e62bf3b",
+          "postedAt": "2026-09-11T14:09:14.663+00:00",
+          "firstSeenAt": "2026-09-17T10:32:26.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 502,
+          "title": "Senior Product Manager - Enterprise AI",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 200000,
+          "salaryMax": 287500,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/5ee9f5f0-2942-4c17-81bf-f2ffec3a64b9",
+          "postedAt": "2026-07-24T15:27:37.407+00:00",
+          "firstSeenAt": "2026-09-17T10:32:26.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 500,
+          "title": "Senior Product Manager - Interactive Analytics",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 200000,
+          "salaryMax": 287500,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/e72df92e-951f-4c64-8016-1def8cf7e05d",
+          "postedAt": "2026-07-06T20:09:16.526+00:00",
+          "firstSeenAt": "2026-09-17T10:32:26.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 499,
+          "title": "Senior Product Manager - AI Migrations",
+          "location": "US-CA-Menlo Park",
+          "salaryMin": 236000,
+          "salaryMax": 339200,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/snowflake/8e88251e-e77e-428e-bccf-dc1ccadc22ef",
+          "postedAt": "2026-06-17T20:10:21.664+00:00",
+          "firstSeenAt": "2026-09-17T10:32:26.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "550-denver-co",
       "companyId": 550,
       "companyName": "Tailscale",
@@ -5544,7 +5647,7 @@
       "state": "CA",
       "latitude": 37.7764012348917,
       "longitude": -122.41263190829545,
-      "roleCount": 18,
+      "roleCount": 17,
       "roles": [
         {
           "id": 5386,
@@ -5787,21 +5890,6 @@
           "isRemote": false
         },
         {
-          "id": 4846,
-          "title": "Group Product Manager, Voice Experiences on Search",
-          "location": "San Francisco, CA, USA; Mountain View, CA, USA; New York, NY, USA",
-          "salaryMin": 240000,
-          "salaryMax": 333000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/75997680588726982-group-product-manager-voice-experiences-on-search",
-          "postedAt": "2026-10-07T12:38:08.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
           "id": 4849,
           "title": "Senior Product Manager, Databases &amp; Analytics, Google Cloud",
           "location": "Sunnyvale, CA, USA; San Francisco, CA, USA; Kirkland, WA, USA",
@@ -5827,7 +5915,7 @@
       "state": "NY",
       "latitude": 40.719950711894384,
       "longitude": -74.00073983676745,
-      "roleCount": 37,
+      "roleCount": 33,
       "roles": [
         {
           "id": 5386,
@@ -6265,21 +6353,6 @@
           "isRemote": false
         },
         {
-          "id": 4787,
-          "title": "Product Manager, Media Effectiveness",
-          "location": "New York, NY, USA; Kirkland, WA, USA; Los Angeles, CA, USA; Mountain View, CA, USA",
-          "salaryMin": 138000,
-          "salaryMax": 197000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/88895029291950790-product-manager-media-effectiveness",
-          "postedAt": "2026-10-12T09:09:27.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
           "id": 4867,
           "title": "Technical Product Manager, Google Ads",
           "location": "Mountain View, CA, USA; San Francisco, CA, USA; New York, NY, USA",
@@ -6307,51 +6380,6 @@
           "firstSeenAt": "2026-10-28T15:58:54.000Z",
           "isNew": false,
           "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 4786,
-          "title": "Product Manager, Media Effectiveness Measurement and Partnerships",
-          "location": "New York, NY, USA; Kirkland, WA, USA; Los Angeles, CA, USA; Mountain View, CA, USA",
-          "salaryMin": 163000,
-          "salaryMax": 236000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/140219605011309254-product-manager-media-effectiveness-measurement-and-partnerships",
-          "postedAt": "2026-10-07T13:08:12.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 4846,
-          "title": "Group Product Manager, Voice Experiences on Search",
-          "location": "San Francisco, CA, USA; Mountain View, CA, USA; New York, NY, USA",
-          "salaryMin": 240000,
-          "salaryMax": 333000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/75997680588726982-group-product-manager-voice-experiences-on-search",
-          "postedAt": "2026-10-07T12:38:08.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 4863,
-          "title": "Senior Product Manager, Energy Projects, Google Research",
-          "location": "Mountain View, CA, USA; Seattle, WA, USA; Cambridge, MA, USA; New York, NY, USA",
-          "salaryMin": 192000,
-          "salaryMax": 278000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/75383053588800198-senior-product-manager-energy-projects-google-research",
-          "postedAt": "2026-10-07T09:44:48.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -6805,7 +6833,7 @@
       "state": "TX",
       "latitude": 30.276471773147914,
       "longitude": -97.75400746015423,
-      "roleCount": 4,
+      "roleCount": 3,
       "roles": [
         {
           "id": 5351,
@@ -6818,21 +6846,6 @@
           "url": "https://job-boards.greenhouse.io/natera/jobs/6239213004",
           "postedAt": "2026-11-06T17:31:00-05:00",
           "firstSeenAt": "2026-11-07T15:26:55.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": true
-        },
-        {
-          "id": 5286,
-          "title": "Sr Product Manager",
-          "location": "US Remote",
-          "salaryMin": 120100,
-          "salaryMax": 150100,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/natera/jobs/6250660004",
-          "postedAt": "2026-11-05T18:51:48-05:00",
-          "firstSeenAt": "2026-11-06T16:37:06.000Z",
           "isNew": true,
           "seniority": "senior",
           "isRemote": true
@@ -6934,7 +6947,7 @@
           "url": "https://job-boards.greenhouse.io/affirm/jobs/8041930003",
           "postedAt": "2026-10-30T17:15:12-04:00",
           "firstSeenAt": "2026-10-23T20:23:32.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": true
         },
@@ -7232,7 +7245,7 @@
           "url": "https://www.coinbase.com/careers/positions/8258909?gh_jid=8258909",
           "postedAt": "2026-10-30T14:18:56-04:00",
           "firstSeenAt": "2026-10-14T14:21:33.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -7247,7 +7260,7 @@
           "url": "https://www.coinbase.com/careers/positions/8204571?gh_jid=8204571",
           "postedAt": "2026-10-30T14:18:48-04:00",
           "firstSeenAt": "2026-09-17T18:22:01.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -7262,7 +7275,7 @@
           "url": "https://www.coinbase.com/careers/positions/8259870?gh_jid=8259870",
           "postedAt": "2026-10-30T14:18:46-04:00",
           "firstSeenAt": "2026-10-07T16:06:38.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -7702,7 +7715,7 @@
       "state": "NY",
       "latitude": 40.70729393479868,
       "longitude": -73.99964054112016,
-      "roleCount": 6,
+      "roleCount": 5,
       "roles": [
         {
           "id": 5353,
@@ -7750,21 +7763,6 @@
           "isRemote": false
         },
         {
-          "id": 3068,
-          "title": "Principal Product Manager, Consumer Money - Consumer Banking",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 220000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/8160675",
-          "postedAt": "2026-10-09T11:00:16-04:00",
-          "firstSeenAt": "2026-10-01T16:01:19.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
           "id": 3067,
           "title": "Principal Product Manager, Business Money – SMB Banking",
           "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
@@ -7805,7 +7803,7 @@
       "state": "CA",
       "latitude": 37.39092565787133,
       "longitude": -122.07135641899784,
-      "roleCount": 58,
+      "roleCount": 54,
       "roles": [
         {
           "id": 5338,
@@ -8498,21 +8496,6 @@
           "isRemote": false
         },
         {
-          "id": 4787,
-          "title": "Product Manager, Media Effectiveness",
-          "location": "New York, NY, USA; Kirkland, WA, USA; Los Angeles, CA, USA; Mountain View, CA, USA",
-          "salaryMin": 138000,
-          "salaryMax": 197000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/88895029291950790-product-manager-media-effectiveness",
-          "postedAt": "2026-10-12T09:09:27.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
           "id": 4867,
           "title": "Technical Product Manager, Google Ads",
           "location": "Mountain View, CA, USA; San Francisco, CA, USA; New York, NY, USA",
@@ -8570,51 +8553,6 @@
           "firstSeenAt": "2026-10-28T15:58:54.000Z",
           "isNew": false,
           "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 4786,
-          "title": "Product Manager, Media Effectiveness Measurement and Partnerships",
-          "location": "New York, NY, USA; Kirkland, WA, USA; Los Angeles, CA, USA; Mountain View, CA, USA",
-          "salaryMin": 163000,
-          "salaryMax": 236000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/140219605011309254-product-manager-media-effectiveness-measurement-and-partnerships",
-          "postedAt": "2026-10-07T13:08:12.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 4846,
-          "title": "Group Product Manager, Voice Experiences on Search",
-          "location": "San Francisco, CA, USA; Mountain View, CA, USA; New York, NY, USA",
-          "salaryMin": 240000,
-          "salaryMax": 333000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/75997680588726982-group-product-manager-voice-experiences-on-search",
-          "postedAt": "2026-10-07T12:38:08.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 4863,
-          "title": "Senior Product Manager, Energy Projects, Google Research",
-          "location": "Mountain View, CA, USA; Seattle, WA, USA; Cambridge, MA, USA; New York, NY, USA",
-          "salaryMin": 192000,
-          "salaryMax": 278000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/75383053588800198-senior-product-manager-energy-projects-google-research",
-          "postedAt": "2026-10-07T09:44:48.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -10104,7 +10042,7 @@
       "state": "TX",
       "latitude": 33.0241109473664,
       "longitude": -96.68176774632553,
-      "roleCount": 32,
+      "roleCount": 31,
       "roles": [
         {
           "id": 5015,
@@ -10355,21 +10293,6 @@
           "salaryCurrency": null,
           "salaryPeriod": "year",
           "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210800768",
-          "postedAt": "2026-10-16T00:00:00.000Z",
-          "firstSeenAt": "2026-10-28T15:58:35.000Z",
-          "isNew": false,
-          "seniority": "director",
-          "isRemote": false
-        },
-        {
-          "id": 4727,
-          "title": "Executive Director - AI-enable Product Lead",
-          "location": "Wilmington, DE; Columbus, OH; Plano, TX; Chicago, IL",
-          "salaryMin": 156750,
-          "salaryMax": 260000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210789123",
           "postedAt": "2026-10-16T00:00:00.000Z",
           "firstSeenAt": "2026-10-28T15:58:35.000Z",
           "isNew": false,
@@ -11703,7 +11626,7 @@
       "state": "WA",
       "latitude": 47.60096441257318,
       "longitude": -122.31739693289377,
-      "roleCount": 218,
+      "roleCount": 215,
       "roles": [
         {
           "id": 5325,
@@ -11986,7 +11909,7 @@
           "url": "https://www.amazon.jobs/en/jobs/10593937/principal-product-manager-amazon-customer-service",
           "postedAt": "2026-10-31T00:00:00.000Z",
           "firstSeenAt": "2026-10-31T15:07:01.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -12906,21 +12829,6 @@
           "isRemote": false
         },
         {
-          "id": 4122,
-          "title": "Principal Technical Product Manager, Quick - Pricing and Billing",
-          "location": "Seattle, WA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10565141/principal-technical-product-manager-quick-pricing-and-billing",
-          "postedAt": "2026-09-30T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
           "id": 4515,
           "title": "Sr. Product Manager - Tech, Just Walk Out Technology",
           "location": "Seattle, WA",
@@ -13431,21 +13339,6 @@
           "isRemote": false
         },
         {
-          "id": 4038,
-          "title": "Senior Product Manager (Technical), AWS Certificate Manager",
-          "location": "Seattle, WA; Atlanta, GA; Herndon, VA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10543778/senior-product-manager-technical-aws-certificate-manager",
-          "postedAt": "2026-09-15T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
           "id": 4042,
           "title": "Sr. Mech Product Manager-Tech, Data Center Engineering",
           "location": "Austin, TX; Seattle, WA; Atlanta, GA; Columbus, OH; Herndon, VA",
@@ -13623,21 +13516,6 @@
           "firstSeenAt": "2026-10-23T20:26:04.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4053,
-          "title": "Principal Product Manager Tech, Prime Video",
-          "location": "Culver City, CA; Seattle, WA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10536073/principal-product-manager-tech-prime-video",
-          "postedAt": "2026-09-10T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "principal",
           "isRemote": false
         },
         {
@@ -14986,7 +14864,7 @@
       "state": "DE",
       "latitude": 39.738331,
       "longitude": -75.5527467,
-      "roleCount": 21,
+      "roleCount": 20,
       "roles": [
         {
           "id": 5332,
@@ -15121,21 +14999,6 @@
           "firstSeenAt": "2026-10-28T15:58:35.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 4727,
-          "title": "Executive Director - AI-enable Product Lead",
-          "location": "Wilmington, DE; Columbus, OH; Plano, TX; Chicago, IL",
-          "salaryMin": 156750,
-          "salaryMax": 260000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210789123",
-          "postedAt": "2026-10-16T00:00:00.000Z",
-          "firstSeenAt": "2026-10-28T15:58:35.000Z",
-          "isNew": false,
-          "seniority": "director",
           "isRemote": false
         },
         {
@@ -15972,7 +15835,7 @@
       "state": "NY",
       "latitude": 40.71147643255695,
       "longitude": -74.02263878511658,
-      "roleCount": 68,
+      "roleCount": 67,
       "roles": [
         {
           "id": 5385,
@@ -16680,21 +16543,6 @@
           "isRemote": false
         },
         {
-          "id": 4642,
-          "title": "Vice President, Platform Product Manager - Identity",
-          "location": "New York, NY",
-          "salaryMin": 133000,
-          "salaryMax": 215000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210772618",
-          "postedAt": "2026-09-23T00:00:00.000Z",
-          "firstSeenAt": "2026-10-28T15:58:35.000Z",
-          "isNew": false,
-          "seniority": "director",
-          "isRemote": false
-        },
-        {
           "id": 4671,
           "title": "Digital Channels Middleware Platforms Product Manager - Vice President",
           "location": "Jersey City, NJ; New York, NY",
@@ -17033,7 +16881,7 @@
       "state": "WA",
       "latitude": 47.663957901842565,
       "longitude": -122.11034038579966,
-      "roleCount": 76,
+      "roleCount": 71,
       "roles": [
         {
           "id": 5253,
@@ -17216,21 +17064,6 @@
           "isRemote": true
         },
         {
-          "id": 5135,
-          "title": "Principal Product Manager",
-          "location": "Redmond, WA",
-          "salaryMin": 142800,
-          "salaryMax": 274800,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://apply.careers.microsoft.com/careers/job/1970393556999795",
-          "postedAt": "2026-11-02T21:06:23.000Z",
-          "firstSeenAt": "2026-11-03T17:04:15.000Z",
-          "isNew": true,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
           "id": 5134,
           "title": "Principal Product Manager",
           "location": "Redmond, WA",
@@ -17261,21 +17094,6 @@
           "isRemote": false
         },
         {
-          "id": 5058,
-          "title": "Principal Product Manager",
-          "location": "Redmond, WA",
-          "salaryMin": 142800,
-          "salaryMax": 274800,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://apply.careers.microsoft.com/careers/job/1970393556940372",
-          "postedAt": "2026-10-30T22:51:59.000Z",
-          "firstSeenAt": "2026-10-31T15:21:26.000Z",
-          "isNew": true,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
           "id": 5055,
           "title": "Senior Product Manager",
           "location": "Redmond, WA",
@@ -17286,21 +17104,6 @@
           "url": "https://apply.careers.microsoft.com/careers/job/1970393557046132",
           "postedAt": "2026-10-30T21:06:28.000Z",
           "firstSeenAt": "2026-10-31T15:21:26.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 5008,
-          "title": "Senior Product Manager",
-          "location": "Redmond, WA; Atlanta, GA; San Antonio, TX; Phoenix, AZ",
-          "salaryMin": 119800,
-          "salaryMax": 234700,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://apply.careers.microsoft.com/careers/job/1970393557027384",
-          "postedAt": "2026-10-30T15:02:08.000Z",
-          "firstSeenAt": "2026-10-30T15:48:25.000Z",
           "isNew": false,
           "seniority": "senior",
           "isRemote": false
@@ -17391,21 +17194,6 @@
           "url": "https://apply.careers.microsoft.com/careers/job/1970393557046203",
           "postedAt": "2026-10-27T18:46:44.000Z",
           "firstSeenAt": "2026-10-28T15:58:14.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 4322,
-          "title": "Principal Product Manager",
-          "location": "Redmond, WA",
-          "salaryMin": 142800,
-          "salaryMax": 274800,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://apply.careers.microsoft.com/careers/job/1970393557044540",
-          "postedAt": "2026-10-23T19:31:25.000Z",
-          "firstSeenAt": "2026-10-23T20:41:16.000Z",
           "isNew": false,
           "seniority": "principal",
           "isRemote": false
@@ -18026,21 +17814,6 @@
           "isRemote": false
         },
         {
-          "id": 4329,
-          "title": "Product Management Intern - CTJ - TS",
-          "location": "Redmond, WA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://apply.careers.microsoft.com/careers/job/1970393556983226",
-          "postedAt": "2026-09-11T18:40:02.000Z",
-          "firstSeenAt": "2026-10-23T20:41:16.000Z",
-          "isNew": false,
-          "seniority": "associate",
-          "isRemote": false
-        },
-        {
           "id": 4285,
           "title": "Senior Product Manager",
           "location": "Redmond, WA",
@@ -18575,7 +18348,7 @@
           "url": "https://www.riotgames.com/en/work-with-us/job/8275356?gh_jid=8275356",
           "postedAt": "2026-10-30T14:17:30-04:00",
           "firstSeenAt": "2026-10-31T15:04:27.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -18706,7 +18479,7 @@
           "url": "https://job-boards.greenhouse.io/zscaler/jobs/5250710007",
           "postedAt": "2026-10-30T12:18:38-04:00",
           "firstSeenAt": "2026-10-31T15:04:27.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "director",
           "isRemote": false
         },
@@ -19719,7 +19492,7 @@
       "state": "WA",
       "latitude": 47.6765382,
       "longitude": -122.2070775,
-      "roleCount": 11,
+      "roleCount": 9,
       "roles": [
         {
           "id": 5275,
@@ -19839,36 +19612,6 @@
           "firstSeenAt": "2026-10-28T15:58:54.000Z",
           "isNew": false,
           "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 4787,
-          "title": "Product Manager, Media Effectiveness",
-          "location": "New York, NY, USA; Kirkland, WA, USA; Los Angeles, CA, USA; Mountain View, CA, USA",
-          "salaryMin": 138000,
-          "salaryMax": 197000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/88895029291950790-product-manager-media-effectiveness",
-          "postedAt": "2026-10-12T09:09:27.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 4786,
-          "title": "Product Manager, Media Effectiveness Measurement and Partnerships",
-          "location": "New York, NY, USA; Kirkland, WA, USA; Los Angeles, CA, USA; Mountain View, CA, USA",
-          "salaryMin": 163000,
-          "salaryMax": 236000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/140219605011309254-product-manager-media-effectiveness-measurement-and-partnerships",
-          "postedAt": "2026-10-07T13:08:12.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "mid",
           "isRemote": false
         },
         {
@@ -20382,7 +20125,7 @@
       "state": "TX",
       "latitude": 30.255298560917502,
       "longitude": -97.74035499162977,
-      "roleCount": 30,
+      "roleCount": 29,
       "roles": [
         {
           "id": 5245,
@@ -20543,21 +20286,6 @@
           "salaryCurrency": null,
           "salaryPeriod": "year",
           "url": "https://www.amazon.jobs/en/jobs/10573953/senior-product-manager-tech-electrical-products-and-services-data-center-engineering",
-          "postedAt": "2026-10-08T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 3950,
-          "title": " Senior Product Manager - Technical, Amazon Key, Amazon Key",
-          "location": "Austin, TX; Sunnyvale, CA; Bellevue, WA; Las Vegas, NV; Hawthorne, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10573564/senior-product-manager-technical-amazon-key-amazon-key",
           "postedAt": "2026-10-08T00:00:00.000Z",
           "firstSeenAt": "2026-10-23T20:26:04.000Z",
           "isNew": false,
@@ -22281,7 +22009,7 @@
       "state": "OH",
       "latitude": 39.95464346345934,
       "longitude": -82.9965425692986,
-      "roleCount": 32,
+      "roleCount": 31,
       "roles": [
         {
           "id": 5266,
@@ -22562,21 +22290,6 @@
           "salaryCurrency": null,
           "salaryPeriod": "year",
           "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210800768",
-          "postedAt": "2026-10-16T00:00:00.000Z",
-          "firstSeenAt": "2026-10-28T15:58:35.000Z",
-          "isNew": false,
-          "seniority": "director",
-          "isRemote": false
-        },
-        {
-          "id": 4727,
-          "title": "Executive Director - AI-enable Product Lead",
-          "location": "Wilmington, DE; Columbus, OH; Plano, TX; Chicago, IL",
-          "salaryMin": 156750,
-          "salaryMax": 260000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210789123",
           "postedAt": "2026-10-16T00:00:00.000Z",
           "firstSeenAt": "2026-10-28T15:58:35.000Z",
           "isNew": false,
@@ -23641,7 +23354,7 @@
           "url": "https://www.bill.com/job?6239148004&gh_jid=6239148004",
           "postedAt": "2026-10-30T13:14:05-04:00",
           "firstSeenAt": "2026-10-31T15:04:27.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -23906,154 +23619,6 @@
           "isNew": false,
           "seniority": "senior",
           "isRemote": true
-        }
-      ]
-    },
-    {
-      "id": "131-menlo-park-ca",
-      "companyId": 131,
-      "companyName": "Snowflake",
-      "companySlug": "snowflake",
-      "city": "Menlo Park",
-      "state": "CA",
-      "latitude": 37.44896106876309,
-      "longitude": -122.19380415890537,
-      "roleCount": 9,
-      "roles": [
-        {
-          "id": 5225,
-          "title": "Director, Product PR",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 228000,
-          "salaryMax": 299200,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/2b964eec-d95c-47f5-a5cd-982c7b2fa207",
-          "postedAt": "2026-11-04T18:56:55.232+00:00",
-          "firstSeenAt": "2026-11-05T17:07:37.000Z",
-          "isNew": true,
-          "seniority": "director",
-          "isRemote": false
-        },
-        {
-          "id": 3755,
-          "title": "Senior Product Manager - Streamlit",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 200000,
-          "salaryMax": 287500,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/b071b406-6bd0-4def-ba95-380b1cbf6de5",
-          "postedAt": "2026-10-20T17:32:03.100+00:00",
-          "firstSeenAt": "2026-10-21T14:21:31.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 3541,
-          "title": "Director, Product Management - Data Transformation (Frontier Engineering)",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 304000,
-          "salaryMax": 437000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/2c1ede0e-02c9-4f74-b084-fc1f5ccd83e2",
-          "postedAt": "2026-10-14T19:07:44.776+00:00",
-          "firstSeenAt": "2026-10-15T13:58:53.000Z",
-          "isNew": false,
-          "seniority": "director",
-          "isRemote": false
-        },
-        {
-          "id": 3540,
-          "title": "Senior Product Manager - Horizontal UI Experiences",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 200000,
-          "salaryMax": 287500,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/11e316e5-7c4b-48f0-8dbc-7d42f2b4e7d6",
-          "postedAt": "2026-10-14T18:21:51.371+00:00",
-          "firstSeenAt": "2026-10-15T13:58:53.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 3501,
-          "title": "Senior Product Manager – Agent Marketplace",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 200000,
-          "salaryMax": 287500,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/3c565761-4ce8-40f4-a346-1997b117afbc",
-          "postedAt": "2026-10-13T19:17:25.788+00:00",
-          "firstSeenAt": "2026-10-14T14:21:38.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 507,
-          "title": "STAFF PRODUCT MANAGER",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 236000,
-          "salaryMax": 339200,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/7576ec7f-01c9-41b9-b451-8cd43e62bf3b",
-          "postedAt": "2026-09-11T14:09:14.663+00:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 502,
-          "title": "Senior Product Manager - Enterprise AI",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 200000,
-          "salaryMax": 287500,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/5ee9f5f0-2942-4c17-81bf-f2ffec3a64b9",
-          "postedAt": "2026-07-24T15:27:37.407+00:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 500,
-          "title": "Senior Product Manager - Interactive Analytics",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 200000,
-          "salaryMax": 287500,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/e72df92e-951f-4c64-8016-1def8cf7e05d",
-          "postedAt": "2026-07-06T20:09:16.526+00:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 499,
-          "title": "Senior Product Manager - AI Migrations",
-          "location": "US-CA-Menlo Park",
-          "salaryMin": 236000,
-          "salaryMax": 339200,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/snowflake/8e88251e-e77e-428e-bccf-dc1ccadc22ef",
-          "postedAt": "2026-06-17T20:10:21.664+00:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
         }
       ]
     },
@@ -25454,7 +25019,7 @@
           "url": "https://www.okta.com/company/careers/opportunity/8332523?gh_jid=8332523",
           "postedAt": "2026-10-30T18:34:43-04:00",
           "firstSeenAt": "2026-10-31T15:04:26.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -25780,7 +25345,7 @@
           "url": "https://www.okta.com/company/careers/opportunity/8332523?gh_jid=8332523",
           "postedAt": "2026-10-30T18:34:43-04:00",
           "firstSeenAt": "2026-10-31T15:04:26.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -26190,7 +25755,7 @@
           "url": "https://www.okta.com/company/careers/opportunity/8332523?gh_jid=8332523",
           "postedAt": "2026-10-30T18:34:43-04:00",
           "firstSeenAt": "2026-10-31T15:04:26.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -26806,7 +26371,7 @@
       "state": "CA",
       "latitude": 34.0248915353402,
       "longitude": -118.40651193330321,
-      "roleCount": 8,
+      "roleCount": 6,
       "roles": [
         {
           "id": 5186,
@@ -26854,21 +26419,6 @@
           "isRemote": false
         },
         {
-          "id": 3964,
-          "title": "Product Manager, Prime Video, Marketing AI, Automation & Tooling",
-          "location": "Culver City, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10569110/product-manager-prime-video-marketing-ai-automation-tooling",
-          "postedAt": "2026-10-05T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
           "id": 3983,
           "title": "Senior Product Manager, Commerce",
           "location": "Culver City, CA; Seattle, WA; Irvine, CA; San Francisco, CA",
@@ -26881,21 +26431,6 @@
           "firstSeenAt": "2026-10-23T20:26:04.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4053,
-          "title": "Principal Product Manager Tech, Prime Video",
-          "location": "Culver City, CA; Seattle, WA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10536073/principal-product-manager-tech-prime-video",
-          "postedAt": "2026-09-10T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "principal",
           "isRemote": false
         },
         {
@@ -27441,7 +26976,7 @@
       "state": "NY",
       "latitude": 40.706611664175966,
       "longitude": -73.9940213059304,
-      "roleCount": 13,
+      "roleCount": 12,
       "roles": [
         {
           "id": 5261,
@@ -27576,21 +27111,6 @@
           "firstSeenAt": "2026-10-24T13:20:32.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 4379,
-          "title": "Sr Mgr-Digital Product Mgmt",
-          "location": "New York, NY",
-          "salaryMin": 123000,
-          "salaryMax": 215250,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://egug.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/26015453",
-          "postedAt": "2026-10-21T00:00:00.000Z",
-          "firstSeenAt": "2026-10-24T13:20:32.000Z",
-          "isNew": false,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -28001,7 +27521,7 @@
       "state": "MA",
       "latitude": 42.376369578853094,
       "longitude": -71.09826335886328,
-      "roleCount": 3,
+      "roleCount": 2,
       "roles": [
         {
           "id": 5200,
@@ -28030,21 +27550,6 @@
           "postedAt": "2026-11-03T11:11:26.000Z",
           "firstSeenAt": "2026-11-03T17:04:57.000Z",
           "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4863,
-          "title": "Senior Product Manager, Energy Projects, Google Research",
-          "location": "Mountain View, CA, USA; Seattle, WA, USA; Cambridge, MA, USA; New York, NY, USA",
-          "salaryMin": 192000,
-          "salaryMax": 278000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/75383053588800198-senior-product-manager-energy-projects-google-research",
-          "postedAt": "2026-10-07T09:44:48.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         }
@@ -28203,7 +27708,7 @@
       "state": "WA",
       "latitude": 47.599608340056704,
       "longitude": -122.31422136699585,
-      "roleCount": 7,
+      "roleCount": 6,
       "roles": [
         {
           "id": 5148,
@@ -28290,21 +27795,6 @@
           "salaryPeriod": "year",
           "url": "https://www.google.com/about/careers/applications/jobs/results/75466775386301126-senior-product-manager-developer-knowledge-platform",
           "postedAt": "2026-10-13T15:07:52.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4863,
-          "title": "Senior Product Manager, Energy Projects, Google Research",
-          "location": "Mountain View, CA, USA; Seattle, WA, USA; Cambridge, MA, USA; New York, NY, USA",
-          "salaryMin": 192000,
-          "salaryMax": 278000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/75383053588800198-senior-product-manager-energy-projects-google-research",
-          "postedAt": "2026-10-07T09:44:48.000Z",
           "firstSeenAt": "2026-10-28T15:58:54.000Z",
           "isNew": false,
           "seniority": "senior",
@@ -30818,7 +30308,7 @@
           "url": "https://careers.datadoghq.com/detail/8337954/?gh_jid=8337954",
           "postedAt": "2026-10-30T17:00:23-04:00",
           "firstSeenAt": "2026-10-31T15:04:26.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -30833,7 +30323,7 @@
           "url": "https://careers.datadoghq.com/detail/8314006/?gh_jid=8314006",
           "postedAt": "2026-10-30T13:25:18-04:00",
           "firstSeenAt": "2026-10-23T14:05:01.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -31342,7 +30832,7 @@
       "state": "WA",
       "latitude": 47.60972552381283,
       "longitude": -122.20008101402696,
-      "roleCount": 52,
+      "roleCount": 50,
       "roles": [
         {
           "id": 5088,
@@ -31507,36 +30997,6 @@
           "firstSeenAt": "2026-10-23T20:26:04.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 3943,
-          "title": "Senior Product Manager - Tech, Fulfilment by Amazon, Selling Partner Services",
-          "location": "Bellevue, WA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10575318/senior-product-manager-tech-fulfilment-by-amazon-selling-partner-services",
-          "postedAt": "2026-10-10T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 3950,
-          "title": " Senior Product Manager - Technical, Amazon Key, Amazon Key",
-          "location": "Austin, TX; Sunnyvale, CA; Bellevue, WA; Las Vegas, NV; Hawthorne, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10573564/senior-product-manager-technical-amazon-key-amazon-key",
-          "postedAt": "2026-10-08T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -32266,7 +31726,7 @@
       "state": "VA",
       "latitude": 38.98325860897905,
       "longitude": -77.38890696585129,
-      "roleCount": 17,
+      "roleCount": 16,
       "roles": [
         {
           "id": 5091,
@@ -32386,21 +31846,6 @@
           "firstSeenAt": "2026-10-23T20:26:04.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 4038,
-          "title": "Senior Product Manager (Technical), AWS Certificate Manager",
-          "location": "Seattle, WA; Atlanta, GA; Herndon, VA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10543778/senior-product-manager-technical-aws-certificate-manager",
-          "postedAt": "2026-09-15T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -32841,7 +32286,7 @@
           "url": "https://jobs.ashbyhq.com/supabase/85f4d148-4602-4139-802a-962705133892",
           "postedAt": "2026-10-31T10:37:01.253+00:00",
           "firstSeenAt": "2026-10-31T15:04:32.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -32856,7 +32301,7 @@
           "url": "https://jobs.ashbyhq.com/supabase/c20228c2-45ff-4b77-ab77-906f39a06ca3",
           "postedAt": "2026-10-31T10:10:26.137+00:00",
           "firstSeenAt": "2026-10-31T15:04:32.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -32944,7 +32389,7 @@
           "url": "https://apply.careers.microsoft.com/careers/job/1970393557048043",
           "postedAt": "2026-10-31T00:36:43.000Z",
           "firstSeenAt": "2026-11-05T17:23:03.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         }
@@ -32972,7 +32417,7 @@
           "url": "https://apply.careers.microsoft.com/careers/job/1970393557048043",
           "postedAt": "2026-10-31T00:36:43.000Z",
           "firstSeenAt": "2026-11-05T17:23:03.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -33015,7 +32460,7 @@
           "url": "https://apply.careers.microsoft.com/careers/job/1970393557048043",
           "postedAt": "2026-10-31T00:36:43.000Z",
           "firstSeenAt": "2026-11-05T17:23:03.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": false
         },
@@ -33088,7 +32533,7 @@
           "url": "https://careers-americas.icims.com/jobs/26958/principal-product-manager%2c-usage-based-pricing/job",
           "postedAt": "2026-10-30T23:29:00.000Z",
           "firstSeenAt": "2026-10-29T15:55:23.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -33103,7 +32548,7 @@
           "url": "https://careers-americas.icims.com/jobs/27426/senior-principal-outbound-product-manager%2c-service-collection/job",
           "postedAt": "2026-10-30T16:49:00.000Z",
           "firstSeenAt": "2026-10-23T20:25:56.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -33176,7 +32621,7 @@
           "url": "https://jobs.ashbyhq.com/owner/d60e4146-81e8-43ba-8893-254e4c8804e4",
           "postedAt": "2026-10-30T19:58:58.776+00:00",
           "firstSeenAt": "2026-10-31T15:04:32.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -33219,7 +32664,7 @@
           "url": "https://jobs.ashbyhq.com/adaptive/8929db09-1a28-4e0f-9929-86c7fe10065e",
           "postedAt": "2026-10-30T17:40:23.703+00:00",
           "firstSeenAt": "2026-10-31T15:04:33.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         }
@@ -33247,7 +32692,7 @@
           "url": "https://jobs.ashbyhq.com/kiddom/5997811d-dbd1-4222-a79a-ceb69b72dd80",
           "postedAt": "2026-10-30T17:09:37.422+00:00",
           "firstSeenAt": "2026-10-31T15:04:33.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -33290,7 +32735,7 @@
           "url": "https://job-boards.greenhouse.io/coursera/jobs/6186173004",
           "postedAt": "2026-10-30T16:54:28-04:00",
           "firstSeenAt": "2026-09-17T10:32:26.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         }
@@ -33318,7 +32763,7 @@
           "url": "https://careers-americas.icims.com/jobs/27426/senior-principal-outbound-product-manager%2c-service-collection/job",
           "postedAt": "2026-10-30T16:49:00.000Z",
           "firstSeenAt": "2026-10-23T20:25:56.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         },
@@ -33376,7 +32821,7 @@
           "url": "https://careers-americas.icims.com/jobs/27426/senior-principal-outbound-product-manager%2c-service-collection/job",
           "postedAt": "2026-10-30T16:49:00.000Z",
           "firstSeenAt": "2026-10-23T20:25:56.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": false
         }
@@ -33404,7 +32849,7 @@
           "url": "https://job-boards.greenhouse.io/rushstreetinteractive/jobs/6233015004",
           "postedAt": "2026-10-30T16:19:34-04:00",
           "firstSeenAt": "2026-10-31T15:04:26.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -33426,90 +32871,6 @@
       ]
     },
     {
-      "id": "1174-atlanta-ga",
-      "companyId": 1174,
-      "companyName": "Microsoft",
-      "companySlug": "microsoft",
-      "city": "Atlanta",
-      "state": "GA",
-      "latitude": 33.76465587821339,
-      "longitude": -84.38214434449492,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 5008,
-          "title": "Senior Product Manager",
-          "location": "Redmond, WA; Atlanta, GA; San Antonio, TX; Phoenix, AZ",
-          "salaryMin": 119800,
-          "salaryMax": 234700,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://apply.careers.microsoft.com/careers/job/1970393557027384",
-          "postedAt": "2026-10-30T15:02:08.000Z",
-          "firstSeenAt": "2026-10-30T15:48:25.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1174-san-antonio-tx",
-      "companyId": 1174,
-      "companyName": "Microsoft",
-      "companySlug": "microsoft",
-      "city": "San Antonio",
-      "state": "TX",
-      "latitude": 29.4246002,
-      "longitude": -98.4951405,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 5008,
-          "title": "Senior Product Manager",
-          "location": "Redmond, WA; Atlanta, GA; San Antonio, TX; Phoenix, AZ",
-          "salaryMin": 119800,
-          "salaryMax": 234700,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://apply.careers.microsoft.com/careers/job/1970393557027384",
-          "postedAt": "2026-10-30T15:02:08.000Z",
-          "firstSeenAt": "2026-10-30T15:48:25.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1174-phoenix-az",
-      "companyId": 1174,
-      "companyName": "Microsoft",
-      "companySlug": "microsoft",
-      "city": "Phoenix",
-      "state": "AZ",
-      "latitude": 33.447708370678065,
-      "longitude": -112.08629809020532,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 5008,
-          "title": "Senior Product Manager",
-          "location": "Redmond, WA; Atlanta, GA; San Antonio, TX; Phoenix, AZ",
-          "salaryMin": 119800,
-          "salaryMax": 234700,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://apply.careers.microsoft.com/careers/job/1970393557027384",
-          "postedAt": "2026-10-30T15:02:08.000Z",
-          "firstSeenAt": "2026-10-30T15:48:25.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "232-mountain-view-ca",
       "companyId": 232,
       "companyName": "Waymo",
@@ -33518,7 +32879,7 @@
       "state": "CA",
       "latitude": 37.3848942233581,
       "longitude": -122.09749660387978,
-      "roleCount": 6,
+      "roleCount": 5,
       "roles": [
         {
           "id": 3620,
@@ -33531,21 +32892,6 @@
           "url": "https://careers.withwaymo.com/jobs?gh_jid=8289592",
           "postedAt": "2026-10-30T14:38:39-04:00",
           "firstSeenAt": "2026-10-17T12:42:51.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 874,
-          "title": "Senior Product Manager, Growth",
-          "location": "Mountain View, CA, USA; San Francisco, CA, USA",
-          "salaryMin": 204000,
-          "salaryMax": 252000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://careers.withwaymo.com/jobs?gh_jid=8027001",
-          "postedAt": "2026-10-27T19:53:43-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
           "isNew": false,
           "seniority": "senior",
           "isRemote": false
@@ -33621,7 +32967,7 @@
       "state": "CA",
       "latitude": 37.793333056178,
       "longitude": -122.40277026410826,
-      "roleCount": 6,
+      "roleCount": 5,
       "roles": [
         {
           "id": 3620,
@@ -33634,21 +32980,6 @@
           "url": "https://careers.withwaymo.com/jobs?gh_jid=8289592",
           "postedAt": "2026-10-30T14:38:39-04:00",
           "firstSeenAt": "2026-10-17T12:42:51.000Z",
-          "isNew": true,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 874,
-          "title": "Senior Product Manager, Growth",
-          "location": "Mountain View, CA, USA; San Francisco, CA, USA",
-          "salaryMin": 204000,
-          "salaryMax": 252000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://careers.withwaymo.com/jobs?gh_jid=8027001",
-          "postedAt": "2026-10-27T19:53:43-04:00",
-          "firstSeenAt": "2026-09-17T18:22:01.000Z",
           "isNew": false,
           "seniority": "senior",
           "isRemote": false
@@ -33780,7 +33111,7 @@
           "url": "https://job-boards.greenhouse.io/edmentum/jobs/6239533004",
           "postedAt": "2026-10-30T13:15:48-04:00",
           "firstSeenAt": "2026-10-31T15:04:27.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": true
         },
@@ -33823,7 +33154,7 @@
           "url": "http://getfiber.ai/careers?gh_jid=5269012007",
           "postedAt": "2026-10-30T13:12:11-04:00",
           "firstSeenAt": "2026-10-20T14:08:03.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": false
         },
@@ -33838,7 +33169,7 @@
           "url": "http://getfiber.ai/careers?gh_jid=5269011007",
           "postedAt": "2026-10-30T13:10:56-04:00",
           "firstSeenAt": "2026-10-20T14:08:03.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "associate",
           "isRemote": true
         }
@@ -35490,7 +34821,7 @@
       "state": "CA",
       "latitude": 37.49781923955393,
       "longitude": -122.34328844155048,
-      "roleCount": 6,
+      "roleCount": 4,
       "roles": [
         {
           "id": 4982,
@@ -35508,21 +34839,6 @@
           "isRemote": false
         },
         {
-          "id": 3585,
-          "title": "Director of Product Management, Platform & Infrastructure",
-          "location": "San Mateo, California, United States",
-          "salaryMin": 240000,
-          "salaryMax": 290000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/skydio/073e72a7-b7e1-4d7a-b64d-fade3c209fc9",
-          "postedAt": "2026-10-15T21:33:33.473+00:00",
-          "firstSeenAt": "2026-10-16T13:45:57.000Z",
-          "isNew": false,
-          "seniority": "director",
-          "isRemote": false
-        },
-        {
           "id": 3543,
           "title": "Senior Product Manager, Fleet & Internal Tools",
           "location": "San Mateo, California, United States",
@@ -35533,21 +34849,6 @@
           "url": "https://jobs.ashbyhq.com/skydio/6dfd44a6-4e77-4cbf-a207-312299112ffb",
           "postedAt": "2026-10-14T20:47:44.422+00:00",
           "firstSeenAt": "2026-10-15T13:58:53.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 1319,
-          "title": "Senior Product Manager, Dock Hardware Platform",
-          "location": "San Mateo, California, United States",
-          "salaryMin": 196000,
-          "salaryMax": 240000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/skydio/b2441c23-49c4-49b3-81a8-a6f807028d25",
-          "postedAt": "2026-09-10T16:26:20.078+00:00",
-          "firstSeenAt": "2026-09-17T18:22:03.000Z",
           "isNew": false,
           "seniority": "senior",
           "isRemote": false
@@ -37557,7 +36858,7 @@
       "state": "CA",
       "latitude": 37.48061544238728,
       "longitude": -122.23763657805594,
-      "roleCount": 4,
+      "roleCount": 3,
       "roles": [
         {
           "id": 4906,
@@ -37587,21 +36888,6 @@
           "firstSeenAt": "2026-10-29T15:52:45.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 3030,
-          "title": "Product Manager II, Workflows",
-          "location": "Redwood City, CA",
-          "salaryMin": 151000,
-          "salaryMax": 188500,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/boxinc/jobs/8237739",
-          "postedAt": "2026-10-21T15:57:15-04:00",
-          "firstSeenAt": "2026-09-30T15:39:52.000Z",
-          "isNew": false,
-          "seniority": "mid",
           "isRemote": false
         },
         {
@@ -38081,7 +37367,7 @@
       "state": "IL",
       "latitude": 41.873053533211085,
       "longitude": -87.60700509899145,
-      "roleCount": 9,
+      "roleCount": 8,
       "roles": [
         {
           "id": 4951,
@@ -38111,21 +37397,6 @@
           "firstSeenAt": "2026-10-28T15:58:35.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 4727,
-          "title": "Executive Director - AI-enable Product Lead",
-          "location": "Wilmington, DE; Columbus, OH; Plano, TX; Chicago, IL",
-          "salaryMin": 156750,
-          "salaryMax": 260000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210789123",
-          "postedAt": "2026-10-16T00:00:00.000Z",
-          "firstSeenAt": "2026-10-28T15:58:35.000Z",
-          "isNew": false,
-          "seniority": "director",
           "isRemote": false
         },
         {
@@ -38867,7 +38138,7 @@
       "state": "FL",
       "latitude": 28.53910727153803,
       "longitude": -81.36718993340419,
-      "roleCount": 3,
+      "roleCount": 2,
       "roles": [
         {
           "id": 4435,
@@ -38880,21 +38151,6 @@
           "url": "https://www.quinstreet.com/careers/?gh_jid=8315940",
           "postedAt": "2026-10-26T17:34:49-04:00",
           "firstSeenAt": "2026-10-27T15:09:10.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": true
-        },
-        {
-          "id": 354,
-          "title": "Product Manager - Digital Products and Monetization",
-          "location": "United States",
-          "salaryMin": 115000,
-          "salaryMax": 115000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.quinstreet.com/careers/?gh_jid=8192449",
-          "postedAt": "2026-10-19T08:54:28-04:00",
-          "firstSeenAt": "2026-09-17T10:32:26.000Z",
           "isNew": false,
           "seniority": "mid",
           "isRemote": true
@@ -41665,34 +40921,6 @@
       ]
     },
     {
-      "id": "795-chicago-il",
-      "companyId": 795,
-      "companyName": "Sprout Social",
-      "companySlug": "sprout-social",
-      "city": "Chicago",
-      "state": "IL",
-      "latitude": 41.88763210500182,
-      "longitude": -87.62836239934325,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 2798,
-          "title": "Staff Product Manager, Integrations",
-          "location": "Remote US",
-          "salaryMin": 164800,
-          "salaryMax": 206000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://sproutsocial.com/careers/open-positions/8220432/?gh_jid=8220432",
-          "postedAt": "2026-10-22T10:14:08-04:00",
-          "firstSeenAt": "2026-09-23T14:05:43.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": true
-        }
-      ]
-    },
-    {
       "id": "225-new-york-city-ny",
       "companyId": 225,
       "companyName": "Stripe",
@@ -42794,7 +42022,7 @@
       "state": "GA",
       "latitude": 33.74694217885205,
       "longitude": -84.38948475013134,
-      "roleCount": 10,
+      "roleCount": 9,
       "roles": [
         {
           "id": 3916,
@@ -42851,21 +42079,6 @@
           "salaryPeriod": "year",
           "url": "https://www.amazon.jobs/en/jobs/10573953/senior-product-manager-tech-electrical-products-and-services-data-center-engineering",
           "postedAt": "2026-10-08T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4038,
-          "title": "Senior Product Manager (Technical), AWS Certificate Manager",
-          "location": "Seattle, WA; Atlanta, GA; Herndon, VA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10543778/senior-product-manager-technical-aws-certificate-manager",
-          "postedAt": "2026-09-15T00:00:00.000Z",
           "firstSeenAt": "2026-10-23T20:26:04.000Z",
           "isNew": false,
           "seniority": "senior",
@@ -43460,7 +42673,7 @@
       "state": "CO",
       "latitude": 39.74519340771123,
       "longitude": -104.98844718108953,
-      "roleCount": 4,
+      "roleCount": 3,
       "roles": [
         {
           "id": 1138,
@@ -43488,21 +42701,6 @@
           "url": "https://job-boards.greenhouse.io/gusto/jobs/8142163",
           "postedAt": "2026-10-19T10:30:42-04:00",
           "firstSeenAt": "2026-10-09T15:50:47.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 3068,
-          "title": "Principal Product Manager, Consumer Money - Consumer Banking",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 220000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/8160675",
-          "postedAt": "2026-10-09T11:00:16-04:00",
-          "firstSeenAt": "2026-10-01T16:01:19.000Z",
           "isNew": false,
           "seniority": "principal",
           "isRemote": false
@@ -43533,7 +42731,7 @@
       "state": "CA",
       "latitude": 37.77871548969971,
       "longitude": -122.39662224359222,
-      "roleCount": 6,
+      "roleCount": 5,
       "roles": [
         {
           "id": 1138,
@@ -43561,21 +42759,6 @@
           "url": "https://job-boards.greenhouse.io/gusto/jobs/8142163",
           "postedAt": "2026-10-19T10:30:42-04:00",
           "firstSeenAt": "2026-10-09T15:50:47.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 3068,
-          "title": "Principal Product Manager, Consumer Money - Consumer Banking",
-          "location": "Denver, CO - Hybrid; New York, NY - Hybrid; San Francisco, CA - Hybrid",
-          "salaryMin": 179000,
-          "salaryMax": 220000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/gusto/jobs/8160675",
-          "postedAt": "2026-10-09T11:00:16-04:00",
-          "firstSeenAt": "2026-10-01T16:01:19.000Z",
           "isNew": false,
           "seniority": "principal",
           "isRemote": false
@@ -44518,34 +43701,6 @@
       ]
     },
     {
-      "id": "288-new-york-ny",
-      "companyId": 288,
-      "companyName": "Peloton",
-      "companySlug": "peloton",
-      "city": "New York",
-      "state": "NY",
-      "latitude": 40.719607764337475,
-      "longitude": -74.01752352966376,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 3220,
-          "title": "Sr. Product Manager",
-          "location": "New York, New York",
-          "salaryMin": 173500,
-          "salaryMax": 213100,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://careers.onepeloton.com/en/all-jobs/?gh_jid=8247000",
-          "postedAt": "2026-10-15T17:50:42-04:00",
-          "firstSeenAt": "2026-10-06T15:42:39.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "1217-atlanta-ga",
       "companyId": 1217,
       "companyName": "Google",
@@ -44582,7 +43737,7 @@
       "state": "CA",
       "latitude": 34.05291740531962,
       "longitude": -118.23189291906994,
-      "roleCount": 4,
+      "roleCount": 2,
       "roles": [
         {
           "id": 4880,
@@ -44612,36 +43767,6 @@
           "firstSeenAt": "2026-10-28T15:58:54.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4787,
-          "title": "Product Manager, Media Effectiveness",
-          "location": "New York, NY, USA; Kirkland, WA, USA; Los Angeles, CA, USA; Mountain View, CA, USA",
-          "salaryMin": 138000,
-          "salaryMax": 197000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/88895029291950790-product-manager-media-effectiveness",
-          "postedAt": "2026-10-12T09:09:27.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 4786,
-          "title": "Product Manager, Media Effectiveness Measurement and Partnerships",
-          "location": "New York, NY, USA; Kirkland, WA, USA; Los Angeles, CA, USA; Mountain View, CA, USA",
-          "salaryMin": 163000,
-          "salaryMax": 236000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.google.com/about/careers/applications/jobs/results/140219605011309254-product-manager-media-effectiveness-measurement-and-partnerships",
-          "postedAt": "2026-10-07T13:08:12.000Z",
-          "firstSeenAt": "2026-10-28T15:58:54.000Z",
-          "isNew": false,
-          "seniority": "mid",
           "isRemote": false
         }
       ]
@@ -45710,7 +44835,7 @@
       "state": "CA",
       "latitude": 37.783075319077255,
       "longitude": -122.41331214999668,
-      "roleCount": 3,
+      "roleCount": 2,
       "roles": [
         {
           "id": 3468,
@@ -45738,21 +44863,6 @@
           "url": "https://jobs.ashbyhq.com/speak/88b810f3-aa10-4e9e-9dbc-163f2ad40f20",
           "postedAt": "2026-10-01T00:39:34.729+00:00",
           "firstSeenAt": "2026-10-01T16:01:24.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 1633,
-          "title": "Product Manager, Memory & Personal Intelligence",
-          "location": "San Francisco",
-          "salaryMin": 191000,
-          "salaryMax": 315000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/speak/d1202fee-1fdc-45cb-87c7-67a5f07aebfa",
-          "postedAt": "2026-07-07T22:21:59.513+00:00",
-          "firstSeenAt": "2026-09-17T18:40:29.000Z",
           "isNew": false,
           "seniority": "mid",
           "isRemote": false
@@ -46007,7 +45117,7 @@
       "state": "CA",
       "latitude": 33.9128272,
       "longitude": -118.3426122,
-      "roleCount": 6,
+      "roleCount": 4,
       "roles": [
         {
           "id": 4003,
@@ -46022,21 +45132,6 @@
           "firstSeenAt": "2026-10-23T20:26:04.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 3950,
-          "title": " Senior Product Manager - Technical, Amazon Key, Amazon Key",
-          "location": "Austin, TX; Sunnyvale, CA; Bellevue, WA; Las Vegas, NV; Hawthorne, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10573564/senior-product-manager-technical-amazon-key-amazon-key",
-          "postedAt": "2026-10-08T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
           "isRemote": false
         },
         {
@@ -46067,21 +45162,6 @@
           "firstSeenAt": "2026-10-23T20:26:04.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4220,
-          "title": "Product Manager - Technical, AI Voice, Ring & Blink Customer Service Technology",
-          "location": "Hawthorne, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10425819/product-manager-technical-ai-voice-ring-blink-customer-service-technology",
-          "postedAt": "2026-05-20T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "mid",
           "isRemote": false
         },
         {
@@ -46476,34 +45556,6 @@
       ]
     },
     {
-      "id": "1144-new-york-city-ny",
-      "companyId": 1144,
-      "companyName": "Mirage",
-      "companySlug": "mirage",
-      "city": "New York City",
-      "state": "NY",
-      "latitude": 40.70275200966716,
-      "longitude": -74.00289150871166,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 3376,
-          "title": "Group Product Manager",
-          "location": "Union Square, New York City",
-          "salaryMin": 200000,
-          "salaryMax": 325000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/mirage/360e78ae-ac98-4101-a637-ea9947fb1634",
-          "postedAt": "2026-10-08T16:13:57.213+00:00",
-          "firstSeenAt": "2026-10-09T15:50:55.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        }
-      ]
-    },
-    {
       "id": "281-san-francisco-ca",
       "companyId": 281,
       "companyName": "Carta",
@@ -46555,49 +45607,6 @@
           "firstSeenAt": "2026-10-08T16:09:11.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "657-san-carlos-ca",
-      "companyId": 657,
-      "companyName": "1X Technologies",
-      "companySlug": "1x-technologies",
-      "city": "San Carlos",
-      "state": "CA",
-      "latitude": 37.504936,
-      "longitude": -122.261823,
-      "roleCount": 2,
-      "roles": [
-        {
-          "id": 3327,
-          "title": "Senior/Staff Technical Product Manager, Platform",
-          "location": "San Carlos, CA",
-          "salaryMin": 190000,
-          "salaryMax": 230000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/1x/6bfaa0a0-01b6-4b44-9984-6791a7744adf",
-          "postedAt": "2026-10-08T01:59:30.559+00:00",
-          "firstSeenAt": "2026-10-08T16:09:17.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 1619,
-          "title": "Director of Product - Platform",
-          "location": "San Carlos, CA",
-          "salaryMin": 225000,
-          "salaryMax": 275000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/1x/3fd289bc-12ba-4b85-b9a4-a565acd515fd",
-          "postedAt": "2026-08-25T16:15:56.721+00:00",
-          "firstSeenAt": "2026-09-17T18:40:29.000Z",
-          "isNew": false,
-          "seniority": "director",
           "isRemote": false
         }
       ]
@@ -46716,182 +45725,6 @@
           "firstSeenAt": "2026-09-23T14:07:49.000Z",
           "isNew": false,
           "seniority": "mid",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1173-sunnyvale-ca",
-      "companyId": 1173,
-      "companyName": "Amazon",
-      "companySlug": "amazon",
-      "city": "Sunnyvale",
-      "state": "CA",
-      "latitude": 37.37622744857826,
-      "longitude": -122.02640541140302,
-      "roleCount": 9,
-      "roles": [
-        {
-          "id": 3950,
-          "title": " Senior Product Manager - Technical, Amazon Key, Amazon Key",
-          "location": "Austin, TX; Sunnyvale, CA; Bellevue, WA; Las Vegas, NV; Hawthorne, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10573564/senior-product-manager-technical-amazon-key-amazon-key",
-          "postedAt": "2026-10-08T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4044,
-          "title": "Senior Builder - Product Manager, Ring",
-          "location": "Sunnyvale, CA; Hawthorne, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10567639/senior-builder-product-manager-ring",
-          "postedAt": "2026-10-02T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 3987,
-          "title": "Sr. Product Manager - Tech , Trust CX Innovations",
-          "location": "Sunnyvale, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10566205/sr-product-manager-tech-trust-cx-innovations",
-          "postedAt": "2026-10-01T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4171,
-          "title": "Sr. Product Manager – Technical, Audio Wearables, Alexa Personal Devices",
-          "location": "Sunnyvale, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10476188/sr-product-manager-technical-audio-wearables-alexa-personal-devices",
-          "postedAt": "2026-07-16T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4178,
-          "title": "Senior Product Manager, Alexa- Echo Devices",
-          "location": "Sunnyvale, CA; Seattle, WA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10473349/senior-product-manager-alexa-echo-devices",
-          "postedAt": "2026-07-14T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4179,
-          "title": "Sr. Product Manager – Tech, Device",
-          "location": "Sunnyvale, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10473100/sr-product-manager-tech-device",
-          "postedAt": "2026-07-13T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4185,
-          "title": "Principal Product Manager - Technical, Alexa Connections",
-          "location": "Sunnyvale, CA; Seattle, WA; Irvine, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10469631/principal-product-manager-technical-alexa-connections",
-          "postedAt": "2026-07-09T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "principal",
-          "isRemote": false
-        },
-        {
-          "id": 4226,
-          "title": "Sr. Product Manager – Tech, Tablet Platform ",
-          "location": "Sunnyvale, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10408084/sr-product-manager-tech-tablet-platform",
-          "postedAt": "2026-04-30T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 4240,
-          "title": "Senior Product Manager - Tech, Ring & Blink Accessories",
-          "location": "Sunnyvale, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/3189521/senior-product-manager-tech-ring-blink-accessories",
-          "postedAt": "2026-02-25T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1173-las-vegas-nv",
-      "companyId": 1173,
-      "companyName": "Amazon",
-      "companySlug": "amazon",
-      "city": "Las Vegas",
-      "state": "NV",
-      "latitude": 36.1674263,
-      "longitude": -115.1484131,
-      "roleCount": 1,
-      "roles": [
-        {
-          "id": 3950,
-          "title": " Senior Product Manager - Technical, Amazon Key, Amazon Key",
-          "location": "Austin, TX; Sunnyvale, CA; Bellevue, WA; Las Vegas, NV; Hawthorne, CA",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://www.amazon.jobs/en/jobs/10573564/senior-product-manager-technical-amazon-key-amazon-key",
-          "postedAt": "2026-10-08T00:00:00.000Z",
-          "firstSeenAt": "2026-10-23T20:26:04.000Z",
-          "isNew": false,
-          "seniority": "senior",
           "isRemote": false
         }
       ]
@@ -48708,6 +47541,139 @@
       ]
     },
     {
+      "id": "1173-sunnyvale-ca",
+      "companyId": 1173,
+      "companyName": "Amazon",
+      "companySlug": "amazon",
+      "city": "Sunnyvale",
+      "state": "CA",
+      "latitude": 37.37622744857826,
+      "longitude": -122.02640541140302,
+      "roleCount": 8,
+      "roles": [
+        {
+          "id": 4044,
+          "title": "Senior Builder - Product Manager, Ring",
+          "location": "Sunnyvale, CA; Hawthorne, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.amazon.jobs/en/jobs/10567639/senior-builder-product-manager-ring",
+          "postedAt": "2026-10-02T00:00:00.000Z",
+          "firstSeenAt": "2026-10-23T20:26:04.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 3987,
+          "title": "Sr. Product Manager - Tech , Trust CX Innovations",
+          "location": "Sunnyvale, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.amazon.jobs/en/jobs/10566205/sr-product-manager-tech-trust-cx-innovations",
+          "postedAt": "2026-10-01T00:00:00.000Z",
+          "firstSeenAt": "2026-10-23T20:26:04.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 4171,
+          "title": "Sr. Product Manager – Technical, Audio Wearables, Alexa Personal Devices",
+          "location": "Sunnyvale, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.amazon.jobs/en/jobs/10476188/sr-product-manager-technical-audio-wearables-alexa-personal-devices",
+          "postedAt": "2026-07-16T00:00:00.000Z",
+          "firstSeenAt": "2026-10-23T20:26:04.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 4178,
+          "title": "Senior Product Manager, Alexa- Echo Devices",
+          "location": "Sunnyvale, CA; Seattle, WA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.amazon.jobs/en/jobs/10473349/senior-product-manager-alexa-echo-devices",
+          "postedAt": "2026-07-14T00:00:00.000Z",
+          "firstSeenAt": "2026-10-23T20:26:04.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 4179,
+          "title": "Sr. Product Manager – Tech, Device",
+          "location": "Sunnyvale, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.amazon.jobs/en/jobs/10473100/sr-product-manager-tech-device",
+          "postedAt": "2026-07-13T00:00:00.000Z",
+          "firstSeenAt": "2026-10-23T20:26:04.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 4185,
+          "title": "Principal Product Manager - Technical, Alexa Connections",
+          "location": "Sunnyvale, CA; Seattle, WA; Irvine, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.amazon.jobs/en/jobs/10469631/principal-product-manager-technical-alexa-connections",
+          "postedAt": "2026-07-09T00:00:00.000Z",
+          "firstSeenAt": "2026-10-23T20:26:04.000Z",
+          "isNew": false,
+          "seniority": "principal",
+          "isRemote": false
+        },
+        {
+          "id": 4226,
+          "title": "Sr. Product Manager – Tech, Tablet Platform ",
+          "location": "Sunnyvale, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.amazon.jobs/en/jobs/10408084/sr-product-manager-tech-tablet-platform",
+          "postedAt": "2026-04-30T00:00:00.000Z",
+          "firstSeenAt": "2026-10-23T20:26:04.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        },
+        {
+          "id": 4240,
+          "title": "Senior Product Manager - Tech, Ring & Blink Accessories",
+          "location": "Sunnyvale, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.amazon.jobs/en/jobs/3189521/senior-product-manager-tech-ring-blink-accessories",
+          "postedAt": "2026-02-25T00:00:00.000Z",
+          "firstSeenAt": "2026-10-23T20:26:04.000Z",
+          "isNew": false,
+          "seniority": "senior",
+          "isRemote": false
+        }
+      ]
+    },
+    {
       "id": "399-new-albany-oh",
       "companyId": 399,
       "companyName": "Hims & Hers",
@@ -49144,7 +48110,7 @@
       "state": "CA",
       "latitude": 37.79362906474447,
       "longitude": -122.4198460105706,
-      "roleCount": 4,
+      "roleCount": 3,
       "roles": [
         {
           "id": 3031,
@@ -49189,21 +48155,6 @@
           "firstSeenAt": "2026-09-28T17:23:26.000Z",
           "isNew": false,
           "seniority": "senior",
-          "isRemote": false
-        },
-        {
-          "id": 2750,
-          "title": "Product Manager, Link Growth [Consumer]",
-          "location": "San Francisco HQ",
-          "salaryMin": 190800,
-          "salaryMax": 262800,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/plaid/34c110d6-61f0-4f51-bbd0-06eb74af00f7",
-          "postedAt": "2026-09-22T17:59:33.335+00:00",
-          "firstSeenAt": "2026-09-22T16:29:34.000Z",
-          "isNew": false,
-          "seniority": "mid",
           "isRemote": false
         }
       ]
@@ -50013,7 +48964,7 @@
       "state": "CA",
       "latitude": 37.786467489877694,
       "longitude": -122.39703907051468,
-      "roleCount": 4,
+      "roleCount": 3,
       "roles": [
         {
           "id": 2809,
@@ -50025,21 +48976,6 @@
           "salaryPeriod": "year",
           "url": "https://jobs.ashbyhq.com/marianaminerals/f3c3c146-c944-424c-a2f0-bd9e9bf4a8a5",
           "postedAt": "2026-09-23T00:05:24.773+00:00",
-          "firstSeenAt": "2026-09-23T14:05:49.000Z",
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2808,
-          "title": "Technical Product Manager, Data & Analytics Platform ",
-          "location": "San Francisco HQ",
-          "salaryMin": 115000,
-          "salaryMax": 208000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://jobs.ashbyhq.com/marianaminerals/920eabfb-9308-47a1-add4-65e4d9ea5c96",
-          "postedAt": "2026-09-23T00:05:22.206+00:00",
           "firstSeenAt": "2026-09-23T14:05:49.000Z",
           "isNew": false,
           "seniority": "mid",
@@ -52957,6 +51893,34 @@
           "url": "https://jobs.ashbyhq.com/heliux/7902a54b-a95a-4d2d-bf9a-df3ffcebc178",
           "postedAt": "2026-08-25T19:20:00.169+00:00",
           "firstSeenAt": "2026-09-18T00:58:44.000Z",
+          "isNew": false,
+          "seniority": "director",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "657-san-carlos-ca",
+      "companyId": 657,
+      "companyName": "1X Technologies",
+      "companySlug": "1x-technologies",
+      "city": "San Carlos",
+      "state": "CA",
+      "latitude": 37.504936,
+      "longitude": -122.261823,
+      "roleCount": 1,
+      "roles": [
+        {
+          "id": 1619,
+          "title": "Director of Product - Platform",
+          "location": "San Carlos, CA",
+          "salaryMin": 225000,
+          "salaryMax": 275000,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://jobs.ashbyhq.com/1x/3fd289bc-12ba-4b85-b9a4-a565acd515fd",
+          "postedAt": "2026-08-25T16:15:56.721+00:00",
+          "firstSeenAt": "2026-09-17T18:40:29.000Z",
           "isNew": false,
           "seniority": "director",
           "isRemote": false
@@ -56823,7 +55787,7 @@
       "state": "CA",
       "latitude": 37.344058046102255,
       "longitude": -121.87864808179842,
-      "roleCount": 82,
+      "roleCount": 81,
       "roles": [
         {
           "id": 2322,
@@ -57561,21 +56525,6 @@
           "isRemote": false
         },
         {
-          "id": 2438,
-          "title": " Senior Product Manager (Data Platform) - User Privacy & Transparency (San Jose)",
-          "location": "San Jose, California, United States of America",
-          "salaryMin": null,
-          "salaryMax": null,
-          "salaryCurrency": null,
-          "salaryPeriod": "year",
-          "url": "https://lifeattiktok.com/search/7647287994324601141",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:10:15.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": false
-        },
-        {
           "id": 2439,
           "title": "Product Manager Shop Ads Creative Project Intern (Ads Interface and Platform) - 2026 Start (BS/MS)",
           "location": "San Jose, California, United States of America",
@@ -58021,7 +56970,7 @@
           "url": "https://lifeattiktok.com/search/7701486873210390837",
           "postedAt": null,
           "firstSeenAt": "2026-10-31T15:05:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "associate",
           "isRemote": false
         },
@@ -58364,7 +57313,7 @@
           "url": "https://lifeattiktok.com/search/7701480558070597893",
           "postedAt": null,
           "firstSeenAt": "2026-10-31T15:05:53.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "associate",
           "isRemote": false
         }
@@ -61653,7 +60602,7 @@
           "url": "https://jobs.ashbyhq.com/kin/367cdec2-ccd9-4f50-bdc4-eec1ec939f76",
           "postedAt": "2026-10-30T15:52:03.328+00:00",
           "firstSeenAt": "2026-10-06T15:42:45.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "mid",
           "isRemote": true
         },
@@ -62011,7 +60960,7 @@
           "url": "https://job-boards.greenhouse.io/navapbc/jobs/4472691009",
           "postedAt": "2026-10-30T16:25:28-04:00",
           "firstSeenAt": "2026-10-30T15:34:56.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -62077,29 +61026,6 @@
         }
       ],
       "roleCount": 5
-    },
-    {
-      "companyId": 339,
-      "companyName": "Omada Health",
-      "companySlug": "omada-health",
-      "roles": [
-        {
-          "id": 2877,
-          "title": "Senior Product Manager, Enterprise Solutions",
-          "location": "Remote, USA",
-          "salaryMin": 174800,
-          "salaryMax": 218500,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://job-boards.greenhouse.io/omadahealth/jobs/8174091",
-          "postedAt": "2026-09-24T15:47:41-04:00",
-          "firstSeenAt": "2026-09-25T14:26:30.000Z",
-          "isNew": false,
-          "seniority": "senior",
-          "isRemote": true
-        }
-      ],
-      "roleCount": 1
     },
     {
       "companyId": 38,
@@ -62490,7 +61416,7 @@
           "url": "https://jobs.ashbyhq.com/sandboxaq/91aa801d-0f99-4271-bd77-baccbeed9adf",
           "postedAt": "2026-10-30T18:12:28.921+00:00",
           "firstSeenAt": "2026-10-31T15:04:33.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": true
         }
@@ -62513,7 +61439,7 @@
           "url": "https://jobs.ashbyhq.com/second-nature/320e06dc-418e-4a35-aa6d-afb8434742e9",
           "postedAt": "2026-10-30T20:21:30.620+00:00",
           "firstSeenAt": "2026-10-31T15:04:32.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "senior",
           "isRemote": true
         },
@@ -62643,7 +61569,7 @@
           "url": "https://jobs.ashbyhq.com/snapdocs/93729a51-6026-4eea-8a62-514d19ea651b",
           "postedAt": "2026-10-30T17:49:40.510+00:00",
           "firstSeenAt": "2026-10-31T15:04:33.000Z",
-          "isNew": true,
+          "isNew": false,
           "seniority": "principal",
           "isRemote": true
         }
@@ -63426,6 +62352,7 @@
     "lowe-s": "https://icons.duckduckgo.com/ip3/lowes.com.ico",
     "coca-cola": "https://icons.duckduckgo.com/ip3/coca-cola.com.ico",
     "genworth": "https://icons.duckduckgo.com/ip3/genworth.com.ico",
+    "snowflake": "https://icons.duckduckgo.com/ip3/snowflake.com.ico",
     "tailscale": "https://icons.duckduckgo.com/ip3/tailscale.com.ico",
     "uber-freight": "https://icons.duckduckgo.com/ip3/uberfreight.com.ico",
     "valon": "https://icons.duckduckgo.com/ip3/valon.com.ico",
@@ -63472,7 +62399,6 @@
     "bill-com": "https://icons.duckduckgo.com/ip3/bill.com.ico",
     "chime": "https://icons.duckduckgo.com/ip3/chime.com.ico",
     "temporal": "https://icons.duckduckgo.com/ip3/temporal.io.ico",
-    "snowflake": "https://icons.duckduckgo.com/ip3/snowflake.com.ico",
     "relativity-space": "https://icons.duckduckgo.com/ip3/relativityspace.com.ico",
     "codepath": "https://icons.duckduckgo.com/ip3/codepath.org.ico",
     "anthropic": "https://icons.duckduckgo.com/ip3/anthropic.com.ico",
@@ -63553,7 +62479,6 @@
     "fastly": "https://icons.duckduckgo.com/ip3/fastly.com.ico",
     "stackadapt": "https://icons.duckduckgo.com/ip3/stackadapt.com.ico",
     "synthesia": "https://icons.duckduckgo.com/ip3/synthesia.com.ico",
-    "sprout-social": "https://icons.duckduckgo.com/ip3/sproutsocial.com.ico",
     "notion": "https://icons.duckduckgo.com/ip3/notion.so.ico",
     "cribl": "https://icons.duckduckgo.com/ip3/cribl.io.ico",
     "atoms": "https://icons.duckduckgo.com/ip3/atoms.com.ico",
@@ -63585,7 +62510,6 @@
     "lambda-labs": "https://icons.duckduckgo.com/ip3/lambdalabs.com.ico",
     "benchling": "https://icons.duckduckgo.com/ip3/benchling.com.ico",
     "decagon": "https://icons.duckduckgo.com/ip3/decagonhq.com.ico",
-    "peloton": "https://icons.duckduckgo.com/ip3/peloton.com.ico",
     "ethos-life": "https://icons.duckduckgo.com/ip3/ethoslife.com.ico",
     "doximity": "https://icons.duckduckgo.com/ip3/doximity.com.ico",
     "yext": "https://icons.duckduckgo.com/ip3/yext.com.ico",
@@ -63758,7 +62682,6 @@
     "metabase": "https://icons.duckduckgo.com/ip3/metabase.com.ico",
     "mindbody": "https://icons.duckduckgo.com/ip3/mindbodyonline.com.ico",
     "msci": "https://icons.duckduckgo.com/ip3/msci.com.ico",
-    "omada-health": "https://icons.duckduckgo.com/ip3/omadahealth.com.ico",
     "opensesame": "https://icons.duckduckgo.com/ip3/opensesame.com.ico",
     "pandadoc": "https://icons.duckduckgo.com/ip3/pandadoc.com.ico",
     "peerspace": "https://icons.duckduckgo.com/ip3/peerspace.com.ico",
