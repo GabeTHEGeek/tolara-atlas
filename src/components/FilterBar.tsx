@@ -6,6 +6,7 @@ interface FilterBarProps {
   onChange: (next: RoleFilters) => void;
   matched: number;
   total: number;
+  categories: Array<{ id: string; label: string }>;
 }
 
 // Round numbers a PM search actually uses, rather than an even split of the
@@ -20,7 +21,7 @@ const REMOTE_LABELS: Record<RemoteMode, string> = {
   "remote-only": "Remote only",
 };
 
-export default function FilterBar({ filters, onChange, matched, total }: FilterBarProps) {
+export default function FilterBar({ filters, onChange, matched, total, categories }: FilterBarProps) {
   const active = isFiltering(filters);
 
   const toggleSeniority = (tier: Seniority) => {
@@ -91,6 +92,23 @@ export default function FilterBar({ filters, onChange, matched, total }: FilterB
             ))}
           </select>
         </label>
+
+        {categories.length > 0 && (
+          <label className="filter-select">
+            <span className="filter-select-label">Industry</span>
+            <select
+              value={filters.industry ?? ""}
+              onChange={(e) => onChange({ ...filters, industry: e.target.value || null })}
+            >
+              <option value="">Any</option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
 
         <label className="filter-select">
           <span className="filter-select-label">Where</span>

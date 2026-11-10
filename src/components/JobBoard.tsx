@@ -22,6 +22,7 @@ interface JobBoardProps {
   pins: LocationPinData[];
   remoteCompanies: RemoteCompanyData[];
   logos: Record<string, string>;
+  categories: Array<{ id: string; label: string }>;
   filters: RoleFilters;
   onFiltersChange: (next: RoleFilters) => void;
   query: string;
@@ -180,6 +181,7 @@ export default function JobBoard({
   pins,
   remoteCompanies,
   logos,
+  categories,
   filters,
   onFiltersChange,
   query,
@@ -243,6 +245,23 @@ export default function JobBoard({
               ))}
             </select>
           </label>
+
+          {categories.length > 0 && (
+            <label className={`job-pill job-pill-select${filters.industry != null ? " is-on" : ""}`}>
+              <select
+                value={filters.industry ?? ""}
+                onChange={(e) => onFiltersChange({ ...filters, industry: e.target.value || null })}
+                aria-label="Industry"
+              >
+                <option value="">Industry</option>
+                {categories.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
 
           <label className={`job-pill job-pill-select${filters.remote !== "all" ? " is-on" : ""}`}>
             <select

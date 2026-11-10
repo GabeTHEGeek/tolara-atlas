@@ -10,6 +10,7 @@
  * The reason has to quote both sides, so a verdict can be checked.
  */
 
+import { createHash } from "node:crypto";
 import type { RoleAnalysis } from "./analyzeRole.js";
 import { cleanDescription } from "./analyzeRole.js";
 import { countedYears, type CandidateProfile } from "./profile.js";
@@ -18,6 +19,7 @@ import { jsonCall } from "./llm.js";
 export interface RequirementsCheck {
   status: "met" | "one_stretch" | "unmet";
   reason: string;
+  degreeGap: boolean; // the posting requires a degree the resume doesn't show as completed
 }
 
 const SYSTEM = `You check whether a candidate meets a job's HARD requirements -- the must-haves, not the nice-to-haves.
@@ -28,10 +30,14 @@ Rules:
 - A requirement for years of a SPECIFIC kind of work ("4 years driving consumer growth", "3 years in payments") is met only by the jobs whose titles and dates show that work -- add up those jobs' date ranges, never the candidate's total years. Up to one year short is a stretch; more than a year short is unmet.
 - Skills listed on the resume count as evidence for a skill requirement ("SQL proficiency").
 - If the posting states no hard requirements at all, you cannot confirm them: answer "one_stretch" and say so.
-- A degree line is never a failed requirement.
+- A required degree the resume doesn't show as completed is a stretch, never unmet. If the posting offers an alternative the candidate meets (e.g. "or equivalent experience"), it is met.
+- A specific tool or language the resume doesn't show (Python, Figma, Salesforce) is a stretch, never unmet -- it can be learned; a missing kind of experience can't.
 - A required domain the candidate hasn't worked in is a stretch, not automatically unmet, unless the posting makes it a hard gate.
-Answer ONLY with JSON: {"status": "<met|one_stretch|unmet>", "reason": "<one sentence quoting the decisive requirement and the candidate evidence (or its absence)>"}
+Answer ONLY with JSON: {"status": "<met|one_stretch|unmet>", "reason": "<one sentence quoting the decisive requirement and the candidate evidence (or its absence)>", "degreeGap": <true if the posting requires a degree the resume doesn't show as completed, with no alternative the candidate meets>}
 "met" = nothing hard is missing; "one_stretch" = exactly one hard requirement is a stretch; "unmet" = a hard requirement is clearly not met.`;
+
+/** Changes whenever the rules above do, so cached verdicts from older rules aren't reused. */
+export const CHECK_VERSION = createHash("sha256").update(SYSTEM).digest("hex").slice(0, 8);
 
 export async function checkRequirements(
   profile: CandidateProfile,
@@ -62,5 +68,6 @@ export async function checkRequirements(
   return {
     status: status === "met" || status === "one_stretch" || status === "unmet" ? status : "one_stretch",
     reason: String(raw.reason ?? "").slice(0, 300),
+    degreeGap: raw.degreeGap === true,
   };
 }

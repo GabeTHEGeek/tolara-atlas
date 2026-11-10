@@ -107,6 +107,10 @@ export interface MapData {
   // Company slug -> logo URL, where the intelligence cache has one. Optional
   // so a map-data.json from before this field was added still loads.
   logos?: Record<string, string>;
+  // Industries (data/company-categories.json), and company slug -> industry
+  // id. Optional for the same reason as logos.
+  categories?: Array<{ id: string; label: string }>;
+  companyCategories?: Record<string, string>;
 }
 
 // ---- Role page: mirrors server/export/companyDetails.ts and the

@@ -41,12 +41,17 @@ export const ANCHORS = {
   company: { sameStage: 20, oneStageAway: 10, twoStagesAway: 3, aiFirstStartupAiTitle: 0, unknown: 10, noStagePreference: 20 },
   // By distance between the role's level and the candidate's target.
   level: { strong: 15, partial: 8, poor: 3 },
-  requirements: { met: 15, oneStretch: 8, unmet: 0 },
-  location: { preferred: 10, secondary: 5, other: 2 },
+  // A missing degree is a hurdle some companies screen on: worse than a
+  // stretch like being half a year short, better than unmet.
+  requirements: { met: 15, oneStretch: 8, degreeGap: 4, unmet: 0 },
+  // Second-choice areas cost a little: the owner rated a strong SF-only
+  // role Strong Apply.
+  location: { preferred: 10, secondary: 7, other: 2 },
   // "Not posted" at a small company isn't in v2; it sits between the large-
-  // company 6 and the under-floor 2, since an unposted band is unknown, not
-  // low.
-  comp: { atTarget: 10, betweenFloorAndTarget: 6, unpostedLarge: 6, unpostedSmall: 4, belowFloor: 2 },
+  // company 5 and the under-floor 2, since an unposted band is unknown, not
+  // low. Large is a point under floor-to-target: a band we can't see is
+  // worth less than one we can.
+  comp: { atTarget: 10, betweenFloorAndTarget: 6, unpostedLarge: 5, unpostedSmall: 4, belowFloor: 2 },
 } as const;
 
 /** A role that's really engineering (or needs deep ML) can't score above this, whatever else fits. */
@@ -61,10 +66,13 @@ export const TOP_BRAND_EMPLOYEES = 10000;
 
 export type Tier = "Strong Apply" | "Apply" | "Consider" | "Pass";
 
+// Calibrated on the owner's ratings: at 80/70/60 a quarter of analysed roles
+// came out Strong Apply, and a role one hurdle short of perfect (88) or with
+// a required domain they lack (61) landed a tier too high.
 export function tierOf(score: number): Tier {
-  if (score >= 80) return "Strong Apply";
-  if (score >= 70) return "Apply";
-  if (score >= 60) return "Consider";
+  if (score >= 90) return "Strong Apply";
+  if (score >= 75) return "Apply";
+  if (score >= 65) return "Consider";
   return "Pass";
 }
 

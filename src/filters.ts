@@ -28,6 +28,9 @@ export interface RoleFilters {
   postedWithinDays: number | null;
   newOnly: boolean;
   remote: RemoteMode;
+  // An industry id from data/company-categories.json, or null for any.
+  // A company with no label counts as "other".
+  industry: string | null;
 }
 
 export const EMPTY_FILTERS: RoleFilters = {
@@ -36,11 +39,12 @@ export const EMPTY_FILTERS: RoleFilters = {
   postedWithinDays: null,
   newOnly: false,
   remote: "all",
+  industry: null,
 };
 
 export function isFiltering(f: RoleFilters): boolean {
   return (
-    f.seniority.size > 0 || f.minSalary != null || f.postedWithinDays != null || f.newOnly || f.remote !== "all"
+    f.seniority.size > 0 || f.minSalary != null || f.postedWithinDays != null || f.newOnly || f.remote !== "all" || f.industry != null
   );
 }
 
@@ -91,10 +95,21 @@ export function roleMatches(role: RoleData, f: RoleFilters, now: number): boolea
  * roleCount is recomputed rather than kept, since it drives the pin's size
  * on the map and its "N open roles" heading.
  */
-export function filterPins(pins: LocationPinData[], f: RoleFilters, now: number): LocationPinData[] {
+/** Whether a company is in the filtered industry. Industry is per company, not per role. */
+function inIndustry(slug: string, f: RoleFilters, categoryOf: Record<string, string>): boolean {
+  return f.industry == null || (categoryOf[slug] ?? "other") === f.industry;
+}
+
+export function filterPins(
+  pins: LocationPinData[],
+  f: RoleFilters,
+  now: number,
+  categoryOf: Record<string, string> = {},
+): LocationPinData[] {
   if (!isFiltering(f)) return pins;
   const out: LocationPinData[] = [];
   for (const pin of pins) {
+    if (!inIndustry(pin.companySlug, f, categoryOf)) continue;
     const roles = pin.roles.filter((r) => roleMatches(r, f, now));
     if (roles.length > 0) out.push({ ...pin, roles, roleCount: roles.length });
   }
@@ -105,10 +120,12 @@ export function filterRemoteCompanies(
   companies: RemoteCompanyData[],
   f: RoleFilters,
   now: number,
+  categoryOf: Record<string, string> = {},
 ): RemoteCompanyData[] {
   if (!isFiltering(f)) return companies;
   const out: RemoteCompanyData[] = [];
   for (const company of companies) {
+    if (!inIndustry(company.companySlug, f, categoryOf)) continue;
     const roles = company.roles.filter((r) => roleMatches(r, f, now));
     if (roles.length > 0) out.push({ ...company, roles, roleCount: roles.length });
   }
@@ -130,12 +147,13 @@ export function countRoles(pins: LocationPinData[], remoteCompanies: RemoteCompa
  * hand-edited or come from an older version.
  */
 export function filtersToParams(f: RoleFilters, params: URLSearchParams): void {
-  for (const key of ["sen", "pay", "posted", "new", "where"]) params.delete(key);
+  for (const key of ["sen", "pay", "posted", "new", "where", "ind"]) params.delete(key);
   if (f.seniority.size > 0) params.set("sen", SENIORITY_TIERS.filter((t) => f.seniority.has(t)).join(","));
   if (f.minSalary != null) params.set("pay", String(f.minSalary));
   if (f.postedWithinDays != null) params.set("posted", String(f.postedWithinDays));
   if (f.newOnly) params.set("new", "1");
   if (f.remote !== "all") params.set("where", f.remote);
+  if (f.industry != null) params.set("ind", f.industry);
 }
 
 export function filtersFromParams(params: URLSearchParams): RoleFilters {
@@ -152,5 +170,8 @@ export function filtersFromParams(params: URLSearchParams): RoleFilters {
     postedWithinDays: positive(params.get("posted")),
     newOnly: params.get("new") === "1",
     remote: where === "office-only" || where === "remote-only" ? where : "all",
+    // Not checked against the category list here (it arrives with the map
+    // data); an unknown id just matches nothing until it's cleared.
+    industry: /^[a-z-]+$/.test(params.get("ind") ?? "") ? params.get("ind") : null,
   };
 }

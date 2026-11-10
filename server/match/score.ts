@@ -94,6 +94,16 @@ function scoreDomain(profile: CandidateProfile, a: RoleAnalysis | null): [number
   if (same === "ai-agents" && a.archetypes.length > 1 && !mine.includes(a.archetypes[1])) {
     return [ANCHORS.domain.adjacent, `AI work, but in ${a.archetypes[1]} products, which you haven't built`];
   }
+  // "Consumer" is the broadest kind of product: a consumer health or travel
+  // app isn't the same work as the consumer apps the candidate built unless
+  // the product area or another of the role's kinds of product matches too.
+  if (
+    same === "consumer" &&
+    !domainOverlap &&
+    !a.archetypes.slice(1).some((r) => primary.some((p) => p.archetype === r))
+  ) {
+    return [ANCHORS.domain.adjacent, `Consumer product, but in ${a.productDomain}, which you haven't worked in`];
+  }
   if (same && !a.descriptionAvailable) {
     return [ANCHORS.domain.adjacent, `Looks like ${same} work from the title, but there's no posting text to confirm`];
   }
@@ -215,11 +225,15 @@ function scoreRequirements(profile: CandidateProfile, a: RoleAnalysis | null, ch
     else [points, why] = [ANCHORS.requirements.unmet, `${a.yearsRequired}+ years asked, you have ${years}`];
   }
   if (check) {
-    const fromCheck = check.status === "met" ? ANCHORS.requirements.met : check.status === "one_stretch" ? ANCHORS.requirements.oneStretch : ANCHORS.requirements.unmet;
+    const fromCheck =
+      check.status === "unmet" ? ANCHORS.requirements.unmet
+      : check.degreeGap ? ANCHORS.requirements.degreeGap
+      : check.status === "one_stretch" ? ANCHORS.requirements.oneStretch
+      : ANCHORS.requirements.met;
     if (fromCheck < points) {
       points = fromCheck;
       why = check.reason;
-    } else if (check.status === "met") why = `${why}; must-haves met: ${check.reason}`;
+    } else if (check.status === "met") why = why.startsWith("Not checked") ? `Must-haves met: ${check.reason}` : `${why}; must-haves met: ${check.reason}`;
   }
   return [points, why];
 }

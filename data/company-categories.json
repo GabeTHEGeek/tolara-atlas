@@ -1,0 +1,95 @@
+{
+  "about": "Industry for each company, by slug. Hand-labelled from the company and its PM roles; read by server/export/exportMapData.ts. A company not listed here shows as 'Other industries' -- the export logs any with open roles.",
+  "categories": [
+    {
+      "id": "big-tech",
+      "label": "Big Tech",
+      "companies": ["amazon", "apple", "google", "meta", "microsoft", "netflix", "nvidia", "tiktok"]
+    },
+    {
+      "id": "banking",
+      "label": "Banks & wealth",
+      "companies": ["american-express", "assetmark", "capital-one", "column-bank", "first-citizens-bank", "jpmorgan-chase", "lead-bank", "lloyds-banking-group", "monzo", "msci", "n26", "netwealth", "peak6", "siam-commercial-bank", "texas-capital-bank"]
+    },
+    {
+      "id": "fintech",
+      "label": "Fintech & payments",
+      "companies": ["addi", "affirm", "alfa-financial-software", "alpaca", "apex-fintech-solutions", "arta-finance", "betterment", "bill-com", "billtrust", "bjakcareer", "blend", "block", "brex", "cardless", "carta", "chime", "clerkie", "codat", "dave", "earnin", "fastspring", "flex", "forter", "greenlight", "grid", "imprint", "jeeves", "kalshi", "lively43", "mercury", "method", "modern-treasury", "obligo", "oportun", "paddle", "plaid", "progressive-leasing", "ramp", "rewards-network", "rho", "riskified", "robinhood", "sardine", "sentilink", "sezzle", "snapdocs", "sofi", "spaceship", "stripe", "super-payments", "sydecar", "talos", "tastytrade", "tremendous", "trolley", "truemed", "valon", "very-good-security", "vesta", "wealthfront", "withpulley", "yipitdata", "zuora"]
+    },
+    {
+      "id": "crypto",
+      "label": "Crypto & web3",
+      "companies": ["0x", "alchemy", "bitgo", "blackbird-xyz", "blockworks", "coinbase", "coinmarketcap", "dune-analytics", "elliptic", "gemini", "helius", "ledger", "magic-eden", "merkle-science", "morpho", "oplabs", "paxos", "ripple", "trm-labs", "trust-wallet", "turnkey"]
+    },
+    {
+      "id": "ai-infra",
+      "label": "AI labs & infrastructure",
+      "companies": ["anthropic", "baseten", "cerebras", "cohere", "coreweave", "crusoe-energy", "elorian", "emerald-ai", "fireworks", "lambda-labs", "langchain", "mistral-ai", "modal", "odysseyml", "openai", "openrouter", "p-1-ai", "runpod", "sandboxaq", "scale-ai", "seekr", "snorkel-ai", "tavily", "tensordyne", "thinking-machines-lab", "together-ai", "vultr"]
+    },
+    {
+      "id": "ai-apps",
+      "label": "AI applications",
+      "companies": ["1mind", "air-ai", "ascertain", "bland", "broccoli", "cresta", "decagon", "deepgram", "deepl", "descript", "elevenlabs", "emanate", "gamma-app", "glean-work", "harvey-ai", "jobs-valence", "legora", "midjourney", "mirelo-ai", "netomi", "opusclip", "otter", "perplexity", "pika", "poly-ai", "prosper-ai", "reevo", "saris-ai", "sekai", "siro", "suno", "synthesia", "tavus", "vapi", "writer"]
+    },
+    {
+      "id": "devtools",
+      "label": "Developer & data tools",
+      "companies": ["altimate", "amplitude", "backblaze", "backstory", "bandwidth", "clickhouse", "cloudera", "cloudflare", "collibra", "convex", "cribl", "databricks", "datadog", "docker", "elastic", "fastly", "fivetran", "gitlab", "grafana-labs", "hevo-data", "hex", "hightouch", "honeycomb", "imply-data", "jetbrains", "kong-api", "lancedb", "launchdarkly", "livekit", "materialize", "matillion", "mechanical-orchard", "metabase", "mixpanel", "mongodb", "netbrain", "nexla", "pagerduty", "posthog", "prefect", "redis", "render", "revenuecat", "sauce-labs", "sentry", "sigma-computing", "signoz", "snowflake", "sourcegraph91", "stackblitz", "stigg", "supabase", "temporal", "twilio", "vercel", "vonage", "workos"]
+    },
+    {
+      "id": "security",
+      "label": "Security & identity",
+      "companies": ["1password", "abnormal-security", "adaptive-shield", "ambient-ai", "beyondtrust", "bigid", "c1", "censys", "dashlane", "delinea", "doppel", "doppler", "drata", "dropzone-ai", "emea-idg", "gen-digital", "hackerone", "id-me-university-recruiting", "illumio", "infisical", "keycard", "kodex", "netskope", "okta", "onetrust", "orca-security", "pindrop", "recordedfuture", "secureframe", "semgrep", "skyflow", "snyk", "socket", "socure", "sola", "tailscale", "tanium", "vanta", "wing-security", "zscaler"]
+    },
+    {
+      "id": "business-software",
+      "label": "Business software",
+      "companies": ["3e", "aircall", "airslate", "alphasense", "apolloio", "asana", "ashby", "assembledhq", "atlassian", "baton", "beamery", "betterup", "boulevard", "box", "brandfolder", "butterfly-mx", "bynder", "calendly", "cayuse", "celigo", "checkr", "civilgrid", "clasp-group", "clickup", "cognism", "companycam", "dealpath", "dualentry", "economicmodeling", "eliseai", "entrata", "envoy", "ethixbase360", "everlaw", "exactera", "figma", "filevine", "fleetio", "fresha", "g2", "gainsight", "groupby-inc", "gusto", "hackerrank", "help-scout", "hireright1", "homebase", "housecall", "intercom", "jobgether", "justworks", "karat", "karmacheck", "lattice", "legion-technologies", "linear", "make", "mindbody", "n8n", "neighborly-software", "notion", "omnea", "outreach", "owner", "oyster-hr", "pandadoc", "pendo", "proof-notary", "pylon", "remote-people", "rillet", "saltmine", "second-nature", "simpplr", "smartsheet", "spoton", "sprypoint-services", "squarespace", "staffbase", "statflo", "storable", "stuut", "survey-monkey", "talentmanagementsolution-wd3-gladstonesoftware-careers", "teamworks", "tekmetric", "tenna", "toast", "toolbx", "valocityglobal", "wilmingtonplc", "workato", "wrapbook", "xero", "yext", "zenoti", "zip", "zoominfo"]
+    },
+    {
+      "id": "consumer-media",
+      "label": "Consumer, social & media",
+      "companies": ["adhoclabs", "discord", "distrokid", "drivemode", "favorited", "nba", "pinterest", "propellerhead", "reddit", "restream", "roku", "sandboxx", "scribdinc", "sonymusicentertainment", "spotify", "substack", "thenewyorktimes", "twitch", "unitedmasters", "vsco39"]
+    },
+    {
+      "id": "gaming",
+      "label": "Gaming & betting",
+      "companies": ["amanotes", "bigger-games", "epic-games", "jam-city", "riot-games", "roblox", "rushstreetinteractive", "scopely", "spcareers", "supercell", "voodoo", "woodbine-entertainment"]
+    },
+    {
+      "id": "marketplaces",
+      "label": "Marketplaces, travel & logistics",
+      "companies": ["airbnb", "angi", "archive", "backmarket", "booking-com", "bounce", "classpass", "cookunity", "costar", "doordashusa", "easyship", "evolve", "expedia-group", "faire", "flexe", "flexport", "fourkites", "going", "gympass", "homelight", "hopper", "hud", "instacart", "kayak", "lyft", "neighbor", "peerspace", "poshmark", "ridezum", "splyt", "street-group", "thumbtack", "toptal", "tripactions", "turo", "uber-freight", "whatnot"]
+    },
+    {
+      "id": "health",
+      "label": "Health & bio",
+      "companies": ["abby-care", "akasa", "aledade", "ambience-healthcare", "assorthealth", "axiscare", "benchling", "biograph", "brellium", "cadencesolutions", "carrot-fertility", "color-health", "commure", "compugroup-medical", "doximity", "element-biosciences", "flatiron-health", "foundationhealthcareers", "freenome", "genentech", "grow-therapy", "headway", "hellopatient", "hims-hers", "hinge-health", "houserx", "infinitus", "jane", "komodohealth", "mavenclinic", "medely", "metriport", "midstream-health", "natera", "nomi-health", "notable-health", "openloophealth", "oura", "parachute-health", "pearly-plan", "pivotal-health", "pointclickcare", "pomelo-care", "resmed", "rula", "seed", "sesame-care", "sprinter-health", "stedi", "sword-health", "symplr", "talkiatry", "tennr", "thyme-care", "trella-health", "turquoise-health", "virta-health", "watchmaker-genomics", "weave", "weight-watchers", "whoop", "zocdoc"]
+    },
+    {
+      "id": "insurance",
+      "label": "Insurance",
+      "companies": ["amplify-health", "clover-health", "coalition", "doma", "duck-creek-technologies", "ethos-life", "furtherai", "genworth", "ivans-appliedsystems", "jerry-ai", "kin-insurance", "lemonade", "liberate", "oscar-health", "pie-insurance", "sidecar-health"]
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "companies": ["babbel", "classdojo", "codeorg", "codepath", "coursera", "duolingo", "edmentum", "ems-linq", "flip-microsoft", "ixl-learning", "kiddom", "kira-learning", "opensesame", "outschool", "peak6-edtech", "preply", "primer-school", "speak-ai-language", "strategic-education", "thinkific", "treering", "wonderschool", "yousician"]
+    },
+    {
+      "id": "hardware",
+      "label": "Hardware, robotics & climate",
+      "companies": ["1x-technologies", "agility-robotics", "applied-intuition", "apptronik", "base-power", "blacksky", "buspatrol", "careersus-maxlinear", "cloverly", "code-metal", "dexterity-inc", "divergent-3d", "fictiv", "flyzipline", "formlabs", "geotab", "gomotive", "hadrian", "heliux", "kodiak-robotics", "loft-orbital", "lucid-motors", "machina-labs", "mariana-minerals", "nexthop", "nexxa", "path-robotics", "phaidra", "picarro-inc", "planet-labs", "relativity-space", "rocket-lab", "samsara", "saronic", "shield-ai", "simplisafe", "skydio", "sylvera", "verkada", "volta-charging", "waymo", "zoox"]
+    },
+    {
+      "id": "adtech",
+      "label": "Ad & marketing tech",
+      "companies": ["6sense", "8451", "amperity", "applovin", "appsflyer", "attentive", "brandlight", "braze", "comscore", "constant-contact", "creatoriq", "customerio", "demandbase", "firsthand", "helium-10", "klaviyo", "lemlist", "liftoff", "manychat", "moloco", "nectar-social", "omnisend", "pacvue", "pencil", "quinstreet", "recast", "redventures", "shopmy", "stackadapt", "taboola", "vibe", "windfalldata", "yotpo", "zeta-global"]
+    },
+    {
+      "id": "other",
+      "label": "Other industries",
+      "companies": ["acclaro", "amca", "arionkoder", "artian", "atoms", "bose", "buspas", "catchafire", "coca-cola", "dupont", "goodparty", "johns-manville", "knit", "leah", "lowe-s", "mile6", "navapbc", "orion-innovation", "pinkerton", "polaris", "prg", "puma", "quarks-tech", "techem", "telus-digital", "tnr", "translucent", "trupropel"]
+    }
+  ]
+}

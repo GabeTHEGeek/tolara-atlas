@@ -62,7 +62,7 @@
  * Usage: npm run export
  */
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -74,6 +74,7 @@ import { NEW_ROLE_DAYS, isNewRole, seniorityOf, sqliteToIso, type Seniority } fr
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUTPUT_PATH = path.join(__dirname, "..", "..", "public", "data", "map-data.json");
+const CATEGORIES_PATH = path.join(__dirname, "..", "..", "data", "company-categories.json");
 
 // Degrees of latitude for the jitter ring's radius (~1.5km) — enough to
 // separate pins visibly at city zoom without misrepresenting the area.
@@ -552,6 +553,24 @@ function main() {
     if (logo) logos[slug] = logo;
   }
 
+  // Company slug -> industry, from the hand-labelled data/company-categories.json.
+  // Only companies on the map; one with no label falls under "other" in
+  // the browser, and is logged here so it gets labelled.
+  const { categories } = JSON.parse(readFileSync(CATEGORIES_PATH, "utf-8")) as {
+    categories: Array<{ id: string; label: string; companies: string[] }>;
+  };
+  const categoryOf = new Map(categories.flatMap((c) => c.companies.map((slug) => [slug, c.id] as const)));
+  const companyCategories: Record<string, string> = {};
+  const unlabelled: string[] = [];
+  for (const slug of companiesOnMap.values()) {
+    const id = categoryOf.get(slug);
+    if (id) companyCategories[slug] = id;
+    else unlabelled.push(slug);
+  }
+  if (unlabelled.length > 0) {
+    console.log(`${unlabelled.length} companies have no industry in data/company-categories.json: ${unlabelled.sort().join(", ")}`);
+  }
+
   mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   writeFileSync(
     OUTPUT_PATH,
@@ -565,6 +584,8 @@ function main() {
         pins,
         remoteCompanies,
         logos,
+        categories: categories.map(({ id, label }) => ({ id, label })),
+        companyCategories,
       },
       null,
       2,

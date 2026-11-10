@@ -3,7 +3,7 @@
  * Scores every live role against one resume and writes a report to check
  * by hand -- the first test of the resume-match rubric, before any UI.
  *
- *   npx tsx scripts/match-resume.ts .local/resume.txt [--answers .local/answers.json] [--analyze 300] [--check 50]
+ *   npx tsx scripts/match-resume.ts .local/resume.txt [--answers .local/answers.json] [--analyze 300] [--check all]
  *
  * --company <slug> scores one company's roles only, analysing and checking
  * every one of them, and writes .local/match-<slug>.md / .csv instead.
@@ -19,9 +19,11 @@
  *   2. Score every role in code with neutral values for unknowns.
  *   3. Analyse the top --analyze roles that aren't cached yet (one model
  *      call each, shared by every future resume; data/role-analysis.json).
- *   4. Re-score, then check hard requirements for the top --check (one
- *      model call each, this candidate only).
+ *   4. Re-score, then check hard requirements for the top --check (default:
+ *      every analysed role; one model call each, this candidate only,
+ *      cached in .local/ per resume, posting and version of the rules).
  *   5. Write .local/match-report.md and .local/match-handscore.csv.
+ *   6. Write .local/match-scores.json, which the app shows (dev server only).
  *
  * Takes plain text or Markdown. For a PDF, extract the text first.
  * Everything personal stays in .local/, which git ignores.
@@ -35,12 +37,13 @@ import { fileURLToPath } from "node:url";
 import { getDb } from "../server/db/client.js";
 import { readCachedIntelligence } from "../server/enrichment/intelligence.js";
 import { analyzeRole, cleanDescription, loadCache, saveCache, type RoleAnalysis } from "../server/match/analyzeRole.js";
-import { checkRequirements, type RequirementsCheck } from "../server/match/check.js";
+import { CHECK_VERSION, checkRequirements, type RequirementsCheck } from "../server/match/check.js";
 import { mapLimit } from "../server/match/llm.js";
 import { countedYears, parseResume, type CandidateProfile } from "../server/match/profile.js";
 import { GENERIC_ANSWERS, preferencesFrom, type Answers } from "../server/match/onboarding.js";
 import { ANCHORS, CATEGORIES, levelFromYears, type Preferences } from "../server/match/rubric.js";
 import { scoreRole, type MatchScore, type RoleFacts } from "../server/match/score.js";
+import { toStored, writeScores } from "../server/match/scoresFile.js";
 import type { MapData } from "../src/types.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -126,7 +129,8 @@ async function main() {
   }
   mkdirSync(LOCAL, { recursive: true });
   const analyzeN = Number(arg("analyze", "300"));
-  const checkN = Number(arg("check", "50"));
+  const checkArg = arg("check", "all");
+  const checkN = checkArg === "all" ? Infinity : Number(checkArg);
   const answersPath = arg("answers", "");
   const answers: Answers = { ...GENERIC_ANSWERS, ...(answersPath ? (JSON.parse(readFileSync(answersPath, "utf-8")) as Partial<Answers>) : {}) };
   const prefs: Preferences = preferencesFrom(answers);
@@ -202,21 +206,41 @@ async function main() {
   let scored = roles.map((r) => ({ r, s: scoreRole(r.facts, profile, prefs, analysisOf(r)) })).sort((a, b) => b.s.score - a.s.score);
   // Title-only postings are skipped: there's nothing to check against.
   const shortlist = scored.slice(0, checkN).filter(({ r }) => analysisOf(r)?.descriptionAvailable);
-  console.log(`Checking hard requirements for the top ${shortlist.length}...`);
+  const checksPath = path.join(LOCAL, `checks-${hash}.json`);
+  const checkCache: Record<string, RequirementsCheck> = existsSync(checksPath) ? JSON.parse(readFileSync(checksPath, "utf-8")) : {};
+  const checkKey = (r: (typeof roles)[number]) => `${r.facts.id}:${analysisOf(r)!.contentHash}:${CHECK_VERSION}`;
   const checks = new Map<number, RequirementsCheck>();
-  await mapLimit(shortlist, 8, async ({ r }) => {
+  const toCheck = shortlist.filter(({ r }) => {
+    const hit = checkCache[checkKey(r)];
+    if (hit) checks.set(r.facts.id, hit);
+    return !hit;
+  });
+  console.log(`Checking hard requirements for ${shortlist.length} roles (${toCheck.length} not cached)...`);
+  await mapLimit(toCheck, 8, async ({ r }) => {
     try {
-      checks.set(r.facts.id, await checkRequirements(profile, { title: r.facts.title, company: r.facts.company, description: r.description }, analysisOf(r)!, resumeText));
+      const check = await checkRequirements(profile, { title: r.facts.title, company: r.facts.company, description: r.description }, analysisOf(r)!, resumeText);
+      checks.set(r.facts.id, check);
+      checkCache[checkKey(r)] = check;
     } catch {
       /* unchecked roles keep their code-only requirements score */
     }
   });
+  writeFileSync(checksPath, JSON.stringify(checkCache));
   scored = roles
     .map((r) => ({ r, s: scoreRole(r.facts, profile, prefs, analysisOf(r), checks.get(r.facts.id) ?? null) }))
     .sort((a, b) => b.s.score - a.s.score);
 
   // 5. Report.
   writeReport(profile, answers, prefs, scored, company);
+
+  // 6. Scores for the app (job board, role prep, the voice agent). Only
+  // analysed roles: a provisional score is a guess, not a recommendation.
+  const analysed = scored.filter(({ s }) => !s.provisional);
+  writeScores(
+    { candidate: profile.name, answers: answersPath || null, roles: Object.fromEntries(analysed.map(({ r, s }) => [r.facts.id, toStored(s)])) },
+    company !== "",
+  );
+  console.log(`App scores: ${analysed.length} roles written to .local/match-scores.json${company ? " (merged)" : ""}`);
 }
 
 // The answers each multiple-choice column allows, by the points they score.

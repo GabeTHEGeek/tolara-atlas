@@ -71,11 +71,11 @@ export default function App() {
   const [now] = useState(() => Date.now());
 
   const filteredPins = useMemo(
-    () => (mapData ? filterPins(mapData.pins, filters, now) : []),
+    () => (mapData ? filterPins(mapData.pins, filters, now, mapData.companyCategories) : []),
     [mapData, filters, now],
   );
   const filteredRemoteCompanies = useMemo(
-    () => (mapData ? filterRemoteCompanies(mapData.remoteCompanies, filters, now) : []),
+    () => (mapData ? filterRemoteCompanies(mapData.remoteCompanies, filters, now, mapData.companyCategories) : []),
     [mapData, filters, now],
   );
   const matchedRoles = useMemo(
@@ -331,7 +331,13 @@ export default function App() {
           />
         )}
         {mapData && !onRolePage && !onJobs && (
-          <FilterBar filters={filters} onChange={setFilters} matched={matchedRoles} total={mapData.roleCount} />
+          <FilterBar
+            filters={filters}
+            onChange={setFilters}
+            matched={matchedRoles}
+            total={mapData.roleCount}
+            categories={mapData.categories ?? []}
+          />
         )}
         {/* Never both at once: the drawer wins while it's open, and the
             panel comes back when it closes. */}
@@ -341,6 +347,7 @@ export default function App() {
             pins={filteredPins}
             remoteCompanies={filteredRemoteCompanies}
             logos={mapData.logos ?? {}}
+            categories={mapData.categories ?? []}
             filters={filters}
             onFiltersChange={setFilters}
             query={jobQuery}
