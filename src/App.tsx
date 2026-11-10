@@ -42,7 +42,7 @@ export default function App() {
   const [jobQuery, setJobQuery] = useState(() => (route.name === "jobs" ? (route.params.get("q") ?? "") : ""));
   const [jobSort, setJobSort] = useState<JobSort>(() => {
     const s = route.name === "jobs" ? route.params.get("sort") : null;
-    return s === "salary" || s === "company" ? s : "newest";
+    return s === "salary" || s === "company" || s === "best" ? s : "newest";
   });
   const [flyToRequest, setFlyToRequest] = useState<FlyToRequest | null>(null);
   const [crumbs, setCrumbs] = useState<{ company: string; role: string } | null>(null);

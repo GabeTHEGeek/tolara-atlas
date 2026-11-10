@@ -14,6 +14,9 @@
  *   TOLARA_AGENT_PROVIDER=gemini|deepseek|openai   (default: gemini)
  *   GEMINI_API_KEY / DEEPSEEK_API_KEY / OPENAI_API_KEY
  *   TOLARA_AGENT_MODEL=<id>                        (optional override)
+ *   TOLARA_AGENT_FALLBACK=gemini,openai            (optional; tried in order
+ *     when the main provider is out of credit, rejects the key, or keeps
+ *     failing after its retries -- each uses its own default model)
  *
  * Note this is the TEXT/tool-calling brain only. The voice transport is a
  * separate, separately swappable concern (see src/voice/) -- today it's the
@@ -150,13 +153,17 @@ export class ProviderError extends Error {
     message: string,
     readonly status: number | null,
     readonly retryable: boolean,
+    readonly provider: string | null = null,
   ) {
     super(message);
   }
 }
 
-export function resolveProvider(): { name: ProviderName; config: ProviderConfig; apiKey: string; model: string } {
-  const name = (process.env.TOLARA_AGENT_PROVIDER ?? "gemini").toLowerCase() as ProviderName;
+type ResolvedProvider = { name: ProviderName; config: ProviderConfig; apiKey: string; model: string };
+
+/** The main provider, or with `fallback` one from TOLARA_AGENT_FALLBACK (its own default model, no base-URL override). */
+export function resolveProvider(fallback?: ProviderName): ResolvedProvider {
+  const name = (fallback ?? process.env.TOLARA_AGENT_PROVIDER ?? "gemini").toLowerCase() as ProviderName;
   const config = PROVIDERS[name];
   if (!config) {
     throw new ProviderError(
@@ -175,10 +182,34 @@ export function resolveProvider(): { name: ProviderName; config: ProviderConfig;
     // A base-URL override lets this point at an AI gateway, a self-hosted
     // OpenAI-compatible server, or a stub during testing, without the
     // provider list having to know about it.
-    config: { ...config, baseUrl: process.env.TOLARA_AGENT_BASE_URL || config.baseUrl },
+    config: fallback ? config : { ...config, baseUrl: process.env.TOLARA_AGENT_BASE_URL || config.baseUrl },
     apiKey,
-    model: process.env.TOLARA_AGENT_MODEL || config.defaultModel,
+    model: fallback ? config.defaultModel : process.env.TOLARA_AGENT_MODEL || config.defaultModel,
   };
+}
+
+function fallbackNames(): ProviderName[] {
+  const main = (process.env.TOLARA_AGENT_PROVIDER ?? "gemini").toLowerCase();
+  return (process.env.TOLARA_AGENT_FALLBACK ?? "")
+    .split(",")
+    .map((n) => n.trim().toLowerCase())
+    .filter((n): n is ProviderName => n in PROVIDERS && n !== main);
+}
+
+/**
+ * What to tell the person, by cause: an empty account and a rejected key
+ * are things only they can fix, so those say what to do; a blip says try
+ * again. `err.message` keeps the provider's raw answer for the logs.
+ */
+export function explainProviderError(err: ProviderError): string {
+  const label = err.provider ?? "The model provider";
+  if (err.status === 402) {
+    return `${label} is out of credit. Top up the account, or add a backup provider with TOLARA_AGENT_FALLBACK in .env.`;
+  }
+  if (err.status === 401 || err.status === 403) return `${label} rejected the API key -- check it in .env.`;
+  if (err.status === 429) return `${label} is rate limiting -- try again in a minute.`;
+  if (err.status == null && /not set|Unknown TOLARA_AGENT_PROVIDER/.test(err.message)) return err.message;
+  return `${label} didn't answer (${err.status ?? "no response"}) -- try again.`;
 }
 
 /** The provider in use, for the UI to show without exposing the key. */
@@ -240,21 +271,41 @@ export async function chat(
   tools: ToolSchema[],
   options: { timeoutMs?: number } = {},
 ): Promise<ChatResult> {
-  let lastError: ProviderError | null = null;
-  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+  const timeoutMs = options.timeoutMs ?? REQUEST_TIMEOUT_MS;
+  let firstError: ProviderError | null = null;
+  for (const fallback of [undefined, ...fallbackNames()]) {
     try {
-      return await chatOnce(messages, tools, options.timeoutMs ?? REQUEST_TIMEOUT_MS);
+      return await withRetries(() => chatOnce(resolveProvider(fallback), messages, tools, timeoutMs));
+    } catch (err) {
+      if (!(err instanceof ProviderError)) throw err;
+      // The first failure is the one to report: it's the provider the
+      // person chose, and the fallbacks are a bonus.
+      firstError ??= err;
+      if (fallback === undefined && fallbackNames().length > 0) {
+        console.warn(`[agent] ${err.message} -- trying ${fallbackNames().join(", ")}`);
+      }
+    }
+  }
+  throw firstError ?? new ProviderError("Request failed", null, true);
+}
+
+async function withRetries<T>(call: () => Promise<T>): Promise<T> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await call();
     } catch (err) {
       if (!(err instanceof ProviderError) || !err.retryable || attempt === MAX_ATTEMPTS - 1) throw err;
-      lastError = err;
       await sleep(BACKOFF_MS[attempt] ?? 1200);
     }
   }
-  throw lastError ?? new ProviderError("Request failed", null, true);
 }
 
-async function chatOnce(messages: ChatMessage[], tools: ToolSchema[], timeoutMs: number): Promise<ChatResult> {
-  const { config, apiKey, model } = resolveProvider();
+async function chatOnce(
+  { config, apiKey, model }: ResolvedProvider,
+  messages: ChatMessage[],
+  tools: ToolSchema[],
+  timeoutMs: number,
+): Promise<ChatResult> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -287,7 +338,7 @@ async function chatOnce(messages: ChatMessage[], tools: ToolSchema[], timeoutMs:
       // settled facts about the account, not blips -- retrying just delays
       // the error the user needs to see.
       const retryable = (resp.status === 429 || resp.status >= 500) && resp.status !== 402;
-      throw new ProviderError(`${config.label} returned ${resp.status}: ${body.slice(0, 300)}`, resp.status, retryable);
+      throw new ProviderError(`${config.label} returned ${resp.status}: ${body.slice(0, 300)}`, resp.status, retryable, config.label);
     }
 
     const json = (await resp.json()) as {
@@ -332,9 +383,9 @@ async function chatOnce(messages: ChatMessage[], tools: ToolSchema[], timeoutMs:
   } catch (err) {
     if (err instanceof ProviderError) throw err;
     if (err instanceof Error && err.name === "AbortError") {
-      throw new ProviderError(`${config.label} timed out after ${timeoutMs / 1000}s`, null, true);
+      throw new ProviderError(`${config.label} timed out after ${timeoutMs / 1000}s`, null, true, config.label);
     }
-    throw new ProviderError(err instanceof Error ? err.message : String(err), null, true);
+    throw new ProviderError(err instanceof Error ? err.message : String(err), null, true, config.label);
   } finally {
     clearTimeout(timer);
   }

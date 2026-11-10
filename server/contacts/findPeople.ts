@@ -70,6 +70,36 @@ function writeCache(cache: Cache) {
 
 const fresh = (r: ContactsResult) => Date.now() - Date.parse(r.foundAt) < CACHE_TTL_MS;
 
+// Search results whose ranking failed (the model was down or out of
+// credit), kept so "Try again" only re-runs the model: repeating the
+// LinkedIn searches would cost the account more activity for nothing new.
+const PENDING_FILE = path.join(LOCAL_DIR, "contacts-pending.json");
+const PENDING_TTL_MS = 86_400_000;
+
+interface PendingSearch {
+  at: string;
+  searches: ContactsResult["searches"];
+  people: PersonResult[];
+  posts: PostResult[];
+}
+
+function readPending(): Record<string, PendingSearch> {
+  try {
+    return JSON.parse(fs.readFileSync(PENDING_FILE, "utf8")) as Record<string, PendingSearch>;
+  } catch {
+    return {};
+  }
+}
+
+function writePending(roleId: number, entry: PendingSearch | null) {
+  const all = readPending();
+  for (const [id, p] of Object.entries(all)) if (Date.now() - Date.parse(p.at) > PENDING_TTL_MS) delete all[id];
+  if (entry) all[String(roleId)] = entry;
+  else delete all[String(roleId)];
+  fs.mkdirSync(LOCAL_DIR, { recursive: true });
+  fs.writeFileSync(PENDING_FILE, JSON.stringify(all));
+}
+
 export function cachedContacts(roleId: number): ContactsResult | null {
   const hit = readCache()[String(roleId)];
   return hit && fresh(hit) ? hit : null;
@@ -183,8 +213,16 @@ export async function findPeople(
   if (!role) throw new Error(`No role ${roleId}`);
 
   const hints = hintsFor(role.title, role.description, null);
-  const plan = planSearches(role.company, role.title, hints);
 
+  const pending = readPending()[String(roleId)];
+  if (pending && Date.now() - Date.parse(pending.at) < PENDING_TTL_MS) {
+    onStatus(`Ranking ${pending.people.length} people and ${pending.posts.length} posts from the earlier searches…`);
+    const result = await rankAndCache(role, hints, pending.searches, pending.people, pending.posts);
+    writePending(roleId, null);
+    return result;
+  }
+
+  const plan = planSearches(role.company, role.title, hints);
   onStatus("Opening LinkedIn…");
   await ensureSignedIn(onStatus);
 
@@ -213,7 +251,12 @@ export async function findPeople(
   }
 
   onStatus(`Ranking ${people.length} people and ${posts.length} posts…`);
-  return rankAndCache(role, hints, searches, people, posts);
+  try {
+    return await rankAndCache(role, hints, searches, people, posts);
+  } catch (err) {
+    writePending(roleId, { at: new Date().toISOString(), searches, people, posts });
+    throw err;
+  }
 }
 
 /**

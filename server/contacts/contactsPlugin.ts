@@ -16,7 +16,7 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Plugin } from "vite";
 import { getDb } from "../db/client.js";
-import { ProviderError } from "../agent/providers.js";
+import { ProviderError, explainProviderError } from "../agent/providers.js";
 import { LinkedInStop } from "./linkedin.js";
 import { cachedContacts, cachedCounts, findPeople, type ContactsResult } from "./findPeople.js";
 
@@ -67,7 +67,7 @@ function start(roleId: number) {
         if (err.reason === "checkpoint" || err.reason === "restricted") blocked = err.message;
       } else if (err instanceof ProviderError) {
         current.state = "error";
-        current.message = err.status === 429 ? "The model is rate limiting — try again in a minute." : `Model error: ${err.message}`;
+        current.message = `${explainProviderError(err)} Your LinkedIn searches are saved, so trying again only re-runs the ranking.`;
       } else {
         current.state = "error";
         current.message = err instanceof Error ? err.message : String(err);

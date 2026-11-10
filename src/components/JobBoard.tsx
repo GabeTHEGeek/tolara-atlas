@@ -4,6 +4,7 @@ import { EMPTY_FILTERS, isFiltering, roleDate, type RemoteMode, type RoleFilters
 import { formatSalary, relativeTime } from "../format.js";
 import { roleHref } from "../router.js";
 import FreshnessTag from "./FreshnessTag.js";
+import { TIER_CLASS, useScores, type Tier } from "../scores.js";
 import { FindPeopleButton } from "./PeoplePanel.js";
 import { useContacts } from "../contacts.js";
 
@@ -16,7 +17,8 @@ import { useContacts } from "../contacts.js";
  * cities, where the map gives it three pins.
  */
 
-export type JobSort = "newest" | "salary" | "company";
+// "best" only appears where match scores exist (the owner's machine).
+export type JobSort = "newest" | "salary" | "company" | "best";
 
 interface JobBoardProps {
   pins: LocationPinData[];
@@ -82,9 +84,13 @@ function buildRows(pins: LocationPinData[], remoteCompanies: RemoteCompanyData[]
   return rows;
 }
 
-function sortRows(rows: JobRow[], sort: JobSort): JobRow[] {
+function sortRows(rows: JobRow[], sort: JobSort, scores: Record<string, [number, Tier]>): JobRow[] {
   const sorted = [...rows];
-  if (sort === "newest") {
+  if (sort === "best") {
+    // Unscored roles (not analysed yet) go last, newest first among them.
+    const score = (r: JobRow) => scores[r.role.id]?.[0] ?? -1;
+    sorted.sort((a, b) => score(b) - score(a) || (b.date ?? 0) - (a.date ?? 0));
+  } else if (sort === "newest") {
     sorted.sort((a, b) => (b.date ?? 0) - (a.date ?? 0));
   } else if (sort === "salary") {
     // Yearly bands only, highest ceiling first; hourly and unbanded roles
@@ -193,6 +199,8 @@ export default function JobBoard({
   const [shown, setShown] = useState(PAGE_SIZE);
   const [moreOpen, setMoreOpen] = useState(filters.postedWithinDays != null || filters.newOnly);
   const { counts: peopleFound } = useContacts();
+  const { roles: scores } = useScores();
+  const hasScores = Object.keys(scores).length > 0;
 
   const rows = useMemo(() => buildRows(pins, remoteCompanies), [pins, remoteCompanies]);
   const matched = useMemo(() => {
@@ -200,8 +208,8 @@ export default function JobBoard({
     // senior roles rather than everything senior plus everything Stripe.
     const words = query.toLowerCase().split(/\s+/).filter(Boolean);
     const hits = words.length === 0 ? rows : rows.filter((r) => words.every((w) => r.searchText.includes(w)));
-    return sortRows(hits, sort);
-  }, [rows, query, sort]);
+    return sortRows(hits, sort === "best" && !hasScores ? "newest" : sort, scores);
+  }, [rows, query, sort, scores, hasScores]);
 
   // A new search or filter starts back at the top of the list.
   useEffect(() => setShown(PAGE_SIZE), [query, sort, filters]);
@@ -295,6 +303,7 @@ export default function JobBoard({
                 <option value="newest">Newest</option>
                 <option value="salary">Highest salary</option>
                 <option value="company">Company A–Z</option>
+                {hasScores && <option value="best">Best match</option>}
               </select>
             </label>
           </span>
@@ -365,6 +374,15 @@ export default function JobBoard({
                         row.role.title
                       )}
                       <FreshnessTag role={row.role} />
+                      {scores[row.role.id] && (
+                        <a
+                          className={`match-badge match-badge--${TIER_CLASS[scores[row.role.id][1]]}`}
+                          href={roleHref(row.companySlug, row.role.id)}
+                          title={`Your match: ${scores[row.role.id][1]} — open role prep for why`}
+                        >
+                          {scores[row.role.id][0]} · {scores[row.role.id][1]}
+                        </a>
+                      )}
                       {peopleFound[row.role.id] > 0 && (
                         <a
                           className="people-badge"

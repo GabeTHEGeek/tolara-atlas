@@ -4,6 +4,7 @@ import { intelligenceApi } from "./server/api/intelligencePlugin";
 import { agentApi } from "./server/agent/agentPlugin";
 import { realtimeApi } from "./server/agent/realtimePlugin";
 import { contactsApi } from "./server/contacts/contactsPlugin";
+import { scoresApi } from "./server/match/scoresPlugin";
 
 // The agent's API key is read from .env by the server-side plugin below
 // (process.env, never import.meta.env) so it stays out of the bundle.
@@ -11,5 +12,5 @@ import { config as loadDotenv } from "dotenv";
 loadDotenv();
 
 export default defineConfig({
-  plugins: [react(), intelligenceApi(), agentApi(), realtimeApi(), contactsApi()],
+  plugins: [react(), intelligenceApi(), agentApi(), realtimeApi(), contactsApi(), scoresApi()],
 });

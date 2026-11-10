@@ -3,6 +3,7 @@ import { roleHref } from "../router.js";
 import { formatSalary, relativeTime } from "../format.js";
 import FreshnessTag from "./FreshnessTag.js";
 import PeoplePanel, { FindPeopleButton } from "./PeoplePanel.js";
+import MatchCard from "./MatchCard.js";
 import type {
   CompanyDetails,
   CompanyDetailsRole,
@@ -349,6 +350,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
         )}
 
         <div className="card-grid">
+          <MatchCard roleId={role.id} />
           <PeoplePanel roleId={role.id} company={details.company.name} />
 
           <section className="card">

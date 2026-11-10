@@ -1973,6 +1973,99 @@ h1.role-page-title {
   white-space: nowrap;
 }
 
+/* ---------- Match scores (local only) ---------- */
+
+.match-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: 11px;
+  font-weight: 600;
+  vertical-align: middle;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.match-badge--strong { color: var(--positive); }
+.match-badge--apply { color: var(--accent); }
+.match-badge--consider { color: var(--caution); }
+.match-badge--pass { color: var(--text-muted); }
+
+.match-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.match-head .match-badge {
+  font-size: 13px;
+}
+
+.match-capped {
+  margin: 4px 0 0;
+  color: var(--caution);
+  font-size: 13px;
+}
+
+.match-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.match-row {
+  display: grid;
+  grid-template-columns: 9rem 1fr 3rem;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.match-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.match-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.match-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.match-points {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.match-why {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 520px) {
+  .match-row {
+    grid-template-columns: 1fr 3rem;
+  }
+  .match-bar {
+    display: none;
+  }
+}
+
 /* ---------- People to reach (role prep) ---------- */
 
 .people-head {

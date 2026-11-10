@@ -44,7 +44,7 @@ Answer ONLY with a JSON object, no prose, using exactly these keys:
 {
   "archetypes": [<1 or 2 of: ${ARCHETYPE_IDS.join(", ")}>],
   "productDomain": "<2-4 words naming the product area, e.g. 'payments', 'creator tools', 'developer APIs'>",
-  "domainRequired": <true only if the posting REQUIRES prior experience in that specific domain; "preferred"/"nice to have"/"bonus" is false>,
+  "domainRequired": <true only if the posting REQUIRES prior experience in that specific domain, with no broader alternative. False when it's "preferred"/"nice to have"/"bonus", and false when the domain is one option in an "or" list that also accepts broader experience (e.g. "discovery systems, recommendation engines, or large-scale consumer products")>,
   "yearsRequired": <number of years of product management experience required, the minimum if a range, null if not stated>,
   "hardRequirements": [<up to 5 must-haves exactly as the posting states them, each under 15 words>],
   "managesPMs": <true only if the role requires managing other product managers>,

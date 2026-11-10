@@ -116,7 +116,9 @@ function scoreDomain(profile: CandidateProfile, a: RoleAnalysis | null): [number
   // candidate has made a main focus: that's the same work, even when the
   // posting's main archetype is a neighbour (platform, here).
   const sharedPrimary = a.archetypes.find((r) => primary.some((p) => p.archetype === r));
-  if (domainOverlap && sharedPrimary && a.descriptionAvailable) {
+  // ...but not when the only shared kind is ai-agents: as above, that's a
+  // way of building, so the product area alone is adjacent.
+  if (domainOverlap && sharedPrimary && sharedPrimary !== "ai-agents" && a.descriptionAvailable) {
     return [ANCHORS.domain.same, `Same product area: ${a.productDomain} ~ your ${domainOverlap} (${sharedPrimary})`];
   }
   if (sharedPrimary) return [ANCHORS.domain.adjacent, `Your main focus (${sharedPrimary}) is this role's secondary area`];

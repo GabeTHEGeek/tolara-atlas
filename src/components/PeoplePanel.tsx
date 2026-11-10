@@ -78,6 +78,15 @@ export default function PeoplePanel({ roleId, company }: { roleId: number; compa
       {failed && (
         <p className={failed.state === "stopped" ? "people-stop" : "intel-error"} role="alert">
           {failed.message}
+          {/* A stop (security check, restriction) means don't retry; an error is the model or a blip. */}
+          {failed.state === "error" && !blocked && (
+            <>
+              {" "}
+              <button className="link-button" onClick={() => void findPeople(roleId)}>
+                Try again
+              </button>
+            </>
+          )}
         </p>
       )}
 

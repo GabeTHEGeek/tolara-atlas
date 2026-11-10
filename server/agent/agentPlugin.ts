@@ -12,7 +12,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Plugin } from "vite";
 import { getDb } from "../db/client.js";
 import { runAgent, type AgentTurn, type ScreenState } from "./agent.js";
-import { ProviderError, describeProvider } from "./providers.js";
+import { ProviderError, describeProvider, explainProviderError } from "./providers.js";
 
 const MAX_UTTERANCE_CHARS = 500;
 
@@ -64,7 +64,7 @@ async function handle(req: IncomingMessage, res: ServerResponse) {
       }
       return send(res, err.status && err.status < 500 ? 400 : 502, {
         error: "provider_error",
-        reply: err.retryable ? "I couldn't reach the model just then — try again?" : err.message,
+        reply: err.retryable ? "I couldn't reach the model just then — try again?" : explainProviderError(err),
       });
     }
     console.error("[api/agent]", err);
