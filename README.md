@@ -2,17 +2,17 @@
 
 **Every open Product Manager job in the US, on one map. Updated every night. With the pay.**
 
-2,498 PM roles at 525 companies hiring right now, read straight from each
+2,979 PM roles at 677 companies hiring right now, read straight from each
 company's own careers site. No reposts, no "promoted" listings, no
-"competitive salary": two out of three roles show the real pay band.
+"competitive salary": 69% of roles show the real pay band.
 
 [![Daily jobs sync](https://github.com/GabeTHEGeek/tolara-atlas/actions/workflows/sync.yml/badge.svg)](https://github.com/GabeTHEGeek/tolara-atlas/actions/workflows/sync.yml)
-![Open PM roles](https://img.shields.io/badge/open%20PM%20roles-2%2C498-6fe0c4)
-![Companies hiring](https://img.shields.io/badge/companies%20hiring-525-6fe0c4)
-![Companies tracked](https://img.shields.io/badge/companies%20tracked-1%2C360-6fe0c4)
-![Cities](https://img.shields.io/badge/cities-117-6fe0c4)
-![With salary](https://img.shields.io/badge/with%20salary-67%25-6fe0c4)
-![Median pay](https://img.shields.io/badge/median%20PM%20pay-%24211K-6fe0c4)
+![Open PM roles](https://img.shields.io/badge/open%20PM%20roles-2%2C979-6fe0c4)
+![Companies hiring](https://img.shields.io/badge/companies%20hiring-677-6fe0c4)
+![Companies tracked](https://img.shields.io/badge/companies%20tracked-1%2C361-6fe0c4)
+![Cities](https://img.shields.io/badge/cities-138-6fe0c4)
+![With salary](https://img.shields.io/badge/with%20salary-69%25-6fe0c4)
+![Median pay](https://img.shields.io/badge/median%20PM%20pay-%24210K-6fe0c4)
 ![Paid data](https://img.shields.io/badge/paid%20data-none-6fe0c4)
 
 ![The map: one pin per company office, sized by open PM roles](docs/screenshots/map.png)
@@ -21,6 +21,22 @@ company's own careers site. No reposts, no "promoted" listings, no
 > how other PMs find it.
 
 ---
+
+## What's new
+
+**November 2026: 155 new companies, +19% roles.** Oracle, Salesforce,
+Adobe, Workday, ServiceNow, HPE, Mastercard, Zillow, Samsung, Intel, FanDuel,
+The Trade Desk, Airwallex, Procore, Sierra, Mercor, Polymarket and 138 more
+joined the map, adding 527 open PM roles. The board now covers **2,979
+roles at 677 companies in 138 cities.**
+
+Also new:
+
+- 🏷️ **Industry filter.** 18 spaces, from AI labs to banks to gaming.
+- 🎯 **Match scores in the app.** A score and tier badge on every role, a
+  *Best match* sort, and a breakdown card on each role page.
+- 🤝 **People to reach.** Recovers from model errors on its own, and a retry
+  doesn't search again.
 
 ## Why this exists
 
@@ -32,20 +48,20 @@ and still not knowing:
 - **Who else is hiring in my city?** No job board shows you a map.
 - **Am I a fit?** Keyword matching says yes to everything.
 
-Tolara answers all four. It reads 1,360 companies' own hiring pages every
+Tolara answers all four. It reads 1,361 companies' own hiring pages every
 night, so a role is here only while it's actually open, at the office where
 it's actually based, with the pay band the company published.
 
 ## Who's on it
 
 **Big Tech:** Amazon · Google · Microsoft · Apple · Meta · NVIDIA · Netflix ·
-TikTok · Salesforce · Adobe · Oracle · Intel
+TikTok · Oracle · Salesforce · Adobe · Workday · ServiceNow · HPE · Intel
 
 **AI:** OpenAI · Anthropic · Perplexity · Scale AI · Cursor · Sierra · Harvey ·
 Mercor · Runway
 
 **Fintech & banks:** JPMorgan Chase · Capital One · American Express ·
-Mastercard · Stripe · Coinbase · Robinhood · Plaid · Ramp · Brex · Affirm
+Mastercard · FanDuel · Stripe · Coinbase · Robinhood · Plaid · Ramp · Brex · Affirm
 
 **Consumer:** Airbnb · Pinterest · Reddit · Roblox · Spotify · Discord ·
 Duolingo · DoorDash · Instacart · Lyft · Zillow · Expedia
@@ -58,21 +74,21 @@ Figma · Notion · Linear · Vercel · GitLab · Palantir
 
 ## PM pay, from real postings
 
-Middle of the posted pay band, for the 1,666 roles that publish one in USD:
+Middle of the posted pay band, for the 2,057 roles that publish one in USD:
 
 | Level | Median |
 |---|---|
-| Associate / APM | **$130K** |
+| Associate / APM | **$123K** |
 | Product Manager | **$200K** |
-| Senior PM | **$211K** |
-| Principal / Group PM | **$236K** |
-| Director and above | **$233K** |
+| Senior PM | **$209K** |
+| Principal / Group PM | **$231K** |
+| Director and above | **$234K** |
 
-60% of banded roles pay $200K or more at the midpoint, and 138 pay $300K or
+58% of banded roles pay $200K or more at the midpoint, and 151 pay $300K or
 more. The highest band on the board goes up to **$1M**. These are posted
 bands, not self-reported surveys.
 
-**This week:** 304 roles opened and 369 closed. The header shows what moved,
+**This week:** 361 roles added and 419 closed. The header shows what moved,
 role by role.
 
 ## What you get
@@ -217,4 +233,4 @@ src/
 
 ---
 
-<sub>Coverage figures are from the nightly sync of November 14, 2026, and change every day.</sub>
+<sub>Coverage figures are from the sync of November 14, 2026, and change every day.</sub>
