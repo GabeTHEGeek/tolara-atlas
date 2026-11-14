@@ -29,17 +29,27 @@ let state: State = { local: null, roles: {}, generatedAt: null };
 const listeners = new Set<() => void>();
 let requested = false;
 
+// Asked again whenever the tab comes back into view: a tab opened while the
+// dev server was restarting would otherwise show no scores until a reload,
+// and a re-run of the matcher shows up without one.
+if (typeof document !== "undefined") {
+  document.addEventListener("visibilitychange", () => {
+    if (requested && document.visibilityState === "visible") void load();
+  });
+}
+
 async function load(): Promise<void> {
   try {
     const res = await fetch("/api/match/scores");
     if (!res.ok || !res.headers.get("content-type")?.includes("json")) {
-      state = { ...state, local: false };
+      // Keep scores already shown; a hiccup shouldn't blank the board.
+      if (state.local !== true) state = { ...state, local: false };
     } else {
       const body = (await res.json()) as { roles: Record<string, [number, Tier]>; generatedAt: string | null };
       state = { local: true, roles: body.roles, generatedAt: body.generatedAt };
     }
   } catch {
-    state = { ...state, local: false };
+    if (state.local !== true) state = { ...state, local: false };
   }
   listeners.forEach((l) => l());
 }
