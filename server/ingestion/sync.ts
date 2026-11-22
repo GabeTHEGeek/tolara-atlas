@@ -10,6 +10,7 @@
  */
 
 import { createHash } from "node:crypto";
+import { PAY_FROM_DETAIL_PAGE, paysOnCompanySite } from "./payOnCompanySite.js";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -82,8 +83,12 @@ function salariesDiffer(
 // snippet) can't say its pay is gone: its band, if any, was read from the
 // text fetched afterwards. Left to the repair below, every sync blanked
 // those bands again. 200 is fetchDescriptions.ts's "missing text" bar.
+// The same goes for boards whose pay is read from somewhere other than the
+// listing's text -- each posting's detail page (Apple, Meta) or the
+// company's own careers site (Stripe) -- see payOnCompanySite.ts.
 function keepsStoredSalary(job: RawJob): boolean {
-  return job.salary === "" && job.description.length < 200;
+  if (job.salary !== "") return false;
+  return job.description.length < 200 || PAY_FROM_DETAIL_PAGE.includes(job.source) || paysOnCompanySite(job.url);
 }
 
 function contentHash(job: RawJob): string {

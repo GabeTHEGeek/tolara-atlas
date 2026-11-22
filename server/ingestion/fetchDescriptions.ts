@@ -25,6 +25,7 @@ import { getDb } from "../db/client.js";
 import { decodeEntities, stripHtml } from "./sources/common.js";
 import { extractSalary } from "./extract.js";
 import { parseSalary } from "./salary.js";
+import { PAY_FROM_DETAIL_PAGE, paysOnCompanySite } from "./payOnCompanySite.js";
 
 const USER_AGENT = "Mozilla/5.0 (compatible; TolaraAtlas/0.1; +https://github.com/GabeTHEGeek/tolara-atlas)";
 const MAX_DESCRIPTION = 4000; // same cap the adapters use
@@ -207,6 +208,37 @@ const fetchMeta: Fetcher = async (url) => {
   return `Compensation: ${min} to ${max}. ${text}`;
 };
 
+/**
+ * Apple's job page embeds the posting in its router data
+ * (window.__staticRouterHydrationData = JSON.parse("...")): summary,
+ * description, qualifications, and a "Pay & Benefits" footer with the US
+ * base range. The pay goes FIRST, so the stored 4,000-character cut can't
+ * drop it.
+ */
+const fetchApple: Fetcher = async (url) => {
+  const html = await getText(url);
+  const m = html?.match(/__staticRouterHydrationData = JSON\.parse\(("(?:[^"\\]|\\.)*")\)/);
+  if (!m) return null;
+  let jobs: {
+    jobSummary?: string;
+    description?: string;
+    minimumQualifications?: string;
+    preferredQualifications?: string;
+    postingFooters?: Array<{ localizations?: { en_US?: Array<{ content?: string }> } }>;
+  } | undefined;
+  try {
+    jobs = JSON.parse(JSON.parse(m[1]))?.loaderData?.jobDetails?.jobsData;
+  } catch {
+    return null;
+  }
+  if (!jobs) return null;
+  const footers = (jobs.postingFooters ?? []).flatMap((f) => f.localizations?.en_US ?? []).map((l) => l.content ?? "");
+  const pay = footers.find((c) => /base pay range/i.test(c)) ?? "";
+  return [pay, jobs.jobSummary, jobs.description, jobs.minimumQualifications, jobs.preferredQualifications]
+    .filter(Boolean)
+    .join("\n\n");
+};
+
 /** iCIMS job pages (in_iframe=1, the same WAF-free view icims.ts lists from) embed a JobPosting. */
 const fetchIcims: Fetcher = async (url) => {
   const html = await getText(`${url}${url.includes("?") ? "&" : "?"}in_iframe=1`);
@@ -225,14 +257,15 @@ const FETCHERS: Record<string, { fetch: Fetcher; concurrency: number; delayMs: n
   bamboohr: { fetch: fetchBambooHr, concurrency: 2, delayMs: 300 },
   icims: { fetch: fetchIcims, concurrency: 2, delayMs: 300 },
   ashby: { fetch: fetchAshby, concurrency: 2, delayMs: 300 },
+  apple: { fetch: fetchApple, concurrency: 2, delayMs: 500 },
   meta: { fetch: fetchMeta, concurrency: 1, delayMs: 1500 },
   microsoft: { fetch: fetchMicrosoft, concurrency: 1, delayMs: 12000 },
 };
 
-// Boards whose pay sits outside the posting text the first fetch stored
-// (Meta's public_compensation field), so a role there without a band is
-// fetched again -- a few dozen requests a night at Meta's spacing.
-const PAY_OUTSIDE_TEXT = ["meta"];
+// Boards whose pay sits outside the posting text the listing gave us
+// (Meta's public_compensation field, Apple's pay footer), so a role there
+// without a band is fetched again -- a few dozen requests a night.
+const PAY_OUTSIDE_TEXT = PAY_FROM_DETAIL_PAGE;
 
 function minutesArg(): number {
   const raw = process.argv.find((a) => a.startsWith("--minutes="))?.split("=")[1];
@@ -281,6 +314,30 @@ async function main() {
     }
   }
   console.log(`Salary bands re-read from stored text: ${reread} of ${unpaid.length} roles without one`);
+
+  // Roles whose board text has no pay, but whose company states it on its
+  // own careers page (Stripe -- see payOnCompanySite.ts). Only the band is
+  // taken from that page; the board's text stays as the description.
+  const offSite = (
+    db
+      .prepare(`SELECT id, url FROM roles WHERE status = 'active' AND salary_min IS NULL AND url IS NOT NULL ORDER BY first_seen_at DESC`)
+      .all() as Array<{ id: number; url: string }>
+  ).filter((r) => paysOnCompanySite(r.url));
+  let offSitePaid = 0;
+  for (const role of offSite) {
+    if (Date.now() > deadline) break;
+    const html = await getText(role.url);
+    if (html) {
+      const text = decodeEntities(stripHtml(html.replace(/<(script|style)[\s\S]*?<\/\1>/gi, " "))).replace(/\s+/g, " ");
+      const parsed = parseSalary(extractSalary(text));
+      if (parsed.min != null) {
+        setSalary.run({ id: role.id, ...parsed });
+        offSitePaid++;
+      }
+    }
+    await sleep(1000);
+  }
+  if (offSite.length > 0) console.log(`Salary bands read from company careers pages: ${offSitePaid} of ${offSite.length}`);
 
   let filled = 0;
   let salaries = 0;
