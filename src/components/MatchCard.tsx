@@ -1,3 +1,4 @@
+import MatchRing from "./MatchRing.js";
 import { TIER_CLASS, openQuiz, useRoleScore, useScores } from "../scores.js";
 
 /**
@@ -17,8 +18,9 @@ export default function MatchCard({ roleId }: { roleId: number }) {
     <section className="card card--wide match-card">
       <div className="match-head">
         <h2 className="card-label">Your match</h2>
-        <span className={`match-badge match-badge--${TIER_CLASS[score.tier]}`}>
-          {score.score} · {score.tier}
+        <span className="match-head-score">
+          <MatchRing score={score.score} tier={score.tier} size={64} />
+          <span className={`match-tier match-tier--${TIER_CLASS[score.tier]}`}>{score.tier}</span>
         </span>
       </div>
       {score.capped && <p className="match-capped">Capped: {score.capped}</p>}

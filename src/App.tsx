@@ -11,7 +11,7 @@ import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
 import JobBoard, { type JobSort } from "./components/JobBoard.js";
 import MatchQuiz from "./components/MatchQuiz.js";
 import { useQuizOpen } from "./scores.js";
-import { replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
+import { onJobsBoard, replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
 import { buildPayRanker } from "./payRank.js";
 import {
   EMPTY_FILTERS,
@@ -42,7 +42,7 @@ export default function App() {
   // Which view sits under the role drawer: the one you opened it from.
   // The map stays mounted either way (MapLibre is slow to rebuild); the job
   // board just covers it.
-  const [baseView, setBaseView] = useState<"map" | "jobs">(route.name === "jobs" ? "jobs" : "map");
+  const [baseView, setBaseView] = useState<"map" | "jobs">(route.name === "map" ? "map" : "jobs");
   const [jobQuery, setJobQuery] = useState(() => (route.name === "jobs" ? (route.params.get("q") ?? "") : ""));
   const quizOpen = useQuizOpen();
   const [jobSort, setJobSort] = useState<JobSort>(() => {
@@ -129,7 +129,7 @@ export default function App() {
     const params = new URLSearchParams();
     filtersToParams(filters, params);
     const query = params.toString();
-    return `#/${query ? `?${query}` : ""}`;
+    return `#/map${query ? `?${query}` : ""}`;
   }, [filters]);
 
   const copyLink = useCallback(() => {
@@ -173,7 +173,7 @@ export default function App() {
       setChangesPanelOpen(false);
       if (window.location.hash.startsWith("#/company/")) closeRole();
       // A company panel belongs to the map; the job board has none.
-      if (window.location.hash.startsWith("#/jobs")) window.location.hash = "#/";
+      if (onJobsBoard()) window.location.hash = "#/map";
       setSelectedPin(pin);
     },
     [closeRole],
@@ -181,7 +181,7 @@ export default function App() {
   const flyToPin = useCallback((pin: LocationPinData) => {
     // The copilot moving the map from the job board brings the map back,
     // rather than flying a camera nobody can see.
-    if (window.location.hash.startsWith("#/jobs")) window.location.hash = "#/";
+    if (onJobsBoard()) window.location.hash = "#/map";
     setFlyToRequest({ pin, nonce: Date.now() });
   }, []);
 
@@ -251,7 +251,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <a className="brand" href={mapHash()} aria-label="Tolara Scout — back to the map">
+        <a className="brand" href={jobsHash()} aria-label="Tolara Scout — back to the job board">
           <span className="brand-mark" aria-hidden="true">
             T
           </span>

@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import maplibregl, { type GeoJSONSource } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { LocationPinData } from "../types.js";
-import { BASEMAP_STYLE, CLUSTER_TEXT, LABEL_HALO, LABEL_TEXT, PIN_COLOR, PIN_STROKE } from "../theme.js";
+import { BASEMAP_STYLE, CLUSTER_COLOR, CLUSTER_TEXT, LABEL_HALO, LABEL_HALO_WIDTH, LABEL_TEXT, PIN_COLOR, PIN_STROKE } from "../theme.js";
 
 // Basemap and colors are shared with the role page's mini map -- see theme.ts.
 
@@ -373,7 +373,7 @@ export default function MapView({
         paint: {
           "circle-color": PIN_COLOR,
           "circle-radius": 7,
-          "circle-stroke-width": 2,
+          "circle-stroke-width": 2.5,
           "circle-stroke-color": PIN_STROKE,
         },
       });
@@ -403,7 +403,7 @@ export default function MapView({
         paint: {
           "text-color": LABEL_TEXT,
           "text-halo-color": LABEL_HALO,
-          "text-halo-width": 1.4,
+          "text-halo-width": LABEL_HALO_WIDTH,
         },
       });
 
@@ -417,8 +417,8 @@ export default function MapView({
         maxzoom: CITY_CLUSTER_MAX_ZOOM,
         layout: { "circle-sort-key": ["get", "roleCount"] },
         paint: {
-          "circle-color": PIN_COLOR,
-          "circle-opacity": 0.9,
+          "circle-color": CLUSTER_COLOR,
+          "circle-opacity": 0.95,
           "circle-radius": ["step", ["get", "roleCount"], 13, 10, 16, 40, 20, 150, 25],
           "circle-stroke-width": 2,
           "circle-stroke-color": PIN_STROKE,
@@ -460,7 +460,7 @@ export default function MapView({
         paint: {
           "text-color": LABEL_TEXT,
           "text-halo-color": LABEL_HALO,
-          "text-halo-width": 1.4,
+          "text-halo-width": LABEL_HALO_WIDTH,
         },
       });
 

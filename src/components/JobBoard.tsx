@@ -7,7 +7,8 @@ import FreshnessTag from "./FreshnessTag.js";
 import RepostTag from "./RepostTag.js";
 import GhostTag from "./GhostTag.js";
 import { payRankShort, type PayRanker } from "../payRank.js";
-import { TIER_CLASS, openQuiz, useScores, type Tier } from "../scores.js";
+import { openQuiz, useScores, type Tier } from "../scores.js";
+import MatchRing from "./MatchRing.js";
 import { FindPeopleButton } from "./PeoplePanel.js";
 import { useContacts } from "../contacts.js";
 
@@ -228,6 +229,9 @@ export default function JobBoard({
   return (
     <div className="job-board">
       <div className="job-board-inner">
+        <h1 className="job-board-title">
+          {total.toLocaleString()} open PM jobs<span> in the US, updated daily.</span>
+        </h1>
         <label className="job-search">
           <span aria-hidden="true" className="job-search-icon">⌕</span>
           <input
@@ -393,7 +397,7 @@ export default function JobBoard({
               const when = daysOpenLabel(openSince(row.date, row.role.repostedFrom));
               const rank = payRank(row.role);
               return (
-                <li key={row.role.id} className="job-row">
+                <li key={row.role.id} className={`job-row${hasScores ? " job-row--scored" : ""}`}>
                   <CompanyLogo name={row.companyName} slug={row.companySlug} logo={logos[row.companySlug]} />
                   <div className="job-main">
                     <p className="job-title">
@@ -407,15 +411,6 @@ export default function JobBoard({
                       <FreshnessTag role={row.role} />
                       <RepostTag repostedFrom={row.role.repostedFrom} />
                       <GhostTag role={row.role} />
-                      {scores[row.role.id] && (
-                        <a
-                          className={`match-badge match-badge--${TIER_CLASS[scores[row.role.id][1]]}`}
-                          href={roleHref(row.companySlug, row.role.id)}
-                          title={`Your match: ${scores[row.role.id][1]} — open the role for why`}
-                        >
-                          {scores[row.role.id][0]} · {scores[row.role.id][1]}
-                        </a>
-                      )}
                       {peopleFound[row.role.id] > 0 && (
                         <a
                           className="people-badge"
@@ -441,6 +436,17 @@ export default function JobBoard({
                       </span>
                     )}
                   </div>
+                  {hasScores && (
+                    <div className="job-score">
+                      {scores[row.role.id] && (
+                        <MatchRing
+                          score={scores[row.role.id][0]}
+                          tier={scores[row.role.id][1]}
+                          href={roleHref(row.companySlug, row.role.id)}
+                        />
+                      )}
+                    </div>
+                  )}
                   <div className="job-actions">
                     {row.role.url && (
                       <a className="job-view" href={row.role.url} target="_blank" rel="noopener noreferrer">
