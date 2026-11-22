@@ -66,6 +66,15 @@ const WORKDAY_PAGE_SIZE = 20; // Workday's own hard cap -- confirmed live; limit
 // production Workday scraper, which documents a 429 silently truncating an
 // entire tenant's results without this.
 const INTER_PAGE_DELAY_MS = 250;
+const RETRY_BACKOFF_MS = [1000, 3000, 6000];
+
+// Boards are read a few at a time, not all at once. Firing all ~70 tenants
+// in parallel worked from a home connection but failed 49+ of them every
+// night from GitHub's runners, so the nightly sync paces itself; failed
+// boards then get one more, slower pass (see searchWorkday).
+const BOARD_CONCURRENCY = 4;
+const BOARD_START_STAGGER_MS = 300;
+const SECOND_PASS_DELAY_MS = 5000;
 
 // During Workday's weekly maintenance window, every CXS request on an
 // affected data center (confirmed live: all of wd1/wd3/wd5 at once, while
@@ -151,22 +160,27 @@ function parseToken(token: string): ParsedWorkdayToken | null {
  * Fetch up to `wantCount` postings from one company's Workday board, paging
  * in batches of WORKDAY_PAGE_SIZE. Never throws -- `failed: true` covers a
  * malformed token, a network error, a timeout (even after one retry), or a
- * non-2xx response on the FIRST page (an invalid tenant/site 422s
- * immediately, confirmed live). A failure on a LATER page just stops
- * pagination early and returns whatever was already fetched -- a board
- * that's real and mostly working shouldn't lose its first 40 good results
- * because request #3 timed out. `failed: false` with an empty array is a
+ * non-2xx response on ANY page (an invalid tenant/site 422s immediately,
+ * confirmed live). A later page failing fails the whole board too: sync
+ * closes every role a checked board didn't return, so a truncated list
+ * would close real roles. `failed: false` with an empty array is a
  * board that loaded fine with zero current postings. `maintenance: true`
  * marks a failure caused by Workday's scheduled maintenance redirect (see
  * MAINTENANCE_URL_MARKER) -- still a failure, just a known, temporary one.
  */
-async function fetchBoard(
-  token: string,
-  wantCount: number,
-  timeoutMs = 15000,
-): Promise<{ jobs: WorkdayJobPosting[]; failed: boolean; maintenance?: boolean }> {
+interface BoardFetchResult {
+  jobs: WorkdayJobPosting[];
+  failed: boolean;
+  maintenance?: boolean;
+  // Why the board failed, for the sync log ("HTTP 403", "timeout",
+  // "partial: page 3, HTTP 429"). Lets a nightly log show whether Workday
+  // is rate-limiting, blocking, or just slow, instead of a bare list.
+  reason?: string;
+}
+
+async function fetchBoard(token: string, wantCount: number, timeoutMs = 15000): Promise<BoardFetchResult> {
   const parsed = parseToken(token);
-  if (!parsed) return { jobs: [], failed: true };
+  if (!parsed) return { jobs: [], failed: true, reason: "malformed token" };
   const { tenant, dataCenter, site, search } = parsed;
   const url = `https://${tenant}.${dataCenter}.myworkdayjobs.com/wday/cxs/${tenant}/${site}/jobs`;
   const searchLower = search.toLowerCase();
@@ -177,55 +191,71 @@ async function fetchBoard(
   let total: number | null = null;
   let firstPage = true;
   let inMaintenance = false;
+  let pageNumber = 0;
 
   while (jobs.length < wantCount && (total === null || offset < total)) {
     if (!firstPage) await sleep(INTER_PAGE_DELAY_MS);
     const pageLimit = Math.min(WORKDAY_PAGE_SIZE, wantCount - jobs.length);
     let page: { total: number; jobPostings: WorkdayJobPosting[] } | null = null;
 
-    // 3 attempts total, not 2 like the other adapters' plain retry-once --
-    // a 429 here is a documented, common failure mode (Workday's WAF rate-
-    // limiting in bursts), not a rare network blip, so it gets one extra
-    // chance to back off and succeed rather than silently truncating a
-    // board's results at whatever page it happened to hit the limit on.
-    for (let attempt = 0; attempt < 3; attempt++) {
+    pageNumber += 1;
+    let lastError = "";
+
+    // 4 attempts, backing off 1s/3s/6s (or the server's Retry-After, up to
+    // 15s) -- a 429 here is Workday's WAF rate-limiting in bursts, a common
+    // failure mode rather than a rare blip, so it gets real time to clear.
+    for (let attempt = 0; attempt < 4; attempt++) {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), timeoutMs);
       try {
         const resp = await fetch(url, {
           method: "POST",
           signal: controller.signal,
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", Accept: "application/json", "Accept-Language": "en-US" },
           body: JSON.stringify({ appliedFacets: {}, limit: pageLimit, offset, searchText: search }),
         });
         clearTimeout(timer);
         // No point retrying -- the window lasts hours, not seconds.
         if (resp.url.includes(MAINTENANCE_URL_MARKER)) {
           inMaintenance = true;
+          lastError = "maintenance";
           break;
         }
         if (resp.status === 429 || resp.status >= 500) {
-          if (attempt < 2) {
-            await sleep(500 * (attempt + 1));
+          lastError = `HTTP ${resp.status}`;
+          if (attempt < 3) {
+            const retryAfter = Number(resp.headers.get("retry-after"));
+            const waitMs = retryAfter > 0 ? Math.min(retryAfter * 1000, 15000) : RETRY_BACKOFF_MS[attempt];
+            await sleep(waitMs);
             continue;
           }
           break; // treated as a failed page below
         }
-        if (!resp.ok) break; // non-retryable 4xx -- treated as a failed page below
+        if (!resp.ok) {
+          lastError = `HTTP ${resp.status}`;
+          break; // non-retryable 4xx -- treated as a failed page below
+        }
         page = (await resp.json()) as { total: number; jobPostings: WorkdayJobPosting[] };
         break;
-      } catch {
+      } catch (err) {
         clearTimeout(timer);
-        if (attempt < 2) continue;
+        lastError = (err as Error)?.name === "AbortError" ? "timeout" : "network error";
+        if (attempt < 3) {
+          await sleep(RETRY_BACKOFF_MS[attempt]);
+          continue;
+        }
         break; // treated as a failed page below
       }
     }
 
     if (!page) {
-      // First page failing means the board itself couldn't be read at all;
-      // a later page failing just means stop paging with what we have.
-      if (firstPage) return { jobs: [], failed: true, maintenance: inMaintenance };
-      break;
+      // Any failed page fails the whole board. A board that stopped
+      // partway is NOT a smaller board: sync.ts closes every role it
+      // didn't see, so returning the partial list closed real, open roles
+      // (Capital One went from 75 to 1 this way). Failed boards keep their
+      // roles untouched until a later sync reads them in full.
+      const reason = firstPage ? lastError : `partial: page ${pageNumber}, ${lastError}`;
+      return { jobs: [], failed: true, maintenance: inMaintenance, reason };
     }
 
     // Workday reports the real total only on the FIRST page; every later
@@ -271,18 +301,36 @@ export async function searchWorkday(
   const boardsEmpty: string[] = [];
   const boardsInMaintenance: string[] = [];
 
-  const rawByBoard = new Map<string, { jobs: WorkdayJobPosting[]; failed: boolean; maintenance?: boolean }>();
-  await Promise.all(
-    boards.map(async (board) => {
-      rawByBoard.set(board, await fetchBoard(board, limit));
-    }),
-  );
+  const failureReasons: Record<string, string> = {};
+
+  const rawByBoard = new Map<string, BoardFetchResult>();
+  await runPool(boards, BOARD_CONCURRENCY, async (board, i) => {
+    if (i < BOARD_CONCURRENCY) await sleep(i * BOARD_START_STAGGER_MS);
+    rawByBoard.set(board, await fetchBoard(board, limit));
+  });
+
+  // Second pass, one board at a time, for anything that failed for a reason
+  // other than scheduled maintenance (which lasts hours) or a bad token.
+  const retryable = boards.filter((b) => {
+    const r = rawByBoard.get(b);
+    return r?.failed && !r.maintenance && r.reason !== "malformed token";
+  });
+  if (retryable.length > 0) {
+    await sleep(SECOND_PASS_DELAY_MS);
+    for (const board of retryable) {
+      const retry = await fetchBoard(board, limit, 25000);
+      if (!retry.failed) rawByBoard.set(board, retry);
+      else rawByBoard.set(board, { ...retry, reason: `${rawByBoard.get(board)?.reason}; retry: ${retry.reason}` });
+      await sleep(BOARD_START_STAGGER_MS);
+    }
+  }
 
   for (const board of boards) {
-    const result = rawByBoard.get(board) ?? { jobs: [], failed: true };
+    const result = rawByBoard.get(board) ?? { jobs: [], failed: true, reason: "not fetched" };
     if (result.failed) {
       boardsFailed.push(board);
       if (result.maintenance) boardsInMaintenance.push(board);
+      if (result.reason) failureReasons[board] = result.reason;
       continue;
     }
     boardsChecked.push(board);
@@ -336,7 +384,19 @@ export async function searchWorkday(
     }
   }
 
-  return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty, boardsInMaintenance } };
+  return { jobs, meta: { boardsChecked, boardsFailed, boardsEmpty, boardsInMaintenance, failureReasons } };
+}
+
+/** Run `worker` over `items`, at most `concurrency` at a time. */
+async function runPool<T>(items: T[], concurrency: number, worker: (item: T, index: number) => Promise<void>): Promise<void> {
+  let next = 0;
+  const runners = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+    while (next < items.length) {
+      const i = next++;
+      await worker(items[i], i);
+    }
+  });
+  await Promise.all(runners);
 }
 
 // Legal-entity and regional-subsidiary noise stripped from

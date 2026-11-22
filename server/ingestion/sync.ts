@@ -356,7 +356,9 @@ async function main() {
         );
       }
       if (otherFailed.length > 0) {
-        console.log(`[${platform}] failed boards: ${otherFailed.join(", ")}`);
+        const reasons = meta.failureReasons ?? {};
+        const label = (b: string) => (reasons[b] ? `${b} (${reasons[b]})` : b);
+        console.log(`[${platform}] failed boards: ${otherFailed.map(label).join(", ")}`);
       }
       if (meta.boardsEmpty.length > 0) {
         console.log(`[${platform}] empty boards (loaded fine, 0 postings): ${meta.boardsEmpty.join(", ")}`);

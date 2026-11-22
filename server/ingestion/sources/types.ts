@@ -32,6 +32,9 @@ export interface SearchMeta {
   // failed, but logged separately so a weekend maintenance window isn't
   // mistaken for a batch of dead tokens.
   boardsInMaintenance?: string[];
+  // Optional per-board failure reason ("HTTP 403", "timeout", "partial:
+  // page 3, HTTP 429"), logged by sync.ts. Only workday.ts fills it so far.
+  failureReasons?: Record<string, string>;
 }
 
 export interface SearchOptions {
