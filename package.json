@@ -16,6 +16,7 @@
     "export": "tsx server/export/exportMapData.ts",
     "discover": "tsx server/ingestion/discoverCompanies.ts",
     "discover:a16z": "tsx server/ingestion/discoverA16z.ts",
+    "discover:vc": "tsx server/ingestion/discoverGetro.ts",
     "find-people": "tsx scripts/find-people.ts"
   },
   "dependencies": {
