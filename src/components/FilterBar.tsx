@@ -57,6 +57,15 @@ export default function FilterBar({ filters, onChange, matched, total, categorie
         >
           New only
         </button>
+        <button
+          type="button"
+          className={`filter-chip${filters.hideGhost ? " is-on" : ""}`}
+          aria-pressed={filters.hideGhost}
+          onClick={() => onChange({ ...filters, hideGhost: !filters.hideGhost })}
+          title="Leave out roles open 90+ days, or reposted and still open after 45 days"
+        >
+          👻 Hide ghost jobs
+        </button>
 
         <label className="filter-select">
           <span className="filter-select-label">Pays</span>

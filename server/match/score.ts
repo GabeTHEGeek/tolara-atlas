@@ -14,7 +14,7 @@
 
 import { isAdjacent, type Archetype } from "./archetypes.js";
 import type { RoleAnalysis } from "./analyzeRole.js";
-import { countedYears, type CandidateProfile } from "./profile.js";
+import { countedYears, type CandidateProfile } from "./candidate.js";
 import type { RequirementsCheck } from "./check.js";
 import {
   ANCHORS,

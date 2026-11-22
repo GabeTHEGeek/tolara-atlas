@@ -1673,8 +1673,10 @@ h1.role-page-title {
 .job-pill {
   display: inline-flex;
   align-items: center;
+  box-sizing: border-box;
+  height: 32px;
   gap: 6px;
-  padding: 6px 13px;
+  padding: 0 13px;
   border: 1px solid var(--border-strong);
   border-radius: 999px;
   background: var(--bg-raised);
@@ -1704,7 +1706,8 @@ h1.role-page-title {
 
 .job-pill-select select,
 .job-sort select {
-  padding: 6px 4px;
+  height: 100%;
+  padding: 0 4px;
   border: none;
   outline: none;
   background: transparent;
@@ -1756,13 +1759,23 @@ h1.role-page-title {
   accent-color: var(--accent);
 }
 
+/* Its own row under the filters: role count on the left, match quiz and
+   sort on the right, so a wide quiz button never wraps the filter row. */
 .job-summary {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 4px;
-  margin-left: auto;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
   font-size: 13px;
   color: var(--text-muted);
+}
+
+.job-summary-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .job-sort {
@@ -2335,4 +2348,219 @@ h1.role-page-title {
 .share-link.is-copied {
   color: var(--accent);
   border-color: var(--accent);
+}
+
+/* On a phone the header has no room for the label: icon only (the title
+   attribute still names it). */
+@media (max-width: 560px) {
+  .share-link {
+    padding: 4px 8px;
+    font-size: 0;
+  }
+  .share-link::before {
+    content: "🔗";
+    font-size: 14px;
+  }
+  .share-link.is-copied::before {
+    content: "✓";
+  }
+}
+
+.fresh-tag.is-ghost {
+  color: #c4b5fd;
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.32);
+}
+
+.role-facts .is-ghost-note {
+  color: #c4b5fd;
+}
+
+/* ---- Match quiz (src/components/MatchQuiz.tsx) ---- */
+.quiz-cta { white-space: nowrap; }
+
+.quiz-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+  background: rgba(5, 7, 10, 0.72);
+  overflow-y: auto;
+}
+
+.quiz {
+  width: 100%;
+  max-width: 640px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.quiz-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px 8px;
+}
+
+.quiz-head h2 { margin: 0; font-size: 20px; }
+.quiz-sub { margin: 6px 0 0; color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+
+.quiz-close {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.quiz-body { padding: 8px 24px 8px; }
+
+.quiz-section {
+  margin: 18px 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.quiz-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.quiz-field > span { font-size: 14px; color: var(--text); }
+.quiz-field em { font-style: normal; color: var(--text-faint); margin-left: 6px; font-size: 13px; }
+
+.quiz-field select,
+.quiz-field input {
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+
+.quiz-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+/* Long labels wrap on a phone, so these pills grow rather than clip. */
+.quiz-chips .job-pill { height: auto; min-height: 32px; padding: 6px 13px; text-align: left; }
+.quiz-chips .job-pill:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.quiz-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 560px) { .quiz-row { grid-template-columns: 1fr; } }
+
+.quiz-note { margin: 4px 0 0; color: var(--text-faint); font-size: 13px; line-height: 1.5; }
+
+.quiz-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px 22px;
+  border-top: 1px solid var(--border);
+  margin-top: 12px;
+}
+
+.match-source { margin: 12px 0 0; color: var(--text-faint); font-size: 13px; }
+.match-source .link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ---- Job board filter row: equal-width pills, one arrow style ----
+   The filter row is a grid so its pills share the width and its edges line
+   up with the summary row below. Native selects lose the browser's own
+   arrow and, like the Seniority and More filters buttons, draw this one. */
+.job-controls,
+.job-more {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.job-more .job-pill {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* The longest label gets two columns; the salary note takes its own line. */
+.job-more .job-pill-wide { grid-column: span 2; }
+.job-more .job-note { grid-column: 1 / -1; }
+
+@media (max-width: 640px) {
+  .job-controls,
+  .job-more {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.job-controls > .job-picker,
+.job-controls > .job-pill {
+  min-width: 0;
+}
+
+.job-controls .job-pill,
+.job-picker > .job-pill {
+  width: 100%;
+}
+
+.job-pill-select {
+  position: relative;
+  padding: 0;
+}
+
+.job-pill-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 0 30px 0 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.job-pill-menu {
+  justify-content: space-between;
+  padding-right: 13px;
+}
+
+.job-pill-select::after,
+.job-pill-menu::after {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.job-pill-select::after {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  margin-top: -3.5px; /* half the arrow's height: centred like the buttons' */
+}
+
+.job-pill-menu[aria-expanded="true"]::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+/* The sort is a pill too, sized to its text, on the summary row. */
+.job-summary .job-sort {
+  width: auto;
+  color: var(--text);
 }

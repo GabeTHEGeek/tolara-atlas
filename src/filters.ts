@@ -11,6 +11,7 @@
  */
 
 import { SENIORITY_TIERS, type LocationPinData, type RemoteCompanyData, type RoleData, type Seniority } from "./types.js";
+import { ghostReason } from "./ghost.js";
 
 export type RemoteMode = "all" | "office-only" | "remote-only";
 
@@ -27,6 +28,8 @@ export interface RoleFilters {
   // missing or unparseable ("Posted Yesterday" and friends).
   postedWithinDays: number | null;
   newOnly: boolean;
+  // Leave out roles tagged "Possible ghost job" (see ghost.ts).
+  hideGhost: boolean;
   remote: RemoteMode;
   // An industry id from data/company-categories.json, or null for any.
   // A company with no label counts as "other".
@@ -38,13 +41,14 @@ export const EMPTY_FILTERS: RoleFilters = {
   minSalary: null,
   postedWithinDays: null,
   newOnly: false,
+  hideGhost: false,
   remote: "all",
   industry: null,
 };
 
 export function isFiltering(f: RoleFilters): boolean {
   return (
-    f.seniority.size > 0 || f.minSalary != null || f.postedWithinDays != null || f.newOnly || f.remote !== "all" || f.industry != null
+    f.seniority.size > 0 || f.minSalary != null || f.postedWithinDays != null || f.newOnly || f.hideGhost || f.remote !== "all" || f.industry != null
   );
 }
 
@@ -78,6 +82,7 @@ export function roleMatches(role: RoleData, f: RoleFilters, now: number): boolea
   }
 
   if (f.newOnly && !role.isNew) return false;
+  if (f.hideGhost && ghostReason(role, now) != null) return false;
 
   if (f.postedWithinDays != null) {
     const date = roleDate(role);
@@ -147,11 +152,12 @@ export function countRoles(pins: LocationPinData[], remoteCompanies: RemoteCompa
  * hand-edited or come from an older version.
  */
 export function filtersToParams(f: RoleFilters, params: URLSearchParams): void {
-  for (const key of ["sen", "pay", "posted", "new", "where", "ind"]) params.delete(key);
+  for (const key of ["sen", "pay", "posted", "new", "ghost", "where", "ind"]) params.delete(key);
   if (f.seniority.size > 0) params.set("sen", SENIORITY_TIERS.filter((t) => f.seniority.has(t)).join(","));
   if (f.minSalary != null) params.set("pay", String(f.minSalary));
   if (f.postedWithinDays != null) params.set("posted", String(f.postedWithinDays));
   if (f.newOnly) params.set("new", "1");
+  if (f.hideGhost) params.set("ghost", "hide");
   if (f.remote !== "all") params.set("where", f.remote);
   if (f.industry != null) params.set("ind", f.industry);
 }
@@ -169,6 +175,7 @@ export function filtersFromParams(params: URLSearchParams): RoleFilters {
     minSalary: positive(params.get("pay")),
     postedWithinDays: positive(params.get("posted")),
     newOnly: params.get("new") === "1",
+    hideGhost: params.get("ghost") === "hide",
     remote: where === "office-only" || where === "remote-only" ? where : "all",
     // Not checked against the category list here (it arrives with the map
     // data); an unknown id just matches nothing until it's cleared.

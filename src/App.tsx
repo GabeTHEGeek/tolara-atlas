@@ -9,6 +9,8 @@ import VoicePanel from "./components/VoicePanel.js";
 import { useVoiceAgent } from "./voice/useVoiceAgent.js";
 import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
 import JobBoard, { type JobSort } from "./components/JobBoard.js";
+import MatchQuiz from "./components/MatchQuiz.js";
+import { useQuizOpen } from "./scores.js";
 import { replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
 import { buildPayRanker } from "./payRank.js";
 import {
@@ -42,6 +44,7 @@ export default function App() {
   // board just covers it.
   const [baseView, setBaseView] = useState<"map" | "jobs">(route.name === "jobs" ? "jobs" : "map");
   const [jobQuery, setJobQuery] = useState(() => (route.name === "jobs" ? (route.params.get("q") ?? "") : ""));
+  const quizOpen = useQuizOpen();
   const [jobSort, setJobSort] = useState<JobSort>(() => {
     const s = route.name === "jobs" ? route.params.get("sort") : null;
     return s === "salary" || s === "company" || s === "best" ? s : "newest";
@@ -338,6 +341,7 @@ export default function App() {
       </header>
 
       <main className="app-main">
+        {quizOpen && <MatchQuiz onSaved={() => setJobSort("best")} />}
         {error && (
           <div className="app-error">
             Couldn't load map data: {error}. Run <code>npm run export</code> first to generate{" "}

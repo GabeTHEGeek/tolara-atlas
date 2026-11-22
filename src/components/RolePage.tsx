@@ -5,6 +5,8 @@ import { roleDate } from "../filters.js";
 import { payRankShort, type PayRanker } from "../payRank.js";
 import FreshnessTag from "./FreshnessTag.js";
 import RepostTag from "./RepostTag.js";
+import GhostTag from "./GhostTag.js";
+import { ghostReason } from "../ghost.js";
 import PeoplePanel, { FindPeopleButton } from "./PeoplePanel.js";
 import MatchCard from "./MatchCard.js";
 import { SENIORITY_LABELS } from "../types.js";
@@ -289,6 +291,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
   const repostedOn = role.repostedFrom
     ? new Date(role.repostedFrom).toLocaleDateString("en-US", { month: "short", day: "numeric" })
     : null;
+  const ghost = ghostReason(role);
   const intelLoaded = intel !== null;
   const profile = intel?.profile ?? null;
 
@@ -301,14 +304,16 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
               {role.title}
               <FreshnessTag role={role} />
               <RepostTag repostedFrom={role.repostedFrom} />
+              <GhostTag role={role} />
             </h1>
             <p className="role-subtitle">
               {[details.company.name, role.team, locationLabel(role)].filter(Boolean).join(" · ")}
             </p>
-            {(daysOpen || repostedOn) && (
+            {(daysOpen || repostedOn || ghost) && (
               <p className="role-facts">
                 {daysOpen && <span>{daysOpen}</span>}
                 {repostedOn && <span>Taken down and reposted · first posted around {repostedOn}</span>}
+                {ghost && <span className="is-ghost-note">Possible ghost job: {ghost}</span>}
               </p>
             )}
           </div>

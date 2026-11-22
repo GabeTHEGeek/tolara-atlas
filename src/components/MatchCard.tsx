@@ -1,12 +1,13 @@
-import { TIER_CLASS, useRoleScore } from "../scores.js";
+import { TIER_CLASS, openQuiz, useRoleScore, useScores } from "../scores.js";
 
 /**
- * "Your match" on role prep: the score from scripts/match-resume.ts and
- * what each part of it came from. Only on the owner's machine, and only
- * for roles the matcher has analysed -- otherwise it renders nothing.
+ * "Your match" on role prep: the score and what each part of it came from,
+ * from this browser's match quiz or (on the owner's machine) the resume
+ * matcher. Only for analysed roles -- otherwise it renders nothing.
  */
 export default function MatchCard({ roleId }: { roleId: number }) {
   const score = useRoleScore(roleId);
+  const { source } = useScores();
   if (!score) return null;
 
   // Categories with no preference behind them weren't part of the score.
@@ -35,6 +36,14 @@ export default function MatchCard({ roleId }: { roleId: number }) {
           </li>
         ))}
       </ul>
+      {source === "quiz" && (
+        <p className="match-source">
+          From your quiz answers.{" "}
+          <button type="button" className="link-button" onClick={() => openQuiz()}>
+            Edit answers
+          </button>
+        </p>
+      )}
     </section>
   );
 }

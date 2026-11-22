@@ -72,6 +72,7 @@ import { writeCompanyDetails } from "./companyDetails.js";
 import { loadRepostedFrom } from "./reposts.js";
 import { readCachedIntelligence } from "../enrichment/intelligence.js";
 import { NEW_ROLE_DAYS, isNewRole, seniorityOf, sqliteToIso, type Seniority } from "./roleFacets.js";
+import { writeMatchFacts } from "./matchFacts.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUTPUT_PATH = path.join(__dirname, "..", "..", "public", "data", "map-data.json");
@@ -609,6 +610,10 @@ function main() {
   const visibleRoleIds = new Set([...rows.map((r) => r.id), ...usUnplacedRows.map((r) => r.id)]);
   const detailFiles = writeCompanyDetails(db, path.join(path.dirname(OUTPUT_PATH), "companies"), visibleRoleIds);
   console.log(`Wrote ${detailFiles} company detail files to ${path.join(path.dirname(OUTPUT_PATH), "companies")}`);
+
+  // Analysed roles' facts for the quiz-based match score in the browser.
+  const matchFacts = writeMatchFacts(db, pins, remoteCompanies, path.join(path.dirname(OUTPUT_PATH), "match-facts.json"));
+  console.log(`Wrote match facts for ${matchFacts} analysed roles`);
 
   console.log(
     `Change feed: ${changes.added} added, ${changes.closed} closed in the last ${changes.windowDays} days`,

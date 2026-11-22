@@ -3,6 +3,7 @@ import { roleHref } from "../router.js";
 import { formatSalary } from "../format.js";
 import FreshnessTag from "./FreshnessTag.js";
 import RepostTag from "./RepostTag.js";
+import GhostTag from "./GhostTag.js";
 
 interface RemotePanelProps {
   companies: RemoteCompanyData[];
@@ -71,6 +72,7 @@ export default function RemotePanel({ companies, open, onClose }: RemotePanelPro
                     <div className="role-meta">
                       <FreshnessTag role={role} />
                       <RepostTag repostedFrom={role.repostedFrom} />
+                      <GhostTag role={role} />
                       {role.location && <span>{role.location}</span>}
                       {salary && (
                         <span className="role-salary" title="From the posting, not estimated">

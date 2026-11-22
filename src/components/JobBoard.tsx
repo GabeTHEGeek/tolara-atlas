@@ -5,8 +5,9 @@ import { daysOpenLabel, formatSalary, openSince } from "../format.js";
 import { roleHref } from "../router.js";
 import FreshnessTag from "./FreshnessTag.js";
 import RepostTag from "./RepostTag.js";
+import GhostTag from "./GhostTag.js";
 import { payRankShort, type PayRanker } from "../payRank.js";
-import { TIER_CLASS, useScores, type Tier } from "../scores.js";
+import { TIER_CLASS, openQuiz, useScores, type Tier } from "../scores.js";
 import { FindPeopleButton } from "./PeoplePanel.js";
 import { useContacts } from "../contacts.js";
 
@@ -166,11 +167,11 @@ function SeniorityPicker({ filters, onChange }: { filters: RoleFilters; onChange
     <div className="job-picker" ref={ref}>
       <button
         type="button"
-        className={`job-pill${chosen.length > 0 ? " is-on" : ""}`}
+        className={`job-pill job-pill-menu${chosen.length > 0 ? " is-on" : ""}`}
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
       >
-        {label} <span aria-hidden="true">▾</span>
+        {label}
       </button>
       {open && (
         <div className="job-picker-menu" role="group" aria-label="Seniority">
@@ -201,9 +202,9 @@ export default function JobBoard({
   payRank,
 }: JobBoardProps) {
   const [shown, setShown] = useState(PAGE_SIZE);
-  const [moreOpen, setMoreOpen] = useState(filters.postedWithinDays != null || filters.newOnly);
+  const [moreOpen, setMoreOpen] = useState(filters.postedWithinDays != null || filters.newOnly || filters.hideGhost);
   const { counts: peopleFound } = useContacts();
-  const { roles: scores } = useScores();
+  const { roles: scores, source: scoreSource } = useScores();
   const hasScores = Object.keys(scores).length > 0;
 
   const rows = useMemo(() => buildRows(pins, remoteCompanies), [pins, remoteCompanies]);
@@ -291,26 +292,12 @@ export default function JobBoard({
 
           <button
             type="button"
-            className={`job-pill${filters.postedWithinDays != null || filters.newOnly ? " is-on" : ""}`}
+            className={`job-pill job-pill-menu${filters.postedWithinDays != null || filters.newOnly || filters.hideGhost ? " is-on" : ""}`}
             aria-expanded={moreOpen}
             onClick={() => setMoreOpen((o) => !o)}
           >
             More filters
           </button>
-
-          <span className="job-summary">
-            <span>
-              {matched.length.toLocaleString()} {narrowed ? `of ${total.toLocaleString()} ` : ""}roles
-            </span>
-            <label className="job-sort">
-              <select value={sort} onChange={(e) => onSortChange(e.target.value as JobSort)} aria-label="Sort by">
-                <option value="newest">Newest</option>
-                <option value="salary">Highest salary</option>
-                <option value="company">Company A–Z</option>
-                {hasScores && <option value="best">Best match</option>}
-              </select>
-            </label>
-          </span>
         </div>
 
         {moreOpen && (
@@ -340,11 +327,50 @@ export default function JobBoard({
             >
               New only
             </button>
+            <button
+              type="button"
+              className={`job-pill job-pill-wide${filters.hideGhost ? " is-on" : ""}`}
+              aria-pressed={filters.hideGhost}
+              onClick={() => onFiltersChange({ ...filters, hideGhost: !filters.hideGhost })}
+              title="Leave out roles open 90+ days, or reposted and still open after 45 days"
+            >
+              👻 Hide possible ghost jobs
+            </button>
             {filters.minSalary != null && (
               <span className="job-note">Salary filters only match roles that publish a band.</span>
             )}
           </div>
         )}
+
+        <div className="job-summary">
+          <span>
+            {matched.length.toLocaleString()} {narrowed ? `of ${total.toLocaleString()} ` : ""}roles
+          </span>
+          <span className="job-summary-actions">
+            <button
+              type="button"
+              className={`job-pill quiz-cta${scoreSource === "quiz" ? " is-on" : ""}`}
+              onClick={() => openQuiz()}
+              title={
+                scoreSource === "quiz"
+                  ? "Change the answers your match scores are based on"
+                  : scoreSource === "owner"
+                    ? "Score roles from quiz answers instead of your resume, in this browser, until you clear them"
+                    : "Answer a few questions and every role gets a match score"
+              }
+            >
+              {scoreSource === "quiz" ? "✨ Edit match quiz" : scoreSource === "owner" ? "✨ Try the match quiz" : "✨ Get your match score"}
+            </button>
+            <label className="job-pill job-pill-select job-sort">
+              <select value={sort} onChange={(e) => onSortChange(e.target.value as JobSort)} aria-label="Sort by">
+                <option value="newest">Newest</option>
+                <option value="salary">Highest salary</option>
+                <option value="company">Company A–Z</option>
+                {hasScores && <option value="best">Best match</option>}
+              </select>
+            </label>
+          </span>
+        </div>
 
         {narrowed && (
           <button type="button" className="job-clear" onClick={clearAll}>
@@ -380,11 +406,12 @@ export default function JobBoard({
                       )}
                       <FreshnessTag role={row.role} />
                       <RepostTag repostedFrom={row.role.repostedFrom} />
+                      <GhostTag role={row.role} />
                       {scores[row.role.id] && (
                         <a
                           className={`match-badge match-badge--${TIER_CLASS[scores[row.role.id][1]]}`}
                           href={roleHref(row.companySlug, row.role.id)}
-                          title={`Your match: ${scores[row.role.id][1]} — open role prep for why`}
+                          title={`Your match: ${scores[row.role.id][1]} — open the role for why`}
                         >
                           {scores[row.role.id][0]} · {scores[row.role.id][1]}
                         </a>
