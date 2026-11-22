@@ -69,6 +69,7 @@ import path from "node:path";
 import { getDb } from "../db/client.js";
 import { isExplicitlyNonUS } from "../ingestion/locationParser.js";
 import { writeCompanyDetails } from "./companyDetails.js";
+import { loadRepostedFrom } from "./reposts.js";
 import { readCachedIntelligence } from "../enrichment/intelligence.js";
 import { NEW_ROLE_DAYS, isNewRole, seniorityOf, sqliteToIso, type Seniority } from "./roleFacets.js";
 
@@ -96,6 +97,9 @@ interface RoleExport {
   // the board's own date and is missing on plenty of postings -- firstSeenAt
   // is always present, so it's what the "posted within" filter falls back to.
   firstSeenAt: string;
+  // For a repost (taken down and put back up as a new posting -- see
+  // reposts.ts): when we first saw the ORIGINAL posting. null otherwise.
+  repostedFrom: string | null;
   isNew: boolean;
   // Derived from the title (see roleFacets.ts) -- the only seniority signal
   // an ATS gives us for free.
@@ -278,7 +282,13 @@ interface RoleExportSource {
   first_seen_at: string;
 }
 
-function toRoleExport(row: RoleExportSource, trackedSince: string, now: number, isRemote: boolean): RoleExport {
+function toRoleExport(
+  row: RoleExportSource,
+  trackedSince: string,
+  now: number,
+  isRemote: boolean,
+  repostedFrom: Map<number, string>,
+): RoleExport {
   return {
     id: row.id,
     title: row.title,
@@ -290,6 +300,7 @@ function toRoleExport(row: RoleExportSource, trackedSince: string, now: number, 
     url: row.url,
     postedAt: row.posted_at,
     firstSeenAt: sqliteToIso(row.first_seen_at),
+    repostedFrom: repostedFrom.get(row.id) ?? null,
     isNew: isNewRole(row, trackedSince, now),
     seniority: seniorityOf(row.title),
     isRemote,
@@ -382,6 +393,7 @@ function main() {
     ).map((r) => [r.company_id, sqliteToIso(r.t)]),
   );
   const trackedSince = (companyId: number) => trackedSinceByCompany.get(companyId) ?? new Date(now).toISOString();
+  const repostedFrom = loadRepostedFrom(db);
 
   // Reads from role_locations (one row per office a role is actually open
   // in), not roles.latitude/longitude directly -- a role listed as open in
@@ -451,7 +463,7 @@ function main() {
       latitude: coord.lat,
       longitude: coord.lng,
       roleCount: p.roles.length,
-      roles: p.roles.map((r) => toRoleExport(r, trackedSince(p.companyId), now, Boolean(r.is_remote))),
+      roles: p.roles.map((r) => toRoleExport(r, trackedSince(p.companyId), now, Boolean(r.is_remote), repostedFrom)),
     };
   });
 
@@ -504,7 +516,7 @@ function main() {
   >();
   for (const row of usUnplacedRows) {
     const existing = remoteCompaniesByCompany.get(row.company_id);
-    const roleExport: RoleExport = toRoleExport(row, trackedSince(row.company_id), now, true);
+    const roleExport: RoleExport = toRoleExport(row, trackedSince(row.company_id), now, true, repostedFrom);
     if (existing) {
       existing.roles.push(roleExport);
     } else {

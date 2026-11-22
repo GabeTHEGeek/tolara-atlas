@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { SENIORITY_LABELS, SENIORITY_TIERS, type LocationPinData, type RemoteCompanyData, type RoleData, type Seniority } from "../types.js";
 import { EMPTY_FILTERS, isFiltering, roleDate, type RemoteMode, type RoleFilters } from "../filters.js";
-import { formatSalary, relativeTime } from "../format.js";
+import { daysOpenLabel, formatSalary, openSince } from "../format.js";
 import { roleHref } from "../router.js";
 import FreshnessTag from "./FreshnessTag.js";
+import RepostTag from "./RepostTag.js";
+import { payRankShort, type PayRanker } from "../payRank.js";
 import { TIER_CLASS, useScores, type Tier } from "../scores.js";
 import { FindPeopleButton } from "./PeoplePanel.js";
 import { useContacts } from "../contacts.js";
@@ -32,6 +34,7 @@ interface JobBoardProps {
   sort: JobSort;
   onSortChange: (s: JobSort) => void;
   total: number;
+  payRank: PayRanker;
 }
 
 interface JobRow {
@@ -195,6 +198,7 @@ export default function JobBoard({
   sort,
   onSortChange,
   total,
+  payRank,
 }: JobBoardProps) {
   const [shown, setShown] = useState(PAGE_SIZE);
   const [moreOpen, setMoreOpen] = useState(filters.postedWithinDays != null || filters.newOnly);
@@ -360,7 +364,8 @@ export default function JobBoard({
           <ul className="job-list">
             {matched.slice(0, shown).map((row) => {
               const salary = formatSalary(row.role.salaryMin, row.role.salaryMax, row.role.salaryCurrency, row.role.salaryPeriod);
-              const when = row.date != null ? relativeTime(new Date(row.date).toISOString()) : null;
+              const when = daysOpenLabel(openSince(row.date, row.role.repostedFrom));
+              const rank = payRank(row.role);
               return (
                 <li key={row.role.id} className="job-row">
                   <CompanyLogo name={row.companyName} slug={row.companySlug} logo={logos[row.companySlug]} />
@@ -374,6 +379,7 @@ export default function JobBoard({
                         row.role.title
                       )}
                       <FreshnessTag role={row.role} />
+                      <RepostTag repostedFrom={row.role.repostedFrom} />
                       {scores[row.role.id] && (
                         <a
                           className={`match-badge match-badge--${TIER_CLASS[scores[row.role.id][1]]}`}
@@ -399,6 +405,14 @@ export default function JobBoard({
                       {when && <span>{when}</span>}
                     </p>
                     {salary ? <span className="job-salary">{salary}</span> : <span className="job-nosalary">Salary not listed</span>}
+                    {rank && rank.percentile >= 75 && (
+                      <span
+                        className="pay-rank"
+                        title={`Pays more than ${rank.percentile}% of the ${rank.sampleSize.toLocaleString()} ${SENIORITY_LABELS[rank.seniority]} PM roles with a posted band`}
+                      >
+                        {payRankShort(rank)} pay for {SENIORITY_LABELS[rank.seniority]}
+                      </span>
+                    )}
                   </div>
                   <div className="job-actions">
                     {row.role.url && (

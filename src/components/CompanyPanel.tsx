@@ -2,6 +2,7 @@ import type { LocationPinData } from "../types.js";
 import { roleHref } from "../router.js";
 import { formatSalary } from "../format.js";
 import FreshnessTag from "./FreshnessTag.js";
+import RepostTag from "./RepostTag.js";
 
 interface CompanyPanelProps {
   pin: LocationPinData | null;
@@ -58,6 +59,7 @@ export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
               </div>
               <div className="role-meta">
                 <FreshnessTag role={role} />
+                <RepostTag repostedFrom={role.repostedFrom} />
                 {role.isRemote && (
                   <span
                     className="role-remote-badge"

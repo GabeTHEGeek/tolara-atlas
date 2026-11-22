@@ -38,6 +38,9 @@ export interface RoleData {
   // (which is the board's own field, often missing or a relative string
   // like "Posted Yesterday"), so it's what the date filter falls back to.
   firstSeenAt: string;
+  // For a repost (taken down and put back up as a new posting): when the
+  // ORIGINAL posting was first seen. Optional so older exports still load.
+  repostedFrom?: string | null;
   isNew: boolean;
   seniority: Seniority;
   // true when this role has no office of its own (e.g. posted as "Remote -
@@ -175,6 +178,7 @@ export interface CompanyDetailsRole {
   url: string | null;
   postedAt: string | null;
   firstSeenAt: string;
+  repostedFrom?: string | null;
   isNew: boolean;
   seniority: Seniority;
   offices: Array<{ city: string; state: string; latitude: number; longitude: number; isRemote: boolean }>;

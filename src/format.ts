@@ -104,3 +104,23 @@ export function freshnessOf(date: number | null, isNew: boolean, now: number): F
   if (days >= 30) return "aging";
   return null;
 }
+
+/**
+ * When a role really opened, in epoch ms: for a repost, when the ORIGINAL
+ * posting first appeared (a repost resets the board's date, not how long
+ * the job has gone unfilled); otherwise filters.ts's roleDate. Null when
+ * nothing parses.
+ */
+export function openSince(roleDateMs: number | null, repostedFrom: string | null | undefined): number | null {
+  const original = repostedFrom ? Date.parse(repostedFrom) : NaN;
+  if (!Number.isNaN(original) && (roleDateMs == null || original < roleDateMs)) return original;
+  return roleDateMs;
+}
+
+/** "Opened today", "Open 1 day", "Open 47 days". */
+export function daysOpenLabel(since: number | null, now: number = Date.now()): string | null {
+  if (since == null) return null;
+  const days = Math.floor((now - since) / DAY_MS);
+  if (days <= 0) return "Opened today";
+  return `Open ${days} ${days === 1 ? "day" : "days"}`;
+}

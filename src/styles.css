@@ -2283,3 +2283,56 @@ h1.role-page-title {
   border-color: rgba(129, 140, 248, 0.25);
   opacity: 0.85;
 }
+
+/* ---------- Reposted tag, pay rank, days open ---------- */
+
+.fresh-tag.is-repost {
+  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.32);
+}
+
+.pay-rank {
+  display: inline-block;
+  margin: 8px 0 0 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--salary);
+  opacity: 0.85;
+}
+
+.role-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text-muted, #9aa4b2);
+}
+
+.role-facts strong {
+  color: var(--salary);
+  font-weight: 600;
+}
+
+/* ---------- Share link button in the header ---------- */
+
+.share-link {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.share-link:hover,
+.share-link.is-copied {
+  color: var(--accent);
+  border-color: var(--accent);
+}

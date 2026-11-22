@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 /**
  * Hash-based routes, so a role link works on any static host with no
  * server-side rewrite rules:
- *   #/                                  the map
+ *   #/  or  #/?sen=...                  the map, its filters in the query
+ *                                       so a filtered map can be shared
  *   #/jobs?q=...&sen=...                the job board, its search and
  *                                       filters in the query so a filtered
  *                                       list can be bookmarked or shared
  *   #/company/<slug>/role/<roleId>      a role page
  */
 export type Route =
-  | { name: "map" }
+  | { name: "map"; params: URLSearchParams }
   | { name: "jobs"; params: URLSearchParams }
   | { name: "role"; companySlug: string; roleId: number };
 
@@ -19,7 +20,8 @@ function parse(hash: string): Route {
   if (m) return { name: "role", companySlug: m[1], roleId: Number(m[2]) };
   const jobs = hash.match(/^#\/jobs\/?(?:\?(.*))?$/);
   if (jobs) return { name: "jobs", params: new URLSearchParams(jobs[1] ?? "") };
-  return { name: "map" };
+  const map = hash.match(/^#\/?\?(.*)$/);
+  return { name: "map", params: new URLSearchParams(map?.[1] ?? "") };
 }
 
 /**
@@ -31,6 +33,14 @@ export function replaceJobsQuery(params: URLSearchParams): void {
   const query = params.toString();
   const next = `#/jobs${query ? `?${query}` : ""}`;
   if (window.location.hash !== next) window.history.replaceState(null, "", next);
+}
+
+/** Same as replaceJobsQuery, for the map's own filter query. */
+export function replaceMapQuery(params: URLSearchParams): void {
+  const query = params.toString();
+  const next = `#/${query ? `?${query}` : ""}`;
+  const current = window.location.hash || "#/";
+  if (current !== next) window.history.replaceState(null, "", next);
 }
 
 export function roleHref(companySlug: string, roleId: number): string {

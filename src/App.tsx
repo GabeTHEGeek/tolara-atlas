@@ -9,7 +9,8 @@ import VoicePanel from "./components/VoicePanel.js";
 import { useVoiceAgent } from "./voice/useVoiceAgent.js";
 import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
 import JobBoard, { type JobSort } from "./components/JobBoard.js";
-import { replaceJobsQuery, useRoute } from "./router.js";
+import { replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
+import { buildPayRanker } from "./payRank.js";
 import {
   EMPTY_FILTERS,
   countRoles,
@@ -33,8 +34,9 @@ export default function App() {
   // that aliases it would be a mutation bug waiting to happen.
   // Opening a shared #/jobs?... link starts with the filters it carries.
   const [filters, setFilters] = useState<RoleFilters>(() =>
-    route.name === "jobs" ? filtersFromParams(route.params) : { ...EMPTY_FILTERS, seniority: new Set() },
+    route.name === "jobs" || route.name === "map" ? filtersFromParams(route.params) : { ...EMPTY_FILTERS, seniority: new Set() },
   );
+  const [linkCopied, setLinkCopied] = useState(false);
   // Which view sits under the role drawer: the one you opened it from.
   // The map stays mounted either way (MapLibre is slow to rebuild); the job
   // board just covers it.
@@ -78,6 +80,12 @@ export default function App() {
     () => (mapData ? filterRemoteCompanies(mapData.remoteCompanies, filters, now, mapData.companyCategories) : []),
     [mapData, filters, now],
   );
+  // Ranked over every open role, not the filtered set: "top 10% for Senior"
+  // shouldn't change because you narrowed the map to one industry.
+  const payRank = useMemo(
+    () => (mapData ? buildPayRanker(mapData.pins, mapData.remoteCompanies) : null),
+    [mapData],
+  );
   const matchedRoles = useMemo(
     () => countRoles(filteredPins, filteredRemoteCompanies),
     [filteredPins, filteredRemoteCompanies],
@@ -105,6 +113,35 @@ export default function App() {
     replaceJobsQuery(params);
   }, [route.name, jobQuery, jobSort, filters]);
 
+  // Same for the map, so a filtered map ("Senior, $200k+, fintech") is a
+  // link you can share too.
+  useEffect(() => {
+    if (route.name !== "map") return;
+    const params = new URLSearchParams();
+    filtersToParams(filters, params);
+    replaceMapQuery(params);
+  }, [route, filters]);
+
+  const mapHash = useCallback(() => {
+    const params = new URLSearchParams();
+    filtersToParams(filters, params);
+    const query = params.toString();
+    return `#/${query ? `?${query}` : ""}`;
+  }, [filters]);
+
+  const copyLink = useCallback(() => {
+    const url = window.location.href;
+    const done = () => {
+      setLinkCopied(true);
+      window.setTimeout(() => setLinkCopied(false), 2000);
+    };
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(url).then(done, () => window.prompt("Copy this link:", url));
+    } else {
+      window.prompt("Copy this link:", url);
+    }
+  }, []);
+
   const jobsHash = useCallback(() => {
     const params = new URLSearchParams();
     if (jobQuery.trim()) params.set("q", jobQuery.trim());
@@ -118,8 +155,8 @@ export default function App() {
   const closeRole = useCallback(() => {
     setRolePinId(null);
     setCrumbs(null);
-    window.location.hash = baseView === "jobs" ? jobsHash() : "#/";
-  }, [baseView, jobsHash]);
+    window.location.hash = baseView === "jobs" ? jobsHash() : mapHash();
+  }, [baseView, jobsHash, mapHash]);
 
   /**
    * Opening a company panel closes whatever else was open, the role drawer
@@ -211,7 +248,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <a className="brand" href="#/" aria-label="Tolara Scout — back to the map">
+        <a className="brand" href={mapHash()} aria-label="Tolara Scout — back to the map">
           <span className="brand-mark" aria-hidden="true">
             T
           </span>
@@ -222,7 +259,7 @@ export default function App() {
         <span className="header-divider" aria-hidden="true" />
         {!onRolePage && (
           <nav className="view-toggle" aria-label="View">
-            <a href="#/" className={onJobs ? "" : "is-on"} aria-current={onJobs ? undefined : "page"}>
+            <a href={mapHash()} className={onJobs ? "" : "is-on"} aria-current={onJobs ? undefined : "page"}>
               Map
             </a>
             <a href={jobsHash()} className={onJobs ? "is-on" : ""} aria-current={onJobs ? "page" : undefined}>
@@ -232,7 +269,7 @@ export default function App() {
         )}
         {onRolePage ? (
           <nav className="breadcrumbs" aria-label="Breadcrumb">
-            <a href={onJobs ? jobsHash() : "#/"}>{onJobs ? "Jobs" : "Map"}</a>
+            <a href={onJobs ? jobsHash() : mapHash()}>{onJobs ? "Jobs" : "Map"}</a>
             {crumbs && (
               <>
                 <span aria-hidden="true">›</span>
@@ -290,6 +327,14 @@ export default function App() {
             </span>
           )
         )}
+        <button
+          type="button"
+          className={`share-link${linkCopied ? " is-copied" : ""}`}
+          onClick={copyLink}
+          title={onRolePage ? "Copy a link to this role" : "Copy a link to this view, filters included"}
+        >
+          {linkCopied ? "Link copied ✓" : "🔗 Copy link"}
+        </button>
       </header>
 
       <main className="app-main">
@@ -355,6 +400,7 @@ export default function App() {
             sort={jobSort}
             onSortChange={setJobSort}
             total={mapData.roleCount}
+            payRank={payRank ?? (() => null)}
           />
         )}
         {mapData && (
@@ -375,6 +421,7 @@ export default function App() {
             onLoaded={onRoleLoaded}
             onClose={closeRole}
             intelRefresh={intelRefresh}
+            payRank={payRank}
           />
         )}
       </main>

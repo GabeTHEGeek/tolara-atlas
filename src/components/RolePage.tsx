@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { roleHref } from "../router.js";
-import { formatSalary, relativeTime } from "../format.js";
+import { daysOpenLabel, formatSalary, openSince, relativeTime } from "../format.js";
+import { roleDate } from "../filters.js";
+import { payRankShort, type PayRanker } from "../payRank.js";
 import FreshnessTag from "./FreshnessTag.js";
+import RepostTag from "./RepostTag.js";
 import PeoplePanel, { FindPeopleButton } from "./PeoplePanel.js";
 import MatchCard from "./MatchCard.js";
+import { SENIORITY_LABELS } from "../types.js";
 import type {
   CompanyDetails,
   CompanyDetailsRole,
@@ -28,6 +32,9 @@ interface RolePageProps {
   // Set when the voice agent has just warmed this company's profile; the
   // nonce makes a repeat refresh for the same company fire again.
   intelRefresh?: { slug: string; nonce: number } | null;
+  // Ranks the role's pay among every open role at its level; built by App
+  // from the map data. Absent until the map data has loaded.
+  payRank?: PayRanker | null;
 }
 
 // Keep in step with the .role-drawer transition in styles.css.
@@ -133,7 +140,7 @@ function initials(name: string): string {
  * office). Stays mounted while moving between roles, so only the first
  * open and the final close animate.
  */
-export default function RolePage({ companySlug, roleId, onLoaded, onClose, intelRefresh }: RolePageProps) {
+export default function RolePage({ companySlug, roleId, onLoaded, onClose, intelRefresh, payRank }: RolePageProps) {
   const [open, setOpen] = useState(false);
   const [details, setDetails] = useState<CompanyDetails | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -277,6 +284,11 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
     writeSaved(next);
   };
   const salary = formatSalary(role.salaryMin, role.salaryMax, role.salaryCurrency, role.salaryPeriod);
+  const daysOpen = daysOpenLabel(openSince(roleDate(role), role.repostedFrom));
+  const rank = payRank?.(role) ?? null;
+  const repostedOn = role.repostedFrom
+    ? new Date(role.repostedFrom).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    : null;
   const intelLoaded = intel !== null;
   const profile = intel?.profile ?? null;
 
@@ -288,10 +300,17 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
             <h1 className="role-page-title">
               {role.title}
               <FreshnessTag role={role} />
+              <RepostTag repostedFrom={role.repostedFrom} />
             </h1>
             <p className="role-subtitle">
               {[details.company.name, role.team, locationLabel(role)].filter(Boolean).join(" · ")}
             </p>
+            {(daysOpen || repostedOn) && (
+              <p className="role-facts">
+                {daysOpen && <span>{daysOpen}</span>}
+                {repostedOn && <span>Taken down and reposted · first posted around {repostedOn}</span>}
+              </p>
+            )}
           </div>
           <div className="role-actions">
             <FindPeopleButton roleId={role.id} />
@@ -310,6 +329,14 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
           <div className="salary-row">
             <span className="salary-chip">{salary}</span>
             <span className="mono-note">FROM POSTING · NOT ESTIMATED</span>
+            {rank && (
+              <span className="role-facts" style={{ marginTop: 0 }}>
+                <span>
+                  <strong>{payRankShort(rank)}</strong> for {SENIORITY_LABELS[rank.seniority]} PM roles: pays more than{" "}
+                  {rank.percentile}% of the {rank.sampleSize.toLocaleString()} with a posted band
+                </span>
+              </span>
+            )}
           </div>
         )}
 

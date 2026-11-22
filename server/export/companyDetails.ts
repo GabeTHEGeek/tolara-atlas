@@ -15,6 +15,7 @@ import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import type Database from "better-sqlite3";
 import { readCachedIntelligence } from "../enrichment/intelligence.js";
+import { loadRepostedFrom } from "./reposts.js";
 import {
   NEW_ROLE_DAYS,
   daysSince,
@@ -44,6 +45,7 @@ export interface CompanyDetailsRole {
   url: string | null;
   postedAt: string | null;
   firstSeenAt: string; // ISO; when our sync first saw it
+  repostedFrom: string | null; // ISO; for a repost, when we first saw the original (see reposts.ts)
   isNew: boolean;
   seniority: Seniority;
   offices: CompanyDetailsOffice[];
@@ -95,6 +97,7 @@ function companySignals(roles: CompanyDetailsRole[], trackedSince: string, now: 
 
 export function writeCompanyDetails(db: Database.Database, outputDir: string, visibleRoleIds: Set<number>) {
   const now = Date.now();
+  const repostedFrom = loadRepostedFrom(db);
   const companies = db
     .prepare(
       `SELECT DISTINCT c.id, c.name, c.slug, c.created_at
@@ -140,6 +143,7 @@ export function writeCompanyDetails(db: Database.Database, outputDir: string, vi
         url: r.url,
         postedAt: r.posted_at,
         firstSeenAt: sqliteToIso(r.first_seen_at),
+        repostedFrom: repostedFrom.get(r.id) ?? null,
         isNew: isNewRole(r, trackedSince, now),
         seniority: seniorityOf(r.title),
         offices: (
