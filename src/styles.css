@@ -2771,3 +2771,16 @@ a.match-ring:hover { transform: scale(1.06); }
   .quiz-nav .btn { flex: 1; }
   .quiz-sub-field { margin-left: 0; }
 }
+
+/* ---------- Match quiz: fill from a resume ---------- */
+.quiz-resume { border: 1px dashed var(--border-strong); border-radius: 12px; padding: 12px 14px; margin: 0 0 18px; font-size: 13.5px; color: var(--text-muted); }
+.quiz-resume p { margin: 0 0 10px; line-height: 1.45; }
+.quiz-resume strong { color: var(--text); }
+.quiz-resume-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.quiz-resume-actions .btn { cursor: pointer; }
+.quiz-resume-actions .is-busy { opacity: 0.6; pointer-events: none; }
+.quiz-link { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.quiz-paste { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.quiz-paste textarea { width: 100%; box-sizing: border-box; resize: vertical; font: inherit; font-size: 13px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface, transparent); color: var(--text); }
+.quiz-paste .btn { align-self: flex-start; }
+.quiz-resume-error { color: #b91c1c; margin: 10px 0 0 !important; }

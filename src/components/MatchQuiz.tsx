@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { QUESTIONS } from "../../server/match/onboarding.js";
 import { ARCHETYPES, DEFAULT_QUIZ, readQuiz, type Archetype, type QuizAnswers } from "../quizMatch.js";
 import { openQuiz, setQuizAnswers } from "../scores.js";
+import { guessFromResume, type ResumeGuess } from "../resumeGuess.js";
+import { resumeText } from "../resumeText.js";
 
 /**
  * The match quiz: a minute of questions in place of a resume. Answers stay
@@ -36,6 +38,12 @@ export default function MatchQuiz({ onSaved }: { onSaved?: () => void }) {
   const [founded, setFounded] = useState((saved?.founderYears ?? 0) > 0);
   const bodyRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  // Resume fill: read and guessed in this browser (resumeGuess.ts), never uploaded.
+  const [pasting, setPasting] = useState(false);
+  const [pasted, setPasted] = useState("");
+  const [reading, setReading] = useState(false);
+  const [resumeError, setResumeError] = useState<string | null>(null);
+  const [filled, setFilled] = useState<ResumeGuess | null>(null);
   const set = <K extends keyof QuizAnswers>(key: K, value: QuizAnswers[K]) => setQ((prev) => ({ ...prev, [key]: value }));
 
   useEffect(() => {
@@ -53,6 +61,32 @@ export default function MatchQuiz({ onSaved }: { onSaved?: () => void }) {
   const toggleFounded = (on: boolean) => {
     setFounded(on);
     set("founderYears", on ? Math.max(1, q.founderYears) : 0);
+  };
+
+  const fillFrom = (text: string) => {
+    const guess = guessFromResume(text);
+    if (guess.jobs.length === 0 && guess.answers.primary.length === 0) {
+      setResumeError("Couldn't find product jobs with dates in that text. Fill in the answers below instead.");
+      return;
+    }
+    setQ((prev) => ({ ...prev, ...guess.answers }));
+    setFounded(guess.answers.founderYears > 0);
+    setFilled(guess);
+    setPasting(false);
+    setPasted("");
+  };
+
+  const onFile = async (file: File | undefined) => {
+    if (!file) return;
+    setResumeError(null);
+    setReading(true);
+    try {
+      fillFrom(await resumeText(file));
+    } catch (e) {
+      setResumeError(e instanceof Error ? e.message : "Couldn't read that file. Paste the text instead.");
+    } finally {
+      setReading(false);
+    }
   };
 
   const last = step === STEPS.length - 1;
@@ -113,6 +147,64 @@ export default function MatchQuiz({ onSaved }: { onSaved?: () => void }) {
 
           {step === 0 && (
             <>
+              <div className="quiz-resume">
+                {filled ? (
+                  <p className="quiz-resume-done">
+                    <strong>Filled in from your resume.</strong>{" "}
+                    {filled.jobs.length > 0
+                      ? `Found ${filled.jobs.length} product ${filled.jobs.length === 1 ? "job" : "jobs"}: ${filled.jobs
+                          .map((j) => `${j.title} (${j.years} yrs)`)
+                          .join("; ")}.`
+                      : "No dated product jobs found, so check the years."}{" "}
+                    It's a rough guess: check each answer on this step and the next.
+                  </p>
+                ) : (
+                  <p>
+                    <strong>Have a resume handy?</strong> We'll fill in this step and the next from it. It's read in this browser and
+                    never uploaded.
+                  </p>
+                )}
+                <div className="quiz-resume-actions">
+                  <label className={`btn btn-secondary${reading ? " is-busy" : ""}`}>
+                    {reading ? "Reading…" : filled ? "Use a different resume" : "Upload resume (PDF)"}
+                    <input
+                      type="file"
+                      accept=".pdf,.txt,.md,application/pdf,text/plain"
+                      hidden
+                      disabled={reading}
+                      onChange={(e) => {
+                        void onFile(e.target.files?.[0]);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                  {!pasting && (
+                    <button type="button" className="quiz-link" onClick={() => setPasting(true)}>
+                      or paste the text
+                    </button>
+                  )}
+                </div>
+                {pasting && (
+                  <div className="quiz-paste">
+                    <textarea
+                      value={pasted}
+                      onChange={(e) => setPasted(e.target.value)}
+                      placeholder="Paste your resume here"
+                      rows={6}
+                      aria-label="Resume text"
+                    />
+                    <button type="button" className="btn btn-secondary" disabled={pasted.trim().length < 100} onClick={() => fillFrom(pasted)}>
+                      Fill in my answers
+                    </button>
+                  </div>
+                )}
+                {resumeError && (
+                  <p className="quiz-resume-error" role="alert">
+                    {resumeError}
+                  </p>
+                )}
+              </div>
+
             <label className="quiz-field">
               <span>Years working as a product manager</span>
               <select value={q.pmYears} onChange={(e) => set("pmYears", Number(e.target.value))}>
