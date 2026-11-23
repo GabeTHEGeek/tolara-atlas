@@ -1,6 +1,9 @@
 /**
  * api/intelligencePlugin.ts
- * GET /api/intelligence?company=<slug>&role=<roleId>
+ * GET /api/intelligence?company=<slug>&role=<roleId>[&refresh=1]
+ *
+ * refresh=1 (the Refresh button) skips the cached copy and looks the
+ * company up again; without it, a cached copy inside its TTL is returned.
  *
  * Serves the role page's "Load company intelligence" button from inside the
  * Vite dev server (`npm run dev`) and preview server (`npm run preview`), so
@@ -32,11 +35,12 @@ async function handle(req: IncomingMessage, res: ServerResponse) {
   const roleParam = params.get("role");
   const roleId = roleParam && /^\d+$/.test(roleParam) ? Number(roleParam) : null;
   if (!company || !/^[a-z0-9-]+$/.test(company)) return send(res, 400, { error: "Missing or invalid company" });
+  const force = params.get("refresh") === "1";
 
-  const key = `${company}:${roleId ?? ""}`;
+  const key = `${company}:${roleId ?? ""}:${force ? "refresh" : ""}`;
   let pending = inFlight.get(key);
   if (!pending) {
-    pending = loadIntelligence(getDb(), company, roleId).finally(() => inFlight.delete(key));
+    pending = loadIntelligence(getDb(), company, roleId, force).finally(() => inFlight.delete(key));
     inFlight.set(key, pending);
   }
   try {

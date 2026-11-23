@@ -197,6 +197,10 @@ export async function loadIntelligence(
   db: Database.Database,
   companySlug: string,
   roleId: number | null,
+  // The Refresh button: look the company up again even if the cached copy
+  // is still within its TTL. A lookup that fails still leaves the cache as
+  // it was (see below), so forcing can't blank a company's card.
+  force = false,
 ): Promise<CompanyIntelligence | null> {
   const company = db.prepare(`SELECT id, name FROM companies WHERE slug = ?`).get(companySlug) as
     { id: number; name: string } | undefined;
@@ -205,7 +209,7 @@ export async function loadIntelligence(
   const unavailable: CompanyIntelligence["unavailable"] = [];
   let transientProfile: CompanyProfile | null = null;
   let profileEntry = readCompanyCache(db, company.id, "profile");
-  if (!profileEntry?.fresh) {
+  if (force || !profileEntry?.fresh) {
     // Cities the company has offices in on our map, plus any hand-set HQ --
     // what a Wikidata match's headquarters is checked against.
     const officeCities = (
@@ -268,7 +272,7 @@ export async function loadIntelligence(
   const leaders = (readCompanyCache(db, company.id, "leadership")?.value as Leader[] | undefined) ?? [];
 
   let newsEntry = readCompanyCache(db, company.id, "news");
-  if (!newsEntry?.fresh) {
+  if (force || !newsEntry?.fresh) {
     const items = await fetchCompanyNews(
       company.name,
       leaders.map((l) => l.name),

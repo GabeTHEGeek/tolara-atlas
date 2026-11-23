@@ -226,10 +226,12 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
   );
 
   const runLoad = useCallback(
-    async (showSpinner: boolean) => {
+    async (showSpinner: boolean, refresh = false) => {
       if (showSpinner) setIntelState("loading");
       try {
-        const res = await fetch(`/api/intelligence?company=${encodeURIComponent(companySlug)}&role=${roleId}`);
+        const res = await fetch(
+          `/api/intelligence?company=${encodeURIComponent(companySlug)}&role=${roleId}${refresh ? "&refresh=1" : ""}`,
+        );
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = (await res.json()) as IntelligenceResponse;
         const company = { profile: data.profile, leaders: data.leaders, news: data.news, fetchedAt: data.fetchedAt };
@@ -249,6 +251,8 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
   );
 
   const loadIntelligence = useCallback(() => void runLoad(true), [runLoad]);
+  // Refresh means fetch again, not re-read the copy the server already has.
+  const refreshIntelligence = useCallback(() => void runLoad(true, true), [runLoad]);
 
   // Asking the voice agent about this company is the same request as
   // pressing "Load company intelligence", so it presses it -- with the
@@ -370,7 +374,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
               Company intelligence
               {intel.fetchedAt && <span className="muted"> · updated {relativeTime(intel.fetchedAt)}</span>}
             </span>
-            <button className="link-button" onClick={loadIntelligence} disabled={intelState === "loading"}>
+            <button className="link-button" onClick={refreshIntelligence} disabled={intelState === "loading"}>
               {intelState === "loading" ? "Refreshing…" : "Refresh"}
             </button>
           </div>
