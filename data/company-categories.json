@@ -29,7 +29,7 @@
     {
       "id": "ai-apps",
       "label": "AI applications",
-      "companies": ["1mind", "air-ai", "ascertain", "bland", "broccoli", "cresta", "decagon", "deepgram", "deepl", "descript", "elevenlabs", "emanate", "gamma-app", "glean-work", "harvey-ai", "jobs-valence", "legora", "midjourney", "mirelo-ai", "netomi", "opusclip", "otter", "perplexity", "pika", "poly-ai", "prosper-ai", "reevo", "saris-ai", "sekai", "siro", "suno", "synthesia", "tavus", "vapi", "writer"]
+      "companies": ["1mind", "air-ai", "ascertain", "bland", "broccoli", "cresta", "decagon", "deepgram", "deepl", "descript", "elevenlabs", "emanate", "emergence-ai", "gamma-app", "glean-work", "harvey-ai", "jobs-valence", "legora", "midjourney", "mirelo-ai", "netomi", "opusclip", "otter", "perplexity", "pika", "poly-ai", "prosper-ai", "reevo", "saris-ai", "sekai", "siro", "suno", "synthesia", "tavus", "vapi", "writer"]
     },
     {
       "id": "devtools",
