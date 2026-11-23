@@ -189,6 +189,8 @@ export interface CompanyDetails {
   generatedAt: string;
   company: { id: number; name: string; slug: string; trackedSince: string };
   signals: HiringSignal[];
+  // Weekly PM roles opened and closed, oldest first (export/companyDetails.ts). Missing in files exported before it existed.
+  pulse?: { weeks: Array<{ start: string; opened: number; closed: number; open: number }> };
   intelligence: CompanyIntelligenceData | null;
   roles: CompanyDetailsRole[];
 }

@@ -58,6 +58,46 @@ export interface HiringSignal {
   detail: string;
 }
 
+/**
+ * The company's hiring pulse: PM roles our sync saw open and close each
+ * week, oldest first, for the role page's heartbeat chart. Only weeks we
+ * were watching count, and the roles found on our first look at the company
+ * aren't "opened" that week (they were already up), so a newly tracked
+ * company has a short pulse rather than one huge spike.
+ */
+export interface HiringPulse {
+  // open: PM roles open at the end of the week (the line the chart draws).
+  weeks: Array<{ start: string; opened: number; closed: number; open: number }>;
+}
+
+export const PULSE_WEEKS = 12;
+const DAY = 24 * 60 * 60 * 1000;
+
+function hiringPulse(history: Array<{ first_seen_at: string; last_seen_at: string | null; status: string }>, trackedSince: string, now: number): HiringPulse {
+  const tracked = Date.parse(trackedSince);
+  // The first look at a company can span a day (big boards sync in pages).
+  const baselineEnd = tracked + DAY;
+  const weeks: HiringPulse["weeks"] = [];
+  for (let i = PULSE_WEEKS; i >= 1; i--) {
+    const start = now - i * 7 * DAY;
+    const end = start + 7 * DAY;
+    if (end <= baselineEnd) continue; // not watching yet
+    let opened = 0;
+    let closed = 0;
+    let open = 0;
+    const at = Math.min(end, now);
+    for (const r of history) {
+      const first = Date.parse(sqliteToIso(r.first_seen_at));
+      if (first >= start && first < end && first >= baselineEnd) opened += 1;
+      const last = r.status === "closed" && r.last_seen_at ? Date.parse(sqliteToIso(r.last_seen_at)) : null;
+      if (last != null && last >= start && last < end) closed += 1;
+      if (first < at && (last == null || last >= at)) open += 1;
+    }
+    weeks.push({ start: new Date(start).toISOString(), opened, closed, open });
+  }
+  return { weeks };
+}
+
 interface RoleRow {
   id: number;
   title: string;
@@ -115,6 +155,7 @@ export function writeCompanyDetails(db: Database.Database, outputDir: string, vi
     `SELECT resolved_city, resolved_state, latitude, longitude, is_remote FROM role_locations WHERE role_id = ?`,
   );
   const trackedSinceFor = db.prepare(`SELECT MIN(first_seen_at) AS t FROM roles WHERE company_id = ?`);
+  const historyFor = db.prepare(`SELECT first_seen_at, last_seen_at, status FROM roles WHERE company_id = ?`);
 
   // Rewrite the folder wholesale so companies that dropped off the map
   // don't leave stale files behind.
@@ -170,6 +211,11 @@ export function writeCompanyDetails(db: Database.Database, outputDir: string, vi
       generatedAt: new Date(now).toISOString(),
       company: { id: company.id, name: company.name, slug: company.slug, trackedSince },
       signals: companySignals(roles, trackedSince, now),
+      pulse: hiringPulse(
+        historyFor.all(company.id) as Array<{ first_seen_at: string; last_seen_at: string | null; status: string }>,
+        trackedSince,
+        now,
+      ),
       intelligence: cached
         ? { profile: cached.profile, leaders: cached.leaders, news: cached.news, fetchedAt: cached.fetchedAt }
         : null,

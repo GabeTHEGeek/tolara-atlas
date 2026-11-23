@@ -11,6 +11,7 @@ import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
 import JobBoard, { type JobSort } from "./components/JobBoard.js";
 import MatchQuiz from "./components/MatchQuiz.js";
 import { useQuizOpen } from "./scores.js";
+import { currentTheme, setTheme } from "./theme.js";
 import { onJobsBoard, replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
 import { buildPayRanker } from "./payRank.js";
 import {
@@ -330,6 +331,15 @@ export default function App() {
             </span>
           )
         )}
+        <button
+          type="button"
+          className="share-link theme-switch"
+          onClick={() => setTheme(currentTheme() === "dark" ? "light" : "dark")}
+          title={currentTheme() === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          aria-label={currentTheme() === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {currentTheme() === "dark" ? "☀️" : "🌙"}
+        </button>
         <button
           type="button"
           className={`share-link${linkCopied ? " is-copied" : ""}`}

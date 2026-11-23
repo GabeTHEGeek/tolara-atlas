@@ -5,6 +5,7 @@ import { roleDate } from "../filters.js";
 import { payRankShort, type PayRanker } from "../payRank.js";
 import FreshnessTag from "./FreshnessTag.js";
 import RepostTag from "./RepostTag.js";
+import HiringPulse from "./HiringPulse.js";
 import GhostTag from "./GhostTag.js";
 import { ghostReason } from "../ghost.js";
 import PeoplePanel, { FindPeopleButton } from "./PeoplePanel.js";
@@ -503,6 +504,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
 
           <section className="card">
             <h2 className="card-label">Hiring signals</h2>
+            {details.pulse && <HiringPulse weeks={details.pulse.weeks} />}
             <ul className="signal-list">
               {signals.map((s, i) => (
                 <li key={i} className={`signal signal--${s.tone}`}>

@@ -5,12 +5,12 @@
   /* Light first, like the landing page (Stripe / Block feel): a cool white
      page, navy ink, one teal accent. The dark scheme below keeps the
      original dark palette for anyone whose system is set to dark. */
-  --bg: #f6f9fc;
-  --bg-raised: #ffffff;
-  --surface: #ffffff;
-  --surface-hover: #f0f4f8;
-  --border: #e3e8ee;
-  --border-strong: #cfd8e3;
+  --bg: #e3e7ec;
+  --bg-raised: #eceff3;
+  --surface: #edf0f4;
+  --surface-hover: #e1e6ec;
+  --border: #d2d9e1;
+  --border-strong: #bcc6d2;
   --text: #0a2540;
   --text-muted: #4b5d74;
   --text-faint: #7a8ba0;
@@ -28,12 +28,12 @@
   --tag-amber: #a16207;
   --tag-violet: #6d28d9;
   --danger-text: #b42318;
-  --overlay: rgba(255, 255, 255, 0.97);
+  --overlay: rgba(237, 240, 244, 0.97);
   --code-bg: rgba(10, 37, 64, 0.06);
-  --map-attrib: rgba(255, 255, 255, 0.8);
+  --map-attrib: rgba(237, 240, 244, 0.8);
   --map-icon-filter: none;
-  --hairline: #cfd8e3;
-  --well: #f0f4f8;
+  --hairline: #bcc6d2;
+  --well: #e1e6ec;
   --shadow-color: rgba(10, 37, 64, 0.16);
   --radius: 12px;
   --font: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -2450,6 +2450,17 @@ h1.role-page-title {
   }
 }
 
+/* The light basemap is near-white; dim it to sit with the softer light palette. */
+:root[data-theme="light"] .maplibregl-canvas { filter: brightness(0.92); }
+
+/* Light/dark switch, just before Copy link. */
+.theme-switch { padding: 4px 9px; line-height: 1; }
+.theme-switch + .share-link { margin-left: 8px; }
+@media (max-width: 560px) {
+  .theme-switch { font-size: 14px; }
+  .theme-switch::before { content: none; }
+}
+
 .fresh-tag.is-ghost {
   color: var(--tag-violet);
   background: rgba(139, 92, 246, 0.1);
@@ -2784,3 +2795,32 @@ a.match-ring:hover { transform: scale(1.06); }
 .quiz-paste textarea { width: 100%; box-sizing: border-box; resize: vertical; font: inherit; font-size: 13px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface, transparent); color: var(--text); }
 .quiz-paste .btn { align-self: flex-start; }
 .quiz-resume-error { color: #b91c1c; margin: 10px 0 0 !important; }
+
+/* ---------- Hiring pulse (HiringPulse.tsx) ----------
+   An animated trend line on a monitor screen: near-black glass and a
+   phosphor line in both themes, green going up, amber going down. */
+.pulse { --pl: #4dffb5; margin: 4px 0 14px; border-radius: 12px; background: #061210; border: 1px solid #12302a; padding: 10px 12px 8px; color: #8fe9cf; box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.6); }
+.pulse--down { --pl: #ffb454; }
+.pulse--steady { --pl: #7fd8ff; }
+.pulse--empty p { margin: 0; font-size: 13px; color: #7fbfae; }
+.pulse-top { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; }
+.pulse-verdict { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-transform: uppercase; color: var(--pl); white-space: nowrap; }
+.pulse-arrow { font-size: 10px; }
+.pulse-readout { margin-left: auto; color: #7fbfae; white-space: nowrap; }
+.pulse-readout strong { color: var(--pl); font-size: 16px; margin-right: 2px; }
+.pulse-diff { color: #7fbfae; }
+.pulse-sound { background: transparent; border: 1px solid #1d4a40; border-radius: 999px; padding: 2px 8px; cursor: pointer; font-size: 13px; line-height: 1.2; }
+.pulse-sound[aria-pressed="true"] { border-color: var(--pl); }
+.pulse-screen { display: block; width: 100%; height: auto; margin-top: 6px; cursor: pointer; overflow: visible; }
+.pulse-gridline { fill: none; stroke: rgba(127, 216, 200, 0.08); stroke-width: 1; }
+.pulse-ylabel { fill: #5f9c8c; font-family: var(--mono); font-size: 13px; text-anchor: end; }
+.pulse-fill-top { stop-color: var(--pl); stop-opacity: 0.28; }
+.pulse-fill-bottom { stop-color: var(--pl); stop-opacity: 0; }
+.pulse-trace { fill: none; stroke: var(--pl); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; filter: drop-shadow(0 0 4px var(--pl)); }
+.pulse-point { fill: #061210; stroke: var(--pl); stroke-width: 1.5; }
+.pulse-head { fill: #f2fffa; filter: drop-shadow(0 0 6px var(--pl)); }
+.pulse-ripple { fill: none; stroke: var(--pl); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: pulse-ripple 1.1s ease-out infinite; }
+@keyframes pulse-ripple { 0% { transform: scale(0.8); opacity: 0.9; } 70% { transform: scale(3.2); opacity: 0; } 100% { transform: scale(3.2); opacity: 0; } }
+.pulse-hit { fill: transparent; }
+.pulse-hit:hover { fill: rgba(127, 216, 200, 0.06); }
+.pulse-axis { display: flex; justify-content: space-between; gap: 8px; font-family: var(--mono); font-size: 10.5px; color: #5f9c8c; margin-top: 2px; }
