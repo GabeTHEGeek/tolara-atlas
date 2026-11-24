@@ -40,6 +40,46 @@ export function grantAccess(): void {
   }
 }
 
+/** Locks this browser again, as if it had never signed up. */
+export function revokeAccess(): void {
+  try {
+    localStorage.removeItem(KEY);
+  } catch {
+    /* blocked: nothing was stored */
+  }
+}
+
+/**
+ * Admin links, handled once at startup (main.tsx):
+ *   #/admin       opens the board in this browser without signing up
+ *   #/admin/lock  locks this browser again, to see what a new visitor sees
+ * Like the gate itself these are a convenience, not security: anyone who
+ * reads the page's code can find them.
+ */
+function applyAdminLink(): boolean {
+  const hash = window.location.hash.replace(/\/$/, "");
+  if (hash === "#/admin") {
+    grantAccess();
+    window.history.replaceState(null, "", "#/jobs");
+    return true;
+  }
+  if (hash === "#/admin/lock") {
+    revokeAccess();
+    window.history.replaceState(null, "", "#/welcome");
+    return true;
+  }
+  return false;
+}
+
+export function handleAdminLink(): void {
+  applyAdminLink();
+  // Typed into the address bar on a page that's already open: the app read
+  // its access at startup, so reload to pick up the change.
+  window.addEventListener("hashchange", () => {
+    if (applyAdminLink()) window.location.reload();
+  });
+}
+
 /** Where a gated visitor was headed (a shared role link, say), to go there once they're in. */
 export function rememberReturnTo(hash: string): void {
   if (!hash || hash === "#/" || hash.startsWith("#/welcome")) return;
