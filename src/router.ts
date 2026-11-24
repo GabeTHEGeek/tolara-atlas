@@ -13,15 +13,18 @@ import { useEffect, useState } from "react";
  *                                       before the job board was the default)
  *                                       still opens the map.
  *   #/company/<slug>/role/<roleId>      a role page
+ *   #/welcome                           the landing page (LandingPage.tsx)
  */
 export type Route =
   | { name: "map"; params: URLSearchParams }
   | { name: "jobs"; params: URLSearchParams }
-  | { name: "role"; companySlug: string; roleId: number };
+  | { name: "role"; companySlug: string; roleId: number }
+  | { name: "welcome" };
 
 function parse(hash: string): Route {
   const m = hash.match(/^#\/company\/([a-z0-9-]+)\/role\/(\d+)\/?$/);
   if (m) return { name: "role", companySlug: m[1], roleId: Number(m[2]) };
+  if (/^#\/welcome\/?$/.test(hash)) return { name: "welcome" };
   const jobs = hash.match(/^#\/jobs\/?(?:\?(.*))?$/);
   if (jobs) return { name: "jobs", params: new URLSearchParams(jobs[1] ?? "") };
   const map = hash.match(/^#\/map\/?(?:\?(.*))?$/);

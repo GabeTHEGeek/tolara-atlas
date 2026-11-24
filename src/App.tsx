@@ -7,9 +7,11 @@ import ChangesPanel from "./components/ChangesPanel.js";
 import FilterBar from "./components/FilterBar.js";
 import VoicePanel from "./components/VoicePanel.js";
 import { useVoiceAgent } from "./voice/useVoiceAgent.js";
+import { VOICE_ENABLED } from "./features.js";
 import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
 import JobBoard, { type JobSort } from "./components/JobBoard.js";
 import MatchQuiz from "./components/MatchQuiz.js";
+import LandingPage from "./components/LandingPage.js";
 import { useQuizOpen } from "./scores.js";
 import { currentTheme, setTheme } from "./theme.js";
 import { onJobsBoard, replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
@@ -247,7 +249,10 @@ export default function App() {
           : null,
       visibleRoleCount: matchedRoles,
     },
-  });
+  }, VOICE_ENABLED);
+
+  // The landing page is a page of its own over the app, not a view inside it.
+  if (route.name === "welcome") return <LandingPage data={mapData} error={error} />;
 
   return (
     <div className="app">
@@ -370,7 +375,7 @@ export default function App() {
             selectedPinId={onRolePage ? rolePinId : (selectedPin?.id ?? null)}
             flyToRequest={flyToRequest}
             zoomRequest={zoomRequest}
-            onCameraSettled={voice.logCamera}
+            onCameraSettled={VOICE_ENABLED ? voice.logCamera : undefined}
             // Side panels cover the right of the map (.company-panel is 360px,
             // the role drawer wider); on a narrow screen they cover most of
             // it anyway, so there's no visible area to center in.
@@ -427,7 +432,8 @@ export default function App() {
         {mapData && (
           <ChangesPanel data={mapData} open={changesPanelOpen} onClose={() => setChangesPanelOpen(false)} />
         )}
-        <VoicePanel {...voice} onHeightChange={setVoiceInset} />
+        {/* Hidden unless VITE_ENABLE_VOICE=1 (features.ts). */}
+        {VOICE_ENABLED && <VoicePanel {...voice} onHeightChange={setVoiceInset} />}
         {route.name === "role" && (
           <RolePage
             companySlug={route.companySlug}

@@ -121,7 +121,7 @@ function findCityPins(pins: LocationPinData[], city: string, state?: string): Lo
   });
 }
 
-export function useVoiceAgent(handlers: VoiceAgentHandlers) {
+export function useVoiceAgent(handlers: VoiceAgentHandlers, enabled = true) {
   const [status, setStatus] = useState<VoiceStatus>("idle");
   const [entries, setEntries] = useState<VoiceEntry[]>([]);
   const [partial, setPartial] = useState("");
@@ -197,6 +197,8 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
   logRef.current = log;
 
   useEffect(() => {
+    // Hidden (features.ts): don't even ask the server whether it's set up.
+    if (!enabled) return;
     fetch("/api/agent/status")
       .then((r) => r.json())
       .then((d) => {
@@ -207,7 +209,7 @@ export function useVoiceAgent(handlers: VoiceAgentHandlers) {
         setProvider({ ready: false, detail: "Agent endpoint unreachable" });
         setUseRealtime(false);
       });
-  }, []);
+  }, [enabled]);
 
   useEffect(() => transport.setMuted?.(muted), [transport, muted]);
 
