@@ -177,8 +177,13 @@ async function main() {
   const db = getDb();
 
   const csvText = readFileSync(COMPANIES_CSV_PATH, "utf-8");
+  // --platforms=workday,oracle syncs only those platforms, e.g. to re-run
+  // Workday from a machine it doesn't rate-limit. Roles are only closed on
+  // boards that were checked, so the platforms left out stay as they were.
+  const only = process.argv.find((a) => a.startsWith("--platforms="))?.slice("--platforms=".length).split(",").filter(Boolean);
+  const platforms = only?.length ? ALL_PLATFORMS.filter((p) => only.includes(p)) : ALL_PLATFORMS;
   const rows = parseCompaniesCsv(csvText).filter(
-    (r) => r.status === "verified" && (ALL_PLATFORMS as string[]).includes(r.platform),
+    (r) => r.status === "verified" && (platforms as string[]).includes(r.platform),
   );
 
   const byPlatform = new Map<string, CompanyRow[]>();
