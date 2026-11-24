@@ -19,6 +19,8 @@ import type {
   IntelligenceResponse,
   RoleFocus,
 } from "../types.js";
+import { dataUrl } from "../base.js";
+import { PEOPLE_ENABLED } from "../features.js";
 
 export interface RoleLoadedInfo {
   company: string;
@@ -159,7 +161,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
     setDetails(null);
     setLoadError(null);
     setIntelState("idle");
-    fetch(`/data/companies/${companySlug}.json`)
+    fetch(dataUrl(`data/companies/${companySlug}.json`))
       .then((res) => {
         if (!res.ok) throw new Error(res.status === 404 ? "This company has no open roles on Tolara right now." : `HTTP ${res.status}`);
         return res.json() as Promise<CompanyDetails>;
@@ -323,7 +325,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
             )}
           </div>
           <div className="role-actions">
-            <FindPeopleButton roleId={role.id} />
+            {PEOPLE_ENABLED && <FindPeopleButton roleId={role.id} />}
             <button className={`btn btn-secondary${isSaved ? " is-active" : ""}`} onClick={toggleSave} aria-pressed={isSaved}>
               {isSaved ? "Saved" : "Save"}
             </button>
@@ -388,7 +390,7 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
 
         <div className="card-grid">
           <MatchCard roleId={role.id} />
-          <PeoplePanel roleId={role.id} company={details.company.name} />
+          {PEOPLE_ENABLED && <PeoplePanel roleId={role.id} company={details.company.name} />}
 
           <section className="card">
             <h2 className="card-label">Leadership</h2>

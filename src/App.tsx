@@ -8,6 +8,7 @@ import FilterBar from "./components/FilterBar.js";
 import VoicePanel from "./components/VoicePanel.js";
 import { useVoiceAgent } from "./voice/useVoiceAgent.js";
 import { VOICE_ENABLED } from "./features.js";
+import { grantAccess, hasAccess, rememberReturnTo, takeReturnTo } from "./access.js";
 import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
 import JobBoard, { type JobSort } from "./components/JobBoard.js";
 import MatchQuiz from "./components/MatchQuiz.js";
@@ -27,6 +28,7 @@ import {
   type RoleFilters,
 } from "./filters.js";
 import type { LocationPinData, MapData } from "./types.js";
+import { dataUrl } from "./base.js";
 
 export default function App() {
   const route = useRoute();
@@ -48,6 +50,7 @@ export default function App() {
   const [baseView, setBaseView] = useState<"map" | "jobs">(route.name === "map" ? "map" : "jobs");
   const [jobQuery, setJobQuery] = useState(() => (route.name === "jobs" ? (route.params.get("q") ?? "") : ""));
   const quizOpen = useQuizOpen();
+  const [unlocked, setUnlocked] = useState(hasAccess);
   const [jobSort, setJobSort] = useState<JobSort>(() => {
     const s = route.name === "jobs" ? route.params.get("sort") : null;
     return s === "salary" || s === "company" || s === "best" ? s : "newest";
@@ -64,7 +67,7 @@ export default function App() {
   const [zoomRequest, setZoomRequest] = useState<ZoomRequest | null>(null);
 
   useEffect(() => {
-    fetch("/data/map-data.json")
+    fetch(dataUrl("data/map-data.json"))
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to load map data (HTTP ${res.status})`);
         return res.json();
@@ -111,22 +114,24 @@ export default function App() {
   // Keep the job board's link current, so it can be bookmarked or shared
   // exactly as filtered.
   useEffect(() => {
-    if (route.name !== "jobs") return;
+    // Not while the landing page stands in for a locked board: the home
+    // address should stay clean for visitors and search engines.
+    if (route.name !== "jobs" || !unlocked) return;
     const params = new URLSearchParams();
     if (jobQuery.trim()) params.set("q", jobQuery.trim());
     filtersToParams(filters, params);
     if (jobSort !== "newest") params.set("sort", jobSort);
     replaceJobsQuery(params);
-  }, [route.name, jobQuery, jobSort, filters]);
+  }, [route.name, jobQuery, jobSort, filters, unlocked]);
 
   // Same for the map, so a filtered map ("Senior, $200k+, fintech") is a
   // link you can share too.
   useEffect(() => {
-    if (route.name !== "map") return;
+    if (route.name !== "map" || !unlocked) return;
     const params = new URLSearchParams();
     filtersToParams(filters, params);
     replaceMapQuery(params);
-  }, [route, filters]);
+  }, [route, filters, unlocked]);
 
   const mapHash = useCallback(() => {
     const params = new URLSearchParams();
@@ -252,7 +257,24 @@ export default function App() {
   }, VOICE_ENABLED);
 
   // The landing page is a page of its own over the app, not a view inside it.
-  if (route.name === "welcome") return <LandingPage data={mapData} error={error} />;
+  // Until someone signs up (access.ts), every route shows it; once they're
+  // in, they go where they were headed -- a shared role link, say.
+  if (route.name === "welcome" || !unlocked) {
+    if (!unlocked) rememberReturnTo(window.location.hash);
+    return (
+      <LandingPage
+        data={mapData}
+        error={error}
+        unlocked={unlocked}
+        onUnlock={() => {
+          grantAccess();
+          setUnlocked(true);
+          const to = takeReturnTo();
+          if (window.location.hash !== to) window.location.hash = to;
+        }}
+      />
+    );
+  }
 
   return (
     <div className="app">

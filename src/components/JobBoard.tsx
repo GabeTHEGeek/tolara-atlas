@@ -11,6 +11,7 @@ import { openQuiz, useScores, type Tier } from "../scores.js";
 import MatchRing from "./MatchRing.js";
 import { FindPeopleButton } from "./PeoplePanel.js";
 import { useContacts } from "../contacts.js";
+import { PEOPLE_ENABLED } from "../features.js";
 
 /**
  * The job board: every role the map shows, as one searchable list.
@@ -456,7 +457,7 @@ export default function JobBoard({
                     <a className="job-prep" href={roleHref(row.companySlug, row.role.id)}>
                       Role prep
                     </a>
-                    <FindPeopleButton roleId={row.role.id} compact />
+                    {PEOPLE_ENABLED && <FindPeopleButton roleId={row.role.id} compact />}
                   </div>
                 </li>
               );

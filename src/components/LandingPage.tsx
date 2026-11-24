@@ -1,5 +1,7 @@
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
-import { KIT_FORM_ID, subscribe } from "../kit.js";
+import { useMemo, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
+import { subscribe } from "../kit.js";
+import { rememberReturnTo } from "../access.js";
+import { siteFacts, siteFaqs } from "../seoFacts.js";
 import { LANDING_LOGOS } from "../landingLogos.js";
 import { LEVELS, METROS, landingRoles, payByLevel, slice, type LandingRole, type LevelId, type MetroId } from "../landingStats.js";
 import { formatSalary, openSince } from "../format.js";
@@ -171,58 +173,86 @@ const FEATURES: Array<{ title: string; body: string; icon: ReactNode }> = [
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-/** First name, last name and email, sent to Kit (see kit.ts). */
-function SignupForm() {
+/**
+ * The signup that opens the board: first name, last name and email, sent to
+ * Kit (see kit.ts). "Already signed up?" takes just the email, for someone
+ * back on a new device or browser; Kit keeps one subscriber per email.
+ */
+function SignupForm({ unlocked, onUnlock }: { unlocked: boolean; onUnlock: () => void }) {
+  const [mode, setMode] = useState<"new" | "returning">("new");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
   const [problem, setProblem] = useState<string | null>(null);
+  const returning = mode === "returning";
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const signup = { firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim() };
-    if (!signup.firstName || !signup.lastName) return setProblem("Add your first and last name.");
+    const signup = returning
+      ? { email: email.trim() }
+      : { firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim() };
+    if (!returning && (!signup.firstName || !signup.lastName)) return setProblem("Add your first and last name.");
     if (!EMAIL_RE.test(signup.email)) return setProblem("That email doesn't look right.");
     setProblem(null);
     setState("sending");
     try {
       await subscribe(signup);
       setState("done");
+      // A moment to read "You're in", then straight to the board.
+      window.setTimeout(onUnlock, 1200);
     } catch (err) {
       setState("idle");
       setProblem(err instanceof Error ? err.message : "Something went wrong. Try again.");
     }
   };
 
+  if (unlocked) {
+    return (
+      <div className="lp-signup lp-signup-done">
+        <p className="lp-done-title">You have access.</p>
+        <a className="lp-btn lp-btn-accent" href="#/jobs">
+          Open the job board <span className="lp-arr">→</span>
+        </a>
+      </div>
+    );
+  }
+
   if (state === "done") {
     return (
       <div className="lp-signup lp-signup-done" role="status">
-        <p className="lp-done-title">You're in, {firstName.trim()}.</p>
-        <p className="lp-fine">Check your inbox to confirm your email. The first Monday email comes this week.</p>
+        <p className="lp-done-title">{returning ? "Welcome back." : `You're in, ${firstName.trim()}.`}</p>
+        <p className="lp-fine">Opening the board…</p>
+        <button className="lp-btn lp-btn-accent" type="button" onClick={onUnlock}>
+          Open the job board <span className="lp-arr">→</span>
+        </button>
       </div>
     );
   }
 
   return (
-    <form className="lp-signup" onSubmit={submit} noValidate>
-      <p className="lp-signup-title">Get your week on the board, every Monday</p>
-      <div className="lp-names">
-        <input
-          aria-label="First name"
-          placeholder="First name"
-          autoComplete="given-name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <input
-          aria-label="Last name"
-          placeholder="Last name"
-          autoComplete="family-name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-      </div>
+    <form className="lp-signup" id="lp-signup" onSubmit={submit} noValidate>
+      <p className="lp-signup-title">
+        {returning ? "Welcome back. Enter the email you signed up with." : "Sign up free to open the board"}
+      </p>
+      {!returning && (
+        <div className="lp-names">
+          <input
+            aria-label="First name"
+            placeholder="First name"
+            autoComplete="given-name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <input
+            aria-label="Last name"
+            placeholder="Last name"
+            autoComplete="family-name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+      )}
       <input
         aria-label="Email address"
         type="email"
@@ -232,8 +262,8 @@ function SignupForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button className="lp-btn lp-btn-accent" type="submit" disabled={state === "sending" || !KIT_FORM_ID}>
-        {state === "sending" ? "Signing you up…" : "Sign up free"}
+      <button className="lp-btn lp-btn-accent" type="submit" disabled={state === "sending"}>
+        {state === "sending" ? "One moment…" : returning ? "Open the board" : "Get free access"}
       </button>
       {problem && (
         <p className="lp-err" role="alert">
@@ -241,15 +271,37 @@ function SignupForm() {
         </p>
       )}
       <p className="lp-fine">
-        {KIT_FORM_ID
-          ? "Free. Unsubscribe any time; the board stays open either way."
-          : "Signups aren't connected yet: set VITE_KIT_FORM_ID (see src/kit.ts)."}
+        {returning ? (
+          <>
+            New here?{" "}
+            <button type="button" className="lp-linkbtn" onClick={() => (setMode("new"), setProblem(null))}>
+              Sign up instead
+            </button>
+          </>
+        ) : (
+          <>
+            Free, plus a Monday email you can turn off any time. Already signed up?{" "}
+            <button type="button" className="lp-linkbtn" onClick={() => (setMode("returning"), setProblem(null))}>
+              Enter your email
+            </button>
+          </>
+        )}
       </p>
     </form>
   );
 }
 
-export default function LandingPage({ data, error }: { data: MapData | null; error: string | null }) {
+export default function LandingPage({
+  data,
+  error,
+  unlocked,
+  onUnlock,
+}: {
+  data: MapData | null;
+  error: string | null;
+  unlocked: boolean;
+  onUnlock: () => void;
+}) {
   const [now] = useState(() => Date.now());
   const [level, setLevel] = useState<LevelId>(() => {
     const saved = store.get("lp.level");
@@ -292,6 +344,20 @@ export default function LandingPage({ data, error }: { data: MapData | null; err
   const ghostShare = all.open > 0 ? all.ghost / all.open : 0;
   const payMax = Math.max(300_000, ...payChart.map((p) => p.pay));
   const board = "#/jobs";
+  // The same answers the build puts in the FAQ structured data (seoFacts.ts).
+  const faqs = useMemo(() => (data ? siteFaqs(siteFacts(data)) : []), [data]);
+  // Until they've signed up, every way into the board leads to the form
+  // instead (and remembers where it was going, for after).
+  const gate = (target: string) =>
+    unlocked
+      ? undefined
+      : (e: MouseEvent) => {
+          e.preventDefault();
+          rememberReturnTo(target);
+          const form = document.getElementById("lp-signup");
+          form?.scrollIntoView({ behavior: "smooth", block: "center" });
+          form?.querySelector("input")?.focus({ preventScroll: true });
+        };
 
   const pickLevel = (v: LevelId) => {
     setLevel(v);
@@ -313,11 +379,15 @@ export default function LandingPage({ data, error }: { data: MapData | null; err
             Tolara Scout
           </a>
           <nav className="lp-nav-links" aria-label="Sections">
-            <a href="#/jobs">Job board</a>
-            <a href="#/map">Map</a>
+            <a href="#/jobs" onClick={gate("#/jobs")}>
+              Job board
+            </a>
+            <a href="#/map" onClick={gate("#/map")}>
+              Map
+            </a>
           </nav>
-          <a className="lp-btn lp-btn-sm lp-nav-cta" href={board}>
-            Open the board <span className="lp-arr">→</span>
+          <a className="lp-btn lp-btn-sm lp-nav-cta" href={board} onClick={gate(board)}>
+            {unlocked ? "Open the board" : "Get free access"} <span className="lp-arr">→</span>
           </a>
         </div>
       </header>
@@ -338,10 +408,10 @@ export default function LandingPage({ data, error }: { data: MapData | null; err
               for months.
             </p>
             <div className="lp-hero-ctas">
-              <a className="lp-btn" href={board}>
-                Open the job board <span className="lp-arr">→</span>
+              <a className="lp-btn" href={board} onClick={gate(board)}>
+                {unlocked ? "Open the job board" : "Get free access"} <span className="lp-arr">→</span>
               </a>
-              <a className="lp-btn lp-btn-ghost" href="#/map">
+              <a className="lp-btn lp-btn-ghost" href="#/map" onClick={gate("#/map")}>
                 See the map
               </a>
             </div>
@@ -410,7 +480,7 @@ export default function LandingPage({ data, error }: { data: MapData | null; err
                     <ul className="lp-roles">
                       {pick.newest.map((r) => (
                         <li key={r.role.id}>
-                          <a href={roleHref(r.companySlug, r.role.id)}>
+                          <a href={roleHref(r.companySlug, r.role.id)} onClick={gate(roleHref(r.companySlug, r.role.id))}>
                             <span className="lp-t">
                               <b>{r.role.title}</b>
                               <span>
@@ -426,9 +496,9 @@ export default function LandingPage({ data, error }: { data: MapData | null; err
                 </>
               )}
             </div>
-            <SignupForm />
+            <SignupForm unlocked={unlocked} onUnlock={onUnlock} />
             <div className="lp-card-foot">
-              <a className="lp-see" href={boardLink(level, metro)}>
+              <a className="lp-see" href={boardLink(level, metro)} onClick={gate(boardLink(level, metro))}>
                 {/* The board has no city filter, so only an "Anywhere" pick
                     opens to exactly these roles and can promise a count. */}
                 {data && metro === "all" && pick.live > 0
@@ -556,8 +626,8 @@ export default function LandingPage({ data, error }: { data: MapData | null; err
             <p className="lp-label">Features</p>
             <h2>Everything on the board.</h2>
             <p className="lp-sec-lede">All of it free, updated daily.</p>
-            <a className="lp-btn" href={board}>
-              Open the job board <span className="lp-arr">→</span>
+            <a className="lp-btn" href={board} onClick={gate(board)}>
+              {unlocked ? "Open the job board" : "Get free access"} <span className="lp-arr">→</span>
             </a>
           </div>
           <ul className="lp-feats">
@@ -576,12 +646,29 @@ export default function LandingPage({ data, error }: { data: MapData | null; err
         </div>
       </section>
 
+      {faqs.length > 0 && (
+        <section className="lp-sec lp-sec-tight" aria-labelledby="lp-faq-h">
+          <div className="lp-wrap lp-faq">
+            <p className="lp-label">Questions</p>
+            <h2 id="lp-faq-h">PM hiring, answered.</h2>
+            <dl>
+              {faqs.map((f) => (
+                <div key={f.q} className="lp-faq-item">
+                  <dt>{f.q}</dt>
+                  <dd>{f.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
+
       <section className="lp-closer">
         <div className="lp-wrap">
           <h2>Stop applying to ghosts.</h2>
           <p>{data ? `${fmt(all.live)} live PM roles, checked every day.` : "Live PM roles, checked every day."} Free.</p>
-          <a className="lp-btn" href={board}>
-            Open the job board <span className="lp-arr">→</span>
+          <a className="lp-btn" href={board} onClick={gate(board)}>
+            {unlocked ? "Open the job board" : "Get free access"} <span className="lp-arr">→</span>
           </a>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
+import { PEOPLE_ENABLED } from "./features.js";
 
 /**
  * Client side of "Find people" (server/contacts/). One shared store, so the
@@ -110,7 +111,8 @@ export function useContacts(): State {
     () => state,
   );
   useEffect(() => {
-    if (checked) return;
+    // Hidden (features.ts): don't ask the local server about it either.
+    if (checked || !PEOPLE_ENABLED) return;
     checked = true;
     void refresh().then(() => {
       if (state.job?.state === "running") void poll();

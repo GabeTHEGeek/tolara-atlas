@@ -20,18 +20,18 @@ const env = (import.meta as ImportMeta & { env?: Record<string, string | undefin
 export const KIT_FORM_ID = /^\d+$/.test(env.VITE_KIT_FORM_ID ?? "") ? env.VITE_KIT_FORM_ID! : null;
 
 export interface Signup {
-  firstName: string;
-  lastName: string;
+  // Optional: "Already signed up?" sends just the email, and Kit keeps the
+  // names it already has for that subscriber.
+  firstName?: string;
+  lastName?: string;
   email: string;
 }
 
 export async function subscribe({ firstName, lastName, email }: Signup): Promise<void> {
   if (!KIT_FORM_ID) throw new Error("Signups aren't connected yet.");
-  const body = new URLSearchParams({
-    email_address: email,
-    "fields[first_name]": firstName,
-    "fields[last_name]": lastName,
-  });
+  const body = new URLSearchParams({ email_address: email });
+  if (firstName) body.set("fields[first_name]", firstName);
+  if (lastName) body.set("fields[last_name]", lastName);
   const res = await fetch(`https://app.kit.com/forms/${KIT_FORM_ID}/subscriptions`, {
     method: "POST",
     headers: { Accept: "application/json" },

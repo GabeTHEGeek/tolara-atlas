@@ -17,6 +17,7 @@ import { CATEGORIES } from "../server/match/rubric.js";
 import { scoreRole, type RoleFacts } from "../server/match/score.js";
 import type { RoleAnalysis } from "../server/match/analyzeRole.js";
 import type { RoleScore } from "./scores.js";
+import { dataUrl } from "./base.js";
 
 export { ARCHETYPES, METROS };
 export type { Archetype };
@@ -102,7 +103,7 @@ interface FactsFile {
 let facts: Promise<FactsFile | null> | null = null;
 
 function loadFacts(): Promise<FactsFile | null> {
-  facts ??= fetch("/data/match-facts.json")
+  facts ??= fetch(dataUrl("data/match-facts.json"))
     .then((r) => (r.ok ? (r.json() as Promise<FactsFile>) : null))
     .catch(() => null);
   return facts;
