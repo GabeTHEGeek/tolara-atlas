@@ -534,7 +534,7 @@ export default function LandingPage({
 
       {logos.length > 0 && (
         <div className="lp-wrap lp-logos">
-          <span className="lp-logos-label">Hiring PMs right now, read daily from their own career sites</span>
+          <span className="lp-logos-label">Some of the companies hiring PMs right now</span>
           <ul className="lp-logo-grid">
             {logos.map(([slug, name, d]) => (
               <li key={slug} className="lp-logo-tile">
