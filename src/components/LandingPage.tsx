@@ -2,6 +2,7 @@ import { useMemo, useState, type FormEvent, type MouseEvent, type ReactNode } fr
 import { subscribe } from "../kit.js";
 import { rememberReturnTo } from "../access.js";
 import { siteFacts, siteFaqs } from "../seoFacts.js";
+import { SOCIAL_LINKS } from "../social.js";
 import { LANDING_LOGOS } from "../landingLogos.js";
 import { LEVELS, METROS, landingRoles, payByLevel, slice, type LandingRole, type LevelId, type MetroId } from "../landingStats.js";
 import { formatSalary, openSince } from "../format.js";
@@ -678,6 +679,15 @@ export default function LandingPage({
         <span>
           {data ? `${fmt(all.open)} open roles at ${fmt(companyCount)} companies` : ""}
         </span>
+        <nav className="lp-social" aria-label="Follow">
+          {SOCIAL_LINKS.map((l) => (
+            <a key={l.href} href={l.href} target="_blank" rel="noopener me" aria-label={l.label} title={l.label}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d={l.icon} />
+              </svg>
+            </a>
+          ))}
+        </nav>
       </footer>
     </div>
   );

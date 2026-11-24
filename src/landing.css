@@ -202,7 +202,11 @@
 .lp-closer p { color: color-mix(in srgb, var(--lp-on-dark) 72%, transparent); font-size: 19px; max-width: 30em; margin: 0 0 32px; }
 .lp-closer .lp-btn { background: var(--lp-on-dark); color: var(--lp-dark) !important; }
 
-.lp-footer { padding-block: 32px 44px; padding-bottom: max(44px, env(safe-area-inset-bottom, 0px)); color: var(--lp-muted); font-size: 13.5px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.lp-footer { padding-block: 32px 44px; padding-bottom: max(44px, env(safe-area-inset-bottom, 0px)); color: var(--lp-muted); font-size: 13.5px; display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; }
+.lp-social { display: flex; gap: 8px; }
+.lp-social a { width: 36px; height: 36px; border-radius: 999px; display: grid; place-items: center; color: var(--lp-muted); background: var(--lp-surface); transition: color .15s, background .15s; }
+.lp-social a:hover { color: var(--lp-ink); background: var(--lp-line); }
+.lp-social svg { width: 16px; height: 16px; fill: currentColor; }
 
 @media (prefers-reduced-motion: reduce) {
   .lp { scroll-behavior: auto; }

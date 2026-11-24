@@ -30,6 +30,7 @@ import { roleDate } from "../../src/filters.js";
 import { landingRoles, METROS, LEVELS, type LandingRole, type MetroId } from "../../src/landingStats.js";
 import { siteFacts, siteFaqs, type SiteFacts } from "../../src/seoFacts.js";
 import type { MapData, Seniority } from "../../src/types.js";
+import { SOCIAL_LINKS } from "../../src/social.js";
 
 export interface CompanyRole {
   id: number;
@@ -185,6 +186,7 @@ th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}th{c
 .ghost{background:color-mix(in srgb,var(--violet) 10%,transparent);border-radius:14px;padding:16px 20px;margin:0 0 28px;max-width:42em}
 footer{border-top:1px solid var(--line);padding-block:32px 48px;font-size:14px;line-height:1.7;color:var(--muted)}
 footer nav{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px}footer a{color:var(--muted)}
+footer nav.social{gap:8px;margin-top:18px}footer .social a{width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:var(--surface);color:var(--muted)}footer .social a:hover{color:var(--ink)}footer .social svg{width:16px;height:16px;fill:currentColor}
 @media (max-width:600px){.facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.fact{padding:14px 16px}.fact b{font-size:19px}h2{margin-top:44px}.lede{font-size:17px}.btn{flex:1 1 auto;justify-content:center}ul.roles li{grid-template-columns:minmax(0,1fr)}ul.roles .p{grid-row:auto;grid-column:auto;align-self:start}}
 `;
 
@@ -258,7 +260,8 @@ ${body}
 </main>
 </div>
 <footer><div class="w">Tolara Scout · ${fmt(facts.openRoles)} open US product manager roles at ${fmt(facts.companies)} companies, updated daily. Last update ${esc(facts.updatedLabel)}.
-<nav aria-label="Site"><a href="${this.href("/jobs/")}">All PM jobs</a><a href="${this.href("/pm-salaries/")}">PM salaries</a><a href="${this.href("/ghost-jobs/")}">Ghost jobs</a><a href="${this.app()}">Open the board</a></nav></div></footer>
+<nav aria-label="Site"><a href="${this.href("/jobs/")}">All PM jobs</a><a href="${this.href("/pm-salaries/")}">PM salaries</a><a href="${this.href("/ghost-jobs/")}">Ghost jobs</a><a href="${this.app()}">Open the board</a></nav>
+<nav class="social" aria-label="Follow">${SOCIAL_LINKS.map((l) => `<a href="${esc(l.href)}" target="_blank" rel="noopener me" aria-label="${esc(l.label)}" title="${esc(l.label)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${l.icon}"/></svg></a>`).join("")}</nav></div></footer>
 </body>
 </html>
 `;
