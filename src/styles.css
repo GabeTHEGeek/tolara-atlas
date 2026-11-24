@@ -2824,3 +2824,20 @@ a.match-ring:hover { transform: scale(1.06); }
 .pulse-hit { fill: transparent; }
 .pulse-hit:hover { fill: rgba(127, 216, 200, 0.06); }
 .pulse-axis { display: flex; justify-content: space-between; gap: 8px; font-family: var(--mono); font-size: 10.5px; color: #5f9c8c; margin-top: 2px; }
+
+/* ---------- Board preview before signup (App.tsx PREVIEW_ROWS) ---------- */
+.job-gate { position: relative; min-height: 440px; }
+.job-list--blurred { filter: blur(5px); opacity: 0.55; pointer-events: none; user-select: none; max-height: 380px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 35%, transparent); mask-image: linear-gradient(#000 35%, transparent); }
+.job-gate-card { position: absolute; inset: 20px 0 auto; display: flex; justify-content: center; padding: 0 12px; }
+.job-gate-inner { width: min(460px, 100%); padding: 22px 0 24px; border-radius: 18px; background: var(--lp-raised); color: var(--lp-ink); box-shadow: var(--lp-shadow); }
+.job-gate-title { margin: 0 24px; font-size: 18px; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; text-wrap: balance; }
+.job-gate .lp-signup { margin-top: 14px; }
+@media (max-width: 600px) { .job-gate-title { margin: 0 18px; font-size: 17px; } }
+/* Narrow phones (iPhone width): drop the divider and tighten the header so the
+   brand, view switch and both buttons fit without scrolling sideways. */
+@media (max-width: 420px) {
+  .header-divider { display: none; }
+  .app-header { gap: 8px; padding-left: 12px; padding-right: 12px; }
+  .brand-name { font-size: 13px; }
+}
+@media (max-width: 380px) { .brand-name { display: none; } }

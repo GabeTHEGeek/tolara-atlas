@@ -1,8 +1,10 @@
 /* Landing page (#/welcome, LandingPage.tsx). Everything is under .lp and
    prefixed lp- so none of it reaches the board. The page scrolls inside its
-   own fixed layer, since the app shell is a fixed-height, no-scroll layout. */
+   own fixed layer, since the app shell is a fixed-height, no-scroll layout.
+   .lp-theme carries just the colours, for the signup form when it appears
+   on the board preview. */
 
-.lp {
+.lp, .lp-theme {
   --lp-bg: #ffffff;
   --lp-surface: #f6f9fc;
   --lp-raised: #ffffff;
@@ -23,7 +25,8 @@
   --lp-r2: #45c8ff;
   --lp-r3: #7a5af8;
   --lp-r4: #ff8a4c;
-
+}
+.lp {
   position: fixed;
   inset: 0;
   z-index: 50;
@@ -37,14 +40,14 @@
   scroll-behavior: smooth;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .lp {
+  :root:not([data-theme="light"]) .lp, :root:not([data-theme="light"]) .lp-theme {
     --lp-bg: #070d14; --lp-surface: #0d1621; --lp-raised: #111c28; --lp-ink: #e8eef5; --lp-muted: #9aabbf; --lp-line: #1f2c3a;
     --lp-accent: #3fd6b1; --lp-accent-ink: #04261d; --lp-accent-soft: #0c2e27; --lp-violet: #a993ff; --lp-violet-soft: #221a44;
     --lp-money: #6fe3a0; --lp-warm: #ffb36b; --lp-dark: #0d1621; --lp-on-dark: #e8eef5;
     --lp-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 18px 36px -18px rgba(0, 0, 0, 0.6);
   }
 }
-:root[data-theme="dark"] .lp {
+:root[data-theme="dark"] .lp, :root[data-theme="dark"] .lp-theme {
   --lp-bg: #070d14; --lp-surface: #0d1621; --lp-raised: #111c28; --lp-ink: #e8eef5; --lp-muted: #9aabbf; --lp-line: #1f2c3a;
   --lp-accent: #3fd6b1; --lp-accent-ink: #04261d; --lp-accent-soft: #0c2e27; --lp-violet: #a993ff; --lp-violet-soft: #221a44;
   --lp-money: #6fe3a0; --lp-warm: #ffb36b; --lp-dark: #0d1621; --lp-on-dark: #e8eef5;

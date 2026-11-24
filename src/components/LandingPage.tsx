@@ -179,7 +179,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
  * Kit (see kit.ts). "Already signed up?" takes just the email, for someone
  * back on a new device or browser; Kit keeps one subscriber per email.
  */
-function SignupForm({ unlocked, onUnlock }: { unlocked: boolean; onUnlock: () => void }) {
+export function SignupForm({ unlocked, onUnlock }: { unlocked: boolean; onUnlock: () => void }) {
   const [mode, setMode] = useState<"new" | "returning">("new");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -380,9 +380,8 @@ export default function LandingPage({
             Tolara Scout
           </a>
           <nav className="lp-nav-links" aria-label="Sections">
-            <a href="#/jobs" onClick={gate("#/jobs")}>
-              Job board
-            </a>
+            {/* The board itself opens to everyone as a preview (App.tsx). */}
+            <a href="#/jobs">Job board</a>
             <a href="#/map" onClick={gate("#/map")}>
               Map
             </a>
@@ -412,8 +411,8 @@ export default function LandingPage({
               <a className="lp-btn" href={board} onClick={gate(board)}>
                 {unlocked ? "Open the job board" : "Get free access"} <span className="lp-arr">→</span>
               </a>
-              <a className="lp-btn lp-btn-ghost" href="#/map" onClick={gate("#/map")}>
-                See the map
+              <a className="lp-btn lp-btn-ghost" href={unlocked ? "#/map" : "#/jobs"}>
+                {unlocked ? "See the map" : "Preview the board"}
               </a>
             </div>
           </div>
@@ -499,7 +498,7 @@ export default function LandingPage({
             </div>
             <SignupForm unlocked={unlocked} onUnlock={onUnlock} />
             <div className="lp-card-foot">
-              <a className="lp-see" href={boardLink(level, metro)} onClick={gate(boardLink(level, metro))}>
+              <a className="lp-see" href={boardLink(level, metro)}>
                 {/* The board has no city filter, so only an "Anywhere" pick
                     opens to exactly these roles and can promise a count. */}
                 {data && metro === "all" && pick.live > 0

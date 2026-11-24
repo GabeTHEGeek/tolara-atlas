@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { SENIORITY_LABELS, SENIORITY_TIERS, type LocationPinData, type RemoteCompanyData, type RoleData, type Seniority } from "../types.js";
 import { EMPTY_FILTERS, isFiltering, roleDate, type RemoteMode, type RoleFilters } from "../filters.js";
 import { daysOpenLabel, formatSalary, openSince } from "../format.js";
@@ -38,6 +38,9 @@ interface JobBoardProps {
   onSortChange: (s: JobSort) => void;
   total: number;
   payRank: PayRanker;
+  /** Before signup: show this many roles, then blur the rest behind `gate`. */
+  previewLimit?: number | null;
+  gate?: ReactNode;
 }
 
 interface JobRow {
@@ -202,8 +205,12 @@ export default function JobBoard({
   onSortChange,
   total,
   payRank,
+  previewLimit = null,
+  gate = null,
 }: JobBoardProps) {
   const [shown, setShown] = useState(PAGE_SIZE);
+  const previewing = previewLimit != null;
+  const visibleCount = previewing ? previewLimit : shown;
   const [moreOpen, setMoreOpen] = useState(filters.postedWithinDays != null || filters.newOnly || filters.hideGhost);
   const { counts: peopleFound } = useContacts();
   const { roles: scores, source: scoreSource } = useScores();
@@ -225,6 +232,76 @@ export default function JobBoard({
   const clearAll = () => {
     onQueryChange("");
     onFiltersChange({ ...EMPTY_FILTERS, seniority: new Set() });
+  };
+
+  const renderRow = (row: JobRow) => {
+    const salary = formatSalary(row.role.salaryMin, row.role.salaryMax, row.role.salaryCurrency, row.role.salaryPeriod);
+    const when = daysOpenLabel(openSince(row.date, row.role.repostedFrom));
+    const rank = payRank(row.role);
+    return (
+      <li key={row.role.id} className={`job-row${hasScores ? " job-row--scored" : ""}`}>
+        <CompanyLogo name={row.companyName} slug={row.companySlug} logo={logos[row.companySlug]} />
+        <div className="job-main">
+          <p className="job-title">
+            {row.role.url ? (
+              <a href={row.role.url} target="_blank" rel="noopener noreferrer">
+                {row.role.title}
+              </a>
+            ) : (
+              row.role.title
+            )}
+            <FreshnessTag role={row.role} />
+            <RepostTag repostedFrom={row.role.repostedFrom} />
+            <GhostTag role={row.role} />
+            {peopleFound[row.role.id] > 0 && (
+              <a
+                className="people-badge"
+                href={roleHref(row.companySlug, row.role.id)}
+                title="People to reach about this role — open role prep"
+              >
+                {peopleFound[row.role.id]} {peopleFound[row.role.id] === 1 ? "person" : "people"}
+              </a>
+            )}
+          </p>
+          <p className="job-meta">
+            <span className="job-company">{row.companyName}</span>
+            <span title={row.cities.length > 1 ? row.cities.join(" · ") : undefined}>{locationLabel(row)}</span>
+            {when && <span>{when}</span>}
+          </p>
+          {salary ? <span className="job-salary">{salary}</span> : <span className="job-nosalary">Salary not listed</span>}
+          {rank && rank.percentile >= 75 && (
+            <span
+              className="pay-rank"
+              title={`Pays more than ${rank.percentile}% of the ${rank.sampleSize.toLocaleString()} ${SENIORITY_LABELS[rank.seniority]} PM roles with a posted band`}
+            >
+              {payRankShort(rank)} pay for {SENIORITY_LABELS[rank.seniority]}
+            </span>
+          )}
+        </div>
+        {hasScores && (
+          <div className="job-score">
+            {scores[row.role.id] && (
+              <MatchRing
+                score={scores[row.role.id][0]}
+                tier={scores[row.role.id][1]}
+                href={roleHref(row.companySlug, row.role.id)}
+              />
+            )}
+          </div>
+        )}
+        <div className="job-actions">
+          {row.role.url && (
+            <a className="job-view" href={row.role.url} target="_blank" rel="noopener noreferrer">
+              View posting <span aria-hidden="true">↗</span>
+            </a>
+          )}
+          <a className="job-prep" href={roleHref(row.companySlug, row.role.id)}>
+            Role prep
+          </a>
+          {PEOPLE_ENABLED && <FindPeopleButton roleId={row.role.id} compact />}
+        </div>
+      </li>
+    );
   };
 
   return (
@@ -393,79 +470,26 @@ export default function JobBoard({
           </div>
         ) : (
           <ul className="job-list">
-            {matched.slice(0, shown).map((row) => {
-              const salary = formatSalary(row.role.salaryMin, row.role.salaryMax, row.role.salaryCurrency, row.role.salaryPeriod);
-              const when = daysOpenLabel(openSince(row.date, row.role.repostedFrom));
-              const rank = payRank(row.role);
-              return (
-                <li key={row.role.id} className={`job-row${hasScores ? " job-row--scored" : ""}`}>
-                  <CompanyLogo name={row.companyName} slug={row.companySlug} logo={logos[row.companySlug]} />
-                  <div className="job-main">
-                    <p className="job-title">
-                      {row.role.url ? (
-                        <a href={row.role.url} target="_blank" rel="noopener noreferrer">
-                          {row.role.title}
-                        </a>
-                      ) : (
-                        row.role.title
-                      )}
-                      <FreshnessTag role={row.role} />
-                      <RepostTag repostedFrom={row.role.repostedFrom} />
-                      <GhostTag role={row.role} />
-                      {peopleFound[row.role.id] > 0 && (
-                        <a
-                          className="people-badge"
-                          href={roleHref(row.companySlug, row.role.id)}
-                          title="People to reach about this role — open role prep"
-                        >
-                          {peopleFound[row.role.id]} {peopleFound[row.role.id] === 1 ? "person" : "people"}
-                        </a>
-                      )}
-                    </p>
-                    <p className="job-meta">
-                      <span className="job-company">{row.companyName}</span>
-                      <span title={row.cities.length > 1 ? row.cities.join(" · ") : undefined}>{locationLabel(row)}</span>
-                      {when && <span>{when}</span>}
-                    </p>
-                    {salary ? <span className="job-salary">{salary}</span> : <span className="job-nosalary">Salary not listed</span>}
-                    {rank && rank.percentile >= 75 && (
-                      <span
-                        className="pay-rank"
-                        title={`Pays more than ${rank.percentile}% of the ${rank.sampleSize.toLocaleString()} ${SENIORITY_LABELS[rank.seniority]} PM roles with a posted band`}
-                      >
-                        {payRankShort(rank)} pay for {SENIORITY_LABELS[rank.seniority]}
-                      </span>
-                    )}
-                  </div>
-                  {hasScores && (
-                    <div className="job-score">
-                      {scores[row.role.id] && (
-                        <MatchRing
-                          score={scores[row.role.id][0]}
-                          tier={scores[row.role.id][1]}
-                          href={roleHref(row.companySlug, row.role.id)}
-                        />
-                      )}
-                    </div>
-                  )}
-                  <div className="job-actions">
-                    {row.role.url && (
-                      <a className="job-view" href={row.role.url} target="_blank" rel="noopener noreferrer">
-                        View posting <span aria-hidden="true">↗</span>
-                      </a>
-                    )}
-                    <a className="job-prep" href={roleHref(row.companySlug, row.role.id)}>
-                      Role prep
-                    </a>
-                    {PEOPLE_ENABLED && <FindPeopleButton roleId={row.role.id} compact />}
-                  </div>
-                </li>
-              );
-            })}
+            {matched.slice(0, visibleCount).map(renderRow)}
           </ul>
         )}
 
-        {matched.length > shown && (
+        {/* Preview: a few more rows, blurred and inert, behind the signup. */}
+        {previewing && matched.length > visibleCount && (
+          <div className="job-gate">
+            <ul
+              className="job-list job-list--blurred"
+              aria-hidden="true"
+              // React 18 has no type for inert yet; it keeps the blurred links out of tab order.
+              {...({ inert: "" } as object)}
+            >
+              {matched.slice(visibleCount, visibleCount + 4).map(renderRow)}
+            </ul>
+            <div className="job-gate-card">{gate}</div>
+          </div>
+        )}
+
+        {!previewing && matched.length > shown && (
           <button type="button" className="job-more-button" onClick={() => setShown((n) => n + PAGE_SIZE)}>
             Show {Math.min(PAGE_SIZE, matched.length - shown)} more
           </button>

@@ -12,7 +12,7 @@ import { grantAccess, hasAccess, rememberReturnTo, takeReturnTo } from "./access
 import RolePage, { type RoleLoadedInfo } from "./components/RolePage.js";
 import JobBoard, { type JobSort } from "./components/JobBoard.js";
 import MatchQuiz from "./components/MatchQuiz.js";
-import LandingPage from "./components/LandingPage.js";
+import LandingPage, { SignupForm } from "./components/LandingPage.js";
 import { useQuizOpen } from "./scores.js";
 import { currentTheme, setTheme } from "./theme.js";
 import { onJobsBoard, replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
@@ -29,6 +29,9 @@ import {
 } from "./filters.js";
 import type { LocationPinData, MapData } from "./types.js";
 import { dataUrl } from "./base.js";
+
+/** How many roles the board shows before signup. */
+const PREVIEW_ROWS = 10;
 
 export default function App() {
   const route = useRoute();
@@ -256,10 +259,21 @@ export default function App() {
     },
   }, VOICE_ENABLED);
 
+  // Before signup, the job board itself opens as a preview: the first
+  // PREVIEW_ROWS roles, then the rest blurred behind the signup form. It has
+  // to be asked for by address (#/jobs, e.g. "Preview the board"); the bare
+  // home address stays the landing page.
+  const previewing = !unlocked && route.name === "jobs" && /^#\/jobs/.test(window.location.hash);
+  const unlockHere = () => {
+    grantAccess();
+    takeReturnTo(); // they're already where they wanted to be
+    setUnlocked(true);
+  };
+
   // The landing page is a page of its own over the app, not a view inside it.
-  // Until someone signs up (access.ts), every route shows it; once they're
-  // in, they go where they were headed -- a shared role link, say.
-  if (route.name === "welcome" || !unlocked) {
+  // Until someone signs up (access.ts), every other route shows it; once
+  // they're in, they go where they were headed -- a shared role link, say.
+  if (route.name === "welcome" || (!unlocked && !previewing)) {
     if (!unlocked) rememberReturnTo(window.location.hash);
     return (
       <LandingPage
@@ -442,6 +456,17 @@ export default function App() {
             onSortChange={setJobSort}
             total={mapData.roleCount}
             payRank={payRank ?? (() => null)}
+            previewLimit={previewing ? PREVIEW_ROWS : null}
+            gate={
+              previewing && (
+                <div className="lp-theme job-gate-inner">
+                  <p className="job-gate-title">
+                    See all {mapData.roleCount.toLocaleString()} roles, with pay ranks, ghost flags and match scores
+                  </p>
+                  <SignupForm unlocked={false} onUnlock={unlockHere} />
+                </div>
+              )
+            }
           />
         )}
         {mapData && (
