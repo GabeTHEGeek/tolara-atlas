@@ -29,6 +29,7 @@ import {
 } from "./filters.js";
 import type { LocationPinData, MapData } from "./types.js";
 import { dataUrl } from "./base.js";
+import { track } from "./analytics.js";
 
 /** How many roles the board shows before signup. */
 const PREVIEW_ROWS = 10;
@@ -264,6 +265,9 @@ export default function App() {
   // to be asked for by address (#/jobs, e.g. "Preview the board"); the bare
   // home address stays the landing page.
   const previewing = !unlocked && route.name === "jobs" && /^#\/jobs/.test(window.location.hash);
+  useEffect(() => {
+    if (previewing) track("view_board_preview");
+  }, [previewing]);
   const unlockHere = () => {
     grantAccess();
     takeReturnTo(); // they're already where they wanted to be

@@ -16,7 +16,7 @@ import type { Plugin, ResolvedConfig } from "vite";
 import { generateSeo, type CompanyFile, type SeoOutput } from "./generate.js";
 import type { MapData } from "../../src/types.js";
 
-export function seoPages(siteUrl: string): Plugin {
+export function seoPages(siteUrl: string, gaId: string | null = null): Plugin {
   let config: ResolvedConfig;
   let out: SeoOutput | null = null;
 
@@ -36,7 +36,7 @@ export function seoPages(siteUrl: string): Plugin {
       const parsed = JSON.parse(fs.readFileSync(path.join(companyDir, file), "utf8")) as CompanyFile;
       if (parsed?.company?.slug && Array.isArray(parsed.roles)) companies.set(parsed.company.slug, parsed);
     }
-    out = generateSeo({ data, companies, siteUrl });
+    out = generateSeo({ data, companies, siteUrl, gaId });
     return out;
   };
 

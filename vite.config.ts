@@ -17,8 +17,11 @@ loadDotenv();
 // (GitHub Pages serves this repo under /tolara-atlas/). Override with
 // SITE_URL=https://your.domain when hosting elsewhere.
 const SITE_URL = (process.env.SITE_URL ?? "https://gabethegeek.github.io/tolara-atlas").replace(/\/$/, "");
+// Google Analytics, set only by the GitHub Pages build (pages.yml), so local
+// builds and the dev server never send anything.
+const GA_ID = process.env.VITE_GA_ID ?? null;
 
 export default defineConfig(({ command }) => ({
   base: command === "build" ? `${new URL(SITE_URL + "/").pathname}` : "/",
-  plugins: [react(), intelligenceApi(), agentApi(), realtimeApi(), contactsApi(), scoresApi(), seoPages(SITE_URL)],
+  plugins: [react(), intelligenceApi(), agentApi(), realtimeApi(), contactsApi(), scoresApi(), seoPages(SITE_URL, GA_ID)],
 }));

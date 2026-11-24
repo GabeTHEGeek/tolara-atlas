@@ -10,6 +10,7 @@ import { roleDate } from "../filters.js";
 import { roleHref } from "../router.js";
 import type { MapData } from "../types.js";
 import "../landing.css";
+import { track } from "../analytics.js";
 
 /**
  * The landing page at #/welcome. Every figure on it comes from map-data.json,
@@ -199,6 +200,7 @@ export function SignupForm({ unlocked, onUnlock }: { unlocked: boolean; onUnlock
     setState("sending");
     try {
       await subscribe(signup);
+      track(returning ? "login" : "generate_lead", { method: "email" });
       setState("done");
       // A moment to read "You're in", then straight to the board.
       window.setTimeout(onUnlock, 1200);

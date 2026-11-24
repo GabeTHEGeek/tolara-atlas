@@ -58,6 +58,7 @@ export interface SeoInput {
   data: MapData;
   companies: Map<string, CompanyFile>;
   siteUrl: string; // e.g. https://gabethegeek.github.io/tolara-atlas (no trailing slash)
+  gaId?: string | null; // Google Analytics measurement ID, live builds only
 }
 
 const DAY = 86_400_000;
@@ -192,7 +193,10 @@ footer nav.social{gap:8px;margin-top:18px}footer .social a{width:36px;height:36p
 
 export class Site {
   readonly base: string; // "/tolara-atlas" or ""
-  constructor(readonly url: string) {
+  constructor(
+    readonly url: string,
+    readonly gaId: string | null = null,
+  ) {
     this.base = new URL(url + "/").pathname.replace(/\/$/, "");
   }
   href(path: string): string {
@@ -243,6 +247,12 @@ ${meta.noindex ? '<meta name="robots" content="noindex">\n' : ""}<meta property=
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap">
 <meta name="theme-color" content="#0a2540">
 <style>${CSS}</style>
+${
+  this.gaId
+    ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${this.gaId}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","${this.gaId}");</script>`
+    : ""
+}
 ${[...crumbLd, ...(meta.jsonld ?? [])].map(ld).join("\n")}
 </head>
 <body>
@@ -535,7 +545,8 @@ export interface SeoOutput {
 }
 
 export function generateSeo(input: SeoInput): SeoOutput {
-  const site = new Site(input.siteUrl.replace(/\/$/, ""));
+  const gaId = input.gaId && /^G-[A-Z0-9]+$/.test(input.gaId) ? input.gaId : null;
+  const site = new Site(input.siteUrl.replace(/\/$/, ""), gaId);
   const generated = Date.parse(input.data.generatedAt);
   const facts = siteFacts(input.data, generated);
   const faqs = siteFaqs(facts);

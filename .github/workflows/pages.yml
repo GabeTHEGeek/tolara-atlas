@@ -54,6 +54,9 @@ jobs:
           # it's visible in any page that embeds the form. Never put a Kit
           # API key here.
           VITE_KIT_FORM_ID: "10236754"
+          # Google Analytics measurement ID (public, like the form ID). Only
+          # this build sets it, so local runs never send analytics.
+          VITE_GA_ID: "G-R3PCYML3YQ"
 
       - uses: actions/configure-pages@v5
 
