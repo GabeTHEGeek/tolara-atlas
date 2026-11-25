@@ -27,6 +27,11 @@ jobs:
       - name: Init database (no-op if it already exists)
         run: npm run db:init
 
+      # Stops here on a broken companies.csv row (an unquoted comma, a
+      # repeated board, two names on one page address) before anything syncs.
+      - name: Check the company list
+        run: npm run check:companies
+
       - name: Run sync
         run: npm run sync
 

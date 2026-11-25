@@ -22,7 +22,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { parseCompaniesCsv } from "../server/ingestion/csv.js";
+import { formatCompanyRow, parseCompaniesCsv } from "../server/ingestion/csv.js";
 import { fetchWorkdayCompanyName } from "../server/ingestion/sources/workday.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -32,9 +32,6 @@ function looksRaw(name: string): boolean {
   return name.includes("|") || /%[0-9A-F]{2}/i.test(name);
 }
 
-function csvField(value: string): string {
-  return /[",\r\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
-}
 
 async function main() {
   const text = readFileSync(COMPANIES_CSV_PATH, "utf-8");
@@ -67,9 +64,7 @@ async function main() {
       continue;
     }
 
-    const fields = [row.company, row.token, row.platform, row.status, row.last_checked, row.notes];
-    fields[0] = newName;
-    lines[i] = fields.map(csvField).join(",") + eol;
+    lines[i] = formatCompanyRow({ ...row, company: newName }).replace(/\n$/, "") + eol;
     console.log(`  ${row.company}  ->  ${newName}`);
     fixed += 1;
   }

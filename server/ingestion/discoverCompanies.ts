@@ -50,7 +50,7 @@ import { readFileSync, appendFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { parseCompaniesCsv } from "./csv.js";
+import { formatCompanyRow, parseCompaniesCsv } from "./csv.js";
 import { searchGreenhouse } from "./sources/greenhouse.js";
 import { searchAshby } from "./sources/ashby.js";
 import { searchLever } from "./sources/lever.js";
@@ -101,19 +101,6 @@ function stripIcimsPrefix(token: string): string {
   return token.replace(/^[a-z]*(?:careers|jobs)-/i, "");
 }
 
-/**
- * Every other platform's display name is derived from title-casing a
- * slug, so it never contains a comma or quote. Paylocity's dataset supplies
- * a real free-text company name instead (e.g. "Smith, Jones & Co."), which
- * can -- so this quotes/escapes it the same way parseLine in csv.ts expects
- * to read it back, and leaves slug-derived names untouched.
- */
-function csvField(value: string): string {
-  if (/[",\r\n]/.test(value)) {
-    return `"${value.replace(/"/g, '""')}"`;
-  }
-  return value;
-}
 
 interface PaylocityTokenEntry {
   guid: string;
@@ -235,7 +222,7 @@ async function main() {
         const name =
           platform === "workday" ? ((await fetchWorkdayCompanyName(board)) ?? fallbackName) : fallbackName;
         newLines.push(
-          `${csvField(name)},${csvField(board)},${platform},verified,${nowIso()},Auto-discovered (bulk token scan)\r\n`,
+          formatCompanyRow({ company: name, token: board, platform, status: "verified", last_checked: nowIso(), notes: "Auto-discovered (bulk token scan)" }),
         );
         totalAdded += 1;
       }

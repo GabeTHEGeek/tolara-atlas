@@ -36,11 +36,10 @@ import { appendFileSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { parseCompaniesCsv } from "./csv.js";
+import { formatCompanyRow, parseCompaniesCsv } from "./csv.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import {
   boardFromApplyUrl,
-  csvField,
   fetchPlatform,
   fetchText,
   nameResemblesToken,
@@ -261,7 +260,7 @@ async function main() {
           noPm += 1;
           continue;
         }
-        newLines.push(`${csvField(r.name)},${csvField(token)},${platform},verified,${nowIso},${csvField(`${r.firm} portfolio (${r.host})`)}\n`);
+        newLines.push(formatCompanyRow({ company: r.name, token, platform, status: "verified", last_checked: nowIso, notes: `${r.firm} portfolio (${r.host})` }));
       }
       await sleep(PAUSE_BETWEEN_BATCHES_MS);
     }

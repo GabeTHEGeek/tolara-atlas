@@ -29,13 +29,6 @@ export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-/** Same quoting rule as discoverCompanies.ts -- a16z names are free text and can contain commas. */
-export function csvField(value: string): string {
-  if (/[",\r\n]/.test(value)) {
-    return `"${value.replace(/"/g, '""')}"`;
-  }
-  return value;
-}
 
 export async function fetchText(url: string, timeoutMs = 20000): Promise<string | null> {
   for (let attempt = 0; attempt < 2; attempt++) {

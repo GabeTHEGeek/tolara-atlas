@@ -18,7 +18,7 @@ import { parseSalary, type ParsedSalary } from "./salary.js";
 import { extractSalary } from "./extract.js";
 
 import { getDb } from "../db/client.js";
-import { parseCompaniesCsv, type CompanyRow } from "./csv.js";
+import { parseCompaniesCsv, SUPPORTED_PLATFORMS, type CompanyRow, type Platform } from "./csv.js";
 import { searchGreenhouse } from "./sources/greenhouse.js";
 import { searchAshby } from "./sources/ashby.js";
 import { searchLever } from "./sources/lever.js";
@@ -101,27 +101,7 @@ function contentHash(job: RawJob): string {
  * afterward via matchesProductManagerFilter, so tuning that function
  * changes what the next sync stores without touching these adapters.
  */
-type Platform = "greenhouse" | "ashby" | "lever" | "bamboohr" | "workday" | "paylocity" | "icims" | "tiktok" | "apple" | "meta" | "eightfold" | "atlassian" | "amazon" | "microsoft" | "booking" | "smartrecruiters" | "oracle" | "google";
-const ALL_PLATFORMS: Platform[] = [
-  "greenhouse",
-  "ashby",
-  "lever",
-  "bamboohr",
-  "workday",
-  "paylocity",
-  "icims",
-  "tiktok",
-  "apple",
-  "meta",
-  "eightfold",
-  "atlassian",
-  "amazon",
-  "microsoft",
-  "booking",
-  "smartrecruiters",
-  "oracle",
-  "google",
-];
+const ALL_PLATFORMS: readonly Platform[] = SUPPORTED_PLATFORMS;
 
 // Boards big enough that PER_BOARD_LIMIT would cut off real PM roles. TikTok
 // is one company with ~4,300 postings worldwide, and the cap is applied

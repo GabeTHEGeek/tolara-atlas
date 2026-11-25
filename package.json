@@ -17,7 +17,8 @@
     "discover": "tsx server/ingestion/discoverCompanies.ts",
     "discover:a16z": "tsx server/ingestion/discoverA16z.ts",
     "discover:vc": "tsx server/ingestion/discoverGetro.ts",
-    "find-people": "tsx scripts/find-people.ts"
+    "find-people": "tsx scripts/find-people.ts",
+    "check:companies": "tsx scripts/check-companies.ts"
   },
   "dependencies": {
     "better-sqlite3": "^11.3.0",

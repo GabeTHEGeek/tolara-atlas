@@ -44,11 +44,10 @@ import { readFileSync, appendFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { parseCompaniesCsv } from "./csv.js";
+import { formatCompanyRow, parseCompaniesCsv } from "./csv.js";
 import { matchesProductManagerFilter } from "./filters/productManager.js";
 import {
   boardFromApplyUrl,
-  csvField,
   fetchPlatform,
   fetchText,
   mostCommon,
@@ -239,7 +238,7 @@ async function main() {
         }
         const name = tokens.get(board) ?? board;
         newLines.push(
-          `${csvField(name)},${csvField(board)},${platform},verified,${nowIso},a16z portfolio (jobs.a16z.com)\r\n`,
+          formatCompanyRow({ company: name, token: board, platform, status: "verified", last_checked: nowIso, notes: "a16z portfolio (jobs.a16z.com)" }),
         );
       }
       await sleep(PAUSE_BETWEEN_BATCHES_MS);
