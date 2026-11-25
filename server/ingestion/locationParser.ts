@@ -48,9 +48,9 @@ const KNOWN_CITIES: Record<string, { city: string; state: string }> = {
   "sf bay area": { city: "San Francisco", state: "CA" },
   "bay area": { city: "San Francisco", state: "CA" },
   "culver city": { city: "Culver City", state: "CA" },
-  "new york city": { city: "New York City", state: "NY" },
+  "new york city": { city: "New York", state: "NY" },
   "new york": { city: "New York", state: "NY" },
-  nyc: { city: "New York City", state: "NY" },
+  nyc: { city: "New York", state: "NY" },
   "palo alto": { city: "Palo Alto", state: "CA" },
   "san mateo": { city: "San Mateo", state: "CA" },
   "menlo park": { city: "Menlo Park", state: "CA" },
@@ -174,6 +174,9 @@ function isPlausibleCity(city: string): boolean {
 }
 
 function toParsed(city: string, state: string): ParsedLocation {
+  // One spelling per city, so "New York City, NY" and "New York, NY" are one
+  // place on the map and in city filters, not two.
+  if (state === "NY" && /^new york city$/i.test(city)) city = "New York";
   return { city, state, query: `${city}, ${state}, USA` };
 }
 
