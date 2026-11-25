@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
  *                                       before the job board was the default)
  *                                       still opens the map.
  *   #/jobs?co=<slug>                    the job board showing one company's roles
+ *                                       (company links use it in dev only)
  *   #/company/<slug>/role/<roleId>      a role page
  *   #/welcome                           the landing page (LandingPage.tsx)
  */
@@ -62,9 +63,14 @@ export function roleHref(companySlug: string, roleId: number): string {
   return `#/company/${companySlug}/role/${roleId}`;
 }
 
-/** The job board narrowed to one company: every role it has open. */
+/**
+ * A company's own page: the crawlable /companies/<slug>/ page the build
+ * writes (server/seo/generate.ts) with all its open roles. Those pages only
+ * exist in a build, so `npm run dev` links to the job board narrowed to the
+ * company instead.
+ */
 export function companyJobsHref(companySlug: string): string {
-  return `#/jobs?co=${companySlug}`;
+  return import.meta.env.DEV ? `#/jobs?co=${companySlug}` : `${import.meta.env.BASE_URL}companies/${companySlug}/`;
 }
 
 export function useRoute(): Route {
