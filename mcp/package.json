@@ -1,0 +1,38 @@
+{
+  "name": "tolara-scout-mcp",
+  "version": "0.1.0",
+  "description": "Search every open US product manager job from Claude, Cursor or any MCP client. Data from Tolara Scout, updated daily.",
+  "type": "module",
+  "bin": {
+    "tolara-scout-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node18 --format=esm --outfile=dist/index.js --packages=external --banner:js='#!/usr/bin/env node'",
+    "dev": "tsx src/index.ts",
+    "test": "tsx src/smoke.ts"
+  },
+  "keywords": [
+    "mcp",
+    "jobs",
+    "product manager",
+    "job search",
+    "claude"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.10",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

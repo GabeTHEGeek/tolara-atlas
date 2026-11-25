@@ -178,6 +178,24 @@ adds you to the Monday email.
 *"Only senior roles over $200K."* Answers come from the posting's own text,
 not the model's memory.
 
+## Ask your AI assistant
+
+Tolara Scout has an [MCP server](mcp/), so Claude, Cursor or any MCP client
+can search the board for you: *"Senior PM roles in New York over $200K,
+newest first"*, *"What's Stripe hiring for?"*, *"What opened yesterday in
+fintech?"*. It runs on your machine and reads the same public data as the
+site, so there's no key and nothing to pay for.
+
+| Tool | What it does |
+|---|---|
+| `search_roles` | Search by keywords, company, city, level, salary, remote, industry and posting age |
+| `get_role` | One role: pay band and its rank for the level, days open, ghost-job flag, focus |
+| `get_company` | A company's roles, weekly hiring trend, leaders and news |
+| `whats_new` | Roles opened and closed in the last 1–7 days, for a daily digest |
+| `tolara_overview` | Market totals, top cities and the industry list |
+
+Setup is one line; see [mcp/README.md](mcp/README.md).
+
 ## Built to be trusted
 
 - **Straight from the source.** Every role links to the company's own
@@ -264,6 +282,7 @@ The daily sync picks it up, and it's on the board the next morning.
 
 - [x] Hosted version, no clone needed: [the live board](https://gabethegeek.github.io/tolara-atlas/)
 - [x] Email signup on the landing page
+- [x] Search the board from Claude, Cursor or any MCP client
 - [ ] The Monday email: new roles that match your level and city
 - [ ] More role families: engineering, design, data
 - [ ] Hiring trends by company and city over time
