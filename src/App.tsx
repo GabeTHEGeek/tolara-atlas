@@ -15,7 +15,7 @@ import MatchQuiz from "./components/MatchQuiz.js";
 import LandingPage, { SignupForm } from "./components/LandingPage.js";
 import { useQuizOpen } from "./scores.js";
 import { currentTheme, setTheme } from "./theme.js";
-import { onJobsBoard, replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
+import { companyJobsHref, onJobsBoard, replaceJobsQuery, replaceMapQuery, useRoute } from "./router.js";
 import { buildPayRanker } from "./payRank.js";
 import {
   EMPTY_FILTERS,
@@ -109,6 +109,22 @@ export default function App() {
     () => (selectedPin ? (filteredPins.find((p) => p.id === selectedPin.id) ?? null) : null),
     [filteredPins, selectedPin],
   );
+
+  // A company link (#/jobs?co=stripe) opens that company's whole list: the
+  // other filters and the search are cleared, so nothing hides its roles.
+  // Other links carry the company along in their query (filtersToParams),
+  // so following them keeps or drops it as the link says.
+  useEffect(() => {
+    if (route.name !== "jobs" && route.name !== "map") return;
+    const co = filtersFromParams(route.params).company;
+    setFilters((f) => {
+      if (co === f.company) return f;
+      if (co != null && route.name === "jobs") return { ...EMPTY_FILTERS, seniority: new Set(), company: co };
+      return { ...f, company: co };
+    });
+    if (co != null && route.name === "jobs" && co !== filters.company) setJobQuery("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route]);
 
   useEffect(() => {
     if (route.name === "map") setBaseView("map");
@@ -322,7 +338,11 @@ export default function App() {
             {crumbs && (
               <>
                 <span aria-hidden="true">›</span>
-                <span>{crumbs.company}</span>
+                {route.name === "role" ? (
+                  <a href={companyJobsHref(route.companySlug)}>{crumbs.company}</a>
+                ) : (
+                  <span>{crumbs.company}</span>
+                )}
                 <span aria-hidden="true">›</span>
                 <span className="breadcrumb-current" aria-current="page">
                   {crumbs.role}

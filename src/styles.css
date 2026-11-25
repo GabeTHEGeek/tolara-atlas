@@ -1972,7 +1972,7 @@ h1.role-page-title {
 
 /* Dot separators drawn between items, so a missing date leaves no
    stray dot behind. */
-.job-meta span + span::before {
+.job-meta > * + *::before {
   content: "·";
   margin: 0 8px;
   color: var(--text-faint);
@@ -1980,6 +1980,54 @@ h1.role-page-title {
 
 .job-company {
   color: var(--text);
+  text-decoration: none;
+}
+.job-company:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* The logo opens the company's jobs too; the name is the keyboard stop. */
+.job-logo-link {
+  display: contents;
+}
+
+.job-company-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.job-company-back {
+  align-self: flex-start;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.job-company-back:hover {
+  color: var(--accent);
+}
+
+.role-company-link,
+.company-panel-header h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+.role-company-link:hover,
+.company-panel-header h2 a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.company-panel-all {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.company-panel-all:hover {
+  text-decoration: underline;
 }
 
 .job-salary,

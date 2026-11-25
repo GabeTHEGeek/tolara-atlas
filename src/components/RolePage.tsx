@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { roleHref } from "../router.js";
+import { companyJobsHref, roleHref } from "../router.js";
 import { daysOpenLabel, formatSalary, openSince, relativeTime } from "../format.js";
 import { roleDate } from "../filters.js";
 import { payRankShort, type PayRanker } from "../payRank.js";
@@ -314,7 +314,10 @@ export default function RolePage({ companySlug, roleId, onLoaded, onClose, intel
               <GhostTag role={role} />
             </h1>
             <p className="role-subtitle">
-              {[details.company.name, role.team, locationLabel(role)].filter(Boolean).join(" · ")}
+              <a className="role-company-link" href={companyJobsHref(details.company.slug)} title={`All ${details.company.name} jobs`}>
+                {details.company.name}
+              </a>
+              {[role.team, locationLabel(role)].filter(Boolean).map((part) => ` · ${part}`)}
             </p>
             {(daysOpen || repostedOn || ghost) && (
               <p className="role-facts">

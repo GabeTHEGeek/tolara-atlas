@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNod
 import { SENIORITY_LABELS, SENIORITY_TIERS, type LocationPinData, type RemoteCompanyData, type RoleData, type Seniority } from "../types.js";
 import { EMPTY_FILTERS, isFiltering, roleDate, type RemoteMode, type RoleFilters } from "../filters.js";
 import { daysOpenLabel, formatSalary, openSince } from "../format.js";
-import { roleHref } from "../router.js";
+import { companyJobsHref, roleHref } from "../router.js";
 import FreshnessTag from "./FreshnessTag.js";
 import RepostTag from "./RepostTag.js";
 import GhostTag from "./GhostTag.js";
@@ -228,6 +228,7 @@ export default function JobBoard({
   // A new search or filter starts back at the top of the list.
   useEffect(() => setShown(PAGE_SIZE), [query, sort, filters]);
 
+  const companyName = filters.company != null ? (rows.find((r) => r.companySlug === filters.company)?.companyName ?? null) : null;
   const narrowed = isFiltering(filters) || query.trim() !== "";
   const clearAll = () => {
     onQueryChange("");
@@ -240,7 +241,9 @@ export default function JobBoard({
     const rank = payRank(row.role);
     return (
       <li key={row.role.id} className={`job-row${hasScores ? " job-row--scored" : ""}`}>
-        <CompanyLogo name={row.companyName} slug={row.companySlug} logo={logos[row.companySlug]} />
+        <a className="job-logo-link" href={companyJobsHref(row.companySlug)} title={`All ${row.companyName} jobs`} tabIndex={-1}>
+          <CompanyLogo name={row.companyName} slug={row.companySlug} logo={logos[row.companySlug]} />
+        </a>
         <div className="job-main">
           <p className="job-title">
             {row.role.url ? (
@@ -264,7 +267,9 @@ export default function JobBoard({
             )}
           </p>
           <p className="job-meta">
-            <span className="job-company">{row.companyName}</span>
+            <a className="job-company" href={companyJobsHref(row.companySlug)} title={`All ${row.companyName} jobs`}>
+              {row.companyName}
+            </a>
             <span title={row.cities.length > 1 ? row.cities.join(" · ") : undefined}>{locationLabel(row)}</span>
             {when && <span>{when}</span>}
           </p>
@@ -307,9 +312,27 @@ export default function JobBoard({
   return (
     <div className="job-board">
       <div className="job-board-inner">
-        <h1 className="job-board-title">
-          {total.toLocaleString()} open PM jobs<span> in the US, updated daily.</span>
-        </h1>
+        {filters.company != null ? (
+          <div className="job-company-head">
+            <a className="job-company-back" href="#/jobs" onClick={(e) => {
+              e.preventDefault();
+              onFiltersChange({ ...filters, company: null });
+            }}>
+              ← All companies
+            </a>
+            <h1 className="job-board-title">
+              {companyName ?? filters.company}
+              <span>
+                {" "}
+                · {matched.length} open PM {matched.length === 1 ? "job" : "jobs"}
+              </span>
+            </h1>
+          </div>
+        ) : (
+          <h1 className="job-board-title">
+            {total.toLocaleString()} open PM jobs<span> in the US, updated daily.</span>
+          </h1>
+        )}
         <label className="job-search">
           <span aria-hidden="true" className="job-search-icon">⌕</span>
           <input

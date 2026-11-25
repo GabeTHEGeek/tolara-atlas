@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
  *                                       #/?sen=... (a filtered map link from
  *                                       before the job board was the default)
  *                                       still opens the map.
+ *   #/jobs?co=<slug>                    the job board showing one company's roles
  *   #/company/<slug>/role/<roleId>      a role page
  *   #/welcome                           the landing page (LandingPage.tsx)
  */
@@ -59,6 +60,11 @@ export function onJobsBoard(hash: string = window.location.hash): boolean {
 
 export function roleHref(companySlug: string, roleId: number): string {
   return `#/company/${companySlug}/role/${roleId}`;
+}
+
+/** The job board narrowed to one company: every role it has open. */
+export function companyJobsHref(companySlug: string): string {
+  return `#/jobs?co=${companySlug}`;
 }
 
 export function useRoute(): Route {

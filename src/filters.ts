@@ -34,6 +34,8 @@ export interface RoleFilters {
   // An industry id from data/company-categories.json, or null for any.
   // A company with no label counts as "other".
   industry: string | null;
+  // One company's slug, or null for every company: "all of Stripe's roles".
+  company: string | null;
 }
 
 export const EMPTY_FILTERS: RoleFilters = {
@@ -44,11 +46,12 @@ export const EMPTY_FILTERS: RoleFilters = {
   hideGhost: false,
   remote: "all",
   industry: null,
+  company: null,
 };
 
 export function isFiltering(f: RoleFilters): boolean {
   return (
-    f.seniority.size > 0 || f.minSalary != null || f.postedWithinDays != null || f.newOnly || f.hideGhost || f.remote !== "all" || f.industry != null
+    f.seniority.size > 0 || f.minSalary != null || f.postedWithinDays != null || f.newOnly || f.hideGhost || f.remote !== "all" || f.industry != null || f.company != null
   );
 }
 
@@ -102,6 +105,7 @@ export function roleMatches(role: RoleData, f: RoleFilters, now: number): boolea
  */
 /** Whether a company is in the filtered industry. Industry is per company, not per role. */
 function inIndustry(slug: string, f: RoleFilters, categoryOf: Record<string, string>): boolean {
+  if (f.company != null && slug !== f.company) return false;
   return f.industry == null || (categoryOf[slug] ?? "other") === f.industry;
 }
 
@@ -152,7 +156,7 @@ export function countRoles(pins: LocationPinData[], remoteCompanies: RemoteCompa
  * hand-edited or come from an older version.
  */
 export function filtersToParams(f: RoleFilters, params: URLSearchParams): void {
-  for (const key of ["sen", "pay", "posted", "new", "ghost", "where", "ind"]) params.delete(key);
+  for (const key of ["sen", "pay", "posted", "new", "ghost", "where", "ind", "co"]) params.delete(key);
   if (f.seniority.size > 0) params.set("sen", SENIORITY_TIERS.filter((t) => f.seniority.has(t)).join(","));
   if (f.minSalary != null) params.set("pay", String(f.minSalary));
   if (f.postedWithinDays != null) params.set("posted", String(f.postedWithinDays));
@@ -160,6 +164,7 @@ export function filtersToParams(f: RoleFilters, params: URLSearchParams): void {
   if (f.hideGhost) params.set("ghost", "hide");
   if (f.remote !== "all") params.set("where", f.remote);
   if (f.industry != null) params.set("ind", f.industry);
+  if (f.company != null) params.set("co", f.company);
 }
 
 export function filtersFromParams(params: URLSearchParams): RoleFilters {
@@ -180,5 +185,6 @@ export function filtersFromParams(params: URLSearchParams): RoleFilters {
     // Not checked against the category list here (it arrives with the map
     // data); an unknown id just matches nothing until it's cleared.
     industry: /^[a-z-]+$/.test(params.get("ind") ?? "") ? params.get("ind") : null,
+    company: /^[a-z0-9-]+$/.test(params.get("co") ?? "") ? params.get("co") : null,
   };
 }

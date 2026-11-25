@@ -1,5 +1,5 @@
 import type { LocationPinData } from "../types.js";
-import { roleHref } from "../router.js";
+import { companyJobsHref, roleHref } from "../router.js";
 import { formatSalary } from "../format.js";
 import FreshnessTag from "./FreshnessTag.js";
 import RepostTag from "./RepostTag.js";
@@ -23,7 +23,11 @@ export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
     <aside className="company-panel">
       <div className="company-panel-header">
         <div>
-          <h2>{pin.companyName}</h2>
+          <h2>
+            <a href={companyJobsHref(pin.companySlug)} title={`All ${pin.companyName} jobs`}>
+              {pin.companyName}
+            </a>
+          </h2>
           <p className="company-panel-location">{location}</p>
         </div>
         <button className="company-panel-close" onClick={onClose} aria-label="Close">
@@ -81,6 +85,9 @@ export default function CompanyPanel({ pin, onClose }: CompanyPanelProps) {
           );
         })}
       </ul>
+      <a className="company-panel-all" href={companyJobsHref(pin.companySlug)}>
+        See all {pin.companyName} jobs →
+      </a>
     </aside>
   );
 }
