@@ -30,16 +30,12 @@ scheduled tasks for a morning summary of new roles that fit you.
 
 ## Set it up
 
-Until it's published on npm, run it from a checkout of this repo:
-
-```bash
-cd mcp && npm install && npm run build
-```
+You need Node.js 18 or newer.
 
 **Claude Code**
 
 ```bash
-claude mcp add tolara-scout -- node /path/to/tolara-atlas/mcp/dist/index.js
+claude mcp add tolara-scout -s user -- npx -y tolara-scout-mcp
 ```
 
 **Claude Desktop, Cursor and others** take the same command in their MCP
@@ -49,14 +45,16 @@ settings (`claude_desktop_config.json`, `.cursor/mcp.json`):
 {
   "mcpServers": {
     "tolara-scout": {
-      "command": "node",
-      "args": ["/path/to/tolara-atlas/mcp/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "tolara-scout-mcp"]
     }
   }
 }
 ```
 
-Once it's on npm, the command becomes `npx -y tolara-scout-mcp`.
+To run it from a checkout of this repo instead:
+`cd mcp && npm install && npm run build`, then use
+`node /path/to/tolara-atlas/mcp/dist/index.js` as the command.
 
 ## Options
 

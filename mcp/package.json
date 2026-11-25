@@ -12,7 +12,8 @@
   "scripts": {
     "build": "esbuild src/index.ts --bundle --platform=node --target=node18 --format=esm --outfile=dist/index.js --packages=external --banner:js='#!/usr/bin/env node'",
     "dev": "tsx src/index.ts",
-    "test": "tsx src/smoke.ts"
+    "test": "tsx src/smoke.ts",
+    "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [
     "mcp",
@@ -34,5 +35,15 @@
     "esbuild": "^0.28.2",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabeTHEGeek/tolara-atlas.git",
+    "directory": "mcp"
+  },
+  "homepage": "https://github.com/GabeTHEGeek/tolara-atlas/tree/main/mcp#readme",
+  "bugs": {
+    "url": "https://github.com/GabeTHEGeek/tolara-atlas/issues"
+  },
+  "mcpName": "io.github.gabethegeek/tolara-scout"
 }
