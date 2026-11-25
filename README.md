@@ -1,43 +1,83 @@
+<div align="center">
+
 # Tolara Scout
 
-**Every open Product Manager job in the US, on one board and one map. Updated daily. With the pay.**
+### Every open Product Manager job in the US. One board, one map, the real pay.
 
-3,341 PM roles at 889 companies hiring right now, read straight from each
-company's own careers site. No reposts, no "promoted" listings, no
-"competitive salary": 72% of roles show the real pay band, and postings that
-have sat open for months are flagged as possible ghosts.
+**Updated daily, straight from 1,606 companies' own careers sites. Free.**
+
+<a href="https://gabethegeek.github.io/tolara-atlas/"><img src="https://img.shields.io/badge/%E2%86%92%20Open%20the%20live%20board-0b8a6e?style=for-the-badge" alt="Open the live board"></a>
+&nbsp;
+<a href="#run-it-yourself"><img src="https://img.shields.io/badge/Run%20it%20yourself-0f1f33?style=for-the-badge" alt="Run it yourself"></a>
 
 [![Daily jobs sync](https://github.com/GabeTHEGeek/tolara-atlas/actions/workflows/sync.yml/badge.svg)](https://github.com/GabeTHEGeek/tolara-atlas/actions/workflows/sync.yml)
-![Open PM roles](https://img.shields.io/badge/open%20PM%20roles-3%2C341-0b8a6e)
-![Companies hiring](https://img.shields.io/badge/companies%20hiring-889-0b8a6e)
-![Companies tracked](https://img.shields.io/badge/companies%20tracked-1%2C606-0b8a6e)
-![Cities](https://img.shields.io/badge/cities-166-0b8a6e)
+![Open PM roles](https://img.shields.io/badge/open%20PM%20roles-3%2C352-0b8a6e)
+![Companies hiring](https://img.shields.io/badge/companies%20hiring-884-0b8a6e)
+![Cities](https://img.shields.io/badge/cities-167-0b8a6e)
 ![With salary](https://img.shields.io/badge/with%20salary-72%25-0b8a6e)
 ![Median pay](https://img.shields.io/badge/median%20PM%20pay-%24210K-0b8a6e)
 ![Paid data](https://img.shields.io/badge/paid%20data-none-0b8a6e)
 
-![The map: one pin per company office, sized by open PM roles](docs/screenshots/map.png)
+<a href="https://gabethegeek.github.io/tolara-atlas/"><img src="docs/screenshots/landing.png" alt="Tolara Scout's landing page: live counts of open Senior PM roles, new roles this week, median pay and possible ghost jobs, with a free signup" width="100%"></a>
 
-> ⭐ **If this saves you an afternoon of tab-hopping, star the repo.** It's
-> how other PMs find it.
+| **3,352** | **884** | **72%** | **$210K** | **478** |
+|:---:|:---:|:---:|:---:|:---:|
+| open PM roles | companies hiring | show the real pay band | median PM pay | ghost jobs flagged |
+
+</div>
+
+> ⭐ **If this saves you an afternoon of tab-hopping, star the repo** and send
+> it to a PM friend who's looking. That's how other PMs find it.
 
 ---
+
+## A 60-second tour
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/job-board.png" alt="The job board sorted by best match, each role with its pay band, freshness tag and a match score ring">
+      <p align="center"><b>📋 The board, sorted by fit.</b><br><sub>Every role with its pay band, how fresh it is, and your match score.</sub></p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/quiz.png" alt="The match quiz, step 2 of 3: what kinds of products you've worked on">
+      <p align="center"><b>🎯 A one-minute match quiz.</b><br><sub>No resume needed. Answers never leave your browser.</sub></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/map.png" alt="The map of the US with one pin per office, sized by open PM roles">
+      <p align="center"><b>🗺️ Who's hiring near you.</b><br><sub>One pin per office, sized by open PM roles.</sub></p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/role-prep.png" alt="A role page: posted pay band and how it ranks, leadership and company snapshot">
+      <p align="center"><b>🧠 Prep for every role.</b><br><sub>Posted pay and how it ranks, leadership, company snapshot, news.</sub></p>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/screenshots/hiring-pulse.gif" alt="Animated hiring pulse: Stripe's open PM roles by week, rising from 22 to 30, labelled Hiring up 36%" width="420"><br>
+  <sub><b>📈 The hiring pulse.</b> Every company's open PM roles, week by week, so you can see who's hiring <i>up</i>.</sub>
+</p>
 
 ## What's new
 
 **Late November 2026: a match quiz, ghost-job flags and a landing page.**
-The board now covers **3,341 roles at 889 companies in 166 cities.**
+The board now covers **3,352 roles at 884 companies in 167 cities.**
 
-- 👋 **A landing page** at `#/welcome`. Every number on it (roles opened and
+- 👋 **A landing page** with live numbers. Everything on it (roles opened and
   closed this week, possible ghosts, pay by level, the newest roles for your
   level and city) is worked out from the same data file the board loads, so
-  it updates with the daily sync. Visitors can sign up for the Monday email
-  with their first name, last name and email, which go straight to Kit.
+  it updates with the daily sync. Signing up (first name, last name, email,
+  sent straight to Kit) opens the board and adds you to the Monday email.
 - 🎯 **A one-minute match quiz.** No resume needed: answer a few questions
   about your experience and what you want, and every role gets a match score.
   An animated ring next to each role shows how strong the match is.
 - 👻 **Ghost-job flags.** Roles open 90+ days, or taken down, reposted and
   open 45+ days, are tagged *Possible ghost job*. One filter hides them all.
+- 📈 **The hiring pulse** on every role page: the company's open PM roles by
+  week, drawn like a heart monitor.
 - 📋 **The job board is the home page.** The map is one click away at
   `#/map`, and old map links still work.
 - 🌗 **A new light design,** with a switch for dark mode.
@@ -83,7 +123,7 @@ Figma · Notion · Linear · Vercel · GitLab
 
 ## PM pay, from real postings
 
-Middle of the posted pay band, for the 2,388 roles that publish a yearly
+Middle of the posted pay band, for the 2,401 roles that publish a yearly
 band in USD:
 
 | Level | Median |
@@ -94,32 +134,13 @@ band in USD:
 | Principal / Group PM | **$231K** |
 | Director and above | **$239K** |
 
-58% of banded roles pay $200K or more at the midpoint, and 152 pay $300K or
+58% of banded roles pay $200K or more at the midpoint, and 150 pay $300K or
 more. These are posted bands, not self-reported surveys.
 
-**This week:** 427 roles added and 310 closed. The header shows what moved,
-role by role. **485 open roles** are flagged as possible ghosts.
+**This week:** 469 roles added and 313 closed. The header shows what moved,
+role by role. **478 open roles** are flagged as possible ghosts.
 
 ## What you get
-
-<table>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/job-board.png" alt="Job board with search, filters, salary bands and freshness tags"></td>
-    <td width="50%"><img src="docs/screenshots/company.png" alt="A company's office on the map, listing its open roles with pay"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub><b>Job board</b>: search, filters, pay and freshness</sub></td>
-    <td align="center"><sub><b>Company view</b>: every role at one office</sub></td>
-  </tr>
-  <tr>
-    <td colspan="2"><img src="docs/screenshots/role-prep.png" alt="Role-prep page with pay from the posting, leadership, company snapshot, hiring signals and news"></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><sub><b>Role prep</b>: pay, leadership, company snapshot, hiring signals and news</sub></td>
-  </tr>
-</table>
-
-<sub>Screenshots show the earlier dark design; the app now opens in light mode.</sub>
 
 📋 **A job board first.** Search by title, company or city. Filter by level,
 pay, industry, remote and posting date. Every role is tagged 🔥 Hot, ✨ New,
@@ -150,8 +171,8 @@ by how close they are to it. Runs locally, only when you ask.
 📈 **A change feed.** Every role opened and closed in the last week, so you
 spot a team's hiring push before everyone else does.
 
-👋 **A landing page** at `#/welcome` with live numbers and a signup for the
-Monday email.
+👋 **A landing page** with live numbers. A free signup opens the board and
+adds you to the Monday email.
 
 🎙️ **Talk to the map (optional, off by default).** *"Take me to New York."*
 *"Only senior roles over $200K."* Answers come from the posting's own text,
@@ -241,7 +262,7 @@ The daily sync picks it up, and it's on the board the next morning.
 
 ## Roadmap
 
-- [ ] Hosted version, no clone needed
+- [x] Hosted version, no clone needed: [the live board](https://gabethegeek.github.io/tolara-atlas/)
 - [x] Email signup on the landing page
 - [ ] The Monday email: new roles that match your level and city
 - [ ] More role families: engineering, design, data
