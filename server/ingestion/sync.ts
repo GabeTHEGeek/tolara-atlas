@@ -156,17 +156,26 @@ async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jo
 async function main() {
   const db = getDb();
 
-  // "New York City" and "NYC" used to resolve to their own city, splitting
-  // New York into two on the map and in city filters. The parser now maps
-  // them to "New York"; this folds in rows geocoded before that (they're
-  // never re-parsed). A no-op once they're gone. A role with both rows
-  // keeps just the one, so it isn't counted twice.
-  db.prepare(
-    `DELETE FROM role_locations WHERE resolved_city = 'New York City' AND resolved_state = 'NY'
-       AND role_id IN (SELECT role_id FROM role_locations WHERE resolved_city = 'New York' AND resolved_state = 'NY')`,
-  ).run();
-  db.prepare(`UPDATE role_locations SET resolved_city = 'New York' WHERE resolved_city = 'New York City' AND resolved_state = 'NY'`).run();
-  db.prepare(`UPDATE roles SET resolved_city = 'New York' WHERE resolved_city = 'New York City' AND resolved_state = 'NY'`).run();
+  // Some cities used to resolve under two spellings ("New York City" and
+  // "New York", "Washington D.C." and "Washington"), splitting one city in
+  // two on the map and in city filters. The parser now gives one spelling;
+  // this folds in rows geocoded before that (they're never re-parsed). A
+  // no-op once they're gone. A role with both rows keeps just the one, so
+  // it isn't counted twice.
+  for (const [from, to, state] of [
+    ["New York City", "New York", "NY"],
+    ["Washington D.C.", "Washington", "DC"],
+    ["Washington DC", "Washington", "DC"],
+    ["Washington, D.C.", "Washington", "DC"],
+    ["District of Columbia", "Washington", "DC"],
+  ] as const) {
+    db.prepare(
+      `DELETE FROM role_locations WHERE resolved_city = ? AND resolved_state = ?
+         AND role_id IN (SELECT role_id FROM role_locations WHERE resolved_city = ? AND resolved_state = ?)`,
+    ).run(from, state, to, state);
+    db.prepare(`UPDATE role_locations SET resolved_city = ? WHERE resolved_city = ? AND resolved_state = ?`).run(to, from, state);
+    db.prepare(`UPDATE roles SET resolved_city = ? WHERE resolved_city = ? AND resolved_state = ?`).run(to, from, state);
+  }
 
   const csvText = readFileSync(COMPANIES_CSV_PATH, "utf-8");
   // --platforms=workday,oracle syncs only those platforms, e.g. to re-run

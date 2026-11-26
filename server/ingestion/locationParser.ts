@@ -79,6 +79,9 @@ const KNOWN_CITIES: Record<string, { city: string; state: string }> = {
   "san diego": { city: "San Diego", state: "CA" },
   irvine: { city: "Irvine", state: "CA" },
   "washington dc": { city: "Washington", state: "DC" },
+  "washington d.c.": { city: "Washington", state: "DC" },
+  "washington, d.c.": { city: "Washington", state: "DC" },
+  "washington, dc": { city: "Washington", state: "DC" },
   dc: { city: "Washington", state: "DC" },
   miami: { city: "Miami", state: "FL" },
   portland: { city: "Portland", state: "OR" },
@@ -177,6 +180,7 @@ function toParsed(city: string, state: string): ParsedLocation {
   // One spelling per city, so "New York City, NY" and "New York, NY" are one
   // place on the map and in city filters, not two.
   if (state === "NY" && /^new york city$/i.test(city)) city = "New York";
+  if (state === "DC" && /^(washington,?\s*d\.?\s?c\.?|district of columbia)$/i.test(city)) city = "Washington";
   return { city, state, query: `${city}, ${state}, USA` };
 }
 
