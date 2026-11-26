@@ -12,7 +12,7 @@ import { SENIORITY_TIERS } from "../../src/types.js";
 import { getCompany, getRole, overview, searchRoles, whatsNew } from "./tools.js";
 
 const server = new McpServer(
-  { name: "tolara-scout", version: "0.1.0" },
+  { name: "tolara-scout", version: "0.1.1" },
   {
     instructions:
       "Tolara Scout tracks open product manager roles at about 900 US companies, read daily from each company's own careers site. " +
