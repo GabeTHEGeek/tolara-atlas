@@ -12,7 +12,7 @@ import { SENIORITY_TIERS } from "../../src/types.js";
 import { getCompany, getRole, overview, searchRoles, whatsNew } from "./tools.js";
 
 const server = new McpServer(
-  { name: "tolara-scout", version: "0.1.1" },
+  { name: "tolara-scout", version: "0.1.2" },
   {
     instructions:
       "Tolara Scout tracks open product manager roles at about 900 US companies, read daily from each company's own careers site. " +
@@ -27,7 +27,7 @@ const server = new McpServer(
 const filterShape = {
   query: z.string().optional().describe('Words that must all appear in the title, company or city, e.g. "growth", "AI platform"'),
   company: z.string().optional().describe('A company name, e.g. "Stripe" or "Capital One"'),
-  location: z.string().optional().describe('A city or state as written in "Austin, TX", e.g. "New York" or "CA"; "remote" matches remote roles'),
+  location: z.string().optional().describe('A city ("New York", "Austin, TX") or a state code or name ("VA", "Virginia"); "remote" matches remote roles'),
   levels: z.array(z.enum(SENIORITY_TIERS)).optional().describe("Seniority levels to include; leave out for all"),
   min_salary: z.number().int().positive().optional().describe("Yearly USD floor. Only roles that post a band can match, compared against the top of the band"),
   remote: z.enum(["any", "remote", "in-office"]).optional().describe("Remote roles only, in-office only, or any (default)"),

@@ -10,6 +10,7 @@ import { daysOpenLabel, formatSalary, openSince } from "../../src/format.js";
 import { ghostReason } from "../../src/ghost.js";
 import { buildPayRanker, payRankShort, type PayRanker } from "../../src/payRank.js";
 import { SENIORITY_LABELS, SENIORITY_TIERS, type MapData, type RoleData, type Seniority } from "../../src/types.js";
+import { US_STATE_NAMES } from "../../server/ingestion/locationParser.js";
 import { slugify } from "../../server/seo/generate.js";
 import { getCompanyFile, getMapData, SITE_URL } from "./data.js";
 
@@ -51,6 +52,35 @@ function index(data: MapData) {
   indexFor = { data, rows, byId, payRank: buildPayRanker(data.pins, data.remoteCompanies) };
   return indexFor;
 }
+
+const STATE_CODES = new Set(Object.values(US_STATE_NAMES));
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/**
+ * A location filter: "VA" or "Virginia" matches roles in that state only
+ * (not Sunnyvale, CA), and anything else matches whole words of "City, ST",
+ * so "New York", "Austin, TX" and "San" work but "york" inside a word doesn't.
+ * Returns null for an empty filter.
+ */
+export function placeMatcher(location: string | undefined): ((city: string | null, state: string | null) => boolean) | null {
+  const where = (location ?? "").trim().toLowerCase().replace(/\s+/g, " ");
+  if (!where) return null;
+  const code = where.length === 2 && STATE_CODES.has(where.toUpperCase()) ? where.toUpperCase() : US_STATE_NAMES[where];
+  const words = new RegExp(`(^|[^a-z0-9])${escapeRe(where)}($|[^a-z0-9])`);
+  return (city, state) => {
+    if (code && (state ?? "").toUpperCase() === code) return true;
+    // A bare state code only ever means the state; a full name like
+    // "New York" or "Washington" can be the city too.
+    if (code && where.length === 2) return false;
+    return words.test([city, state].filter(Boolean).join(", ").toLowerCase());
+  };
+}
+
+/** "Sunnyvale, CA" -> ["Sunnyvale", "CA"]. */
+const splitPlace = (place: string): [string, string | null] => {
+  const i = place.lastIndexOf(", ");
+  return i < 0 ? [place, null] : [place.slice(0, i), place.slice(i + 2)];
+};
 
 /** The public page for a role: crawlable, no signup needed. */
 export function rolePageUrl(companySlug: string, roleId: number, title: string): string {
@@ -139,15 +169,14 @@ async function matchingRows(args: SearchArgs, now: number) {
   const f = filtersFrom(args);
   const categoryOf = data.companyCategories ?? {};
   const words = (args.query ?? "").toLowerCase().split(/\s+/).filter(Boolean);
-  const where = (args.location ?? "").toLowerCase().trim();
+  const remoteOnly = (args.location ?? "").trim().toLowerCase() === "remote";
+  const place = remoteOnly ? null : placeMatcher(args.location);
   const hits = rows.filter((r) => {
     if (company && r.companySlug !== company.slug) return false;
     if (f.industry && (categoryOf[r.companySlug] ?? "other") !== f.industry) return false;
     if (!roleMatches(r.role, f, now)) return false;
-    if (where) {
-      const inCity = r.cities.some((c) => c.toLowerCase().includes(where));
-      if (!inCity && !(where === "remote" && r.remote)) return false;
-    }
+    if (remoteOnly && !r.remote) return false;
+    if (place && !r.cities.some((c) => place(...splitPlace(c)))) return false;
     // Every word has to appear somewhere: "senior payments" finds senior payments roles.
     return words.every((w) => r.searchText.includes(w));
   });
@@ -246,11 +275,11 @@ export async function whatsNew(args: SearchArgs & { days?: number }, now = Date.
 
   const company = args.company ? await resolveCompanySlug(data, args.company) : null;
   const words = (args.query ?? "").toLowerCase().split(/\s+/).filter(Boolean);
-  const where = (args.location ?? "").toLowerCase().trim();
+  const place = (args.location ?? "").trim().toLowerCase() === "remote" ? null : placeMatcher(args.location);
   const closed = data.changes.closedRoles.filter((r) => {
     if (Date.parse(r.closedAt) < since) return false;
     if (company && r.companySlug !== company.slug) return false;
-    if (where && where !== "remote" && ![r.city, r.state].filter(Boolean).join(", ").toLowerCase().includes(where)) return false;
+    if (place && !place(r.city, r.state)) return false;
     const text = `${r.title} ${r.companyName} ${r.city ?? ""} ${r.state ?? ""}`.toLowerCase();
     return words.every((w) => text.includes(w));
   });
