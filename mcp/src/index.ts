@@ -1,5 +1,5 @@
 /**
- * Tolara Scout MCP server: every open US product manager job, searchable
+ * Tolara Scout MCP server: open US product manager jobs, searchable
  * from Claude, Cursor or any MCP client. Runs on the user's own machine over
  * stdio and reads the public data the website publishes each night, so
  * there's no server or key involved.
@@ -15,7 +15,8 @@ const server = new McpServer(
   { name: "tolara-scout", version: "0.1.0" },
   {
     instructions:
-      "Tolara Scout tracks every open product manager role in the US, read daily from each company's own careers site. " +
+      "Tolara Scout tracks open product manager roles at about 900 US companies, read daily from each company's own careers site. " +
+      "It covers the companies it follows, not every PM job in the US, so say 'roles Tolara tracks' rather than 'all PM jobs'. " +
       "Use search_roles to find roles, get_role for one role's details, get_company for a company's roles and hiring trend, " +
       "and whats_new for roles that opened or closed recently (good for a daily digest). Salaries are only what the posting " +
       "states, never estimates. A 'possible ghost job' has been open 90+ days, or reposted and still open after 45. " +
@@ -95,7 +96,7 @@ server.registerTool(
   "tolara_overview",
   {
     title: "Tolara Scout overview",
-    description: "Totals for the whole PM job market Tolara tracks: roles by level, top cities, remote count, ghost jobs, and the industry ids search_roles accepts.",
+    description: "Totals for the PM roles Tolara tracks: roles by level, top cities, remote count, ghost jobs, and the industry ids search_roles accepts.",
     inputSchema: {},
     annotations: READ_ONLY,
   },

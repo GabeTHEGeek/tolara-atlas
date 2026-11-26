@@ -85,8 +85,8 @@ function place(r: LandingRole, picked: MetroId = "all"): string {
 
 const FEATURES: Array<{ title: string; body: string; icon: ReactNode }> = [
   {
-    title: "Map of every PM job",
-    body: "Every open US role on one map. Click a city to see who's hiring there.",
+    title: "Map of PM jobs",
+    body: "Every role we track on one map. Click a city to see who's hiring there.",
     icon: (
       <>
         <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" />
@@ -172,6 +172,76 @@ const FEATURES: Array<{ title: string; body: string; icon: ReactNode }> = [
     ),
   },
 ];
+
+/**
+ * The stat people can paste into LinkedIn or X: "1 in 7 open PM jobs might
+ * be a ghost", from today's numbers, with a link back to the site.
+ */
+function GhostShareCard({
+  oneIn,
+  opened,
+  closed,
+  total,
+  windowDays,
+  weekOf,
+}: {
+  oneIn: number;
+  opened: number;
+  closed: number;
+  total: number;
+  windowDays: number;
+  weekOf: Date | null;
+}) {
+  const [copied, setCopied] = useState<"idle" | "done" | "failed">("idle");
+  const site = `${window.location.origin}${import.meta.env.BASE_URL}`;
+  const week = windowDays === 7 ? "this week" : `in the last ${windowDays} days`;
+  const text =
+    `1 in ${oneIn} open PM jobs might be a ghost. ` +
+    `${fmt(opened)} opened and ${fmt(closed)} closed ${week} across the ${fmt(total)} US PM roles Tolara Scout tracks. ` +
+    `Free list without the ghosts: ${site}`;
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied("done");
+    } catch {
+      setCopied("failed");
+    }
+    window.setTimeout(() => setCopied("idle"), 2500);
+  };
+  const weekLabel = weekOf ? weekOf.toLocaleDateString("en-US", { month: "short", day: "numeric" }).toUpperCase() : null;
+  return (
+    <section className="lp-wrap lp-share" aria-labelledby="lp-share-h">
+      <figure className="lp-share-card" aria-label="Shareable stat card">
+        <div className="lp-share-top">
+          <span>{weekLabel ? `PM HIRING · ${weekLabel}` : "PM HIRING"}</span>
+          <span>Tolara Scout</span>
+        </div>
+        <p className="lp-share-big">
+          1 in {oneIn} open PM jobs
+          <br />
+          might be a <em>ghost</em>.
+        </p>
+        <div className="lp-share-foot">
+          <span className="lp-new">+{fmt(opened)} opened</span>
+          <span className="lp-gone">−{fmt(closed)} closed</span>
+          <span>{fmt(total)} open roles tracked</span>
+        </div>
+      </figure>
+      <div className="lp-share-copy">
+        <h2 id="lp-share-h">Know a PM who's job hunting?</h2>
+        <p>Copy today's number and post it where PMs hang out. It links back here, so anyone can check the roles for themselves.</p>
+        <div className="lp-share-actions">
+          <button className="lp-btn" type="button" onClick={copy}>
+            {copied === "done" ? "Copied" : "Copy this stat"}
+          </button>
+          <span className="lp-share-msg" role="status">
+            {copied === "done" ? "Paste it into a post on LinkedIn or X." : copied === "failed" ? "Couldn't copy. Select the card text instead." : ""}
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -344,7 +414,10 @@ export default function LandingPage({
   const updatedLabel = updated
     ? updated.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
     : null;
-  const ghostShare = all.open > 0 ? all.ghost / all.open : 0;
+  // The one role count the page shows everywhere (hero, share card, closer,
+  // footer), so they can't drift apart.
+  const totalRoles = all.open;
+  const ghostShare = totalRoles > 0 ? all.ghost / totalRoles : 0;
   const payMax = Math.max(300_000, ...payChart.map((p) => p.pay));
   const board = "#/jobs";
   // The same answers the build puts in the FAQ structured data (seoFacts.ts).
@@ -402,10 +475,10 @@ export default function LandingPage({
               <b>FREE</b> Updated daily from {data ? fmt(companyCount) : "hundreds of"} companies' career sites
             </span>
             <h1>
-              Every real PM job. <span className="lp-soft">None of the ghosts.</span>
+              Real PM jobs. <span className="lp-soft">None of the ghosts.</span>
             </h1>
             <p className="lp-lede">
-              A free map and job board of {data ? `all ${fmt(all.open)}` : "every"} open product manager roles in the US. See
+              A free map and job board of {data ? `${fmt(totalRoles)} open product manager roles at ${fmt(companyCount)} US companies` : "open product manager roles at US companies"}, read from their own careers sites. See
               the pay band when it's posted, a match score for your experience, and a flag on postings that have sat open
               for months.
             </p>
@@ -513,6 +586,25 @@ export default function LandingPage({
         </div>
       </div>
 
+      {logos.length > 0 && (
+        <div className="lp-wrap lp-logos">
+          <span className="lp-logos-label">Some of the companies hiring PMs right now</span>
+          <ul className="lp-logo-grid">
+            {logos.map(([slug, name, d]) => (
+              <li key={slug} className="lp-logo-tile">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d={d} />
+                </svg>
+                <span>{name}</span>
+              </li>
+            ))}
+          </ul>
+          <span className="lp-logos-more">
+            + {fmt(Math.max(0, companyCount - logos.length))} more, from seed-stage startups to the Fortune 500
+          </span>
+        </div>
+      )}
+
       {data && (
         <div className="lp-stats">
           <div className="lp-wrap lp-stats-row" aria-label={`Last ${data.changes.windowDays} days of PM hiring`}>
@@ -532,23 +624,15 @@ export default function LandingPage({
         </div>
       )}
 
-      {logos.length > 0 && (
-        <div className="lp-wrap lp-logos">
-          <span className="lp-logos-label">Some of the companies hiring PMs right now</span>
-          <ul className="lp-logo-grid">
-            {logos.map(([slug, name, d]) => (
-              <li key={slug} className="lp-logo-tile">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d={d} />
-                </svg>
-                <span>{name}</span>
-              </li>
-            ))}
-          </ul>
-          <span className="lp-logos-more">
-            + {fmt(Math.max(0, companyCount - logos.length))} more, from seed-stage startups to the Fortune 500
-          </span>
-        </div>
+      {data && all.ghost > 0 && (
+        <GhostShareCard
+          oneIn={Math.max(2, Math.round(totalRoles / all.ghost))}
+          opened={data.changes.added}
+          closed={data.changes.closed}
+          total={totalRoles}
+          windowDays={data.changes.windowDays}
+          weekOf={updated}
+        />
       )}
 
       <section className="lp-sec">
@@ -615,7 +699,7 @@ export default function LandingPage({
                 <div className="lp-meter">
                   <span style={{ width: `${Math.round(ghostShare * 100)}%` }} />
                 </div>
-                <small className="lp-meter-note">{Math.round(ghostShare * 100)}% of open US PM roles today</small>
+                <small className="lp-meter-note">{Math.round(ghostShare * 100)}% of the roles we track today</small>
               </div>
             </div>
           </div>
@@ -668,7 +752,7 @@ export default function LandingPage({
       <section className="lp-closer">
         <div className="lp-wrap">
           <h2>Stop applying to ghosts.</h2>
-          <p>{data ? `${fmt(all.live)} live PM roles, checked every day.` : "Live PM roles, checked every day."} Free.</p>
+          <p>{data ? `${fmt(totalRoles)} open PM roles, checked every day.` : "Open PM roles, checked every day."} Free.</p>
           <a className="lp-btn" href={board} onClick={gate(board)}>
             {unlocked ? "Open the job board" : "Get free access"} <span className="lp-arr">→</span>
           </a>
@@ -678,7 +762,7 @@ export default function LandingPage({
       <footer className="lp-wrap lp-footer">
         <span>Tolara Scout{updatedLabel ? ` · Figures from the ${updatedLabel} update` : ""}</span>
         <span>
-          {data ? `${fmt(all.open)} open roles at ${fmt(companyCount)} companies` : ""}
+          {data ? `${fmt(totalRoles)} open roles at ${fmt(companyCount)} companies` : ""}
         </span>
         <nav className="lp-social" aria-label="Follow">
           {SOCIAL_LINKS.map((l) => (

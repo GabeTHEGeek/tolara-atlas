@@ -2,7 +2,7 @@
 
 # Tolara Scout
 
-### Every open Product Manager job in the US. One board, one map, the real pay.
+### Product Manager jobs from 1,600+ US companies. One board, one map, the real pay.
 
 **Updated daily, straight from 1,606 companies' own careers sites. Free.**
 

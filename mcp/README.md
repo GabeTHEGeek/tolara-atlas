@@ -1,6 +1,6 @@
 # Tolara Scout MCP
 
-Search every open US product manager job from Claude, Cursor or any
+Search open US product manager jobs from Claude, Cursor or any
 [MCP](https://modelcontextprotocol.io) client. It reads
 [Tolara Scout](https://gabethegeek.github.io/tolara-atlas/)'s public data,
 refreshed every night from each company's own careers site: 3,000+ roles at

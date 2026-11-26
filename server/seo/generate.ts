@@ -664,7 +664,7 @@ export function generateSeo(input: SeoInput): SeoOutput {
       "@context": "https://schema.org",
       "@type": "Dataset",
       name: "Open product manager jobs in the US",
-      description: `Every open product manager role at ${fmt(facts.companies)} US companies, read daily from each company's careers site, with posted pay bands, office locations, level and days open.`,
+      description: `Open product manager roles at ${fmt(facts.companies)} US companies, read daily from each company's careers site, with posted pay bands, office locations, level and days open.`,
       url: site.abs("/jobs/"),
       dateModified: facts.updated,
       isAccessibleForFree: true,
@@ -679,7 +679,7 @@ export function generateSeo(input: SeoInput): SeoOutput {
       mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
     },
   ];
-  const homeDescription = `Every open product manager job in the US on one free board and map: ${fmt(facts.openRoles)} roles at ${fmt(facts.companies)} companies, with posted pay bands, match scores and ghost jobs flagged. Updated daily.`;
+  const homeDescription = `A free board and map of ${fmt(facts.openRoles)} open product manager jobs at ${fmt(facts.companies)} US companies, with posted pay bands, match scores and ghost jobs flagged. Updated daily.`;
   const homeTitle = `Tolara Scout: ${fmt(facts.openRoles)} Product Manager Jobs in the US, Updated Daily`;
   const homeHead = [
     `<meta name="description" content="${esc(homeDescription)}">`,
@@ -695,8 +695,8 @@ export function generateSeo(input: SeoInput): SeoOutput {
     ...homeLd.map(ld),
   ].join("\n    ");
   const homeBody = `<main style="max-width:960px;margin:0 auto;padding:32px 20px;font-family:system-ui,sans-serif">
-<h1>Every real PM job. None of the ghosts.</h1>
-<p>A free map and job board of all ${fmt(facts.openRoles)} open product manager roles in the US, at ${fmt(facts.companies)} companies, read daily from each company's own careers site. See the pay band when it's posted, a match score for your experience, and a flag on postings that have sat open for months.</p>
+<h1>Real PM jobs. None of the ghosts.</h1>
+<p>A free map and job board of ${fmt(facts.openRoles)} open product manager roles at ${fmt(facts.companies)} US companies, read daily from each company's own careers site. See the pay band when it's posted, a match score for your experience, and a flag on postings that have sat open for months.</p>
 <ul>
 <li>+${fmt(facts.addedThisWeek)} PM roles opened in the last ${facts.windowDays} days, −${fmt(facts.closedThisWeek)} taken down</li>
 <li>${fmt(facts.ghostRoles)} open 90+ days or reposted: possible ghost jobs</li>
@@ -775,7 +775,7 @@ function ghostPage(site: Site, roles: RoleEntry[], facts: SiteFacts, faqs: Array
 <p class="lede">${esc(ghostFaq.a)}</p>
 <div class="facts">
 <div class="fact"><b>${fmt(facts.ghostRoles)}</b><span>Possible ghost PM jobs today</span></div>
-<div class="fact"><b>${Math.round(facts.ghostShare * 100)}%</b><span>Of open US PM roles</span></div>
+<div class="fact"><b>${Math.round(facts.ghostShare * 100)}%</b><span>Of the PM roles we track</span></div>
 </div>
 <h2>How Tolara Scout flags them</h2>
 <ul><li>Open <strong>90 days or more</strong>, counted from the original posting, or</li><li>Taken down and <strong>reposted</strong>, and still open after <strong>45 days</strong>.</li></ul>
@@ -845,7 +845,7 @@ Sitemap: ${site.abs("/sitemap.xml")}
 function llmsTxt(site: Site, facts: SiteFacts, faqs: Array<{ q: string; a: string }>, cities: number): string {
   return `# Tolara Scout
 
-> A free job board and map of every open product manager (PM) job in the US: ${fmt(facts.openRoles)} roles at ${fmt(facts.companies)} companies as of ${facts.updatedLabel}, read daily from each company's own careers site, with posted pay bands, seniority, office locations and possible ghost jobs flagged.
+> A free job board and map of open product manager (PM) jobs in the US: ${fmt(facts.openRoles)} roles at the ${fmt(facts.companies)} companies it follows as of ${facts.updatedLabel}, read daily from each company's own careers site, with posted pay bands, seniority, office locations and possible ghost jobs flagged.
 
 Figures below are from the ${facts.updatedLabel} update and change daily.
 

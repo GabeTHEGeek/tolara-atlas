@@ -88,11 +88,11 @@ export function siteFaqs(f: SiteFacts): Faq[] {
   return [
     {
       q: "How many product manager jobs are open in the US right now?",
-      a: `${fmt(f.openRoles)} product manager roles are open at ${fmt(f.companies)} US companies as of ${f.updatedLabel}, read from each company's own careers site. ${fmt(f.addedThisWeek)} opened and ${fmt(f.closedThisWeek)} closed in the last ${f.windowDays} days.`,
+      a: `Tolara Scout is tracking ${fmt(f.openRoles)} open product manager roles at ${fmt(f.companies)} US companies as of ${f.updatedLabel}, read from each company's own careers site. That's every PM role at the companies it follows, not every PM job in the country. ${fmt(f.addedThisWeek)} opened and ${fmt(f.closedThisWeek)} closed in the last ${f.windowDays} days.`,
     },
     {
       q: "How much do product managers get paid in the US?",
-      a: `The typical top of the posted pay band for open US product manager roles is ${f.medianPayTop ? k(f.medianPayTop) : "not yet known"}. By level: ${pay}. These come from pay bands companies publish in their postings, not from surveys.`,
+      a: `The typical top of the posted pay band for the US product manager roles Tolara Scout tracks is ${f.medianPayTop ? k(f.medianPayTop) : "not yet known"}. By level: ${pay}. These come from pay bands companies publish in their postings, not from surveys.`,
     },
     {
       q: "Where are the most product manager jobs?",

@@ -1,7 +1,7 @@
 {
   "name": "tolara-scout-mcp",
   "version": "0.1.0",
-  "description": "Search every open US product manager job from Claude, Cursor or any MCP client. Data from Tolara Scout, updated daily.",
+  "description": "Search open US product manager jobs from Claude, Cursor or any MCP client. Data from Tolara Scout, updated daily.",
   "type": "module",
   "bin": {
     "tolara-scout-mcp": "dist/index.js"
