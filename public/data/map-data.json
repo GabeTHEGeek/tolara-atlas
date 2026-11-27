@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-27T07:26:56.220Z",
+  "generatedAt": "2026-11-27T07:32:49.067Z",
   "companyCount": 874,
   "pinCount": 1118,
-  "roleCount": 3278,
+  "roleCount": 3276,
   "changes": {
     "windowDays": 7,
-    "since": "2026-11-20T07:26:56.220Z",
-    "added": 356,
+    "since": "2026-11-20T07:32:49.067Z",
+    "added": 357,
     "closed": 367,
     "closedRoles": [
       {
@@ -2011,7 +2011,7 @@
       }
     ],
     "lastSync": {
-      "finishedAt": "2026-11-27T07:24:30.000Z",
+      "finishedAt": "2026-11-27T07:32:47.000Z",
       "status": "success"
     }
   },
@@ -77283,7 +77283,7 @@
       "state": "WA",
       "latitude": 47.60580756707718,
       "longitude": -122.1825035128785,
-      "roleCount": 9,
+      "roleCount": 8,
       "roles": [
         {
           "id": 2639,
@@ -77304,7 +77304,7 @@
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -77368,28 +77368,12 @@
         {
           "id": 2657,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 205000,
           "salaryMax": 277000,
           "salaryCurrency": "USD",
           "salaryPeriod": "year",
           "url": "https://www.metacareers.com/jobs/1420853345578936/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:51:31.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2658,
-          "title": "Product Manager",
-          "location": "Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA",
-          "salaryMin": 146000,
-          "salaryMax": 204000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/961472602841468/",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:51:31.000Z",
           "repostedFrom": null,
@@ -77440,7 +77424,7 @@
       "state": "CA",
       "latitude": 37.45546631408781,
       "longitude": -122.16585750925132,
-      "roleCount": 25,
+      "roleCount": 23,
       "roles": [
         {
           "id": 2639,
@@ -77461,7 +77445,7 @@
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -77523,22 +77507,6 @@
           "isRemote": false
         },
         {
-          "id": 2649,
-          "title": "Product Manager, Evals & Improvement",
-          "location": "Menlo Park, CA; New York, NY",
-          "salaryMin": 146000,
-          "salaryMax": 204000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1842433873407112/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:51:31.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
           "id": 2651,
           "title": "Product Manager, Machine Learning",
           "location": "Redmond, WA; Menlo Park, CA; Seattle, WA",
@@ -77563,22 +77531,6 @@
           "salaryCurrency": "USD",
           "salaryPeriod": "year",
           "url": "https://www.metacareers.com/jobs/720234290553790/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:51:31.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2654,
-          "title": "Product Manager, Agent Transformation Accelerator ",
-          "location": "",
-          "salaryMin": 173000,
-          "salaryMax": 241000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1620341402775771/",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:51:31.000Z",
           "repostedFrom": null,
@@ -77621,7 +77573,7 @@
         {
           "id": 2657,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 205000,
           "salaryMax": 277000,
           "salaryCurrency": "USD",
@@ -77637,7 +77589,7 @@
         {
           "id": 2658,
           "title": "Product Manager",
-          "location": "Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA",
+          "location": "Menlo Park, CA; Washington, DC; New York, NY",
           "salaryMin": 146000,
           "salaryMax": 204000,
           "salaryCurrency": "USD",
@@ -77653,7 +77605,7 @@
         {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
+          "location": "Sunnyvale, CA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 249000,
           "salaryMax": 323000,
           "salaryCurrency": "USD",
@@ -77669,7 +77621,7 @@
         {
           "id": 2663,
           "title": "Product Management, Director",
-          "location": "Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA",
+          "location": "Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US",
           "salaryMin": 249000,
           "salaryMax": 323000,
           "salaryCurrency": "USD",
@@ -77811,22 +77763,6 @@
           "isRemote": false
         },
         {
-          "id": 5588,
-          "title": "Director of Product Staff, Instagram Business Ranking & Delivery",
-          "location": "Menlo Park, CA; New York, NY",
-          "salaryMin": 249000,
-          "salaryMax": 323000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/2143933519831023/",
-          "postedAt": null,
-          "firstSeenAt": "2026-11-12T17:26:44.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "director",
-          "isRemote": false
-        },
-        {
           "id": 6390,
           "title": "Product Manager, Content Integrity, Harm Prevention",
           "location": "Menlo Park, CA",
@@ -77841,6 +77777,22 @@
           "isNew": false,
           "seniority": "mid",
           "isRemote": false
+        },
+        {
+          "id": 7593,
+          "title": "Product Manager",
+          "location": "Menlo Park, CA",
+          "salaryMin": null,
+          "salaryMax": null,
+          "salaryCurrency": null,
+          "salaryPeriod": "year",
+          "url": "https://www.metacareers.com/jobs/1586596673213002/",
+          "postedAt": null,
+          "firstSeenAt": "2026-11-27T07:31:50.000Z",
+          "repostedFrom": null,
+          "isNew": true,
+          "seniority": "mid",
+          "isRemote": false
         }
       ]
     },
@@ -77853,7 +77805,7 @@
       "state": "CA",
       "latitude": 37.79107094539562,
       "longitude": -122.4201634743052,
-      "roleCount": 7,
+      "roleCount": 6,
       "roles": [
         {
           "id": 2639,
@@ -77874,7 +77826,7 @@
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -77922,7 +77874,7 @@
         {
           "id": 2657,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 205000,
           "salaryMax": 277000,
           "salaryCurrency": "USD",
@@ -77936,25 +77888,9 @@
           "isRemote": false
         },
         {
-          "id": 2658,
-          "title": "Product Manager",
-          "location": "Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA",
-          "salaryMin": 146000,
-          "salaryMax": 204000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/961472602841468/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:51:31.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
+          "location": "Sunnyvale, CA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 249000,
           "salaryMax": 323000,
           "salaryCurrency": "USD",
@@ -77978,12 +77914,12 @@
       "state": "CA",
       "latitude": 37.38082802292837,
       "longitude": -122.03332450281714,
-      "roleCount": 3,
+      "roleCount": 4,
       "roles": [
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -78015,7 +77951,7 @@
         {
           "id": 2657,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 205000,
           "salaryMax": 277000,
           "salaryCurrency": "USD",
@@ -78027,29 +77963,16 @@
           "isNew": false,
           "seniority": "mid",
           "isRemote": false
-        }
-      ]
-    },
-    {
-      "id": "1169-los-angeles-ca",
-      "companyId": 1169,
-      "companyName": "Meta",
-      "companySlug": "meta",
-      "city": "Los Angeles",
-      "state": "CA",
-      "latitude": 34.066577263057155,
-      "longitude": -118.2472478862541,
-      "roleCount": 1,
-      "roles": [
+        },
         {
-          "id": 2640,
-          "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
-          "salaryMin": 173000,
-          "salaryMax": 241000,
+          "id": 2659,
+          "title": "Product Manager (Leadership)",
+          "location": "Sunnyvale, CA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
+          "salaryMin": 249000,
+          "salaryMax": 323000,
           "salaryCurrency": "USD",
           "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1238249364564427/",
+          "url": "https://www.metacareers.com/jobs/2193201618154538/",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:51:31.000Z",
           "repostedFrom": null,
@@ -78068,12 +77991,12 @@
       "state": "WA",
       "latitude": 47.6006106010639,
       "longitude": -122.31509115882209,
-      "roleCount": 10,
+      "roleCount": 9,
       "roles": [
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -78103,22 +78026,6 @@
           "isRemote": false
         },
         {
-          "id": 2654,
-          "title": "Product Manager, Agent Transformation Accelerator ",
-          "location": "",
-          "salaryMin": 173000,
-          "salaryMax": 241000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1620341402775771/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:51:31.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
           "id": 2656,
           "title": "Product Manager, Central Product",
           "location": "Bellevue, WA; Menlo Park, CA; Seattle, WA; Remote, US; New York, NY; San Francisco, CA",
@@ -78135,14 +78042,14 @@
           "isRemote": false
         },
         {
-          "id": 2658,
+          "id": 2657,
           "title": "Product Manager",
-          "location": "Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA",
-          "salaryMin": 146000,
-          "salaryMax": 204000,
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
+          "salaryMin": 205000,
+          "salaryMax": 277000,
           "salaryCurrency": "USD",
           "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/961472602841468/",
+          "url": "https://www.metacareers.com/jobs/1420853345578936/",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:51:31.000Z",
           "repostedFrom": null,
@@ -78153,7 +78060,7 @@
         {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
+          "location": "Sunnyvale, CA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 249000,
           "salaryMax": 323000,
           "salaryCurrency": "USD",
@@ -78169,7 +78076,7 @@
         {
           "id": 2663,
           "title": "Product Management, Director",
-          "location": "Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA",
+          "location": "Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US",
           "salaryMin": 249000,
           "salaryMax": 323000,
           "salaryCurrency": "USD",
@@ -78246,7 +78153,7 @@
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -78262,7 +78169,7 @@
         {
           "id": 2657,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 205000,
           "salaryMax": 277000,
           "salaryCurrency": "USD",
@@ -78278,7 +78185,7 @@
         {
           "id": 2663,
           "title": "Product Management, Director",
-          "location": "Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA",
+          "location": "Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US",
           "salaryMin": 249000,
           "salaryMax": 323000,
           "salaryCurrency": "USD",
@@ -78307,7 +78214,7 @@
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -78331,12 +78238,12 @@
       "state": "NY",
       "latitude": 40.71915577976231,
       "longitude": -74.00274700798185,
-      "roleCount": 13,
+      "roleCount": 10,
       "roles": [
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -78382,38 +78289,6 @@
           "isRemote": false
         },
         {
-          "id": 2649,
-          "title": "Product Manager, Evals & Improvement",
-          "location": "Menlo Park, CA; New York, NY",
-          "salaryMin": 146000,
-          "salaryMax": 204000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1842433873407112/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:51:31.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
-          "id": 2654,
-          "title": "Product Manager, Agent Transformation Accelerator ",
-          "location": "",
-          "salaryMin": 173000,
-          "salaryMax": 241000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/1620341402775771/",
-          "postedAt": null,
-          "firstSeenAt": "2026-09-19T08:51:31.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "mid",
-          "isRemote": false
-        },
-        {
           "id": 2656,
           "title": "Product Manager, Central Product",
           "location": "Bellevue, WA; Menlo Park, CA; Seattle, WA; Remote, US; New York, NY; San Francisco, CA",
@@ -78432,7 +78307,7 @@
         {
           "id": 2657,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 205000,
           "salaryMax": 277000,
           "salaryCurrency": "USD",
@@ -78448,7 +78323,7 @@
         {
           "id": 2658,
           "title": "Product Manager",
-          "location": "Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA",
+          "location": "Menlo Park, CA; Washington, DC; New York, NY",
           "salaryMin": 146000,
           "salaryMax": 204000,
           "salaryCurrency": "USD",
@@ -78464,7 +78339,7 @@
         {
           "id": 2659,
           "title": "Product Manager (Leadership)",
-          "location": "Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
+          "location": "Sunnyvale, CA; Menlo Park, CA; Seattle, WA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 249000,
           "salaryMax": 323000,
           "salaryCurrency": "USD",
@@ -78524,22 +78399,6 @@
           "isNew": false,
           "seniority": "mid",
           "isRemote": false
-        },
-        {
-          "id": 5588,
-          "title": "Director of Product Staff, Instagram Business Ranking & Delivery",
-          "location": "Menlo Park, CA; New York, NY",
-          "salaryMin": 249000,
-          "salaryMax": 323000,
-          "salaryCurrency": "USD",
-          "salaryPeriod": "year",
-          "url": "https://www.metacareers.com/jobs/2143933519831023/",
-          "postedAt": null,
-          "firstSeenAt": "2026-11-12T17:26:44.000Z",
-          "repostedFrom": null,
-          "isNew": false,
-          "seniority": "director",
-          "isRemote": false
         }
       ]
     },
@@ -78557,7 +78416,7 @@
         {
           "id": 2640,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Los Angeles, CA; Remote, US; Bellevue, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
+          "location": "Sunnyvale, CA; Bellevue, WA; Remote, US; Menlo Park, CA; Seattle, WA; Burlingame, CA; Boston, MA; New York, NY; San Francisco, CA; Fremont, CA",
           "salaryMin": 173000,
           "salaryMax": 241000,
           "salaryCurrency": "USD",
@@ -78602,7 +78461,7 @@
         {
           "id": 2657,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 205000,
           "salaryMax": 277000,
           "salaryCurrency": "USD",
@@ -78618,7 +78477,7 @@
         {
           "id": 2663,
           "title": "Product Management, Director",
-          "location": "Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA",
+          "location": "Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US",
           "salaryMin": 249000,
           "salaryMax": 323000,
           "salaryCurrency": "USD",
@@ -78647,12 +78506,41 @@
         {
           "id": 2657,
           "title": "Product Manager",
-          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; Remote, US; New York, NY; San Francisco, CA",
+          "location": "Sunnyvale, CA; Denver, CO; Bellevue, WA; Redmond, WA; Menlo Park, CA; Seattle, WA; Burlingame, CA; New York, NY; San Francisco, CA; Remote, US",
           "salaryMin": 205000,
           "salaryMax": 277000,
           "salaryCurrency": "USD",
           "salaryPeriod": "year",
           "url": "https://www.metacareers.com/jobs/1420853345578936/",
+          "postedAt": null,
+          "firstSeenAt": "2026-09-19T08:51:31.000Z",
+          "repostedFrom": null,
+          "isNew": false,
+          "seniority": "mid",
+          "isRemote": false
+        }
+      ]
+    },
+    {
+      "id": "1169-washington-dc",
+      "companyId": 1169,
+      "companyName": "Meta",
+      "companySlug": "meta",
+      "city": "Washington",
+      "state": "DC",
+      "latitude": 38.904631462485646,
+      "longitude": -77.0392960264375,
+      "roleCount": 1,
+      "roles": [
+        {
+          "id": 2658,
+          "title": "Product Manager",
+          "location": "Menlo Park, CA; Washington, DC; New York, NY",
+          "salaryMin": 146000,
+          "salaryMax": 204000,
+          "salaryCurrency": "USD",
+          "salaryPeriod": "year",
+          "url": "https://www.metacareers.com/jobs/961472602841468/",
           "postedAt": null,
           "firstSeenAt": "2026-09-19T08:51:31.000Z",
           "repostedFrom": null,
