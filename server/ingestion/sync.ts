@@ -109,7 +109,7 @@ const ALL_PLATFORMS: readonly Platform[] = SUPPORTED_PLATFORMS;
 // Oracle boards search one loose keyword, best matches first: JPMorgan's
 // "product" matches thousands, with PM and Product Owner titles spread
 // through the first ~1,000 (sources/oracle.ts).
-const PER_BOARD_LIMIT_OVERRIDES: Partial<Record<Platform, number>> = { tiktok: 10000, eightfold: 2000, amazon: 2000, microsoft: 2000, oracle: 1000 };
+const PER_BOARD_LIMIT_OVERRIDES: Partial<Record<Platform, number>> = { tiktok: 10000, eightfold: 2000, amazon: 2000, microsoft: 2000, oracle: 1000, meta: 2000 };
 
 async function fetchPlatform(platform: Platform, boards: string[]): Promise<{ jobs: RawJob[]; meta: SearchMeta }> {
   const options = { boards, limit: PER_BOARD_LIMIT_OVERRIDES[platform] ?? PER_BOARD_LIMIT };

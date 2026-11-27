@@ -37,7 +37,7 @@ const JOB_URL = "https://www.metacareers.com/jobs/{id}/";
 const USER_AGENT = "Mozilla/5.0 (compatible; TolaraAtlas/0.1; +https://github.com/GabeTHEGeek/tolara-atlas)";
 const REQUEST_DELAY_MS = 1500;
 const QUERY_NAME = "CareersJobSearchResultsDataQuery";
-const FALLBACK_DOC_ID = "27506805582236862"; // as of 2026-09-19
+const FALLBACK_DOC_ID = "40084319704492118"; // as of 2026-11-27
 const SEARCH_PHRASES = ["product manager", "product management"];
 
 // Without Accept headers the search page answers HTTP 400.
@@ -154,10 +154,13 @@ async function searchJobs(session: Session, q: string): Promise<MetaJob[] | null
     // The response can carry extra newline-separated payloads after the
     // first JSON object; only the first holds the query result.
     const json = JSON.parse((await resp.text()).split("\n")[0]) as {
-      data?: { job_search_with_featured_jobs?: { all_jobs?: MetaJob[] } };
+      data?: Record<string, { all_jobs?: MetaJob[] } | undefined>;
       errors?: unknown;
     };
-    const jobs = json.data?.job_search_with_featured_jobs?.all_jobs;
+    // Meta renamed the field to job_search_with_featured_jobs_v2 in
+    // November 2026; accept either so the next rename back isn't a week of
+    // silent failures.
+    const jobs = (json.data?.job_search_with_featured_jobs_v2 ?? json.data?.job_search_with_featured_jobs)?.all_jobs;
     return json.errors || !Array.isArray(jobs) ? null : jobs;
   } catch {
     return null;
